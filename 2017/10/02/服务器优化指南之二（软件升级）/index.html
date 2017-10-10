@@ -96,18 +96,18 @@
 
 
 
-<meta name="description" content="今天越安逸，明天越危险">
+<meta name="description" content="当后端的服务并发满足不了需要的时候，进行软件升级也是一个性价比很高的方法。  下面写一个简单的测试程序bench.php12345678910for($i =0; $i &amp;lt; 10000000; $i++)&amp;#123;    $info = array(        &amp;apos;name&amp;apos; =&amp;gt;&amp;apos;Tom&amp;apos;,        &amp;apos;rank&amp;apos;">
 <meta name="keywords" content="服务器性能优化">
 <meta property="og:type" content="article">
 <meta property="og:title" content="服务器优化指南之二（软件升级）">
 <meta property="og:url" content="http://idonkeyliu.github.io/2017/10/02/服务器优化指南之二（软件升级）/index.html">
 <meta property="og:site_name" content="idonkeyliu&#39;s Blog">
-<meta property="og:description" content="今天越安逸，明天越危险">
+<meta property="og:description" content="当后端的服务并发满足不了需要的时候，进行软件升级也是一个性价比很高的方法。  下面写一个简单的测试程序bench.php12345678910for($i =0; $i &amp;lt; 10000000; $i++)&amp;#123;    $info = array(        &amp;apos;name&amp;apos; =&amp;gt;&amp;apos;Tom&amp;apos;,        &amp;apos;rank&amp;apos;">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-10-02T03:43:49.000Z">
+<meta property="og:updated_time" content="2017-10-10T03:56:33.381Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="服务器优化指南之二（软件升级）">
-<meta name="twitter:description" content="今天越安逸，明天越危险">
+<meta name="twitter:description" content="当后端的服务并发满足不了需要的时候，进行软件升级也是一个性价比很高的方法。  下面写一个简单的测试程序bench.php12345678910for($i =0; $i &amp;lt; 10000000; $i++)&amp;#123;    $info = array(        &amp;apos;name&amp;apos; =&amp;gt;&amp;apos;Tom&amp;apos;,        &amp;apos;rank&amp;apos;">
 
 
 
@@ -432,7 +432,18 @@
       
 
       
-        
+        <blockquote>
+<p>当后端的服务并发满足不了需要的时候，进行软件升级也是一个性价比很高的方法。</p>
+</blockquote>
+<p>下面写一个简单的测试程序bench.php<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">for($i =0; $i &lt; 10000000; $i++)</div><div class="line">&#123;</div><div class="line">    $info = array(</div><div class="line">        &apos;name&apos; =&gt;&apos;Tom&apos;,</div><div class="line">        &apos;rank&apos; =&gt; 1</div><div class="line">    );</div><div class="line"></div><div class="line">    $infoEncode = json_encode($info);</div><div class="line">    $infoDecode = json_decode($infoEncode, true);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在机器A上面看php的版本号码</p>
+<p>PHP 5.6.21 (cli) (built: Aug 18 2016 16:16:25)<br>Copyright (c) 1997-2016 The PHP Group<br>Zend Engine v2.6.0, Copyright (c) 1998-2016 Zend Technologies<br>    with Zend OPcache v7.0.6-dev, Copyright (c) 1999-2016, by Zend Technologies<br>在机器A上面运行bench.php，并且用time工具查看耗时</p>
+<p>[<strong>@</strong> /<strong>/</strong>]# time php bench.php</p>
+<p>real    0m32.086s<br>user    0m32.084s<br>sys     0m0.004s<br>然后将机器A的php版本升级到php7</p>
+<p>PHP 7.0.7 (cli) (built: Aug 18 2016 20:08:32) ( NTS )<br>Copyright (c) 1997-2016 The PHP Group<br>Zend Engine v3.0.0, Copyright (c) 1998-2016 Zend Technologies<br>    with Zend OPcache v7.0.6-dev, Copyright (c) 1999-2016, by Zend Technologies<br>再次执行bench.php，并且用time工具查看耗时</p>
+<p>[<strong>@</strong> /<strong>/</strong>]# time php bench.php</p>
+<p>real    0m14.106s<br>user    0m14.096s<br>sys     0m0.008s<br>可以看到在不改变程序只升级软件的情况下，php7的性能比php5.6高出很多。不止是php，还有许多其余的软件，都可以关注其最新的版本，然后可以尝试升级到最新的稳定版本，会有意想不到的好效果的~</p>
+
       
     </div>
     
@@ -573,7 +584,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

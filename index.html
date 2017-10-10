@@ -338,6 +338,184 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://idonkeyliu.github.io/2017/10/10/浅谈架构/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="idonkeyliu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://wx.qlogo.cn/mmopen/jAfCQk2WgOibyUrBiaP3iaMlnghS5kfoib1atEM7hxQPqiciaGib9XSXVg5aYcNkzztzNdWd5fGbrlEoicjjzyJjMqCwTziaCuiaXcWaI5/0">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="idonkeyliu's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/10/浅谈架构/" itemprop="url">浅谈架构</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-10T11:55:53+08:00">
+                2017-10-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/架构/" itemprop="url" rel="index">
+                    <span itemprop="name">架构</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="浅谈架构"><a href="#浅谈架构" class="headerlink" title="浅谈架构"></a>浅谈架构</h3><blockquote>
+<p>高并发、高可用、易扩展、易维护</p>
+</blockquote>
+<ol>
+<li><p>取舍之道</p>
+</li>
+<li><p>软硬件的艺术</p>
+</li>
+<li><p>全局的视野，系统性思维方式</p>
+</li>
+<li><p>各司其职</p>
+</li>
+<li><p>解耦</p>
+</li>
+<li><p>缓存</p>
+</li>
+<li><p>池化技术</p>
+</li>
+<li><p>立体监控</p>
+</li>
+<li><p>全链路压测</p>
+</li>
+<li><p>全链路日志</p>
+</li>
+<li><p>量力而行</p>
+</li>
+<li><p>弹性伸缩</p>
+</li>
+<li><p>时空开销，区域自治</p>
+</li>
+<li><p>异地多活，完全容灾，全网调度</p>
+</li>
+<li><p>保持干净</p>
+</li>
+<li><p>回馈开源社区<br>一个好的架构不应该是一个人或者是一批人的玩物，应该开放出来回馈广大的社区。提升别人的同时也能成长自己，自己好不是真的好，大家好才是真的好。需要多看看能给别人带来什么，需要看看能为改变这个世界做点什么。一个开放的心态，一个开阔的视角必然能为好的架构打下一个更高的起点。</p>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://idonkeyliu.github.io/2017/10/09/读微信摇一摇有感/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -577,7 +755,18 @@
       
         
           
-            
+            <blockquote>
+<p>当后端的服务并发满足不了需要的时候，进行软件升级也是一个性价比很高的方法。</p>
+</blockquote>
+<p>下面写一个简单的测试程序bench.php<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">for($i =0; $i &lt; 10000000; $i++)</div><div class="line">&#123;</div><div class="line">    $info = array(</div><div class="line">        &apos;name&apos; =&gt;&apos;Tom&apos;,</div><div class="line">        &apos;rank&apos; =&gt; 1</div><div class="line">    );</div><div class="line"></div><div class="line">    $infoEncode = json_encode($info);</div><div class="line">    $infoDecode = json_decode($infoEncode, true);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在机器A上面看php的版本号码</p>
+<p>PHP 5.6.21 (cli) (built: Aug 18 2016 16:16:25)<br>Copyright (c) 1997-2016 The PHP Group<br>Zend Engine v2.6.0, Copyright (c) 1998-2016 Zend Technologies<br>    with Zend OPcache v7.0.6-dev, Copyright (c) 1999-2016, by Zend Technologies<br>在机器A上面运行bench.php，并且用time工具查看耗时</p>
+<p>[<strong>@</strong> /<strong>/</strong>]# time php bench.php</p>
+<p>real    0m32.086s<br>user    0m32.084s<br>sys     0m0.004s<br>然后将机器A的php版本升级到php7</p>
+<p>PHP 7.0.7 (cli) (built: Aug 18 2016 20:08:32) ( NTS )<br>Copyright (c) 1997-2016 The PHP Group<br>Zend Engine v3.0.0, Copyright (c) 1998-2016 Zend Technologies<br>    with Zend OPcache v7.0.6-dev, Copyright (c) 1999-2016, by Zend Technologies<br>再次执行bench.php，并且用time工具查看耗时</p>
+<p>[<strong>@</strong> /<strong>/</strong>]# time php bench.php</p>
+<p>real    0m14.106s<br>user    0m14.096s<br>sys     0m0.008s<br>可以看到在不改变程序只升级软件的情况下，php7的性能比php5.6高出很多。不止是php，还有许多其余的软件，都可以关注其最新的版本，然后可以尝试升级到最新的稳定版本，会有意想不到的好效果的~</p>
+
           
         
       
@@ -1404,7 +1593,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
