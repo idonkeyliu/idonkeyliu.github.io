@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="idonkeyliu&#39;s Blog">
 <meta property="og:description" content="php安装zookeeper zookeeper是非常著名的分布式开源软件，在选主、配置管理、分布式锁等应用方面表现出色。那么在php环境下如何使用zookeeper呢？     zookeeper源码版本 zookeeper扩展版本     3.4.10 0.4.0    1.安装zookeeper Lib首先需要下载zookeeper的源码进行编译安装，源码下载地址为为zookeeper源码1">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-10-18T12:28:39.922Z">
+<meta property="og:updated_time" content="2017-10-18T12:31:35.110Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="php安装zookeeper">
 <meta name="twitter:description" content="php安装zookeeper zookeeper是非常著名的分布式开源软件，在选主、配置管理、分布式锁等应用方面表现出色。那么在php环境下如何使用zookeeper呢？     zookeeper源码版本 zookeeper扩展版本     3.4.10 0.4.0    1.安装zookeeper Lib首先需要下载zookeeper的源码进行编译安装，源码下载地址为为zookeeper源码1">
@@ -491,7 +491,57 @@
 <p>在B与C机器执行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/<span class="built_in">local</span>/zookeeper-3.4.10/bin]<span class="comment"># ./zkServer.sh status</span></div></pre></td></tr></table></figure></p>
 <p>会显示<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ZooKeeper JMX enabled by default</div><div class="line">Using config: /usr/<span class="built_in">local</span>/zookeeper-3.4.10/bin/../conf/zoo.cfg</div><div class="line">Mode: follower</div></pre></td></tr></table></figure></p>
 <p>表示B、C机器为zookeeper集群的从节点</p>
-<h2 id="4-zookeeper命令"><a href="#4-zookeeper命令" class="headerlink" title="4 zookeeper命令"></a>4 zookeeper命令</h2><p>ZooKeeper 支持某些特定的四字命令字母与其的交互。它们大多是查询命令，用来获取 ZooKeeper 服务的当前状态及相关信息。用户在客户端可以通过 telnet 或 nc 向 ZooKeeper 提交相应的命令。 ZooKeeper 常用四字命令见下表 所示：<br>|命令 |    作用|<br>| -  | - |<br>|conf | 输出相关服务配置的详细信息|<br>|cons | 列出所有连接到服务器的客户端的完全的连接 / 会话的详细信息。包括“接受 / 发送”的包数量、会话 id 、操作延迟、最后的操作执行等等信息|<br>|dump | 列出未经处理的会话和临时节点|<br>|envi | 输出关于服务环境的详细信息（区别于 conf 命令）|<br>|reqs | 列出未经处理的请求|<br>|ruok | 测试服务是否处于正确状态。如果确实如此，那么服务返回“imok ”，否则不做任何相应|<br>|stat | 输出关于性能和连接的客户端的列表|<br>|wchs | 列出服务器 watch 的详细信息|<br>|wchc | 通过 session 列出服务器 watch 的详细信息，它的输出是一个与watch 相关的会话的列表|<br>|wchp | 通过路径列出服务器 watch 的详细信息。它输出一个与 session相关的路径|</p>
+<h2 id="4-zookeeper命令"><a href="#4-zookeeper命令" class="headerlink" title="4 zookeeper命令"></a>4 zookeeper命令</h2><p>ZooKeeper 支持某些特定的四字命令字母与其的交互。它们大多是查询命令，用来获取 ZooKeeper 服务的当前状态及相关信息。用户在客户端可以通过 telnet 或 nc 向 ZooKeeper 提交相应的命令。ZooKeeper常用四字命令见下表所示:</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>conf</td>
+<td>输出相关服务配置的详细信息</td>
+</tr>
+<tr>
+<td>cons</td>
+<td>列出所有连接到服务器的客户端的完全的连接 / 会话的详细信息。包括“接受 / 发送”的包数量、会话 id 、操作延迟、最后的操作执行等等信息</td>
+</tr>
+<tr>
+<td>dump</td>
+<td>列出未经处理的会话和临时节点</td>
+</tr>
+<tr>
+<td>envi</td>
+<td>输出关于服务环境的详细信息（区别于 conf 命令）</td>
+</tr>
+<tr>
+<td>reqs</td>
+<td>列出未经处理的请求</td>
+</tr>
+<tr>
+<td>ruok</td>
+<td>测试服务是否处于正确状态。如果确实如此，那么服务返回“imok ”，否则不做任何相应</td>
+</tr>
+<tr>
+<td>stat</td>
+<td>输出关于性能和连接的客户端的列表</td>
+</tr>
+<tr>
+<td>wchs</td>
+<td>列出服务器 watch 的详细信息</td>
+</tr>
+<tr>
+<td>wchc</td>
+<td>通过 session 列出服务器 watch 的详细信息，它的输出是一个与watch 相关的会话的列表</td>
+</tr>
+<tr>
+<td>wchp</td>
+<td>通过路径列出服务器 watch 的详细信息。它输出一个与 session相关的路径</td>
+</tr>
+</tbody>
+</table>
 <p>下面演示一下ruok命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/<span class="built_in">local</span>/zookeeper-3.4.10/bin]<span class="comment"># echo ruok | nc localhost 2181</span></div></pre></td></tr></table></figure></p>
 <p>然后会显示<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">imok</div></pre></td></tr></table></figure></p>
 <p>表示该节点处于正确状态。<br>如果nc命令执行不了，就执行<code>yum install nmap-ncat</code>安装</p>
