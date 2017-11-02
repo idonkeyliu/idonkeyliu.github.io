@@ -338,6 +338,153 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://idonkeyliu.github.io/2017/11/02/leecode-27-Remove-Element/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="idonkeyliu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://wx.qlogo.cn/mmopen/jAfCQk2WgOibyUrBiaP3iaMlnghS5kfoib1atEM7hxQPqiciaGib9XSXVg5aYcNkzztzNdWd5fGbrlEoicjjzyJjMqCwTziaCuiaXcWaI5/0">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="idonkeyliu's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/02/leecode-27-Remove-Element/" itemprop="url">leecode-27. Remove Element</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-02T21:21:34+08:00">
+                2017-11-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="27-Remove-Element"><a href="#27-Remove-Element" class="headerlink" title="27. Remove Element"></a>27. Remove Element</h1><p>Given an array and a value, remove all instances of that value in place and return the new length.</p>
+<p>Do not allocate extra space for another array, you must do this in place with constant memory.</p>
+<p>The order of elements can be changed. It doesn’t matter what you leave beyond the new length.</p>
+<h2 id="Example-1"><a href="#Example-1" class="headerlink" title="Example 1:"></a>Example 1:</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Given input array nums = [<span class="number">3</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>], val = <span class="number">3</span></div><div class="line"></div><div class="line">Your function should <span class="keyword">return</span> length = <span class="number">2</span>, <span class="keyword">with</span> the first two elements of nums being <span class="number">2.</span></div></pre></td></tr></table></figure>
+<p>思路：需要从列表中删除指定val的元素，需要返回新列表的长度，另外看到提示中不管元素原来的顺序，很自然的想到会是从首尾同时开始找，找到了就开始swap，最后新列表前面的子列表就是需要的新列表，首指针的值就是新列表的长度<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">removeElement</span><span class="params">(self, nums, val)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line"><span class="string">        :type nums: List[int]</span></div><div class="line"><span class="string">        :type val: int</span></div><div class="line"><span class="string">        :rtype: int</span></div><div class="line"><span class="string">        """</span></div><div class="line">        begin, end = <span class="number">0</span>, len(nums) - <span class="number">1</span></div><div class="line"></div><div class="line">        <span class="keyword">while</span> begin &lt;= end:</div><div class="line">            <span class="keyword">if</span> nums[begin] == val:</div><div class="line">                nums[begin], nums[end], end = nums[end], nums[begin], end - <span class="number">1</span></div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                begin += <span class="number">1</span></div><div class="line"></div><div class="line">        <span class="keyword">return</span> begin</div></pre></td></tr></table></figure></p>
+<p>另外python版本还有一个更简单的方法<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">while</span> val <span class="keyword">in</span> nums:</div><div class="line">  nums.remove(value)</div><div class="line"><span class="keyword">return</span> len(nums)</div></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://idonkeyliu.github.io/2017/11/02/leecode-717-1-bit-and-2-bit-Characters/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1613,153 +1760,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://idonkeyliu.github.io/2017/10/02/2017国庆/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="idonkeyliu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://wx.qlogo.cn/mmopen/jAfCQk2WgOibyUrBiaP3iaMlnghS5kfoib1atEM7hxQPqiciaGib9XSXVg5aYcNkzztzNdWd5fGbrlEoicjjzyJjMqCwTziaCuiaXcWaI5/0">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="idonkeyliu's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/02/2017国庆/" itemprop="url">2017国庆</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-02T09:30:21+08:00">
-                2017-10-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/随感/" itemprop="url" rel="index">
-                    <span itemprop="name">随感</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>今天下午早点下班（国庆前一天），去腾大吃晚饭，估计晚上会堵车。班车是准时6点半出发的，果然很堵，广深沿江公路真是挤爆了，半天动不了。到国庆第一天早上8点钟才到家。</p>
-<h3 id="Day-1"><a href="#Day-1" class="headerlink" title="Day 1"></a>Day 1</h3><p>回来就看到了两个半月大的儿子，真的是非常开心，今天哪也没有去，就是陪着儿子好好玩了一天，儿子真是可爱极了。<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/10/02/2017国庆/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1810,7 +1810,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1832,7 +1832,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
