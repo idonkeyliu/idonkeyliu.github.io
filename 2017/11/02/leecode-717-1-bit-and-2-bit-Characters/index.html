@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="idonkeyliu&#39;s Blog">
 <meta property="og:description" content="717. 1-bit and 2-bit CharactersWe have two special characters. The first character can be represented by one bit 0. The second character can be represented by two bits (10 or 11).Now given a string re">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-02T12:32:33.292Z">
+<meta property="og:updated_time" content="2017-11-02T13:32:31.269Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="leecode-717. 1-bit and 2-bit Characters">
 <meta name="twitter:description" content="717. 1-bit and 2-bit CharactersWe have two special characters. The first character can be represented by one bit 0. The second character can be represented by two bits (10 or 11).Now given a string re">
@@ -434,6 +434,7 @@
       
         <h1 id="717-1-bit-and-2-bit-Characters"><a href="#717-1-bit-and-2-bit-Characters" class="headerlink" title="717. 1-bit and 2-bit Characters"></a>717. 1-bit and 2-bit Characters</h1><p>We have two special characters. The first character can be represented by one bit 0. The second character can be represented by two bits (10 or 11).<br>Now given a string represented by several bits. Return whether the last character must be a one-bit character or not. The given string will always end with a zero.</p>
 <h2 id="Example-1"><a href="#Example-1" class="headerlink" title="Example 1:"></a>Example 1:</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Input:</div><div class="line">bits = [<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>]</div><div class="line">Output: <span class="keyword">True</span></div><div class="line">Explanation:</div><div class="line">The only way to decode it <span class="keyword">is</span> two-bit character <span class="keyword">and</span> one-bit character. So the last character <span class="keyword">is</span> one-bit character.</div></pre></td></tr></table></figure>
+<a id="more"></a>
 <h2 id="Example-2"><a href="#Example-2" class="headerlink" title="Example 2:"></a>Example 2:</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Input:</div><div class="line">bits = [<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>]</div><div class="line">Output: <span class="keyword">False</span></div><div class="line">Explanation:</div><div class="line">The only way to decode it <span class="keyword">is</span> two-bit character <span class="keyword">and</span> two-bit character. So the last character <span class="keyword">is</span> NOT one-bit character.</div></pre></td></tr></table></figure>
 <h2 id="Note"><a href="#Note" class="headerlink" title="Note:"></a>Note:</h2><ul>
 <li>1 &lt;= len(bits) &lt;= 1000.</li>

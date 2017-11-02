@@ -430,15 +430,17 @@
 
       
         
-          
-            <h1 id="27-Remove-Element"><a href="#27-Remove-Element" class="headerlink" title="27. Remove Element"></a>27. Remove Element</h1><p>Given an array and a value, remove all instances of that value in place and return the new length.</p>
+          <h1 id="27-Remove-Element"><a href="#27-Remove-Element" class="headerlink" title="27. Remove Element"></a>27. Remove Element</h1><p>Given an array and a value, remove all instances of that value in place and return the new length.</p>
 <p>Do not allocate extra space for another array, you must do this in place with constant memory.</p>
 <p>The order of elements can be changed. It doesn’t matter what you leave beyond the new length.</p>
 <h2 id="Example-1"><a href="#Example-1" class="headerlink" title="Example 1:"></a>Example 1:</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Given input array nums = [<span class="number">3</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>], val = <span class="number">3</span></div><div class="line"></div><div class="line">Your function should <span class="keyword">return</span> length = <span class="number">2</span>, <span class="keyword">with</span> the first two elements of nums being <span class="number">2.</span></div></pre></td></tr></table></figure>
-<p>思路：需要从列表中删除指定val的元素，需要返回新列表的长度，另外看到提示中不管元素原来的顺序，很自然的想到会是从首尾同时开始找，找到了就开始swap，最后新列表前面的子列表就是需要的新列表，首指针的值就是新列表的长度<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">removeElement</span><span class="params">(self, nums, val)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line"><span class="string">        :type nums: List[int]</span></div><div class="line"><span class="string">        :type val: int</span></div><div class="line"><span class="string">        :rtype: int</span></div><div class="line"><span class="string">        """</span></div><div class="line">        begin, end = <span class="number">0</span>, len(nums) - <span class="number">1</span></div><div class="line"></div><div class="line">        <span class="keyword">while</span> begin &lt;= end:</div><div class="line">            <span class="keyword">if</span> nums[begin] == val:</div><div class="line">                nums[begin], nums[end], end = nums[end], nums[begin], end - <span class="number">1</span></div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                begin += <span class="number">1</span></div><div class="line"></div><div class="line">        <span class="keyword">return</span> begin</div></pre></td></tr></table></figure></p>
-<p>另外python版本还有一个更简单的方法<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">while</span> val <span class="keyword">in</span> nums:</div><div class="line">  nums.remove(value)</div><div class="line"><span class="keyword">return</span> len(nums)</div></pre></td></tr></table></figure></p>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/02/leecode-27-Remove-Element/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -577,18 +579,15 @@
 
       
         
-          
-            <h1 id="717-1-bit-and-2-bit-Characters"><a href="#717-1-bit-and-2-bit-Characters" class="headerlink" title="717. 1-bit and 2-bit Characters"></a>717. 1-bit and 2-bit Characters</h1><p>We have two special characters. The first character can be represented by one bit 0. The second character can be represented by two bits (10 or 11).<br>Now given a string represented by several bits. Return whether the last character must be a one-bit character or not. The given string will always end with a zero.</p>
+          <h1 id="717-1-bit-and-2-bit-Characters"><a href="#717-1-bit-and-2-bit-Characters" class="headerlink" title="717. 1-bit and 2-bit Characters"></a>717. 1-bit and 2-bit Characters</h1><p>We have two special characters. The first character can be represented by one bit 0. The second character can be represented by two bits (10 or 11).<br>Now given a string represented by several bits. Return whether the last character must be a one-bit character or not. The given string will always end with a zero.</p>
 <h2 id="Example-1"><a href="#Example-1" class="headerlink" title="Example 1:"></a>Example 1:</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Input:</div><div class="line">bits = [<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>]</div><div class="line">Output: <span class="keyword">True</span></div><div class="line">Explanation:</div><div class="line">The only way to decode it <span class="keyword">is</span> two-bit character <span class="keyword">and</span> one-bit character. So the last character <span class="keyword">is</span> one-bit character.</div></pre></td></tr></table></figure>
-<h2 id="Example-2"><a href="#Example-2" class="headerlink" title="Example 2:"></a>Example 2:</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Input:</div><div class="line">bits = [<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>]</div><div class="line">Output: <span class="keyword">False</span></div><div class="line">Explanation:</div><div class="line">The only way to decode it <span class="keyword">is</span> two-bit character <span class="keyword">and</span> two-bit character. So the last character <span class="keyword">is</span> NOT one-bit character.</div></pre></td></tr></table></figure>
-<h2 id="Note"><a href="#Note" class="headerlink" title="Note:"></a>Note:</h2><ul>
-<li>1 &lt;= len(bits) &lt;= 1000.</li>
-<li>bits[i] is always 0 or 1.</li>
-</ul>
-<p>思路：判断列表长度，当列表长度为1的时候返回True, 判断列表头，为1的时候可以移除列表头2位，为0的时候可以移除1位，持续这个过程，最后如果列表为空就是False。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">isOneBitCharacter</span><span class="params">(self, bits)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line"><span class="string">        :type bits: List[int]</span></div><div class="line"><span class="string">        :rtype: bool</span></div><div class="line"><span class="string">        """</span></div><div class="line">        <span class="keyword">if</span> len(bits) == <span class="number">1</span>:</div><div class="line">            <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line"></div><div class="line">        <span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">            <span class="keyword">if</span> len(bits) == <span class="number">1</span>:</div><div class="line">                <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line">            <span class="keyword">elif</span> len(bits) == <span class="number">0</span>:</div><div class="line">                <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line"></div><div class="line">            <span class="keyword">if</span> bits[<span class="number">0</span>] == <span class="number">0</span>:</div><div class="line">                bits.pop(<span class="number">0</span>)</div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                bits.pop(<span class="number">0</span>)</div><div class="line">                bits.pop(<span class="number">0</span>)</div></pre></td></tr></table></figure>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/02/leecode-717-1-bit-and-2-bit-Characters/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
