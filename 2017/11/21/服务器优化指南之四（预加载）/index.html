@@ -96,18 +96,18 @@
 
 
 
-<meta name="description" content="##预加载 有时候服务端需要一些资源文件，特别是在一些特殊的时间节点上，比如年底的微信红包、双11的天猫全球网络购物节。 如果等到节日的当天再由客户端来服务器拉取资源，那无疑对服务器是巨大的冲击，对带宽资源是严重的挑战。即使带宽可以被无限满足，那么用户下载资源等待的时间也是难以忍受的。 所以可以将服务器资源有计划的提前下发到客户端，这样就可以大大的减轻服务器在节日时间的压力。 分离与异步，是计算机">
+<meta name="description" content="预加载有时候服务端需要一些资源文件，特别是在一些特殊的时间节点上，比如年底的微信红包、双11的天猫全球网络购物节。 如果等到节日的当天再由客户端来服务器拉取资源，那无疑对服务器是巨大的冲击，对带宽资源是严重的挑战。即使带宽可以被无限满足，那么用户下载资源等待的时间也是难以忍受的。 所以可以将服务器资源有计划的提前下发到客户端，这样就可以大大的减轻服务器在节日时间的压力。 分离与异步，是计算机技术中">
 <meta name="keywords" content="服务器性能优化">
 <meta property="og:type" content="article">
 <meta property="og:title" content="服务器优化指南之四（预加载）">
 <meta property="og:url" content="http://idonkeyliu.github.io/2017/11/21/服务器优化指南之四（预加载）/index.html">
 <meta property="og:site_name" content="idonkeyliu&#39;s Blog">
-<meta property="og:description" content="##预加载 有时候服务端需要一些资源文件，特别是在一些特殊的时间节点上，比如年底的微信红包、双11的天猫全球网络购物节。 如果等到节日的当天再由客户端来服务器拉取资源，那无疑对服务器是巨大的冲击，对带宽资源是严重的挑战。即使带宽可以被无限满足，那么用户下载资源等待的时间也是难以忍受的。 所以可以将服务器资源有计划的提前下发到客户端，这样就可以大大的减轻服务器在节日时间的压力。 分离与异步，是计算机">
+<meta property="og:description" content="预加载有时候服务端需要一些资源文件，特别是在一些特殊的时间节点上，比如年底的微信红包、双11的天猫全球网络购物节。 如果等到节日的当天再由客户端来服务器拉取资源，那无疑对服务器是巨大的冲击，对带宽资源是严重的挑战。即使带宽可以被无限满足，那么用户下载资源等待的时间也是难以忍受的。 所以可以将服务器资源有计划的提前下发到客户端，这样就可以大大的减轻服务器在节日时间的压力。 分离与异步，是计算机技术中">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-21T04:26:22.731Z">
+<meta property="og:updated_time" content="2017-11-21T04:27:11.255Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="服务器优化指南之四（预加载）">
-<meta name="twitter:description" content="##预加载 有时候服务端需要一些资源文件，特别是在一些特殊的时间节点上，比如年底的微信红包、双11的天猫全球网络购物节。 如果等到节日的当天再由客户端来服务器拉取资源，那无疑对服务器是巨大的冲击，对带宽资源是严重的挑战。即使带宽可以被无限满足，那么用户下载资源等待的时间也是难以忍受的。 所以可以将服务器资源有计划的提前下发到客户端，这样就可以大大的减轻服务器在节日时间的压力。 分离与异步，是计算机">
+<meta name="twitter:description" content="预加载有时候服务端需要一些资源文件，特别是在一些特殊的时间节点上，比如年底的微信红包、双11的天猫全球网络购物节。 如果等到节日的当天再由客户端来服务器拉取资源，那无疑对服务器是巨大的冲击，对带宽资源是严重的挑战。即使带宽可以被无限满足，那么用户下载资源等待的时间也是难以忍受的。 所以可以将服务器资源有计划的提前下发到客户端，这样就可以大大的减轻服务器在节日时间的压力。 分离与异步，是计算机技术中">
 
 
 
@@ -432,8 +432,7 @@
       
 
       
-        <p>##预加载</p>
-<p>有时候服务端需要一些资源文件，特别是在一些特殊的时间节点上，比如年底的微信红包、双11的天猫全球网络购物节。</p>
+        <h2 id="预加载"><a href="#预加载" class="headerlink" title="预加载"></a>预加载</h2><p>有时候服务端需要一些资源文件，特别是在一些特殊的时间节点上，比如年底的微信红包、双11的天猫全球网络购物节。</p>
 <p>如果等到节日的当天再由客户端来服务器拉取资源，那无疑对服务器是巨大的冲击，对带宽资源是严重的挑战。即使带宽可以被无限满足，那么用户下载资源等待的时间也是难以忍受的。</p>
 <p>所以可以将服务器资源有计划的提前下发到客户端，这样就可以大大的减轻服务器在节日时间的压力。</p>
 <p>分离与异步，是计算机技术中的两个伟大思想，分离分为时间分离与空间分离，预加载与延迟加载就是时间分离的典范。</p>
@@ -558,8 +557,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://wx.qlogo.cn/mmopen/jAfCQk2WgOibyUrBiaP3iaMlnghS5kfoib1atEM7hxQPqiciaGib9XSXVg5aYcNkzztzNdWd5fGbrlEoicjjzyJjMqCwTziaCuiaXcWaI5/0"
@@ -652,6 +660,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#预加载"><span class="nav-number">1.</span> <span class="nav-text">预加载</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
