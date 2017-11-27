@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="idonkeyliu&#39;s Blog">
 <meta property="og:description" content="1. 禁止嵌套循环将嵌套循环改为二次循环 （新手常犯该错误） 2. 单次循环读写单次循环读写改为批量读写，单次循环会占用非常多的开销 （新手常犯错误） 3. 超时时间设置不设置超时会引起雪崩，连接超时与执行超时都需要设置，udp有回包也需要设置超时时间">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-27T11:57:23.492Z">
+<meta property="og:updated_time" content="2017-11-27T11:59:07.772Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="服务器优化指南之五（逻辑优化）">
 <meta name="twitter:description" content="1. 禁止嵌套循环将嵌套循环改为二次循环 （新手常犯该错误） 2. 单次循环读写单次循环读写改为批量读写，单次循环会占用非常多的开销 （新手常犯错误） 3. 超时时间设置不设置超时会引起雪崩，连接超时与执行超时都需要设置，udp有回包也需要设置超时时间">
@@ -437,12 +437,9 @@
 <h3 id="3-超时时间设置"><a href="#3-超时时间设置" class="headerlink" title="3. 超时时间设置"></a>3. 超时时间设置</h3><p>不设置超时会引起雪崩，连接超时与执行超时都需要设置，udp有回包也需要设置超时时间</p>
 <a id="more"></a>
 <h3 id="4-请求分页"><a href="#4-请求分页" class="headerlink" title="4. 请求分页"></a>4. 请求分页</h3><p>不要在一个请求里面返回太多的数据内容，如果返回的内容不会都用到，可以用多个请求来获取，也即是分页。当请求条数变大的时候服务器性能会变差</p>
-<p>###5. DB相关</p>
-<h4 id="5-1-索引的威力"><a href="#5-1-索引的威力" class="headerlink" title="5.1 索引的威力"></a>5.1 索引的威力</h4><h4 id="5-2-提取必要数据，避免select"><a href="#5-2-提取必要数据，避免select" class="headerlink" title="5.2 提取必要数据，避免select *"></a>5.2 提取必要数据，避免select *</h4><h4 id="5-3-避免使用函数"><a href="#5-3-避免使用函数" class="headerlink" title="5.3 避免使用函数"></a>5.3 避免使用函数</h4><p>###6. 算法<br>O(1) O(n) O(logn) O(n2)</p>
-<p>###7. IO多路复用</p>
-<p>###8. yield生成器</p>
-<p>###9. 有锁编程<br>有锁编程变为无锁编程</p>
-<p>###10. 写硬盘<br>写内存替代写硬盘</p>
+<h3 id="5-DB相关"><a href="#5-DB相关" class="headerlink" title="5. DB相关"></a>5. DB相关</h3><h4 id="5-1-索引的威力"><a href="#5-1-索引的威力" class="headerlink" title="5.1 索引的威力"></a>5.1 索引的威力</h4><h4 id="5-2-提取必要数据，避免select"><a href="#5-2-提取必要数据，避免select" class="headerlink" title="5.2 提取必要数据，避免select *"></a>5.2 提取必要数据，避免select *</h4><h4 id="5-3-避免使用函数"><a href="#5-3-避免使用函数" class="headerlink" title="5.3 避免使用函数"></a>5.3 避免使用函数</h4><h3 id="6-算法"><a href="#6-算法" class="headerlink" title="6. 算法"></a>6. 算法</h3><p>O(1) O(n) O(logn) O(n2)</p>
+<h3 id="7-IO多路复用"><a href="#7-IO多路复用" class="headerlink" title="7. IO多路复用"></a>7. IO多路复用</h3><h3 id="8-yield生成器"><a href="#8-yield生成器" class="headerlink" title="8. yield生成器"></a>8. yield生成器</h3><h3 id="9-有锁编程"><a href="#9-有锁编程" class="headerlink" title="9. 有锁编程"></a>9. 有锁编程</h3><p>有锁编程变为无锁编程</p>
+<h3 id="10-写硬盘"><a href="#10-写硬盘" class="headerlink" title="10. 写硬盘"></a>10. 写硬盘</h3><p>写内存替代写硬盘</p>
 
       
     </div>
@@ -677,7 +674,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-禁止嵌套循环"><span class="nav-number">1.</span> <span class="nav-text">1. 禁止嵌套循环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-单次循环读写"><span class="nav-number">2.</span> <span class="nav-text">2. 单次循环读写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-超时时间设置"><span class="nav-number">3.</span> <span class="nav-text">3. 超时时间设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-请求分页"><span class="nav-number">4.</span> <span class="nav-text">4. 请求分页</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-1-索引的威力"><span class="nav-number">4.1.</span> <span class="nav-text">5.1 索引的威力</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-提取必要数据，避免select"><span class="nav-number">4.2.</span> <span class="nav-text">5.2 提取必要数据，避免select *</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-避免使用函数"><span class="nav-number">4.3.</span> <span class="nav-text">5.3 避免使用函数</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-禁止嵌套循环"><span class="nav-number">1.</span> <span class="nav-text">1. 禁止嵌套循环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-单次循环读写"><span class="nav-number">2.</span> <span class="nav-text">2. 单次循环读写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-超时时间设置"><span class="nav-number">3.</span> <span class="nav-text">3. 超时时间设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-请求分页"><span class="nav-number">4.</span> <span class="nav-text">4. 请求分页</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-DB相关"><span class="nav-number">5.</span> <span class="nav-text">5. DB相关</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-1-索引的威力"><span class="nav-number">5.1.</span> <span class="nav-text">5.1 索引的威力</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-提取必要数据，避免select"><span class="nav-number">5.2.</span> <span class="nav-text">5.2 提取必要数据，避免select *</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-避免使用函数"><span class="nav-number">5.3.</span> <span class="nav-text">5.3 避免使用函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-算法"><span class="nav-number">6.</span> <span class="nav-text">6. 算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-IO多路复用"><span class="nav-number">7.</span> <span class="nav-text">7. IO多路复用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-yield生成器"><span class="nav-number">8.</span> <span class="nav-text">8. yield生成器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-有锁编程"><span class="nav-number">9.</span> <span class="nav-text">9. 有锁编程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-写硬盘"><span class="nav-number">10.</span> <span class="nav-text">10. 写硬盘</span></a></li></ol></div>
             
 
           </div>
