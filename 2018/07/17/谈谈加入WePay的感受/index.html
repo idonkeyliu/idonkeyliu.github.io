@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="服务器性能优化," />
+  <meta name="keywords" content="今天越安逸，明天越危险" />
 
 
 
@@ -96,18 +96,17 @@
 
 
 
-<meta name="description" content="有时候在移动端服务器侧开发的时候，某些接口的性能得不到优化，可以看看是不是该接口做了太多的事情，提取了太多的数据，看看能否将这一个接口做的事情拆分为几个接口来做。 有时候我们总想着一个接口提供大而全的数据供前端使用，但是却没有去想提供的数据是不是会马上就用到，如果提供的部分数据永远不会被用到或者是很小概率会用到，那么我们为什么还需要在这个接口里面返回，是不是可以考虑延迟加载。 移动APP的位置有限">
-<meta name="keywords" content="服务器性能优化">
+<meta name="description" content="今天越安逸，明天越危险">
 <meta property="og:type" content="article">
-<meta property="og:title" content="服务器优化指南之三（延迟处理）">
-<meta property="og:url" content="http://idonkeyliu.github.io/2017/11/16/服务器优化指南之三（延迟处理）/index.html">
+<meta property="og:title" content="谈谈加入WePay的感受">
+<meta property="og:url" content="http://idonkeyliu.github.io/2018/07/17/谈谈加入WePay的感受/index.html">
 <meta property="og:site_name" content="idonkeyliu&#39;s Blog">
-<meta property="og:description" content="有时候在移动端服务器侧开发的时候，某些接口的性能得不到优化，可以看看是不是该接口做了太多的事情，提取了太多的数据，看看能否将这一个接口做的事情拆分为几个接口来做。 有时候我们总想着一个接口提供大而全的数据供前端使用，但是却没有去想提供的数据是不是会马上就用到，如果提供的部分数据永远不会被用到或者是很小概率会用到，那么我们为什么还需要在这个接口里面返回，是不是可以考虑延迟加载。 移动APP的位置有限">
+<meta property="og:description" content="今天越安逸，明天越危险">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-16T14:20:31.151Z">
+<meta property="og:updated_time" content="2018-07-17T12:40:23.498Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="服务器优化指南之三（延迟处理）">
-<meta name="twitter:description" content="有时候在移动端服务器侧开发的时候，某些接口的性能得不到优化，可以看看是不是该接口做了太多的事情，提取了太多的数据，看看能否将这一个接口做的事情拆分为几个接口来做。 有时候我们总想着一个接口提供大而全的数据供前端使用，但是却没有去想提供的数据是不是会马上就用到，如果提供的部分数据永远不会被用到或者是很小概率会用到，那么我们为什么还需要在这个接口里面返回，是不是可以考虑延迟加载。 移动APP的位置有限">
+<meta name="twitter:title" content="谈谈加入WePay的感受">
+<meta name="twitter:description" content="今天越安逸，明天越危险">
 
 
 
@@ -136,13 +135,13 @@
 
 
 
-  <link rel="canonical" href="http://idonkeyliu.github.io/2017/11/16/服务器优化指南之三（延迟处理）/"/>
+  <link rel="canonical" href="http://idonkeyliu.github.io/2018/07/17/谈谈加入WePay的感受/"/>
 
 
 
 
 
-  <title>服务器优化指南之三（延迟处理） | idonkeyliu's Blog</title>
+  <title>谈谈加入WePay的感受 | idonkeyliu's Blog</title>
   
 
 
@@ -338,7 +337,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://idonkeyliu.github.io/2017/11/16/服务器优化指南之三（延迟处理）/">
+    <link itemprop="mainEntityOfPage" href="http://idonkeyliu.github.io/2018/07/17/谈谈加入WePay的感受/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="idonkeyliu">
@@ -355,7 +354,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">服务器优化指南之三（延迟处理）</h1>
+          <h1 class="post-title" itemprop="name headline">谈谈加入WePay的感受</h1>
         
 
         <div class="post-meta">
@@ -367,8 +366,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-16T22:05:51+08:00">
-                2017-11-16
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-17T20:40:23+08:00">
+                2018-07-17
               </time>
             
 
@@ -377,28 +376,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/" itemprop="url" rel="index">
-                    <span itemprop="name">技术</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -432,10 +409,7 @@
       
 
       
-        <p>有时候在移动端服务器侧开发的时候，某些接口的性能得不到优化，可以看看是不是该接口做了太多的事情，提取了太多的数据，看看能否将这一个接口做的事情拆分为几个接口来做。</p>
-<p>有时候我们总想着一个接口提供大而全的数据供前端使用，但是却没有去想提供的数据是不是会马上就用到，如果提供的部分数据永远不会被用到或者是很小概率会用到，那么我们为什么还需要在这个接口里面返回，是不是可以考虑延迟加载。</p>
-<p>移动APP的位置有限，所以都十分重要，越浅的层级就需要越快的加载速度，越高的并发性能，所以首页等页面一定要做到非常轻量。</p>
-
+        
       
     </div>
     
@@ -479,12 +453,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/服务器性能优化/" rel="tag"><i class="fa fa-tag"></i> 服务器性能优化</a>
-          
-        </div>
-      
 
       
       
@@ -494,8 +462,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/11/02/leecode-27-Remove-Element/" rel="next" title="leecode-27. Remove Element">
-                <i class="fa fa-chevron-left"></i> leecode-27. Remove Element
+              <a href="/2018/06/06/日本旅行计划/" rel="next" title="日本旅行计划">
+                <i class="fa fa-chevron-left"></i> 日本旅行计划
               </a>
             
           </div>
@@ -503,10 +471,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/11/21/服务器优化指南之四（预加载）/" rel="prev" title="服务器优化指南之四（预加载）">
-                服务器优化指南之四（预加载） <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
