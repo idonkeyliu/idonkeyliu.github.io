@@ -104,7 +104,7 @@
 <meta property="og:description" content="一、数据库事务隔离级别 数据库事务的隔离级别有4个，由低到高依次为Read uncommitted 、Read committed 、Repeatable read 、Serializable ，这四个级别可以逐个解决脏读 、不可重复读 、幻读 这几类问题。 √: 可能出现    ×: 不会出现    脏读 不可重复读 幻读     Read uncommitted √ √ √   Read co">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://idonkeyliu.github.io/2018/07/19/mysql隔离级别学习/read.gif">
-<meta property="og:updated_time" content="2018-07-19T02:00:24.906Z">
+<meta property="og:updated_time" content="2018-07-19T02:01:26.279Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mysql隔离级别学习">
 <meta name="twitter:description" content="一、数据库事务隔离级别 数据库事务的隔离级别有4个，由低到高依次为Read uncommitted 、Read committed 、Repeatable read 、Serializable ，这四个级别可以逐个解决脏读 、不可重复读 、幻读 这几类问题。 √: 可能出现    ×: 不会出现    脏读 不可重复读 幻读     Read uncommitted √ √ √   Read co">
@@ -449,6 +449,7 @@
 </tr>
 </tbody>
 </table>
+<a id="more"></a>
 <p>注意：我们讨论隔离级别的场景，主要是在多个事务并发 的情况下，因此，接下来的讲解都围绕事务并发。</p>
 <p>Read uncommitted 读未提交<br>公司发工资了，领导把5000元打到singo的账号上，但是该事务并未提交，而singo正好去查看账户，发现工资已经到账，是5000元整，非常高 兴。可是不幸的是，领导发现发给singo的工资金额不对，是2000元，于是迅速回滚了事务，修改金额后，将事务提交，最后singo实际的工资只有 2000元，singo空欢喜一场。</p>
 <img src="/2018/07/19/mysql隔离级别学习/read.gif" alt="read.gif" title="">
