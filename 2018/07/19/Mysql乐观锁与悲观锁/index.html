@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="idonkeyliu&#39;s Blog">
 <meta property="og:description" content="我们在操作数据库的时候，可能会由于并发问题而引起的数据的不一致性（数据冲突） 乐观锁乐观锁不是数据库自带的，需要我们自己去实现。乐观锁是指操作数据库时(更新操作)，想法很乐观，认为这次的操作不会导致冲突，在操作数据时，并不进行任何其他的特殊处理（也就是不加锁），而在进行更新后，再去判断是否有冲突了。 通常实现是这样的：在表中的数据进行操作时(更新)，先给数据表加一个版本(version)字段，每操">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-19T03:21:18.577Z">
+<meta property="og:updated_time" content="2018-07-19T03:25:34.775Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mysql乐观锁与悲观锁">
 <meta name="twitter:description" content="我们在操作数据库的时候，可能会由于并发问题而引起的数据的不一致性（数据冲突） 乐观锁乐观锁不是数据库自带的，需要我们自己去实现。乐观锁是指操作数据库时(更新操作)，想法很乐观，认为这次的操作不会导致冲突，在操作数据时，并不进行任何其他的特殊处理（也就是不加锁），而在进行更新后，再去判断是否有冲突了。 通常实现是这样的：在表中的数据进行操作时(更新)，先给数据表加一个版本(version)字段，每操">
@@ -432,7 +432,6 @@
 <p>SELECT * from city where id = “1”  lock in share mode;</p>
 <p>由于对于city表中,id字段为主键，就也相当于索引。执行加锁时，会将id这个索引为1的记录加上锁，那么这个锁就是行锁。</p>
 <p>表锁<br>表锁，和行锁相对应，给这个表加上锁。</p>
-<p>MyISAM引擎里有的，暂时研究了</p>
 
       
     </div>
