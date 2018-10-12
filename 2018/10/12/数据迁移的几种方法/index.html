@@ -96,17 +96,17 @@
 
 
 
-<meta name="description" content="今天越安逸，明天越危险">
+<meta name="description" content="在我们的日常工作中，因为各种各样的原因，比如机器裁撤、业务重构等都会遇到数据迁移的情况，下面就谈谈数据迁移的几种常见方法。 1. 停机维护停机维护指的是，选择一个时间（比如凌晨3、4点钟，这个时间用户量最小）对外挂出停服维护的公告，然后停止服务，留出一整段时间来进行数据迁移，当数据迁移完毕并且校验通过后，再将存储切换到新的存储系统上，然后开始提供服务。在整个数据迁移的过程中，服务都是停止的。该方式">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据迁移的几种方法">
 <meta property="og:url" content="http://idonkeyliu.github.io/2018/10/12/数据迁移的几种方法/index.html">
 <meta property="og:site_name" content="idonkeyliu&#39;s Blog">
-<meta property="og:description" content="今天越安逸，明天越危险">
+<meta property="og:description" content="在我们的日常工作中，因为各种各样的原因，比如机器裁撤、业务重构等都会遇到数据迁移的情况，下面就谈谈数据迁移的几种常见方法。 1. 停机维护停机维护指的是，选择一个时间（比如凌晨3、4点钟，这个时间用户量最小）对外挂出停服维护的公告，然后停止服务，留出一整段时间来进行数据迁移，当数据迁移完毕并且校验通过后，再将存储切换到新的存储系统上，然后开始提供服务。在整个数据迁移的过程中，服务都是停止的。该方式">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-10-12T07:32:05.710Z">
+<meta property="og:updated_time" content="2018-10-12T07:47:21.337Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据迁移的几种方法">
-<meta name="twitter:description" content="今天越安逸，明天越危险">
+<meta name="twitter:description" content="在我们的日常工作中，因为各种各样的原因，比如机器裁撤、业务重构等都会遇到数据迁移的情况，下面就谈谈数据迁移的几种常见方法。 1. 停机维护停机维护指的是，选择一个时间（比如凌晨3、4点钟，这个时间用户量最小）对外挂出停服维护的公告，然后停止服务，留出一整段时间来进行数据迁移，当数据迁移完毕并且校验通过后，再将存储切换到新的存储系统上，然后开始提供服务。在整个数据迁移的过程中，服务都是停止的。该方式">
 
 
 
@@ -409,7 +409,10 @@
       
 
       
-        
+        <p>在我们的日常工作中，因为各种各样的原因，比如机器裁撤、业务重构等都会遇到数据迁移的情况，下面就谈谈数据迁移的几种常见方法。</p>
+<h3 id="1-停机维护"><a href="#1-停机维护" class="headerlink" title="1. 停机维护"></a>1. 停机维护</h3><p>停机维护指的是，选择一个时间（比如凌晨3、4点钟，这个时间用户量最小）对外挂出停服维护的公告，然后停止服务，留出一整段时间来进行数据迁移，当数据迁移完毕并且校验通过后，再将存储切换到新的存储系统上，然后开始提供服务。在整个数据迁移的过程中，服务都是停止的。该方式简单，不会带来额外的问题，但是却很少被使用，另外停机前也得做一系列的准备工作。</p>
+<h3 id="2-主备备模式"><a href="#2-主备备模式" class="headerlink" title="2. 主备备模式"></a>2. 主备备模式</h3><p>这种方式适用于Master-Slave结构的存储系统，比如Mysql与Redis等。当主机需要被裁撤的时候，拿出一台新机器，将其挂载为备机的备机。当主机-备机-备机的备机的同步延迟为0的时候，将主的读写都切到备机上面，这样裁撤过程就完成了。</p>
+
       
     </div>
     
@@ -524,8 +527,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://wx.qlogo.cn/mmopen/jAfCQk2WgOibyUrBiaP3iaMlnghS5kfoib1atEM7hxQPqiciaGib9XSXVg5aYcNkzztzNdWd5fGbrlEoicjjzyJjMqCwTziaCuiaXcWaI5/0"
@@ -618,6 +630,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-停机维护"><span class="nav-number">1.</span> <span class="nav-text">1. 停机维护</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-主备备模式"><span class="nav-number">2.</span> <span class="nav-text">2. 主备备模式</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
