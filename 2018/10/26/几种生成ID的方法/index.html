@@ -96,16 +96,17 @@
 
 
 
-<meta name="description" content="今天越安逸，明天越危险">
-<meta property="og:type" content="website">
-<meta property="og:title" content="idonkeyliu&#39;s Blog">
-<meta property="og:url" content="http://idonkeyliu.github.io/archives/2018/04/index.html">
+<meta name="description" content="在我们的工作中，经常会遇到需要生成ID的场景，比如全链路日志中标识唯一请求或者说唯一链路的ID，用户注册过程中给用户分配的唯一账号ID，交易过程中的幂等值等。下面就说说几种常见的ID生成方法，也就是Id Maker的实现方案。 1. 数据库auto increment我们很容易的想到，数据库中auto increment就是为了生成唯一主键ID的，而且数据库的ACID特性，保证该过程肯定是原子的，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="几种生成ID的方法">
+<meta property="og:url" content="http://idonkeyliu.github.io/2018/10/26/几种生成ID的方法/index.html">
 <meta property="og:site_name" content="idonkeyliu&#39;s Blog">
-<meta property="og:description" content="今天越安逸，明天越危险">
+<meta property="og:description" content="在我们的工作中，经常会遇到需要生成ID的场景，比如全链路日志中标识唯一请求或者说唯一链路的ID，用户注册过程中给用户分配的唯一账号ID，交易过程中的幂等值等。下面就说说几种常见的ID生成方法，也就是Id Maker的实现方案。 1. 数据库auto increment我们很容易的想到，数据库中auto increment就是为了生成唯一主键ID的，而且数据库的ACID特性，保证该过程肯定是原子的，">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-10-26T09:55:38.699Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="idonkeyliu&#39;s Blog">
-<meta name="twitter:description" content="今天越安逸，明天越危险">
+<meta name="twitter:title" content="几种生成ID的方法">
+<meta name="twitter:description" content="在我们的工作中，经常会遇到需要生成ID的场景，比如全链路日志中标识唯一请求或者说唯一链路的ID，用户注册过程中给用户分配的唯一账号ID，交易过程中的幂等值等。下面就说说几种常见的ID生成方法，也就是Id Maker的实现方案。 1. 数据库auto increment我们很容易的想到，数据库中auto increment就是为了生成唯一主键ID的，而且数据库的ACID特性，保证该过程肯定是原子的，">
 
 
 
@@ -134,13 +135,13 @@
 
 
 
-  <link rel="canonical" href="http://idonkeyliu.github.io/archives/2018/04/"/>
+  <link rel="canonical" href="http://idonkeyliu.github.io/2018/10/26/几种生成ID的方法/"/>
 
 
 
 
 
-  <title>归档 | idonkeyliu's Blog</title>
+  <title>几种生成ID的方法 | idonkeyliu's Blog</title>
   
 
 
@@ -190,7 +191,7 @@
     
   
 
-  <div class="container sidebar-position-left  page-archive  ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -322,221 +323,178 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
 
-      <span class="archive-page-counter">
-        
-        
-         
-        
-        OK! 目前共计 34 篇日志。 继续努力。
-      </span>
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://idonkeyliu.github.io/2018/10/26/几种生成ID的方法/">
 
-      
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="idonkeyliu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://wx.qlogo.cn/mmopen/jAfCQk2WgOibyUrBiaP3iaMlnghS5kfoib1atEM7hxQPqiciaGib9XSXVg5aYcNkzztzNdWd5fGbrlEoicjjzyJjMqCwTziaCuiaXcWaI5/0">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="idonkeyliu's Blog">
+    </span>
+
+    
+      <header class="post-header">
 
         
         
+          <h1 class="post-title" itemprop="name headline">几种生成ID的方法</h1>
         
 
-        
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-26T17:37:55+08:00">
+                2018-10-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-          <div class="collection-title">
-            <h2 class="archive-year motion-element" id="archive-year-2018">2018</h2>
-          </div>
-        
-        
 
-        
+          
+            
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/04/26/架构师技能图谱/" itemprop="url">
-              
-                <span itemprop="name">架构师技能图谱</span>
-              
-            </a>
-        
-      </h2>
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-26T17:10:24+08:00"
-              content="2018-04-26" >
-          04-26
-        </time>
-      </div>
+          
 
-    </header>
-  </article>
+          
 
+        </div>
+      </header>
+    
 
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/04/25/QCon-北京站-2018年4月与会记录/" itemprop="url">
-              
-                <span itemprop="name">QCon(北京站)2018年4月与会记录</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-25T16:20:39+08:00"
-              content="2018-04-25" >
-          04-25
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/04/17/服务器优化指南全集/" itemprop="url">
-              
-                <span itemprop="name">服务器优化指南全集</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-17T10:10:08+08:00"
-              content="2018-04-17" >
-          04-17
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+      
+        <p>在我们的工作中，经常会遇到需要生成ID的场景，比如全链路日志中标识唯一请求或者说唯一链路的ID，用户注册过程中给用户分配的唯一账号ID，交易过程中的幂等值等。下面就说说几种常见的ID生成方法，也就是Id Maker的实现方案。</p>
+<h3 id="1-数据库auto-increment"><a href="#1-数据库auto-increment" class="headerlink" title="1. 数据库auto increment"></a>1. 数据库auto increment</h3><p>我们很容易的想到，数据库中auto increment就是为了生成唯一主键ID的，而且数据库的ACID特性，保证该过程肯定是原子的，原子的意思就是不会有ID冲突即有两个ID生成的一模一样。该方法对于生成ID不是很频繁的场景还是比较适用的，一般是生成请求在几千次/s的情况下。</p>
+<h3 id="2-使用redis自增命令"><a href="#2-使用redis自增命令" class="headerlink" title="2. 使用redis自增命令"></a>2. 使用redis自增命令</h3><p>redis有个incrby的命令，通用点的叫法就是计数器，其实这种思路与mysql的自增并没有什么分别，不过因为存储方式的原因，使用redis做id maker可以在单位时间内生成更多的ID，redis的性能都是10W/s的。不过使用redis没有使用mysql那么简单，它需要在业务层面做一些保护。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">唯一ID：id（每次生成的ID）</div><div class="line">ID保护：max(生成的最大ID)</div><div class="line"></div><div class="line">$id = 调用incrby计数器加<span class="number">1</span>;</div><div class="line">获取$max</div><div class="line"></div><div class="line"><span class="keyword">if</span> ($id &lt;= $max)&#123;</div><div class="line">  $max = $max + $step</div><div class="line">  $id = $max</div><div class="line">&#125;<span class="keyword">else</span>&#123;</div><div class="line">  $max = $id</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">return</span> $id</div></pre></td></tr></table></figure>
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/04/16/谈谈A-B测试/" itemprop="url">
-              
-                <span itemprop="name">谈谈A/B测试</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-16T11:21:47+08:00"
-              content="2018-04-16" >
-          04-16
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/04/12/全链路压测系统/" itemprop="url">
-              
-                <span itemprop="name">全链路压测系统</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-12T20:45:06+08:00"
-              content="2018-04-12" >
-          04-12
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="idonkeyliu WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="idonkeyliu Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/12/数据迁移的几种方法/" rel="next" title="数据迁移的几种方法">
+                <i class="fa fa-chevron-left"></i> 数据迁移的几种方法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -544,6 +502,12 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMTEwOC83NjU3"></div>
+    
+  </div>
+
 
         </div>
         
@@ -564,8 +528,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://wx.qlogo.cn/mmopen/jAfCQk2WgOibyUrBiaP3iaMlnghS5kfoib1atEM7hxQPqiciaGib9XSXVg5aYcNkzztzNdWd5fGbrlEoicjjzyJjMqCwTziaCuiaXcWaI5/0"
@@ -658,6 +631,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-数据库auto-increment"><span class="nav-number">1.</span> <span class="nav-text">1. 数据库auto increment</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-使用redis自增命令"><span class="nav-number">2.</span> <span class="nav-text">2. 使用redis自增命令</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -786,11 +775,9 @@
   
 
   
-  
-    <script type="text/javascript" id="motion.page.archive">
-      $('.archive-year').velocity('transition.slideLeftIn');
-    </script>
-  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
 
 
   
@@ -820,6 +807,17 @@
 
 
 
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
   
 
 
@@ -853,26 +851,6 @@
   
 
   
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 
