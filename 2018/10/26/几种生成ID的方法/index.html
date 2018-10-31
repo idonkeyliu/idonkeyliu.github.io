@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="idonkeyliu&#39;s Blog">
 <meta property="og:description" content="在我们的工作中，经常会遇到需要生成ID的场景，比如全链路日志中标识唯一请求或者说唯一链路的ID，用户注册过程中给用户分配的唯一账号ID，交易过程中的幂等值等。下面就说说几种常见的ID生成方法，也就是Id Maker的实现方案。 1. 数据库auto increment我们很容易的想到，数据库中auto increment就是为了生成唯一主键ID的，而且数据库的ACID特性，保证该过程肯定是原子的，">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-10-26T10:00:22.393Z">
+<meta property="og:updated_time" content="2018-10-31T13:44:01.054Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="几种生成ID的方法">
 <meta name="twitter:description" content="在我们的工作中，经常会遇到需要生成ID的场景，比如全链路日志中标识唯一请求或者说唯一链路的ID，用户注册过程中给用户分配的唯一账号ID，交易过程中的幂等值等。下面就说说几种常见的ID生成方法，也就是Id Maker的实现方案。 1. 数据库auto increment我们很容易的想到，数据库中auto increment就是为了生成唯一主键ID的，而且数据库的ACID特性，保证该过程肯定是原子的，">
@@ -411,8 +411,9 @@
       
         <p>在我们的工作中，经常会遇到需要生成ID的场景，比如全链路日志中标识唯一请求或者说唯一链路的ID，用户注册过程中给用户分配的唯一账号ID，交易过程中的幂等值等。下面就说说几种常见的ID生成方法，也就是Id Maker的实现方案。</p>
 <h3 id="1-数据库auto-increment"><a href="#1-数据库auto-increment" class="headerlink" title="1. 数据库auto increment"></a>1. 数据库auto increment</h3><p>我们很容易的想到，数据库中auto increment就是为了生成唯一主键ID的，而且数据库的ACID特性，保证该过程肯定是原子的，原子的意思就是不会有ID冲突即有两个ID生成的一模一样。该方法对于生成ID不是很频繁的场景还是比较适用的，一般是生成请求在几千次/s的情况下。</p>
-<h3 id="2-使用redis自增命令"><a href="#2-使用redis自增命令" class="headerlink" title="2. 使用redis自增命令"></a>2. 使用redis自增命令</h3><p>redis有个incrby的命令，通用点的叫法就是计数器，其实这种思路与mysql的自增并没有什么分别，不过因为存储方式的原因，使用redis做id maker可以在单位时间内生成更多的ID，redis的性能都是10W/s的。不过使用redis没有使用mysql那么简单，它需要在业务层面做一些保护。</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">唯一ID：id（每次生成的ID）</div><div class="line">ID保护：max(生成的最大ID)</div><div class="line"></div><div class="line">$id = 调用incrby计数器加<span class="number">1</span>;</div><div class="line">获取$max</div><div class="line"></div><div class="line"><span class="keyword">if</span> ($id &lt;= $max)&#123;</div><div class="line">  $max = $max + $step</div><div class="line">  $id = $max</div><div class="line">&#125;<span class="keyword">else</span>&#123;</div><div class="line">  $max = $id</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">return</span> $id</div></pre></td></tr></table></figure>
+<h3 id="2-使用redis自增命令"><a href="#2-使用redis自增命令" class="headerlink" title="2. 使用redis自增命令"></a>2. 使用redis自增命令</h3><p>redis有个incrby的命令，通用点的叫法就是计数器，其实这种思路与mysql的自增并没有什么分别，不过因为存储方式的原因，使用redis做id maker可以在单位时间内生成更多的ID，redis的性能都是10W/s的。不过使用redis没有使用mysql那么简单，它需要在业务层面做一些保护。<br><a id="more"></a><br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">唯一ID：id（每次生成的ID）</div><div class="line">ID保护：max(生成的最大ID)</div><div class="line"></div><div class="line">$id = 调用incrby计数器加<span class="number">1</span>;</div><div class="line">获取$max</div><div class="line"></div><div class="line"><span class="keyword">if</span> ($id &lt;= $max)&#123;</div><div class="line">  $max = $max + $step</div><div class="line">  $id = $max</div><div class="line">&#125;<span class="keyword">else</span>&#123;</div><div class="line">  $max = $id</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">return</span> $id</div></pre></td></tr></table></figure></p>
+<h3 id="3-UUID算法"><a href="#3-UUID算法" class="headerlink" title="3. UUID算法"></a>3. UUID算法</h3><p>该算法比较常见，不过生成的ID不是数字，也不具备单调递增的特性，这种ID生成方法比较适用于对于ID没有单调性要求的分布式日志唯一ID。</p>
+<h3 id="4-SnowFlake算法"><a href="#4-SnowFlake算法" class="headerlink" title="4. SnowFlake算法"></a>4. SnowFlake算法</h3><p>可以理解为分段算法，64bit的整数，分为时间戳、机器、序列号等段，可以满足一段号段内的递增属性，该ID算法生成的ID范围很大，基本上用不完，是比较常用的一种算法。</p>
 
       
     </div>
@@ -641,7 +642,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-数据库auto-increment"><span class="nav-number">1.</span> <span class="nav-text">1. 数据库auto increment</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-使用redis自增命令"><span class="nav-number">2.</span> <span class="nav-text">2. 使用redis自增命令</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-数据库auto-increment"><span class="nav-number">1.</span> <span class="nav-text">1. 数据库auto increment</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-使用redis自增命令"><span class="nav-number">2.</span> <span class="nav-text">2. 使用redis自增命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-UUID算法"><span class="nav-number">3.</span> <span class="nav-text">3. UUID算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-SnowFlake算法"><span class="nav-number">4.</span> <span class="nav-text">4. SnowFlake算法</span></a></li></ol></div>
             
 
           </div>
