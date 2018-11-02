@@ -421,14 +421,21 @@
 <p>其中属性类型在属性名称后，以冒号分割<br>其中方法的返回值类型在方法名称后，也是以冒号分割。</p>
 <h3 id="类间的表达方式"><a href="#类间的表达方式" class="headerlink" title="类间的表达方式"></a>类间的表达方式</h3><p>类与类根据耦合关系从松到紧，可以依次分为：<br>依赖-&gt;关联-&gt;聚合-&gt;组合-&gt;泛化=实现</p>
 <h4 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h4><img src="/2018/11/02/UML类图入门/yl.png" alt="yl.png" title="">
-<h4 id="关联"><a href="#关联" class="headerlink" title="关联"></a>关联</h4><img src="/2018/11/02/UML类图入门/gl.png" alt="gl.png" title="">
+<h4 id="关联"><a href="#关联" class="headerlink" title="关联"></a>关联</h4><p>其中关联分为单向、双向与自关联。<br><img src="/2018/11/02/UML类图入门/gl.png" alt="gl.png" title=""><br>一个类持有一个类类型的成员变量。</p>
 <img src="/2018/11/02/UML类图入门/double-gl.png" alt="double-gl.png" title="">
+<p>互相持有类类型的成员变量。</p>
 <img src="/2018/11/02/UML类图入门/self-gl.png" alt="self-gl.png" title="">
+<p>简单说就是自己包含自己。</p>
 <h4 id="聚合"><a href="#聚合" class="headerlink" title="聚合"></a>聚合</h4><img src="/2018/11/02/UML类图入门/jh.png" alt="jh.png" title="">
+<p>聚合强调整体包含部分，部分脱离了整体依然可以存在，类与类之间是contains的关系</p>
 <h4 id="组合"><a href="#组合" class="headerlink" title="组合"></a>组合</h4><img src="/2018/11/02/UML类图入门/zh.png" alt="zh.png" title="">
+<p>组合强调整体包含部分，部分脱离了整体不能存在，类与类间是has的关系</p>
 <h4 id="泛化"><a href="#泛化" class="headerlink" title="泛化"></a>泛化</h4><img src="/2018/11/02/UML类图入门/jc.png" alt="jc.png" title="">
+<p>泛化就是继承的意思，这个用的非常多。</p>
 <h4 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h4><img src="/2018/11/02/UML类图入门/sx.png" alt="sx.png" title="">
-<h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><p><a href="https://www.cnblogs.com/shindo/p/5579191.html" target="_blank" rel="external">五分钟读懂UML类图</a></p>
+<p>接口实现关系</p>
+<h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><p><a href="https://www.cnblogs.com/shindo/p/5579191.html" target="_blank" rel="external">五分钟读懂UML类图</a><br><a href="https://www.cnblogs.com/jiyuqi/p/4571543.html" target="_blank" rel="external">UML中常见关系详解</a></p>
+<h3 id="制图工具"><a href="#制图工具" class="headerlink" title="制图工具"></a>制图工具</h3><p><a href="https://www.processon.com/" target="_blank" rel="external">https://www.processon.com/</a></p>
 
           
         
