@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="服务器性能优化," />
+  <meta name="keywords" content="今天越安逸，明天越危险" />
 
 
 
@@ -96,18 +96,20 @@
 
 
 
-<meta name="description" content="1. 禁止嵌套循环将嵌套循环改为二次循环 （新手常犯该错误） 2. 单次循环读写单次循环读写改为批量读写，单次循环会占用非常多的开销 （新手常犯错误） 3. 超时时间设置不设置超时会引起雪崩，连接超时与执行超时都需要设置，udp有回包也需要设置超时时间">
-<meta name="keywords" content="服务器性能优化">
+<meta name="description" content="进公司六年多了，刚开始的时候参加过一些培训课程，但是感觉收获都不是很大，可能我自己不太适合培训这种方式吧，所以渐渐的都不去参加了。公司有两门非常热门的课程叫《五星级沟通》与《金字塔思维》，陆陆续续听到有些同事去听这两门课程，搞得自己也忍不住想去听一下，所以就都报名了。因为太火爆了，所以根据报名情况进行排队在，直到今天才去学习了《五星级沟通》。下面对今天的学习进行总结下，也算是复习了。 人最重要的属">
 <meta property="og:type" content="article">
-<meta property="og:title" content="服务器优化指南之五（逻辑优化）">
-<meta property="og:url" content="http://idonkeyliu.github.io/2017/11/27/服务器优化指南之五（逻辑优化）/index.html">
+<meta property="og:title" content="学习《五星级沟通》">
+<meta property="og:url" content="http://idonkeyliu.github.io/2018/12/19/学习《五星级沟通》/index.html">
 <meta property="og:site_name" content="idonkeyliu&#39;s Blog">
-<meta property="og:description" content="1. 禁止嵌套循环将嵌套循环改为二次循环 （新手常犯该错误） 2. 单次循环读写单次循环读写改为批量读写，单次循环会占用非常多的开销 （新手常犯错误） 3. 超时时间设置不设置超时会引起雪崩，连接超时与执行超时都需要设置，udp有回包也需要设置超时时间">
+<meta property="og:description" content="进公司六年多了，刚开始的时候参加过一些培训课程，但是感觉收获都不是很大，可能我自己不太适合培训这种方式吧，所以渐渐的都不去参加了。公司有两门非常热门的课程叫《五星级沟通》与《金字塔思维》，陆陆续续听到有些同事去听这两门课程，搞得自己也忍不住想去听一下，所以就都报名了。因为太火爆了，所以根据报名情况进行排队在，直到今天才去学习了《五星级沟通》。下面对今天的学习进行总结下，也算是复习了。 人最重要的属">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-27T11:59:07.772Z">
+<meta property="og:image" content="http://idonkeyliu.github.io/2018/12/19/学习《五星级沟通》/talk.jpg">
+<meta property="og:image" content="http://idonkeyliu.github.io/2018/12/19/学习《五星级沟通》/beijing.jpg">
+<meta property="og:updated_time" content="2018-12-19T12:24:58.453Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="服务器优化指南之五（逻辑优化）">
-<meta name="twitter:description" content="1. 禁止嵌套循环将嵌套循环改为二次循环 （新手常犯该错误） 2. 单次循环读写单次循环读写改为批量读写，单次循环会占用非常多的开销 （新手常犯错误） 3. 超时时间设置不设置超时会引起雪崩，连接超时与执行超时都需要设置，udp有回包也需要设置超时时间">
+<meta name="twitter:title" content="学习《五星级沟通》">
+<meta name="twitter:description" content="进公司六年多了，刚开始的时候参加过一些培训课程，但是感觉收获都不是很大，可能我自己不太适合培训这种方式吧，所以渐渐的都不去参加了。公司有两门非常热门的课程叫《五星级沟通》与《金字塔思维》，陆陆续续听到有些同事去听这两门课程，搞得自己也忍不住想去听一下，所以就都报名了。因为太火爆了，所以根据报名情况进行排队在，直到今天才去学习了《五星级沟通》。下面对今天的学习进行总结下，也算是复习了。 人最重要的属">
+<meta name="twitter:image" content="http://idonkeyliu.github.io/2018/12/19/学习《五星级沟通》/talk.jpg">
 
 
 
@@ -136,13 +138,13 @@
 
 
 
-  <link rel="canonical" href="http://idonkeyliu.github.io/2017/11/27/服务器优化指南之五（逻辑优化）/"/>
+  <link rel="canonical" href="http://idonkeyliu.github.io/2018/12/19/学习《五星级沟通》/"/>
 
 
 
 
 
-  <title>服务器优化指南之五（逻辑优化） | idonkeyliu's Blog</title>
+  <title>学习《五星级沟通》 | idonkeyliu's Blog</title>
   
 
 
@@ -338,7 +340,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://idonkeyliu.github.io/2017/11/27/服务器优化指南之五（逻辑优化）/">
+    <link itemprop="mainEntityOfPage" href="http://idonkeyliu.github.io/2018/12/19/学习《五星级沟通》/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="idonkeyliu">
@@ -355,7 +357,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">服务器优化指南之五（逻辑优化）</h1>
+          <h1 class="post-title" itemprop="name headline">学习《五星级沟通》</h1>
         
 
         <div class="post-meta">
@@ -367,8 +369,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-27T19:56:27+08:00">
-                2017-11-27
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-19T19:43:03+08:00">
+                2018-12-19
               </time>
             
 
@@ -377,28 +379,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/" itemprop="url" rel="index">
-                    <span itemprop="name">技术</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -432,15 +412,14 @@
       
 
       
-        <h3 id="1-禁止嵌套循环"><a href="#1-禁止嵌套循环" class="headerlink" title="1. 禁止嵌套循环"></a>1. 禁止嵌套循环</h3><p>将嵌套循环改为二次循环 （新手常犯该错误）</p>
-<h3 id="2-单次循环读写"><a href="#2-单次循环读写" class="headerlink" title="2. 单次循环读写"></a>2. 单次循环读写</h3><p>单次循环读写改为批量读写，单次循环会占用非常多的开销 （新手常犯错误）</p>
-<h3 id="3-超时时间设置"><a href="#3-超时时间设置" class="headerlink" title="3. 超时时间设置"></a>3. 超时时间设置</h3><p>不设置超时会引起雪崩，连接超时与执行超时都需要设置，udp有回包也需要设置超时时间</p>
-<a id="more"></a>
-<h3 id="4-请求分页"><a href="#4-请求分页" class="headerlink" title="4. 请求分页"></a>4. 请求分页</h3><p>不要在一个请求里面返回太多的数据内容，如果返回的内容不会都用到，可以用多个请求来获取，也即是分页。当请求条数变大的时候服务器性能会变差</p>
-<h3 id="5-DB相关"><a href="#5-DB相关" class="headerlink" title="5. DB相关"></a>5. DB相关</h3><h4 id="5-1-索引的威力"><a href="#5-1-索引的威力" class="headerlink" title="5.1 索引的威力"></a>5.1 索引的威力</h4><h4 id="5-2-提取必要数据，避免select"><a href="#5-2-提取必要数据，避免select" class="headerlink" title="5.2 提取必要数据，避免select *"></a>5.2 提取必要数据，避免select *</h4><h4 id="5-3-避免使用函数"><a href="#5-3-避免使用函数" class="headerlink" title="5.3 避免使用函数"></a>5.3 避免使用函数</h4><h3 id="6-算法"><a href="#6-算法" class="headerlink" title="6. 算法"></a>6. 算法</h3><p>O(1) O(n) O(logn) O(n2)</p>
-<h3 id="7-IO多路复用"><a href="#7-IO多路复用" class="headerlink" title="7. IO多路复用"></a>7. IO多路复用</h3><h3 id="8-yield生成器"><a href="#8-yield生成器" class="headerlink" title="8. yield生成器"></a>8. yield生成器</h3><h3 id="9-有锁编程"><a href="#9-有锁编程" class="headerlink" title="9. 有锁编程"></a>9. 有锁编程</h3><p>有锁编程变为无锁编程</p>
-<h3 id="10-写硬盘"><a href="#10-写硬盘" class="headerlink" title="10. 写硬盘"></a>10. 写硬盘</h3><p>写内存替代写硬盘</p>
-
+        <p>进公司六年多了，刚开始的时候参加过一些培训课程，但是感觉收获都不是很大，可能我自己不太适合培训这种方式吧，所以渐渐的都不去参加了。公司有两门非常热门的课程叫《五星级沟通》与《金字塔思维》，陆陆续续听到有些同事去听这两门课程，搞得自己也忍不住想去听一下，所以就都报名了。因为太火爆了，所以根据报名情况进行排队在，直到今天才去学习了《五星级沟通》。下面对今天的学习进行总结下，也算是复习了。<br><img src="/2018/12/19/学习《五星级沟通》/talk.jpg" alt="talk.jpg" title=""></p>
+<p>人最重要的属性是社会性，社会性就是指人不是孤立存在的，他是需要与周围的人交流互动进而产生一定关系的。所以沟通就是最常见也最必不可少的方式了。参加课程前我只知道沟通的学问很多，因为无论在生活中还是在工作中，总会有人沟通起来很顺畅，有些人沟通起来很费劲，这里面一定有些门道。那怎么样才能做好沟通呢？</p>
+<h3 id="1-建立沟通意识"><a href="#1-建立沟通意识" class="headerlink" title="1. 建立沟通意识"></a>1. 建立沟通意识</h3><p>沟通是最常见，最容易被忽视的一种行为，因为大家大多数时间都是在做沟通，不自觉的沉溺其中而不知道自己做的有哪些不够。</p>
+<h3 id="1-1-建立沟通意识"><a href="#1-1-建立沟通意识" class="headerlink" title="1.1 建立沟通意识"></a>1.1 建立沟通意识</h3><img src="/2018/12/19/学习《五星级沟通》/beijing.jpg" alt="beijing.jpg" title="">
+<p>戒掉以自我为中心的沟通，建立换位思考的沟通方式</p>
+<h3 id="1-2-沟通的重要性"><a href="#1-2-沟通的重要性" class="headerlink" title="1.2 沟通的重要性"></a>1.2 沟通的重要性</h3><p>专家研究说20%的沟通是有效沟通，80%的是无效沟通，虽然这个数据不一定靠谱，但是想想看也觉得我们沟通过程中确实存在着很多问题。说的激烈一点，我们很多时间都是在说废话，在做无效沟通要么是浪费别人的时间，要么是让别人浪费我们的时间。</p>
+<h3 id="1-3-明确沟通目的"><a href="#1-3-明确沟通目的" class="headerlink" title="1.3 明确沟通目的"></a>1.3 明确沟通目的</h3><p>有效的沟通从明确目的开始，有些人讲了半天别人都不知道他想干嘛，</p>
+<h3 id="2-明确沟通的障碍"><a href="#2-明确沟通的障碍" class="headerlink" title="2. 明确沟通的障碍"></a>2. 明确沟通的障碍</h3><h4 id="2-1-人"><a href="#2-1-人" class="headerlink" title="2.1 人"></a>2.1 人</h4><h4 id="2-2-人际关系"><a href="#2-2-人际关系" class="headerlink" title="2.2 人际关系"></a>2.2 人际关系</h4><h4 id="2-3"><a href="#2-3" class="headerlink" title="2.3"></a>2.3</h4>
       
     </div>
     
@@ -484,12 +463,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/服务器性能优化/" rel="tag"><i class="fa fa-tag"></i> 服务器性能优化</a>
-          
-        </div>
-      
 
       
       
@@ -499,8 +472,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/11/22/漫谈计算机X化/" rel="next" title="漫谈计算机X化">
-                <i class="fa fa-chevron-left"></i> 漫谈计算机X化
+              <a href="/2018/11/02/UML类图入门/" rel="next" title="UML类图入门">
+                <i class="fa fa-chevron-left"></i> UML类图入门
               </a>
             
           </div>
@@ -508,10 +481,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/12/13/数据决策/" rel="prev" title="数据决策">
-                数据决策 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -678,7 +647,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-禁止嵌套循环"><span class="nav-number">1.</span> <span class="nav-text">1. 禁止嵌套循环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-单次循环读写"><span class="nav-number">2.</span> <span class="nav-text">2. 单次循环读写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-超时时间设置"><span class="nav-number">3.</span> <span class="nav-text">3. 超时时间设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-请求分页"><span class="nav-number">4.</span> <span class="nav-text">4. 请求分页</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-DB相关"><span class="nav-number">5.</span> <span class="nav-text">5. DB相关</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-1-索引的威力"><span class="nav-number">5.1.</span> <span class="nav-text">5.1 索引的威力</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-提取必要数据，避免select"><span class="nav-number">5.2.</span> <span class="nav-text">5.2 提取必要数据，避免select *</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-避免使用函数"><span class="nav-number">5.3.</span> <span class="nav-text">5.3 避免使用函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-算法"><span class="nav-number">6.</span> <span class="nav-text">6. 算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-IO多路复用"><span class="nav-number">7.</span> <span class="nav-text">7. IO多路复用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-yield生成器"><span class="nav-number">8.</span> <span class="nav-text">8. yield生成器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-有锁编程"><span class="nav-number">9.</span> <span class="nav-text">9. 有锁编程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-写硬盘"><span class="nav-number">10.</span> <span class="nav-text">10. 写硬盘</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-建立沟通意识"><span class="nav-number">1.</span> <span class="nav-text">1. 建立沟通意识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-建立沟通意识"><span class="nav-number">2.</span> <span class="nav-text">1.1 建立沟通意识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-沟通的重要性"><span class="nav-number">3.</span> <span class="nav-text">1.2 沟通的重要性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-明确沟通目的"><span class="nav-number">4.</span> <span class="nav-text">1.3 明确沟通目的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-明确沟通的障碍"><span class="nav-number">5.</span> <span class="nav-text">2. 明确沟通的障碍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-人"><span class="nav-number">5.1.</span> <span class="nav-text">2.1 人</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-人际关系"><span class="nav-number">5.2.</span> <span class="nav-text">2.2 人际关系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3"><span class="nav-number">5.3.</span> <span class="nav-text">2.3</span></a></li></ol></li></ol></div>
             
 
           </div>
