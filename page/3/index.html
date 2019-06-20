@@ -338,6 +338,134 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://idonkeyliu.github.io/2018/04/12/全链路压测系统/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="idonkeyliu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://scontent-hkg3-2.cdninstagram.com/vp/0ccbade3d0ffbc61e0e0026d1107f52b/5DA4ABBC/t51.2885-19/s320x320/17268278_1394248337262388_9201900576219070464_a.jpg?_nc_ht=scontent-hkg3-2.cdninstagram.com">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="idonkeyliu's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/12/全链路压测系统/" itemprop="url">全链路压测系统</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-12T20:45:06+08:00">
+                2018-04-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>背景：在日常开发的过程中，开发更多的关注在功能开发上，对于接口性能与服务能力关注较少，但是无论是对内还是对外提供接口与服务，都应该明白的给出服务能力界限的说明，而且需要对方给出调用量的评估，这样才能在一定程度上做到心中有数，从而维护系统的安全。压测系统不是一蹴而就的，据了解业内大公司的压测系统基本经过了几轮迭代，而且耗时基本需要3年。</p>
+</blockquote>
+<h3 id="1-思路"><a href="#1-思路" class="headerlink" title="1. 思路"></a>1. 思路</h3><p>压测系统的设计最后会走上类似阿里双十一、微信等全链路压测的道路，但是这两个系统都是花费了至少3年的时间打磨完成，所以我们也分四大步走：<br>1.提供压测的url、ip+port+协议栈 +参数，来进行简单的分布式压测，（<font color="red">预期完成时间2018年上半年</font>)<br>2.改造目前项目的上下游路由机制（目前使用的是L５，但是L５不具备准备的流量分配机制），使得能方便快速的切换流量到单台机器上，从而得出单台机器的负载上限。（<font color="red">预期完成时间2018年下半年</font>)<br>3.复制目前项目单日所有用户的流量，清洗后进行重放，来大规模的压测整个系统，目的是在大流量的压力下发现系统瓶颈与隐藏故障点。（<font color="red">预期完成时间2019年全年</font>)<br>4.压测常规化，定时的来进行流量压测，完成自动化压测系统的进化。（<font color="red">预期完成时间2020年上半年</font>)</p>
+<h3 id="2-同类型产品分析"><a href="#2-同类型产品分析" class="headerlink" title="2. 同类型产品分析"></a>2. 同类型产品分析</h3><h4 id="2-1-压测大师"><a href="#2-1-压测大师" class="headerlink" title="2.1 压测大师"></a>2.1 压测大师</h4><p>压测大师可以很方便的实现第一步，但是具备如下缺点：<br>1.被压测机器的负载不能很方便的展示出来，最关键的是需要在被压测机器上装个软件，路径较长<br>2.压测大师对每个Url的并发上限为200，虽然可以通过开启白名单的方式来提升，但是感觉还是不太方便。<br>3.最主要的一点是，压测大师是一个独立的系统，虽然能大概cover住我们的第一步，但是对于我们的长期目标来说并不能很好的满足。</p>
+<h3 id="3-压测架构图"><a href="#3-压测架构图" class="headerlink" title="3. 压测架构图"></a>3. 压测架构图</h3><img src="/2018/04/12/全链路压测系统/pressure.jpg" alt="pressure.jpg" title="">
+<p>模块介绍：<br>web controler: 显示与控制模块，显示压测的结果数据与agent的负载数据、agent的状态数据、dispatch模块的分发状态。<br>Manager：任务管理模块，通过从web controler获取任务配置，然后进行任务分配与启动停止。<br>Register: agent节点注册模块，可以获取agent的空闲繁忙状态，一般是分布式节点，推荐使用zk<br>dispatch: 文件分发模块，将提交的任务文件通过dispatch模块分发到各agent机器中。<br>agent: 真实的压测发起模块，从dispatch模块获取压测文件，从manager获取启停命令。<br>monitor: 监控统计模块，agent的负载信息上报至monitor模块。<br>MQ: agent获取压测结果，将其写入MQ<br>Collector: 收集器模块，将压测结果与agent的负载信息汇聚处理。<br>DB/DR：信息储存模块，存储web controler需要显示的各项数据。</p>
+<h3 id="4-设计要点"><a href="#4-设计要点" class="headerlink" title="4. 设计要点"></a>4. 设计要点</h3><p>1.能模拟线上流量（真实请求回放、自己模拟请求）<br>2.能区分模拟流量与真实流量<br>3.在线压测<br>4.物理隔离存储 正常存储+影子存储<br>5.能快速的进行流量路由，将单个模块的请求打满，直到错误率上升为止，因为具备重试的逻辑，所以问题不是很大。</p>
+<h3 id="4-参考文档"><a href="#4-参考文档" class="headerlink" title="4.参考文档"></a>4.参考文档</h3><p>有赞<br><a href="http://www.infoq.com/cn/articles/youzan-11-11-stress-testing" target="_blank" rel="external">http://www.infoq.com/cn/articles/youzan-11-11-stress-testing</a><br>云集<br><a href="https://github.com/yunjiweidian/TITAN" target="_blank" rel="external">https://github.com/yunjiweidian/TITAN</a><br>滴滴<br><a href="http://gitbook.cn/books/58edf24902c60a2473618fac/index.html" target="_blank" rel="external">http://gitbook.cn/books/58edf24902c60a2473618fac/index.html</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://idonkeyliu.github.io/2018/02/26/2018规划/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1643,152 +1771,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://idonkeyliu.github.io/2017/10/10/互联网技术关键词/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="idonkeyliu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://scontent-hkg3-2.cdninstagram.com/vp/0ccbade3d0ffbc61e0e0026d1107f52b/5DA4ABBC/t51.2885-19/s320x320/17268278_1394248337262388_9201900576219070464_a.jpg?_nc_ht=scontent-hkg3-2.cdninstagram.com">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="idonkeyliu's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/10/互联网技术关键词/" itemprop="url">互联网技术关键词</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-10T22:42:32+08:00">
-                2017-10-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/" itemprop="url" rel="index">
-                    <span itemprop="name">技术</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1834,7 +1821,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">40</span>
+                <span class="site-state-item-count">41</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
