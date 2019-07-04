@@ -338,6 +338,138 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://idonkeyliu.github.io/2018/04/26/架构师技能图谱/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="idonkeyliu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://scontent-hkg3-2.cdninstagram.com/vp/0ccbade3d0ffbc61e0e0026d1107f52b/5DA4ABBC/t51.2885-19/s320x320/17268278_1394248337262388_9201900576219070464_a.jpg?_nc_ht=scontent-hkg3-2.cdninstagram.com">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="idonkeyliu's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/26/架构师技能图谱/" itemprop="url">架构师技能图谱</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-26T17:10:24+08:00">
+                2018-04-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <img src="/2018/04/26/架构师技能图谱/jgtp.jpg" alt="jgtp.jpg" title="">
+<h1 id="系统架构能力"><a href="#系统架构能力" class="headerlink" title="系统架构能力"></a>系统架构能力</h1><h2 id="1-基本理论"><a href="#1-基本理论" class="headerlink" title="1.基本理论"></a>1.基本理论</h2><h3 id="扩展性设计"><a href="#扩展性设计" class="headerlink" title="扩展性设计"></a>扩展性设计</h3><p>架构易于扩展是其非常重要的一个特性，好的架构需要有非常强的扩展能力，架构中的每个角色都需要有standby，好的架构可以满足业务飞速发展的需要，传说中QQ的架构好多年都没有大变，满足了用户从百万、千万、亿级的发展需要。我自己写的AcMid和reviewTask工程就是具备多机多进程的消费模型，通过队列进行生产者与消费者的解耦，也是可以无限添加机器与进程的架构。</p>
+<h3 id="可用性设计"><a href="#可用性设计" class="headerlink" title="可用性设计"></a>可用性设计</h3><p>好的架构都是非常注重可用性的，好的架构可以极大的提高系统的可用性。好的架构是一整套方案，所以可用性是非常高的。</p>
+<h3 id="可靠性设计"><a href="#可靠性设计" class="headerlink" title="可靠性设计"></a>可靠性设计</h3><p>用于定义组件或系统可靠性的一个度量标准是平均故障间隔时间 (MTBF)。MTBF 是平均间隔时间。好的架构需要易监控、会有全套的业务日志打出，这样整个系统会比较定位问题，而且容灾完全可以让架构更可靠。</p>
+<h3 id="一致性设计"><a href="#一致性设计" class="headerlink" title="一致性设计"></a>一致性设计</h3><p>在海量服务的时代，单台机器是Hold不住的，所以我们的系统都是分布式的系统，一致性就是特指的数据一致性，也就是存储一致性。一致性有时候没有那么严格，海量服务时代大部分的需求实现最终一致性就行了。CAP定理告诉我们三者不能兼得，P是必须要保证的，所以只能牺牲一定的C来保证A。</p>
+<h3 id="负载均衡设计"><a href="#负载均衡设计" class="headerlink" title="负载均衡设计"></a>负载均衡设计</h3><p>负载均衡是架构设计中非常重要的一环，就如上面提到的，海量服务之道与分布式架构是捆绑在一起的，既然是分布式的，就不然存在非常多的机器来协同工作，如果平衡各个模块的负载就非常的重要，希望流量可以均衡的分配在下游的模块中（需要考虑到下游模块的负载），负载均衡的方法有很多，我个人觉得L5的设计师非常的赞的，几年前就预感其会普遍流行起来的。</p>
+<h3 id="过载保护设计"><a href="#过载保护设计" class="headerlink" title="过载保护设计"></a>过载保护设计</h3><p>好的架构不是提供尽力而为的服务，而是提供量力而为的服务。好的架构一定有一个容量与负载边界，超过这个边界后系统开始出现问题，有的架构在此时会产生雪崩，服务完全不可用。过载保护就像是给系统加一个保险，始终将服务的量级控制在自己的能力之内。我们目前的架构不具备过载保护，所以动漫目前的架构不是一个好的架构。</p>
+<h3 id="灾难恢复与备份"><a href="#灾难恢复与备份" class="headerlink" title="灾难恢复与备份"></a>灾难恢复与备份</h3><p>容灾是架构最开始就需要考虑的一个点，架构不允许出现单点的情况。目前很多的海量系统都设计为多地部署，所以灾难恢复不是什么难题，最要紧的部分就是存储，网上经常爆出程序员离职后格式化数据库，那么存储组件的备份一定要做好，每天都需要备份，然后线上也需要存储多个副本。</p>
+<h2 id="2-协议设计"><a href="#2-协议设计" class="headerlink" title="2.协议设计"></a>2.协议设计</h2><h3 id="文本协议"><a href="#文本协议" class="headerlink" title="文本协议"></a>文本协议</h3><p>如果是http服务的话，文本协议比较好。http+json是非常多服务的标配，文本协议具备简单、可读性高等特性。文本协议在配置方面也应用广泛。</p>
+<h3 id="二进制协议"><a href="#二进制协议" class="headerlink" title="二进制协议"></a>二进制协议</h3><p>二进制协议体积小、效率高，在数据传输方面有极大的优势，所以是数据传输格式的首选，不过因为二进制协议可读性不高，所以还需要配套使用一些解析工具。</p>
+<h2 id="3-接入层架构设计"><a href="#3-接入层架构设计" class="headerlink" title="3.接入层架构设计"></a>3.接入层架构设计</h2><h3 id="DNS轮询"><a href="#DNS轮询" class="headerlink" title="DNS轮询"></a>DNS轮询</h3><p>目前DNS轮询是接入层采用的比较多的一种方式了，不过DNS轮询比较大的问题是的配置存在ttl。</p>
+<h3 id="动静态分离"><a href="#动静态分离" class="headerlink" title="动静态分离"></a>动静态分离</h3><p>快慢分离、动静分离是好的架构需要具备的特性。动态请求与静态请求分开处理，静态请求是十分适合CDN的，分发至离用户更近的OC节点，可以为用户提供更好的服务。不过貌似目前动态请求也可以放在CDN了，该动态值得关注。</p>
+<h3 id="静态化"><a href="#静态化" class="headerlink" title="静态化"></a>静态化</h3><p>静态化的并发肯定比动态请求更高 </p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://idonkeyliu.github.io/2018/04/25/QCon-北京站-2018年4月与会记录/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1551,150 +1683,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://idonkeyliu.github.io/2017/11/16/服务器优化指南之三（延迟处理）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="idonkeyliu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://scontent-hkg3-2.cdninstagram.com/vp/0ccbade3d0ffbc61e0e0026d1107f52b/5DA4ABBC/t51.2885-19/s320x320/17268278_1394248337262388_9201900576219070464_a.jpg?_nc_ht=scontent-hkg3-2.cdninstagram.com">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="idonkeyliu's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/16/服务器优化指南之三（延迟处理）/" itemprop="url">服务器优化指南之三（延迟处理）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-16T22:05:51+08:00">
-                2017-11-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/" itemprop="url" rel="index">
-                    <span itemprop="name">技术</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>有时候在移动端服务器侧开发的时候，某些接口的性能得不到优化，可以看看是不是该接口做了太多的事情，提取了太多的数据，看看能否将这一个接口做的事情拆分为几个接口来做。</p>
-<p>有时候我们总想着一个接口提供大而全的数据供前端使用，但是却没有去想提供的数据是不是会马上就用到，如果提供的部分数据永远不会被用到或者是很小概率会用到，那么我们为什么还需要在这个接口里面返回，是不是可以考虑延迟加载。</p>
-<p>移动APP的位置有限，所以都十分重要，越浅的层级就需要越快的加载速度，越高的并发性能，所以首页等页面一定要做到非常轻量。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1745,7 +1733,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">54</span>
+                <span class="site-state-item-count">55</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
