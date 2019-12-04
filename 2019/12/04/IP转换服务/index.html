@@ -83,6 +83,8 @@
 
 
 
+  
+
 
   <link rel="alternate" href="/atom.xml" title="idonkeyliu's Blog" type="application/atom+xml" />
 
@@ -103,10 +105,12 @@
 <meta property="og:site_name" content="idonkeyliu&#39;s Blog">
 <meta property="og:description" content="前几天，看网上说IPV4的地址已经分配完了，IPV6的时代开始了。其实工信部早就开始推各个大公司进行IPV6改造了，不过进度不尽如人意。说到IPV4就不能不提IP转换服务了，IP转换服务是指根据用户的IP获取用户的国籍、省份、城市、运营商等信息的服务。可以被使用到诸如用户画像、版权控制、流量调度、路径加速等领域。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-12-04T14:34:18.137Z">
+<meta property="og:image" content="http://idonkeyliu.github.io/2019/12/04/IP转换服务/ipv6.jpg">
+<meta property="og:updated_time" content="2019-12-04T14:40:11.851Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IP转换服务">
 <meta name="twitter:description" content="前几天，看网上说IPV4的地址已经分配完了，IPV6的时代开始了。其实工信部早就开始推各个大公司进行IPV6改造了，不过进度不尽如人意。说到IPV4就不能不提IP转换服务了，IP转换服务是指根据用户的IP获取用户的国籍、省份、城市、运营商等信息的服务。可以被使用到诸如用户画像、版权控制、流量调度、路径加速等领域。">
+<meta name="twitter:image" content="http://idonkeyliu.github.io/2019/12/04/IP转换服务/ipv6.jpg">
 
 
 
@@ -409,7 +413,7 @@
       
 
       
-        <p>前几天，看网上说IPV4的地址已经分配完了，IPV6的时代开始了。其实工信部早就开始推各个大公司进行IPV6改造了，不过进度不尽如人意。说到IPV4就不能不提IP转换服务了，IP转换服务是指根据用户的IP获取用户的国籍、省份、城市、运营商等信息的服务。可以被使用到诸如用户画像、版权控制、流量调度、路径加速等领域。<br><br><a id="more"></a><br>那该怎么做一个IP转换服务呢？</p>
+        <p>前几天，看网上说IPV4的地址已经分配完了，IPV6的时代开始了。其实工信部早就开始推各个大公司进行IPV6改造了，不过进度不尽如人意。说到IPV4就不能不提IP转换服务了，IP转换服务是指根据用户的IP获取用户的国籍、省份、城市、运营商等信息的服务。可以被使用到诸如用户画像、版权控制、流量调度、路径加速等领域。<br><img src="/2019/12/04/IP转换服务/ipv6.jpg" alt="ipv6.jpg" title=""><br><a id="more"></a><br>那该怎么做一个IP转换服务呢？</p>
 <h3 id="1-获取IP地址库"><a href="#1-获取IP地址库" class="headerlink" title="1.获取IP地址库"></a>1.获取IP地址库</h3><p>目前有商用的IP地址库，还是些之前网上网盘中的一些IP库，有些大的公司会自建IP库，不过即使是同一家公司，也很有可能存在多个版本的IP库。</p>
 <h3 id="2-建立存储"><a href="#2-建立存储" class="headerlink" title="2.建立存储"></a>2.建立存储</h3><p>有些IP库的格式如下<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">xxx.xxx.xxx<span class="number">.0</span> 中国 广东省 广州市 番禺区 中国联通 ...</div><div class="line">xxx.xxx.xxx<span class="number">.0</span> 中国 台湾省 台北市 ... ... ...</div></pre></td></tr></table></figure></p>
 <p>这种其实很好办，使用ip2long函数将其转为int,然后&gt;&gt;8位当key，value就是后面的具体信息，这样无论是用redis的kv还是mysql都可以满足需要。<br>我们知道IPV4有接近43亿个地址，可以分为1600万个C段地址，也就是数据量级为1600W，无论是哪种存储都是OK的。</p>
