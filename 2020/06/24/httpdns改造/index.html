@@ -83,8 +83,6 @@
 
 
 
-  
-
 
   <link rel="alternate" href="/atom.xml" title="idonkeyliu's Blog" type="application/atom+xml" />
 
@@ -107,7 +105,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://idonkeyliu.github.io/2020/06/24/httpdns改造/dns.png">
 <meta property="og:image" content="http://idonkeyliu.github.io/2020/06/24/httpdns改造/httpdns.jpg">
-<meta property="og:updated_time" content="2020-06-24T13:07:55.833Z">
+<meta property="og:updated_time" content="2020-06-24T13:11:37.512Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="httpdns改造">
 <meta name="twitter:description" content="从App上线到现在，一直会有些问题困扰着我们。时不时会有用户反馈图片打不开，最后定位的原因有几个，一种是某地区的域名解析被运营商“劫持”了，另一种是用户的域名解析失败。作为一个图片为主要内容的APP，这样的状况我们肯定不是乐于见到的。为了解决这个问题，决定采用httpdns方案优化下。说httpdns之前，我们说下DNS。">
@@ -425,7 +423,7 @@
 </ol>
 <p>用DNS解析获取服务器IP的方式<code>不能保证客户端与服务端通信的稳定性</code>，所以需要一种客户端与服务端IP直通的方式，即是客户端不需要经过DNS过程就可以获取到服务端的IP地址，从而与服务器建立通讯，如此一来，通信的稳定性会大大提高，另外减少了域名解析的过程，整个通讯的耗时会相应的减少，从而提高用户访问体验。</p>
 <p>HttpDNS就是类似采用这样的方式来获取IP。<a href="http://xxxxx/getIp?client_ip=xx.xx.xx.xx" target="_blank" rel="external">http://xxxxx/getIp?client_ip=xx.xx.xx.xx</a>, 其中XXXX是VIP，这样该请求就不会被劫持，然后该请求的结果会返回一组IP，这一组IP是目前最适合该客户端的服务器IP。客户端获取到IP后，选择一个与服务器直连。</p>
-<p>最后说下两者的效果<br>|方式|延迟|成功率|<br>|————————— |————————— |<br>|localdns|137|98.3%|<br>|httpdns|116|99.5%|</p>
+<p>最后说下两者的效果<br>|方式|延迟|成功率|<br>| - | - |- |<br>|localdns|137|98.3%|<br>|httpdns|116|99.5%|</p>
 <p>可以看到httpdns在成功率和延迟上都有更好的表现。</p>
 
       
