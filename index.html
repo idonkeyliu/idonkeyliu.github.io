@@ -338,6 +338,172 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://idonkeyliu.github.io/2020/07/29/分布式架构知识体系/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="idonkeyliu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://thirdwx.qlogo.cn/mmopen/vi_32/nqv8Jdn4oa4vIBamP2ZLQcGdg87gicx6PGlOkFGhs8QP6VlWYicj14hJsISSQO44rytt4fujXj4uNicEJUxRBlWzQ/0">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="idonkeyliu's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/07/29/分布式架构知识体系/" itemprop="url">分布式架构知识体系（摘抄）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-29T22:06:24+08:00">
+                2020-07-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="0-摘抄来源"><a href="#0-摘抄来源" class="headerlink" title="0.摘抄来源"></a>0.摘抄来源</h3><p><a href="https://www.douban.com/note/695644758/" target="_blank" rel="external">分布式架构知识体系</a></p>
+<h3 id="1-问题"><a href="#1-问题" class="headerlink" title="1.问题"></a>1.问题</h3><ul>
+<li><ol>
+<li>何为分布式何为微服务</li>
+</ol>
+</li>
+<li><ol>
+<li>为什么需要分布式</li>
+</ol>
+</li>
+<li><ol>
+<li>分布式核心理论基础、节点、网络、时间、顺序、一致性</li>
+</ol>
+</li>
+<li><ol>
+<li>分布式系统有哪些设计模式</li>
+</ol>
+</li>
+<li><ol>
+<li>分布式有哪些类型</li>
+</ol>
+</li>
+<li><ol>
+<li>如何实现分布式</li>
+</ol>
+</li>
+</ul>
+<h3 id="2-关键词"><a href="#2-关键词" class="headerlink" title="2.关键词"></a>2.关键词</h3><p>节点、时间、一致性、CAP、ACID、BASE、P2P、机器伸缩、网络变更、负载均衡、限流、鉴权、服务发现、服务编排、降级、熔断、幂等、分库分表、分片分区、自动运维、容错处理、全栈监控、故障恢复、性能调优</p>
+<h3 id="3-全文概要"><a href="#3-全文概要" class="headerlink" title="3.全文概要"></a>3.全文概要</h3><p>随着移动互联网的发展智能终端的普及，计算机系统早就从单机独立工作过渡到多机器协作工作。计算机以集群的方式存在，按照分布式理论的指导构建出庞大复杂的应用服务，也已经深入人心。本文力求从分布式基础理论，架构设计模式，工程应用，部署运维，业界方案这几大方面，介绍基于MSA（微服务架构）的分布式的知识体系大纲。从而对SOA到MSA进化有个立体的认识，从概念和工具应用上更进一步了解微服务分布式的本质，身临其境的感受如何搭建全套微服务架构的过程。</p>
+<h3 id="4-基础理论"><a href="#4-基础理论" class="headerlink" title="4.基础理论"></a>4.基础理论</h3><h4 id="4-1-SOA到MSA的进化"><a href="#4-1-SOA到MSA的进化" class="headerlink" title="4.1 SOA到MSA的进化"></a>4.1 SOA到MSA的进化</h4><p>SOA面向服务架构<br>由于业务发展到一定程度后，需要对服务进行解耦，从而把一个单一的大系统按逻辑拆分为不同的子系统，通过服务接口来通讯，面向服务的设计模式，最终需要总线集成服务，而且大部分时候还共享数据库，出现单点故障的时候会导致总线层面的故障，更进一步可能会把数据库拖垮，所有才有了更加独立的设计</p>
+<p>MSA微服务架构<br>微服务是真正意义上的独立服务，从服务入口到数据持久层，逻辑上都是独立隔离的，无需服务总线来接入，但同时增加了整个分布式系统的搭建和管理难度，需要对服务进行编排和管理，所以伴随着微服务的兴起，微服务生态的整套技术栈也需要无缝接入，才能支撑起微服务的治理理念。</p>
+<h4 id="4-2-节点与网络"><a href="#4-2-节点与网络" class="headerlink" title="4.2 节点与网络"></a>4.2 节点与网络</h4><p>节点<br>传统的节点也就是一台单体的物理机，所有的服务都揉进去，包括服务于数据库；随着虚拟化的发展，单台物理机往往可以分成多台虚拟机，实现资源利用的最大化，节点的概念也变成单台虚拟机上面服务；近几年容器技术逐渐成熟后，服务已经彻底容器化，也就是节点只是轻量级的容器服务。总体来说，节点就是能提供单位服务的逻辑计算资源的集合。</p>
+<p>网络<br>分布式架构的根基就是网络，不管是局域网还是公网，没有网络就无法把计算机联合在一起工作，但是网络也带来了一系列的问题。网络消息的传播有先后，消息丢失和延迟是经常发生的事情，我们定义了三种网络工作模式：</p>
+<p>同步网络</p>
+<ul>
+<li>节点同步执行、消息延迟有限、高效全局锁<br>半同步网络</li>
+<li>锁范围放宽<br>异步网络</li>
+<li>节点独立执行、消息延迟无上限、无全局锁、部分算法不可行</li>
+</ul>
+<h4 id="4-3-时间和顺序"><a href="#4-3-时间和顺序" class="headerlink" title="4.3 时间和顺序"></a>4.3 时间和顺序</h4><p>时间<br>慢速物理时空中，时间独自在流淌着，对于串行的事务来说，很简单的就是跟着时间的脚步走就可以，先来后到的发生。而后我们发明了时钟来刻画以往发生的时间点，时钟让这个世界井然有序。但是对于分布式世界来说，跟时间打交道是一件痛苦的事情。分布式世界里面，我们要协调不同节点之间的先来后到关系，但是不同节点本身承认的时间又各执己见，于是我们创造了网络时间协议（NTP）视图来解决不同节点之间的标准时间，但是NTP本身表现不尽如人意，所以我们又构造出了逻辑时钟，最后改进为向量时钟：<br>NTP的一些缺点，无法完全满足分布式下并发任务的协调问题</p>
+<ul>
+<li>节点间时间不同步</li>
+<li>硬件时钟漂移</li>
+<li>线程可能休眠</li>
+<li>操作系统休眠</li>
+<li>硬件休眠</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://idonkeyliu.github.io/2020/07/29/Go竞赛试题/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1519,135 +1685,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://idonkeyliu.github.io/2020/01/06/我心目中的领导力/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="idonkeyliu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://thirdwx.qlogo.cn/mmopen/vi_32/nqv8Jdn4oa4vIBamP2ZLQcGdg87gicx6PGlOkFGhs8QP6VlWYicj14hJsISSQO44rytt4fujXj4uNicEJUxRBlWzQ/0">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="idonkeyliu's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/01/06/我心目中的领导力/" itemprop="url">我心目中的领导力</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-06T22:34:07+08:00">
-                2020-01-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>每个人都有自己的领导，也会接触到形形色色的领导，自己也会想着成为领导，那么怎么才能算是好的领导力呢？<br><img src="/2020/01/06/我心目中的领导力/leader.jpg" alt="leader.jpg" title=""><br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2020/01/06/我心目中的领导力/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1693,7 +1735,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">80</span>
+                <span class="site-state-item-count">81</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
