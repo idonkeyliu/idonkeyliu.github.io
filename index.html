@@ -338,6 +338,146 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://idonkeyliu.github.io/2020/09/02/系统安全学习/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="idonkeyliu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://thirdwx.qlogo.cn/mmopen/vi_32/nqv8Jdn4oa4vIBamP2ZLQcGdg87gicx6PGlOkFGhs8QP6VlWYicj14hJsISSQO44rytt4fujXj4uNicEJUxRBlWzQ/0">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="idonkeyliu's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/09/02/系统安全学习/" itemprop="url">系统安全学习</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-09-02T21:31:32+08:00">
+                2020-09-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最近参加了答辩，虽然最后评委说了一些优点和缺点，但是自己始终觉得还是没有表现好，估计不通过的几率要偏大一些了，暂时先不管这些了。整个答辩过程中关于安全的问题是挑战的最多的，下面具体看看了。</p>
+<h3 id="材料中安全的引入"><a href="#材料中安全的引入" class="headerlink" title="材料中安全的引入"></a>材料中安全的引入</h3><p>因为答辩选择的材料是开放平台项目，里面提供了一个客户端SDK，那么自然而然就涉及安全方面的问题，说到安全就自然会有下述内容</p>
+<h3 id="1-蓝方"><a href="#1-蓝方" class="headerlink" title="1. 蓝方"></a>1. 蓝方</h3><h4 id="1-窃听"><a href="#1-窃听" class="headerlink" title="1. 窃听"></a>1. 窃听</h4><p>也就是偷听，你在互联网上传输的内容有人能够看到，能够知悉。</p>
+<h4 id="2-篡改"><a href="#2-篡改" class="headerlink" title="2. 篡改"></a>2. 篡改</h4><p>篡改就是更改了原来的内容，换成了篡改人自己想要添加的内容。比如电视剧中男一会交给女一些重要的东西，但是女二在偶然的情况下接触到了这些东西，然后把它替换了，最后造成了男一和女一的误会。</p>
+<h4 id="3-伪造"><a href="#3-伪造" class="headerlink" title="3. 伪造"></a>3. 伪造</h4><p>伪造的意思就是，不合法的伪装成合法的，就比如最近网上比较火的伪造老干妈的公章骗取腾讯公司的广告资源</p>
+<h4 id="4-试、猜、碰"><a href="#4-试、猜、碰" class="headerlink" title="4. 试、猜、碰"></a>4. 试、猜、碰</h4><p>场景的比如猜密码、撞库等</p>
+<h4 id="5-资源消耗"><a href="#5-资源消耗" class="headerlink" title="5. 资源消耗"></a>5. 资源消耗</h4><p>比如DDOS攻击，你的服务能力是有限的，那就让你瘫痪不具备服务能力</p>
+<h4 id="6-黑产"><a href="#6-黑产" class="headerlink" title="6. 黑产"></a>6. 黑产</h4><p>这个涉及的内容比较多，养号等。</p>
+<h3 id="2-红方"><a href="#2-红方" class="headerlink" title="2. 红方"></a>2. 红方</h3><h4 id="2-1-加密"><a href="#2-1-加密" class="headerlink" title="2.1 加密"></a>2.1 加密</h4><p>我们都知道如果在互联网上传输明文数据的话，那么就很容易被窃听，其中加密分为对称加密和非对称加密。</p>
+<h4 id="2-2-签名"><a href="#2-2-签名" class="headerlink" title="2.2 签名"></a>2.2 签名</h4><p>签名了就知道数据在中途有没有被修改过。</p>
+<h4 id="2-3-复杂口令"><a href="#2-3-复杂口令" class="headerlink" title="2.3 复杂口令"></a>2.3 复杂口令</h4><p>现在基本上设置密码对长度和字符都有一定的要求</p>
+<h4 id="2-4-不同产品不同密码"><a href="#2-4-不同产品不同密码" class="headerlink" title="2.4 不同产品不同密码"></a>2.4 不同产品不同密码</h4><p>防止撞库</p>
+<h4 id="2-5-敏感信息加密存储"><a href="#2-5-敏感信息加密存储" class="headerlink" title="2.5 敏感信息加密存储"></a>2.5 敏感信息加密存储</h4><p>防止脱库导致的敏感信息泄露</p>
+<h3 id="3-常见的安全风险"><a href="#3-常见的安全风险" class="headerlink" title="3. 常见的安全风险"></a>3. 常见的安全风险</h3><ul>
+<li>sql注入</li>
+<li>xss</li>
+<li>crsf</li>
+<li>DDOS</li>
+<li>并发请求</li>
+<li>刷量</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://idonkeyliu.github.io/2020/07/29/分布式架构知识体系/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1561,130 +1701,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://idonkeyliu.github.io/2020/01/13/年前系统走查/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="idonkeyliu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://thirdwx.qlogo.cn/mmopen/vi_32/nqv8Jdn4oa4vIBamP2ZLQcGdg87gicx6PGlOkFGhs8QP6VlWYicj14hJsISSQO44rytt4fujXj4uNicEJUxRBlWzQ/0">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="idonkeyliu's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/01/13/年前系统走查/" itemprop="url">年前系统走查</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-13T19:52:05+08:00">
-                2020-01-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>下周就要放假了，春节临近啦~老规矩，放假前都需要对系统进行一次全面地梳理与走查，具体的细节如下：<br><img src="/2020/01/13/年前系统走查/fdj.jpg" alt="fdj.jpg" title=""><br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2020/01/13/年前系统走查/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1735,7 +1751,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">81</span>
+                <span class="site-state-item-count">82</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
