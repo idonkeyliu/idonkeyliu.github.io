@@ -1,38 +1,1010 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
 
 
-{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
 
-{% block page_class %}page-post-detail{% endblock %}
+  
 
 
-{% block content %}
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="今天越安逸，明天越危险" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="idonkeyliu's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="第一章VUCA，volatility(易变性)、uncertainty(不确定性)、complexity(复杂性)、ambiguity(模糊性)，源于军事用语，911后概念才被确定，该词用来描述混乱的和快速变化的商业环境。面对复杂易变的商业环境，那么在进行软件实践的时候就会遇到很多难题，问题从此就展开了。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="持续交付2.0读书笔记">
+<meta property="og:url" content="http://idonkeyliu.github.io/2019/12/12/持续交付2-0读书笔记/index.html">
+<meta property="og:site_name" content="idonkeyliu&#39;s Blog">
+<meta property="og:description" content="第一章VUCA，volatility(易变性)、uncertainty(不确定性)、complexity(复杂性)、ambiguity(模糊性)，源于军事用语，911后概念才被确定，该词用来描述混乱的和快速变化的商业环境。面对复杂易变的商业环境，那么在进行软件实践的时候就会遇到很多难题，问题从此就展开了。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-11-17T14:54:47.677Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="持续交付2.0读书笔记">
+<meta name="twitter:description" content="第一章VUCA，volatility(易变性)、uncertainty(不确定性)、complexity(复杂性)、ambiguity(模糊性)，源于军事用语，911后概念才被确定，该词用来描述混乱的和快速变化的商业环境。面对复杂易变的商业环境，那么在进行软件实践的时候就会遇到很多难题，问题从此就展开了。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '6F2WMLW1H9',
+      apiKey: '425ab9d811f8cec07d6103e168490a30',
+      indexName: 'prod_tang_tang',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://idonkeyliu.github.io/2019/12/12/持续交付2-0读书笔记/"/>
+
+
+
+
+
+  <title>持续交付2.0读书笔记 | idonkeyliu's Blog</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-107117252-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?d3c2fc214cb28804722819af3b12894e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1264537514&web_id=1264537514" language="JavaScript"></script>
+  </div>
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">idonkeyliu's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
 
   <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://idonkeyliu.github.io/2019/12/12/持续交付2-0读书笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="idonkeyliu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://thirdwx.qlogo.cn/mmopen/vi_32/nqv8Jdn4oa4vIBamP2ZLQcGdg87gicx6PGlOkFGhs8QP6VlWYicj14hJsISSQO44rytt4fujXj4uNicEJUxRBlWzQ/0">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="idonkeyliu's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">持续交付2.0读书笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-12T22:11:36+08:00">
+                2019-12-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h2><p>VUCA，volatility(易变性)、uncertainty(不确定性)、complexity(复杂性)、ambiguity(模糊性)，源于军事用语，911后概念才被确定，该词用来描述混乱的和快速变化的商业环境。面对复杂易变的商业环境，那么在进行软件实践的时候就会遇到很多难题，问题从此就展开了。<br><a id="more"></a></p>
+<h3 id="软件工程"><a href="#软件工程" class="headerlink" title="软件工程"></a>软件工程</h3><p>软件工程是软件危机的产物，是落后的软件生成方式无法满足计算机软件需求而产生的现象。人们视图将目光投向建筑工程，希冀找到一种工程式的方法来实现快速交付软件的愿望。</p>
+<h4 id="1-瀑布软件开发方法"><a href="#1-瀑布软件开发方法" class="headerlink" title="1. 瀑布软件开发方法"></a>1. 瀑布软件开发方法</h4><p>瀑布软件开发方法很像流水线，和现在的主流程其实也没有什么不同，不过该段流程很重，周期很长。重计划、重流程、重文档，一切都很慢。</p>
+<h4 id="2-敏捷软件开发方法"><a href="#2-敏捷软件开发方法" class="headerlink" title="2. 敏捷软件开发方法"></a>2. 敏捷软件开发方法</h4><p>敏捷不是压榨，敏捷也不是为了赶时间而时刻产生技术债务。scrum和极限编程，都是在该时间产生的软件开发方法。</p>
+<h4 id="3-DevOps"><a href="#3-DevOps" class="headerlink" title="3. DevOps"></a>3. DevOps</h4><p>是一种理念，一种实践。包括了开发、运维和测试，使得从前比较独立的三方联系的更加紧密。</p>
+<h4 id="4-AIOps"><a href="#4-AIOps" class="headerlink" title="4.AIOps"></a>4.AIOps</h4><p>目前比较新的一种理念，后续应该是发展的主流，DevOps加上AI的能力来重塑这个流程，使得流程更加的智能，更加的有效率。</p>
+<h4 id="5-持续交付1-0"><a href="#5-持续交付1-0" class="headerlink" title="5.持续交付1.0"></a>5.持续交付1.0</h4><p>提出了部署生产线概念，工业化最伟大的发明就是流水线，而持续交付1.0的核心就是能够以可持续方式，安全快速把代码变更部署到生产环境上，让用户使用，整个过程就像流水线一样高效。</p>
+<p>持续交付涉及的角色有产品、设计、开发、测试、运维<br>敏捷涉及的角色有产品、设计、开发<br>CI涉及的角色有开发、测试<br>CD涉及的角色有测试、运维，这里的CD指持续交付<br>CD涉及的角色有运维，这里的CD指的是持续部署<br>DevOps涉及的角色有开发、测试和运维。</p>
+<h3 id="持续交付2-0"><a href="#持续交付2-0" class="headerlink" title="持续交付2.0"></a>持续交付2.0</h3><p>会发现持续交付1.0是单纯技术领域的活动，有时候交付的软件并没有什么价值，所以借鉴了《精益创业》的思想，最小产品化原则，也即是MVP，从业务增益的角度来考虑问题。所以结合精益创业+持续交付1.0的思想就产生了持续交付2.0.</p>
+<p>持续交付2.0的四个核心原则</p>
+<h4 id="1-坚持少做"><a href="#1-坚持少做" class="headerlink" title="1. 坚持少做"></a>1. 坚持少做</h4><p>少即是多，这个上升到了哲学的高度了。</p>
+<h4 id="2-持续分解问题"><a href="#2-持续分解问题" class="headerlink" title="2. 持续分解问题"></a>2. 持续分解问题</h4><h4 id="3-坚持快速反馈"><a href="#3-坚持快速反馈" class="headerlink" title="3. 坚持快速反馈"></a>3. 坚持快速反馈</h4><h4 id="4-持续改进并衡量"><a href="#4-持续改进并衡量" class="headerlink" title="4. 持续改进并衡量"></a>4. 持续改进并衡量</h4><h3 id="持续交付七巧板"><a href="#持续交付七巧板" class="headerlink" title="持续交付七巧板"></a>持续交付七巧板</h3><p>持续支付2.0涉及的组织和角色众多，如果要描述的话可以用一个七巧板图来描述。</p>
+<h2 id="第二章-价值探索环"><a href="#第二章-价值探索环" class="headerlink" title="第二章.价值探索环"></a>第二章.价值探索环</h2><p>敏捷开发十二原则第一条：最优先要做的事情就是通过尽早、持续地交付有价值的软件来使客户满意。什么是价值？价值只能由企业外部的客户来定义，企业内部只有成本，没有价值这一说。那么如何识别和发现用户需求呢？</p>
+<h3 id="2-1-探索环的意义"><a href="#2-1-探索环的意义" class="headerlink" title="2.1 探索环的意义"></a>2.1 探索环的意义</h3><p>探索环就是要从业务问题出发，与团队一起找出三类假设：1. 用户假设，我们提供的产品服务是针对某类潜在用户人群的需求 2.问题假设，目标群体存在某些痛点需要解决 3.解决方案假设，我们提供的解决方案可以解决这些痛点，而且比现存的解决方案都有效且高效。1和2可以综合成人无我有，3可以理解为人有我优。</p>
+<h3 id="2-2-探索环的4个关键环节"><a href="#2-2-探索环的4个关键环节" class="headerlink" title="2.2 探索环的4个关键环节"></a>2.2 探索环的4个关键环节</h3><p>1）提问，关键有4点：1.涉众尽量到场 2.多问几个为什么，可以使用苏格拉底式问法 3.尽可能收集数据信息 4.移情，同理心。<br>2）锚定，设定目标以及目标分解的讨论过程，目的是确定要达成的目标以及可以衡量它的指标，应该避免模糊不清的目标，这点非常重要。目标的选择应该遵循两点，其一是识别价值指标而不是虚假指标，其二是指标应该可衡量而且便于获取，易于直观对比。<br>3）共创，当我们制订了要达到的目标后，团队为之找出的多种可行性方案的过程。有两种方法，一种是量化式影响地图，第二种是用户旅行地图<br>4）精炼，就是对众多方案进行评估，选出最小可行性解决方案的过程，VUCA环境中，时间是最大的隐形成本。</p>
+<h3 id="2-3-工作原则"><a href="#2-3-工作原则" class="headerlink" title="2.3 工作原则"></a>2.3 工作原则</h3><h4 id="2-3-1"><a href="#2-3-1" class="headerlink" title="2.3.1"></a>2.3.1</h4><p>分解并快速试错</p>
+<h4 id="2-3-2"><a href="#2-3-2" class="headerlink" title="2.3.2"></a>2.3.2</h4><p>一次只验证一点</p>
+<h4 id="2-3-3"><a href="#2-3-3" class="headerlink" title="2.3.3"></a>2.3.3</h4><p>允许失败</p>
+<h3 id="2-4-共创与精炼常用方法"><a href="#2-4-共创与精炼常用方法" class="headerlink" title="2.4 共创与精炼常用方法"></a>2.4 共创与精炼常用方法</h3><p>装饰窗、最小可行特性法、特区法、定向探索法、稻草人法、最小可行产品法</p>
+<h3 id="2-5-实施注意事项"><a href="#2-5-实施注意事项" class="headerlink" title="2.5 实施注意事项"></a>2.5 实施注意事项</h3><p>多角色参与探索、存在往复过程、风险不是等价的、上帝视角、唯数字论、蛇行效应。</p>
+<h2 id="第三章-快速验证环"><a href="#第三章-快速验证环" class="headerlink" title="第三章.快速验证环"></a>第三章.快速验证环</h2><p>只有产品或者服务被用户消费，并且最终能够得到变现，才能证明其价值的存在。快速验证环的速度由两个因素决定，一个是探索环的最小可行性解决方案的大小和复杂性，另外一个是快速验证环本身的运转速度。</p>
+<h3 id="3-1-验证环的目标"><a href="#3-1-验证环的目标" class="headerlink" title="3.1 验证环的目标"></a>3.1 验证环的目标</h3><p>验证环的目标是借助各种工具或者方法、让质量可靠的解决方案以最快的速度交付到用户手中，从而收集并分析真实的反馈。</p>
+<h3 id="3-2-验证环的4个关键环节"><a href="#3-2-验证环的4个关键环节" class="headerlink" title="3.2 验证环的4个关键环节"></a>3.2 验证环的4个关键环节</h3><p>验证环有4个关键环节，即构建、运行、监测、决策。</p>
+<h4 id="3-2-1-构建"><a href="#3-2-1-构建" class="headerlink" title="3.2.1 构建"></a>3.2.1 构建</h4><p>构建是将自然语言的描述转换为计算机可以执行的软件，即质量达标的软件包。这个环节涉众最多，时间盒管理、工作任务分解、持续验证是这个环节有效的手段。时间盒管理类似项目管理，包括截止时间、交付物与交付质量；工作任务分解包括需求分解和开发任务分解；持续验证依赖持续集成，而自动化测试是持续集成最重要的质量验证手段。</p>
+<h4 id="3-2-2-运行"><a href="#3-2-2-运行" class="headerlink" title="3.2.2 运行"></a>3.2.2 运行</h4><p>该环节最主要的矛盾是在用户无感知的情况下完成版本的升级更新，该阶段手工操作最多，需要不遗余力的进行优化，将人从重复性的体力劳动中解放出来。</p>
+<h4 id="3-3-3-监测"><a href="#3-3-3-监测" class="headerlink" title="3.3.3 监测"></a>3.3.3 监测</h4><p>监测环节收集数据并且展示统计结果</p>
+<h4 id="3-3-4-决策"><a href="#3-3-4-决策" class="headerlink" title="3.3.4 决策"></a>3.3.4 决策</h4><p>决策是根据监测的数据来验证是否符合最初的预期，从而来选择是继续下一个实验方案还是开始新问题的探索。</p>
+<h3 id="3-3-工作原则"><a href="#3-3-工作原则" class="headerlink" title="3.3 工作原则"></a>3.3 工作原则</h3><h4 id="3-3-1-质量内建"><a href="#3-3-1-质量内建" class="headerlink" title="3.3.1 质量内建"></a>3.3.1 质量内建</h4><p>质量内建就是从第一个环节开始就关注质量。</p>
+<h4 id="3-3-2-消除等待"><a href="#3-3-2-消除等待" class="headerlink" title="3.3.2 消除等待"></a>3.3.2 消除等待</h4><h4 id="3-3-3-任务自助化"><a href="#3-3-3-任务自助化" class="headerlink" title="3.3.3 任务自助化"></a>3.3.3 任务自助化</h4><h4 id="3-3-4-监测一切"><a href="#3-3-4-监测一切" class="headerlink" title="3.3.4 监测一切"></a>3.3.4 监测一切</h4><h2 id="第四章-持续交付2-0的组织文化"><a href="#第四章-持续交付2-0的组织文化" class="headerlink" title="第四章.持续交付2.0的组织文化"></a>第四章.持续交付2.0的组织文化</h2><h3 id="4-1-安全、信任与持续改善"><a href="#4-1-安全、信任与持续改善" class="headerlink" title="4.1 安全、信任与持续改善"></a>4.1 安全、信任与持续改善</h3><h4 id="4-1-1-失败是安全的"><a href="#4-1-1-失败是安全的" class="headerlink" title="4.1.1 失败是安全的"></a>4.1.1 失败是安全的</h4><p>按照2/8原则，做的事情80%是错的，也即是失败的，如果不能容忍失败或者对失败者给予严重的惩罚，那么组员会倾向避免犯错，从而逃避责任，缺少合作。</p>
+<h4 id="4-1-2-相互信任"><a href="#4-1-2-相互信任" class="headerlink" title="4.1.2 相互信任"></a>4.1.2 相互信任</h4><p>信任是合作的基础，也是组织凝聚力和成员士气的基础。</p>
+<h4 id="4-1-3-持续改善"><a href="#4-1-3-持续改善" class="headerlink" title="4.1.3 持续改善"></a>4.1.3 持续改善</h4><p>持续改善的文化是人人参与以及时时改善，不积跬步无以至千里，乘法效应，慢慢来比较快说的就是这个道理。</p>
+<h3 id="4-2-文化塑造四步法"><a href="#4-2-文化塑造四步法" class="headerlink" title="4.2 文化塑造四步法"></a>4.2 文化塑造四步法</h3><h4 id="4-2-1-行为决定文化"><a href="#4-2-1-行为决定文化" class="headerlink" title="4.2.1 行为决定文化"></a>4.2.1 行为决定文化</h4><p>行动决定很多东西，很多东西是行动带来的。行为决定性格，性格决定命运。四步法是</p>
+<ol>
+<li>定义想要做的事情</li>
+<li>定义期望的做事方式</li>
+<li>提供相应的培训</li>
+<li>做些必需的事情来强化那些行为</li>
+</ol>
+<h3 id="4-3-行动原则"><a href="#4-3-行动原则" class="headerlink" title="4.3 行动原则"></a>4.3 行动原则</h3><p>管理学上把公司定义为一个复杂系统，兼具简单系统和随机系统的特点。其内部有很多的子系统，子系统间相互合作、互相影响，可以共同进化。</p>
+<h4 id="4-3-1-价值导向"><a href="#4-3-1-价值导向" class="headerlink" title="4.3.1 价值导向"></a>4.3.1 价值导向</h4><h4 id="4-3-2-快速验证"><a href="#4-3-2-快速验证" class="headerlink" title="4.3.2 快速验证"></a>4.3.2 快速验证</h4><h4 id="4-3-3-持续学习"><a href="#4-3-3-持续学习" class="headerlink" title="4.3.3 持续学习"></a>4.3.3 持续学习</h4><p>在业务领域中，除了深入了解和学习，还要保持对做事过程的学习与反思。有两种方法，一个是定期回顾，二个是事件复盘。</p>
+<h3 id="4-4-度量原则"><a href="#4-4-度量原则" class="headerlink" title="4.4 度量原则"></a>4.4 度量原则</h3><p>不能度量的东西是无法管理的。</p>
+<h4 id="4-4-1-度量指标的4类属性"><a href="#4-4-1-度量指标的4类属性" class="headerlink" title="4.4.1 度量指标的4类属性"></a>4.4.1 度量指标的4类属性</h4><ol>
+<li>引领性指标与滞后性指标</li>
+<li>可观测性指标与可行动性指标<br>IT组织的4个度量项分别为发布频率、发布周期、MTBF/MTTR、吞吐量。</li>
+</ol>
+<h4 id="4-4-2-度量的目标是改善"><a href="#4-4-2-度量的目标是改善" class="headerlink" title="4.4.2 度量的目标是改善"></a>4.4.2 度量的目标是改善</h4><h3 id="4-5-改善套路进行持续改进"><a href="#4-5-改善套路进行持续改进" class="headerlink" title="4.5 改善套路进行持续改进"></a>4.5 改善套路进行持续改进</h3><p>四步法</p>
+<ol>
+<li>明确方向与挑战</li>
+<li>掌握当前状态</li>
+<li>定义下一个目标状态</li>
+<li>迭代改进，PDCA戴明环</li>
+</ol>
+<h2 id="第五章-持续交付的软件系统架构"><a href="#第五章-持续交付的软件系统架构" class="headerlink" title="第五章.持续交付的软件系统架构"></a>第五章.持续交付的软件系统架构</h2><p>亚马逊从巨石应用到SOA服务的改变</p>
+<ol>
+<li>服务接口的方式提供功能</li>
+<li>团队间通过接口调用</li>
+<li>不允许有非接口的获取方式</li>
+<li>具体的实现不作规定</li>
+<li>所有的接口，必须以可以公开为设计导向</li>
+<li>不遵守上面的规定，就会被解雇。</li>
+</ol>
+<h3 id="5-1-大系统小做原则"><a href="#5-1-大系统小做原则" class="headerlink" title="5.1 大系统小做原则"></a>5.1 大系统小做原则</h3><p>大系统小做是海量服务之道1.0里面的内容</p>
+<h4 id="5-1-1-持续交付架构的要求"><a href="#5-1-1-持续交付架构的要求" class="headerlink" title="5.1.1 持续交付架构的要求"></a>5.1.1 持续交付架构的要求</h4><ol>
+<li>为测试而设计</li>
+<li>为部署而设计</li>
+<li>为监控而设计</li>
+<li>为失效而设计</li>
+</ol>
+<h4 id="5-1-2-系统拆分原则"><a href="#5-1-2-系统拆分原则" class="headerlink" title="5.1.2 系统拆分原则"></a>5.1.2 系统拆分原则</h4><ol>
+<li>每个组件或者服务有清晰的业务职责，可以被独立修改</li>
+<li>松耦合、高内聚，每个组件只知道尽可能少的信息，完成相对独立的单一功能</li>
+<li>整个系统易于构建与测试</li>
+<li>团队之间的沟通协作更加顺畅</li>
+</ol>
+<h3 id="5-2-常见的架构模式"><a href="#5-2-常见的架构模式" class="headerlink" title="5.2 常见的架构模式"></a>5.2 常见的架构模式</h3><h4 id="5-2-1-微核架构也即是插件架构"><a href="#5-2-1-微核架构也即是插件架构" class="headerlink" title="5.2.1 微核架构也即是插件架构"></a>5.2.1 微核架构也即是插件架构</h4><h4 id="5-2-2-微服务架构"><a href="#5-2-2-微服务架构" class="headerlink" title="5.2.2 微服务架构"></a>5.2.2 微服务架构</h4><h4 id="5-2-3-巨石架构"><a href="#5-2-3-巨石架构" class="headerlink" title="5.2.3 巨石架构"></a>5.2.3 巨石架构</h4><h3 id="5-3-架构改造实施模式"><a href="#5-3-架构改造实施模式" class="headerlink" title="5.3 架构改造实施模式"></a>5.3 架构改造实施模式</h3><h4 id="5-3-1-拆迁者模式"><a href="#5-3-1-拆迁者模式" class="headerlink" title="5.3.1 拆迁者模式"></a>5.3.1 拆迁者模式</h4><h4 id="5-3-2-绞杀者模式"><a href="#5-3-2-绞杀者模式" class="headerlink" title="5.3.2 绞杀者模式"></a>5.3.2 绞杀者模式</h4><h4 id="5-3-3-修缮者模式"><a href="#5-3-3-修缮者模式" class="headerlink" title="5.3.3 修缮者模式"></a>5.3.3 修缮者模式</h4><h4 id="5-3-4-数据库的拆分方法"><a href="#5-3-4-数据库的拆分方法" class="headerlink" title="5.3.4 数据库的拆分方法"></a>5.3.4 数据库的拆分方法</h4><h2 id="第六章-业务需求协作管理"><a href="#第六章-业务需求协作管理" class="headerlink" title="第六章.业务需求协作管理"></a>第六章.业务需求协作管理</h2><h3 id="6-1-产品版本周期概述"><a href="#6-1-产品版本周期概述" class="headerlink" title="6.1 产品版本周期概述"></a>6.1 产品版本周期概述</h3><h4 id="6-1-1-准备期"><a href="#6-1-1-准备期" class="headerlink" title="6.1.1 准备期"></a>6.1.1 准备期</h4><p>核心任务是达成业务理解与目标的共识，也可以称作启动期或者迭代0.准备期的主要工作内容如下：</p>
+<ol>
+<li>目标阐述与理解</li>
+<li>业务领域角色与流程识别，及解决方案的探索</li>
+<li>重大风险识别与验证</li>
+<li>精炼并达成最小可行方案共识</li>
+</ol>
+<h4 id="6-1-2-交付期"><a href="#6-1-2-交付期" class="headerlink" title="6.1.2 交付期"></a>6.1.2 交付期</h4><h3 id="6-2-需求拆分的利与弊"><a href="#6-2-需求拆分的利与弊" class="headerlink" title="6.2 需求拆分的利与弊"></a>6.2 需求拆分的利与弊</h3><h4 id="6-2-1-需求拆分的收益"><a href="#6-2-1-需求拆分的收益" class="headerlink" title="6.2.1 需求拆分的收益"></a>6.2.1 需求拆分的收益</h4><ol>
+<li>建立共识，协调工作</li>
+<li>小批量交付，加强价值流动</li>
+<li>低成本拥抱变化</li>
+<li>多次集成，及时反馈质量</li>
+<li>鼓舞团队士气</li>
+</ol>
+<h4 id="6-2-2-需求拆分的成本"><a href="#6-2-2-需求拆分的成本" class="headerlink" title="6.2.2 需求拆分的成本"></a>6.2.2 需求拆分的成本</h4><ol>
+<li>需求拆分的显式成本</li>
+<li>分批开发、测试和部署的迭代成本</li>
+</ol>
+<h3 id="6-3-需求拆分方法"><a href="#6-3-需求拆分方法" class="headerlink" title="6.3 需求拆分方法"></a>6.3 需求拆分方法</h3><h4 id="6-3-1-需求的来源"><a href="#6-3-1-需求的来源" class="headerlink" title="6.3.1 需求的来源"></a>6.3.1 需求的来源</h4><ul>
+<li>业务需求</li>
+<li>技术指标性需求</li>
+<li>安全需求</li>
+</ul>
+<h4 id="6-3-2-技术债也是需求"><a href="#6-3-2-技术债也是需求" class="headerlink" title="6.3.2 技术债也是需求"></a>6.3.2 技术债也是需求</h4><h4 id="6-3-3-参与需求拆分的角色"><a href="#6-3-3-参与需求拆分的角色" class="headerlink" title="6.3.3 参与需求拆分的角色"></a>6.3.3 参与需求拆分的角色</h4><h4 id="6-3-4-不平等的INVEST原则"><a href="#6-3-4-不平等的INVEST原则" class="headerlink" title="6.3.4 不平等的INVEST原则"></a>6.3.4 不平等的INVEST原则</h4><h4 id="6-3-5-五大拆分技法"><a href="#6-3-5-五大拆分技法" class="headerlink" title="6.3.5 五大拆分技法"></a>6.3.5 五大拆分技法</h4><ol>
+<li>路径拆分法</li>
+<li>按接触点拆分</li>
+<li>数据类型或者格式拆分</li>
+<li>按规则拆分</li>
+<li>按探索路径拆分</li>
+</ol>
+<h4 id="6-3-6-七大组成部分"><a href="#6-3-6-七大组成部分" class="headerlink" title="6.3.6 七大组成部分"></a>6.3.6 七大组成部分</h4><p>用户故事的七大组成部分</p>
+<ol>
+<li>编号</li>
+<li>名称</li>
+<li>描述</li>
+<li>技术备忘</li>
+<li>前提假设</li>
+<li>依赖关系</li>
+<li>验收条件</li>
+</ol>
+<h3 id="6-4-需求分析和管理工具集"><a href="#6-4-需求分析和管理工具集" class="headerlink" title="6.4 需求分析和管理工具集"></a>6.4 需求分析和管理工具集</h3><h4 id="6-4-1-用户故事地图"><a href="#6-4-1-用户故事地图" class="headerlink" title="6.4.1 用户故事地图"></a>6.4.1 用户故事地图</h4><h4 id="6-4-2-用户故事树"><a href="#6-4-2-用户故事树" class="headerlink" title="6.4.2 用户故事树"></a>6.4.2 用户故事树</h4><h4 id="6-4-3-依赖关系图"><a href="#6-4-3-依赖关系图" class="headerlink" title="6.4.3 依赖关系图"></a>6.4.3 依赖关系图</h4><h4 id="6-4-4-需求管理数字化平台"><a href="#6-4-4-需求管理数字化平台" class="headerlink" title="6.4.4 需求管理数字化平台"></a>6.4.4 需求管理数字化平台</h4><h3 id="6-5-团队协作管理工具"><a href="#6-5-团队协作管理工具" class="headerlink" title="6.5 团队协作管理工具"></a>6.5 团队协作管理工具</h3><h4 id="6-5-1-团队共享日历"><a href="#6-5-1-团队共享日历" class="headerlink" title="6.5.1 团队共享日历"></a>6.5.1 团队共享日历</h4><p>一直觉得这个工具是很有必要的，需要有员工的休假计划表，然后就是领导的会议时间表，还有团队的集体活动表</p>
+<h4 id="6-5-2-团队回顾"><a href="#6-5-2-团队回顾" class="headerlink" title="6.5.2 团队回顾"></a>6.5.2 团队回顾</h4><h4 id="6-5-3-可视化故事墙"><a href="#6-5-3-可视化故事墙" class="headerlink" title="6.5.3 可视化故事墙"></a>6.5.3 可视化故事墙</h4><h4 id="6-5-4-明确“完成”的定义"><a href="#6-5-4-明确“完成”的定义" class="headerlink" title="6.5.4 明确“完成”的定义"></a>6.5.4 明确“完成”的定义</h4><h4 id="6-5-5-持续集成"><a href="#6-5-5-持续集成" class="headerlink" title="6.5.5 持续集成"></a>6.5.5 持续集成</h4><h4 id="6-5-6-故事验证"><a href="#6-5-6-故事验证" class="headerlink" title="6.5.6 故事验证"></a>6.5.6 故事验证</h4><h2 id="第七章-部署流水线原则与工具设计"><a href="#第七章-部署流水线原则与工具设计" class="headerlink" title="第七章 部署流水线原则与工具设计"></a>第七章 部署流水线原则与工具设计</h2><p>部署流水线是持续交付1.0的核心模式，流水线是工业时代最伟大的发明。</p>
+<h3 id="7-1-简单的部署流水线"><a href="#7-1-简单的部署流水线" class="headerlink" title="7.1 简单的部署流水线"></a>7.1 简单的部署流水线</h3><h4 id="7-1-1-简单的产品研发流程"><a href="#7-1-1-简单的产品研发流程" class="headerlink" title="7.1.1 简单的产品研发流程"></a>7.1.1 简单的产品研发流程</h4><h4 id="7-1-2-初始部署流水线"><a href="#7-1-2-初始部署流水线" class="headerlink" title="7.1.2 初始部署流水线"></a>7.1.2 初始部署流水线</h4><h4 id="7-1-3-流水线执行状态解析"><a href="#7-1-3-流水线执行状态解析" class="headerlink" title="7.1.3 流水线执行状态解析"></a>7.1.3 流水线执行状态解析</h4><h3 id="7-2-部署流水线的设计与使用"><a href="#7-2-部署流水线的设计与使用" class="headerlink" title="7.2 部署流水线的设计与使用"></a>7.2 部署流水线的设计与使用</h3><h4 id="7-1-2-流水线的设计原则"><a href="#7-1-2-流水线的设计原则" class="headerlink" title="7.1.2 流水线的设计原则"></a>7.1.2 流水线的设计原则</h4><ol>
+<li>一次构建，多次使用</li>
+<li>与业务逻辑松耦合</li>
+<li>并行化原则</li>
+<li>快速反馈优先</li>
+<li>重要反馈优先</li>
+</ol>
+<h4 id="7-2-2-团队的协作纪律"><a href="#7-2-2-团队的协作纪律" class="headerlink" title="7.2.2 团队的协作纪律"></a>7.2.2 团队的协作纪律</h4><ol>
+<li>立即暂停原则</li>
+<li>安全审计原则<br>传递的代码和软件包来着受控环境，受控环境是指对该环境的一切操作均被审计</li>
+</ol>
+<h3 id="7-3-部署流水线平台的构成"><a href="#7-3-部署流水线平台的构成" class="headerlink" title="7.3 部署流水线平台的构成"></a>7.3 部署流水线平台的构成</h3><h4 id="7-3-1-工具链总体架构"><a href="#7-3-1-工具链总体架构" class="headerlink" title="7.3.1 工具链总体架构"></a>7.3.1 工具链总体架构</h4><ol>
+<li>唯一受信源</li>
+<li>部署流水线平台</li>
+<li>基础支撑服务层<br>测试部门管理多套测试环境，运维部门则控制生产环境</li>
+</ol>
+<h4 id="7-3-2-平台应当具备的基础能力"><a href="#7-3-2-平台应当具备的基础能力" class="headerlink" title="7.3.2 平台应当具备的基础能力"></a>7.3.2 平台应当具备的基础能力</h4><ol>
+<li>审计追踪</li>
+<li>重现问题</li>
+</ol>
+<h4 id="7-3-3-工具链建设策略"><a href="#7-3-3-工具链建设策略" class="headerlink" title="7.3.3 工具链建设策略"></a>7.3.3 工具链建设策略</h4><h3 id="7-4-基础支撑服务的云化"><a href="#7-4-基础支撑服务的云化" class="headerlink" title="7.4 基础支撑服务的云化"></a>7.4 基础支撑服务的云化</h3><h4 id="7-4-1-基础支撑服务的协作过程解析"><a href="#7-4-1-基础支撑服务的协作过程解析" class="headerlink" title="7.4.1 基础支撑服务的协作过程解析"></a>7.4.1 基础支撑服务的协作过程解析</h4><ol>
+<li>环境准备</li>
+<li>提交构建</li>
+<li>次级构建</li>
+<li>部署生产环境</li>
+</ol>
+<h4 id="7-4-2-编译构建管理服务"><a href="#7-4-2-编译构建管理服务" class="headerlink" title="7.4.2 编译构建管理服务"></a>7.4.2 编译构建管理服务</h4><h4 id="7-4-3-自动化测试管理服务"><a href="#7-4-3-自动化测试管理服务" class="headerlink" title="7.4.3 自动化测试管理服务"></a>7.4.3 自动化测试管理服务</h4><h4 id="7-4-4-软件部署管理服务"><a href="#7-4-4-软件部署管理服务" class="headerlink" title="7.4.4 软件部署管理服务"></a>7.4.4 软件部署管理服务</h4><h4 id="7-4-5-基础环境管理服务"><a href="#7-4-5-基础环境管理服务" class="headerlink" title="7.4.5 基础环境管理服务"></a>7.4.5 基础环境管理服务</h4><h3 id="7-5-企业制品库的管理"><a href="#7-5-企业制品库的管理" class="headerlink" title="7.5 企业制品库的管理"></a>7.5 企业制品库的管理</h3><h4 id="7-5-1-制品库的分类"><a href="#7-5-1-制品库的分类" class="headerlink" title="7.5.1 制品库的分类"></a>7.5.1 制品库的分类</h4><h4 id="7-5-2-制品库的管理原则"><a href="#7-5-2-制品库的管理原则" class="headerlink" title="7.5.2 制品库的管理原则"></a>7.5.2 制品库的管理原则</h4><h3 id="7-6-多种多样的部署流水线"><a href="#7-6-多种多样的部署流水线" class="headerlink" title="7.6 多种多样的部署流水线"></a>7.6 多种多样的部署流水线</h3><h4 id="7-6-1-多组件的部署流水线"><a href="#7-6-1-多组件的部署流水线" class="headerlink" title="7.6.1 多组件的部署流水线"></a>7.6.1 多组件的部署流水线</h4><h4 id="7-6-2-个人部署流水线"><a href="#7-6-2-个人部署流水线" class="headerlink" title="7.6.2 个人部署流水线"></a>7.6.2 个人部署流水线</h4><h4 id="7-6-3-部署流水线的不断演进"><a href="#7-6-3-部署流水线的不断演进" class="headerlink" title="7.6.3 部署流水线的不断演进"></a>7.6.3 部署流水线的不断演进</h4><h3 id="7-7-为开发者构建自助式工具"><a href="#7-7-为开发者构建自助式工具" class="headerlink" title="7.7 为开发者构建自助式工具"></a>7.7 为开发者构建自助式工具</h3><ol>
+<li>基础的研发流程自助平台，比如环境</li>
+<li>数据自助平台</li>
+<li>实验测量平台</li>
+<li>针对移动设备，建立用户触达平台</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="idonkeyliu WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="idonkeyliu Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/12/04/IP转换服务/" rel="next" title="IP转换服务">
+                <i class="fa fa-chevron-left"></i> IP转换服务
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/12/23/腾讯云架构工程师认证知识点/" rel="prev" title="腾讯云架构工程师认证知识点">
+                腾讯云架构工程师认证知识点 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
 
     <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+      
     </div>
   </div>
 
-{% endblock %}
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+          </div>
+          
 
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMTEwOC83NjU3"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://thirdwx.qlogo.cn/mmopen/vi_32/nqv8Jdn4oa4vIBamP2ZLQcGdg87gicx6PGlOkFGhs8QP6VlWYicj14hJsISSQO44rytt4fujXj4uNicEJUxRBlWzQ/0"
+               alt="idonkeyliu" />
+          <p class="site-author-name" itemprop="name">idonkeyliu</p>
+           
+              <p class="site-description motion-element" itemprop="description">今天越安逸，明天越危险</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">90</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/idonkeyliu" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      github
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/idonkeyliu" target="_blank" title="twitter">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      twitter
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第一章"><span class="nav-number">1.</span> <span class="nav-text">第一章</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#软件工程"><span class="nav-number">1.1.</span> <span class="nav-text">软件工程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-瀑布软件开发方法"><span class="nav-number">1.1.1.</span> <span class="nav-text">1. 瀑布软件开发方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-敏捷软件开发方法"><span class="nav-number">1.1.2.</span> <span class="nav-text">2. 敏捷软件开发方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-DevOps"><span class="nav-number">1.1.3.</span> <span class="nav-text">3. DevOps</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-AIOps"><span class="nav-number">1.1.4.</span> <span class="nav-text">4.AIOps</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-持续交付1-0"><span class="nav-number">1.1.5.</span> <span class="nav-text">5.持续交付1.0</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#持续交付2-0"><span class="nav-number">1.2.</span> <span class="nav-text">持续交付2.0</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-坚持少做"><span class="nav-number">1.2.1.</span> <span class="nav-text">1. 坚持少做</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-持续分解问题"><span class="nav-number">1.2.2.</span> <span class="nav-text">2. 持续分解问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-坚持快速反馈"><span class="nav-number">1.2.3.</span> <span class="nav-text">3. 坚持快速反馈</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-持续改进并衡量"><span class="nav-number">1.2.4.</span> <span class="nav-text">4. 持续改进并衡量</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#持续交付七巧板"><span class="nav-number">1.3.</span> <span class="nav-text">持续交付七巧板</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二章-价值探索环"><span class="nav-number">2.</span> <span class="nav-text">第二章.价值探索环</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-探索环的意义"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 探索环的意义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-探索环的4个关键环节"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 探索环的4个关键环节</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-工作原则"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 工作原则</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-1"><span class="nav-number">2.3.1.</span> <span class="nav-text">2.3.1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-2"><span class="nav-number">2.3.2.</span> <span class="nav-text">2.3.2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-3"><span class="nav-number">2.3.3.</span> <span class="nav-text">2.3.3</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-共创与精炼常用方法"><span class="nav-number">2.4.</span> <span class="nav-text">2.4 共创与精炼常用方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-实施注意事项"><span class="nav-number">2.5.</span> <span class="nav-text">2.5 实施注意事项</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第三章-快速验证环"><span class="nav-number">3.</span> <span class="nav-text">第三章.快速验证环</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-验证环的目标"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 验证环的目标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-验证环的4个关键环节"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 验证环的4个关键环节</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-1-构建"><span class="nav-number">3.2.1.</span> <span class="nav-text">3.2.1 构建</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-2-运行"><span class="nav-number">3.2.2.</span> <span class="nav-text">3.2.2 运行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-3-监测"><span class="nav-number">3.2.3.</span> <span class="nav-text">3.3.3 监测</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-4-决策"><span class="nav-number">3.2.4.</span> <span class="nav-text">3.3.4 决策</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-工作原则"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 工作原则</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-1-质量内建"><span class="nav-number">3.3.1.</span> <span class="nav-text">3.3.1 质量内建</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-2-消除等待"><span class="nav-number">3.3.2.</span> <span class="nav-text">3.3.2 消除等待</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-3-任务自助化"><span class="nav-number">3.3.3.</span> <span class="nav-text">3.3.3 任务自助化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-4-监测一切"><span class="nav-number">3.3.4.</span> <span class="nav-text">3.3.4 监测一切</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第四章-持续交付2-0的组织文化"><span class="nav-number">4.</span> <span class="nav-text">第四章.持续交付2.0的组织文化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-安全、信任与持续改善"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 安全、信任与持续改善</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1-1-失败是安全的"><span class="nav-number">4.1.1.</span> <span class="nav-text">4.1.1 失败是安全的</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1-2-相互信任"><span class="nav-number">4.1.2.</span> <span class="nav-text">4.1.2 相互信任</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1-3-持续改善"><span class="nav-number">4.1.3.</span> <span class="nav-text">4.1.3 持续改善</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-文化塑造四步法"><span class="nav-number">4.2.</span> <span class="nav-text">4.2 文化塑造四步法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-1-行为决定文化"><span class="nav-number">4.2.1.</span> <span class="nav-text">4.2.1 行为决定文化</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-行动原则"><span class="nav-number">4.3.</span> <span class="nav-text">4.3 行动原则</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-1-价值导向"><span class="nav-number">4.3.1.</span> <span class="nav-text">4.3.1 价值导向</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-2-快速验证"><span class="nav-number">4.3.2.</span> <span class="nav-text">4.3.2 快速验证</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-3-持续学习"><span class="nav-number">4.3.3.</span> <span class="nav-text">4.3.3 持续学习</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-度量原则"><span class="nav-number">4.4.</span> <span class="nav-text">4.4 度量原则</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-4-1-度量指标的4类属性"><span class="nav-number">4.4.1.</span> <span class="nav-text">4.4.1 度量指标的4类属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-4-2-度量的目标是改善"><span class="nav-number">4.4.2.</span> <span class="nav-text">4.4.2 度量的目标是改善</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-改善套路进行持续改进"><span class="nav-number">4.5.</span> <span class="nav-text">4.5 改善套路进行持续改进</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第五章-持续交付的软件系统架构"><span class="nav-number">5.</span> <span class="nav-text">第五章.持续交付的软件系统架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-大系统小做原则"><span class="nav-number">5.1.</span> <span class="nav-text">5.1 大系统小做原则</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-1-1-持续交付架构的要求"><span class="nav-number">5.1.1.</span> <span class="nav-text">5.1.1 持续交付架构的要求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-1-2-系统拆分原则"><span class="nav-number">5.1.2.</span> <span class="nav-text">5.1.2 系统拆分原则</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-常见的架构模式"><span class="nav-number">5.2.</span> <span class="nav-text">5.2 常见的架构模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-1-微核架构也即是插件架构"><span class="nav-number">5.2.1.</span> <span class="nav-text">5.2.1 微核架构也即是插件架构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-2-微服务架构"><span class="nav-number">5.2.2.</span> <span class="nav-text">5.2.2 微服务架构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-3-巨石架构"><span class="nav-number">5.2.3.</span> <span class="nav-text">5.2.3 巨石架构</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-架构改造实施模式"><span class="nav-number">5.3.</span> <span class="nav-text">5.3 架构改造实施模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-1-拆迁者模式"><span class="nav-number">5.3.1.</span> <span class="nav-text">5.3.1 拆迁者模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-2-绞杀者模式"><span class="nav-number">5.3.2.</span> <span class="nav-text">5.3.2 绞杀者模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-3-修缮者模式"><span class="nav-number">5.3.3.</span> <span class="nav-text">5.3.3 修缮者模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-4-数据库的拆分方法"><span class="nav-number">5.3.4.</span> <span class="nav-text">5.3.4 数据库的拆分方法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第六章-业务需求协作管理"><span class="nav-number">6.</span> <span class="nav-text">第六章.业务需求协作管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-产品版本周期概述"><span class="nav-number">6.1.</span> <span class="nav-text">6.1 产品版本周期概述</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#6-1-1-准备期"><span class="nav-number">6.1.1.</span> <span class="nav-text">6.1.1 准备期</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-1-2-交付期"><span class="nav-number">6.1.2.</span> <span class="nav-text">6.1.2 交付期</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-需求拆分的利与弊"><span class="nav-number">6.2.</span> <span class="nav-text">6.2 需求拆分的利与弊</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#6-2-1-需求拆分的收益"><span class="nav-number">6.2.1.</span> <span class="nav-text">6.2.1 需求拆分的收益</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-2-2-需求拆分的成本"><span class="nav-number">6.2.2.</span> <span class="nav-text">6.2.2 需求拆分的成本</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-需求拆分方法"><span class="nav-number">6.3.</span> <span class="nav-text">6.3 需求拆分方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#6-3-1-需求的来源"><span class="nav-number">6.3.1.</span> <span class="nav-text">6.3.1 需求的来源</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-3-2-技术债也是需求"><span class="nav-number">6.3.2.</span> <span class="nav-text">6.3.2 技术债也是需求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-3-3-参与需求拆分的角色"><span class="nav-number">6.3.3.</span> <span class="nav-text">6.3.3 参与需求拆分的角色</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-3-4-不平等的INVEST原则"><span class="nav-number">6.3.4.</span> <span class="nav-text">6.3.4 不平等的INVEST原则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-3-5-五大拆分技法"><span class="nav-number">6.3.5.</span> <span class="nav-text">6.3.5 五大拆分技法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-3-6-七大组成部分"><span class="nav-number">6.3.6.</span> <span class="nav-text">6.3.6 七大组成部分</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-需求分析和管理工具集"><span class="nav-number">6.4.</span> <span class="nav-text">6.4 需求分析和管理工具集</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#6-4-1-用户故事地图"><span class="nav-number">6.4.1.</span> <span class="nav-text">6.4.1 用户故事地图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-4-2-用户故事树"><span class="nav-number">6.4.2.</span> <span class="nav-text">6.4.2 用户故事树</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-4-3-依赖关系图"><span class="nav-number">6.4.3.</span> <span class="nav-text">6.4.3 依赖关系图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-4-4-需求管理数字化平台"><span class="nav-number">6.4.4.</span> <span class="nav-text">6.4.4 需求管理数字化平台</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-5-团队协作管理工具"><span class="nav-number">6.5.</span> <span class="nav-text">6.5 团队协作管理工具</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#6-5-1-团队共享日历"><span class="nav-number">6.5.1.</span> <span class="nav-text">6.5.1 团队共享日历</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-5-2-团队回顾"><span class="nav-number">6.5.2.</span> <span class="nav-text">6.5.2 团队回顾</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-5-3-可视化故事墙"><span class="nav-number">6.5.3.</span> <span class="nav-text">6.5.3 可视化故事墙</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-5-4-明确“完成”的定义"><span class="nav-number">6.5.4.</span> <span class="nav-text">6.5.4 明确“完成”的定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-5-5-持续集成"><span class="nav-number">6.5.5.</span> <span class="nav-text">6.5.5 持续集成</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-5-6-故事验证"><span class="nav-number">6.5.6.</span> <span class="nav-text">6.5.6 故事验证</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第七章-部署流水线原则与工具设计"><span class="nav-number">7.</span> <span class="nav-text">第七章 部署流水线原则与工具设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1-简单的部署流水线"><span class="nav-number">7.1.</span> <span class="nav-text">7.1 简单的部署流水线</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#7-1-1-简单的产品研发流程"><span class="nav-number">7.1.1.</span> <span class="nav-text">7.1.1 简单的产品研发流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-1-2-初始部署流水线"><span class="nav-number">7.1.2.</span> <span class="nav-text">7.1.2 初始部署流水线</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-1-3-流水线执行状态解析"><span class="nav-number">7.1.3.</span> <span class="nav-text">7.1.3 流水线执行状态解析</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2-部署流水线的设计与使用"><span class="nav-number">7.2.</span> <span class="nav-text">7.2 部署流水线的设计与使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#7-1-2-流水线的设计原则"><span class="nav-number">7.2.1.</span> <span class="nav-text">7.1.2 流水线的设计原则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-2-2-团队的协作纪律"><span class="nav-number">7.2.2.</span> <span class="nav-text">7.2.2 团队的协作纪律</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-3-部署流水线平台的构成"><span class="nav-number">7.3.</span> <span class="nav-text">7.3 部署流水线平台的构成</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#7-3-1-工具链总体架构"><span class="nav-number">7.3.1.</span> <span class="nav-text">7.3.1 工具链总体架构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-3-2-平台应当具备的基础能力"><span class="nav-number">7.3.2.</span> <span class="nav-text">7.3.2 平台应当具备的基础能力</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-3-3-工具链建设策略"><span class="nav-number">7.3.3.</span> <span class="nav-text">7.3.3 工具链建设策略</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-4-基础支撑服务的云化"><span class="nav-number">7.4.</span> <span class="nav-text">7.4 基础支撑服务的云化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#7-4-1-基础支撑服务的协作过程解析"><span class="nav-number">7.4.1.</span> <span class="nav-text">7.4.1 基础支撑服务的协作过程解析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-4-2-编译构建管理服务"><span class="nav-number">7.4.2.</span> <span class="nav-text">7.4.2 编译构建管理服务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-4-3-自动化测试管理服务"><span class="nav-number">7.4.3.</span> <span class="nav-text">7.4.3 自动化测试管理服务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-4-4-软件部署管理服务"><span class="nav-number">7.4.4.</span> <span class="nav-text">7.4.4 软件部署管理服务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-4-5-基础环境管理服务"><span class="nav-number">7.4.5.</span> <span class="nav-text">7.4.5 基础环境管理服务</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-5-企业制品库的管理"><span class="nav-number">7.5.</span> <span class="nav-text">7.5 企业制品库的管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#7-5-1-制品库的分类"><span class="nav-number">7.5.1.</span> <span class="nav-text">7.5.1 制品库的分类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-5-2-制品库的管理原则"><span class="nav-number">7.5.2.</span> <span class="nav-text">7.5.2 制品库的管理原则</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-6-多种多样的部署流水线"><span class="nav-number">7.6.</span> <span class="nav-text">7.6 多种多样的部署流水线</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#7-6-1-多组件的部署流水线"><span class="nav-number">7.6.1.</span> <span class="nav-text">7.6.1 多组件的部署流水线</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-6-2-个人部署流水线"><span class="nav-number">7.6.2.</span> <span class="nav-text">7.6.2 个人部署流水线</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-6-3-部署流水线的不断演进"><span class="nav-number">7.6.3.</span> <span class="nav-text">7.6.3 部署流水线的不断演进</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-7-为开发者构建自助式工具"><span class="nav-number">7.7.</span> <span class="nav-text">7.7 为开发者构建自助式工具</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">idonkeyliu</span>
+</div>
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.2"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
