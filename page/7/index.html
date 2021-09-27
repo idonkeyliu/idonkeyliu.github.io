@@ -102,17 +102,16 @@
 <meta property="og:url" content="http://idonkeyliu.github.io/page/7/index.html">
 <meta property="og:site_name" content="idonkeyliu&#39;s Blog">
 <meta property="og:description" content="今天越安逸，明天越危险">
-<meta property="og:locale" content="zh-Hans">
+<meta property="og:locale">
+<meta property="article:author" content="idonkeyliu">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="idonkeyliu&#39;s Blog">
-<meta name="twitter:description" content="今天越安逸，明天越危险">
 
 
 
 <script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    root: '/',
+    root: '',
     scheme: 'Muse',
     sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
@@ -123,9 +122,9 @@
       author: '博主'
     },
     algolia: {
-      applicationID: '6F2WMLW1H9',
-      apiKey: '425ab9d811f8cec07d6103e168490a30',
-      indexName: 'prod_tang_tang',
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
@@ -181,7 +180,7 @@
 
 
 
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -338,10 +337,10 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://idonkeyliu.github.io/2018/07/19/mysql隔离级别学习/">
+    <link itemprop="mainEntityOfPage" href="http://idonkeyliu.github.io/2018/07/19/Mysql%E4%B9%90%E8%A7%82%E9%94%81%E4%B8%8E%E6%82%B2%E8%A7%82%E9%94%81/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="idonkeyliu">
+      <meta itemprop="name" content="">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="http://thirdwx.qlogo.cn/mmopen/vi_32/nqv8Jdn4oa4vIBamP2ZLQcGdg87gicx6PGlOkFGhs8QP6VlWYicj14hJsISSQO44rytt4fujXj4uNicEJUxRBlWzQ/0">
     </span>
@@ -357,7 +356,132 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/19/mysql隔离级别学习/" itemprop="url">Mysql隔离级别学习</a></h1>
+                <a class="post-title-link" href="/2018/07/19/Mysql%E4%B9%90%E8%A7%82%E9%94%81%E4%B8%8E%E6%82%B2%E8%A7%82%E9%94%81/" itemprop="url">Mysql乐观锁与悲观锁</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-19T11:16:27+08:00">
+                2018-07-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>我们在操作数据库的时候，可能会由于并发问题而引起的数据的不一致性（数据冲突）</p>
+<p>乐观锁<br>乐观锁不是数据库自带的，需要我们自己去实现。乐观锁是指操作数据库时(更新操作)，想法很乐观，认为这次的操作不会导致冲突，在操作数据时，并不进行任何其他的特殊处理（也就是不加锁），而在进行更新后，再去判断是否有冲突了。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/19/Mysql%E4%B9%90%E8%A7%82%E9%94%81%E4%B8%8E%E6%82%B2%E8%A7%82%E9%94%81/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://idonkeyliu.github.io/2018/07/19/mysql%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E5%AD%A6%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://thirdwx.qlogo.cn/mmopen/vi_32/nqv8Jdn4oa4vIBamP2ZLQcGdg87gicx6PGlOkFGhs8QP6VlWYicj14hJsISSQO44rytt4fujXj4uNicEJUxRBlWzQ/0">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="idonkeyliu's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/19/mysql%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E5%AD%A6%E4%B9%A0/" itemprop="url">Mysql隔离级别学习</a></h1>
         
 
         <div class="post-meta">
@@ -411,45 +535,10 @@
           <p>一、数据库事务隔离级别</p>
 <p>数据库事务的隔离级别有4个，由低到高依次为Read uncommitted 、Read committed 、Repeatable read 、Serializable ，这四个级别可以逐个解决脏读 、不可重复读 、幻读 这几类问题。</p>
 <p>√: 可能出现    ×: 不会出现</p>
-<table>
-<thead>
-<tr>
-<th>隔离级别</th>
-<th>脏读</th>
-<th>不可重复读</th>
-<th>幻读</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Read uncommitted</td>
-<td>√</td>
-<td>√</td>
-<td>√</td>
-</tr>
-<tr>
-<td>Read committed</td>
-<td>×</td>
-<td>√</td>
-<td>√</td>
-</tr>
-<tr>
-<td>Repeatable read</td>
-<td>×</td>
-<td>×</td>
-<td>√</td>
-</tr>
-<tr>
-<td>Serializable</td>
-<td>×</td>
-<td>×</td>
-<td>×</td>
-</tr>
-</tbody>
-</table>
+<p>|隔离级别|脏读|    不可重复读|    幻读|<br>|-|-|-|<br>|Read uncommitted    |√|    √    |√|<br>|Read committed    |×|    √    |√|<br>|Repeatable read|    ×    |×|√|<br>|Serializable|    ×    |×    |×|</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/07/19/mysql隔离级别学习/#more" rel="contents">
+            <a class="btn" href="/2018/07/19/mysql%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E5%AD%A6%E4%B9%A0/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -500,10 +589,10 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://idonkeyliu.github.io/2018/07/18/读QuestMobile中国移动互联网2018半年大报告有感/">
+    <link itemprop="mainEntityOfPage" href="http://idonkeyliu.github.io/2018/07/18/%E8%AF%BBQuestMobile%E4%B8%AD%E5%9B%BD%E7%A7%BB%E5%8A%A8%E4%BA%92%E8%81%94%E7%BD%912018%E5%8D%8A%E5%B9%B4%E5%A4%A7%E6%8A%A5%E5%91%8A%E6%9C%89%E6%84%9F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="idonkeyliu">
+      <meta itemprop="name" content="">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="http://thirdwx.qlogo.cn/mmopen/vi_32/nqv8Jdn4oa4vIBamP2ZLQcGdg87gicx6PGlOkFGhs8QP6VlWYicj14hJsISSQO44rytt4fujXj4uNicEJUxRBlWzQ/0">
     </span>
@@ -519,7 +608,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/18/读QuestMobile中国移动互联网2018半年大报告有感/" itemprop="url">读QuestMobile中国移动互联网2018半年大报告有感</a></h1>
+                <a class="post-title-link" href="/2018/07/18/%E8%AF%BBQuestMobile%E4%B8%AD%E5%9B%BD%E7%A7%BB%E5%8A%A8%E4%BA%92%E8%81%94%E7%BD%912018%E5%8D%8A%E5%B9%B4%E5%A4%A7%E6%8A%A5%E5%91%8A%E6%9C%89%E6%84%9F/" itemprop="url">读QuestMobile中国移动互联网2018半年大报告有感</a></h1>
         
 
         <div class="post-meta">
@@ -570,12 +659,13 @@
 
       
         
-          <img src="/2018/07/18/读QuestMobile中国移动互联网2018半年大报告有感/timg.jpeg" alt="timg.jpeg" title="">
+          <img src="/2018/07/18/%E8%AF%BBQuestMobile%E4%B8%AD%E5%9B%BD%E7%A7%BB%E5%8A%A8%E4%BA%92%E8%81%94%E7%BD%912018%E5%8D%8A%E5%B9%B4%E5%A4%A7%E6%8A%A5%E5%91%8A%E6%9C%89%E6%84%9F/timg.jpeg" class="">
+
 <ol>
-<li>强者愈强，弱者愈弱，马太效应明显，腾讯系、阿里系、百度系、头条系、新浪系占据了中国网民的绝大部分时间，后进者要么从垂直领域切入、要么改变自己的信息架构与技术架构才有一些机会。当然科技发展的同时也会产生一些蓝海区域，快速的把握时代发展就更加重要了。
+<li><p>强者愈强，弱者愈弱，马太效应明显，腾讯系、阿里系、百度系、头条系、新浪系占据了中国网民的绝大部分时间，后进者要么从垂直领域切入、要么改变自己的信息架构与技术架构才有一些机会。当然科技发展的同时也会产生一些蓝海区域，快速的把握时代发展就更加重要了。</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/07/18/读QuestMobile中国移动互联网2018半年大报告有感/#more" rel="contents">
+            <a class="btn" href="/2018/07/18/%E8%AF%BBQuestMobile%E4%B8%AD%E5%9B%BD%E7%A7%BB%E5%8A%A8%E4%BA%92%E8%81%94%E7%BD%912018%E5%8D%8A%E5%B9%B4%E5%A4%A7%E6%8A%A5%E5%91%8A%E6%9C%89%E6%84%9F/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -626,10 +716,10 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://idonkeyliu.github.io/2018/07/17/谈谈加入WePay的感受/">
+    <link itemprop="mainEntityOfPage" href="http://idonkeyliu.github.io/2018/07/17/%E8%B0%88%E8%B0%88%E5%8A%A0%E5%85%A5WePay%E7%9A%84%E6%84%9F%E5%8F%97/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="idonkeyliu">
+      <meta itemprop="name" content="">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="http://thirdwx.qlogo.cn/mmopen/vi_32/nqv8Jdn4oa4vIBamP2ZLQcGdg87gicx6PGlOkFGhs8QP6VlWYicj14hJsISSQO44rytt4fujXj4uNicEJUxRBlWzQ/0">
     </span>
@@ -645,7 +735,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/17/谈谈加入WePay的感受/" itemprop="url">谈谈加入WePay的感受</a></h1>
+                <a class="post-title-link" href="/2018/07/17/%E8%B0%88%E8%B0%88%E5%8A%A0%E5%85%A5WePay%E7%9A%84%E6%84%9F%E5%8F%97/" itemprop="url">谈谈加入WePay的感受</a></h1>
         
 
         <div class="post-meta">
@@ -696,10 +786,11 @@
 
       
         
-          <p>一眨眼两个月的时间就过去了，两个月来一直忙于接手业务、熟悉业务、熟悉代码，也没有时间进行总结与回顾，没有想到真正要回顾的时候就已经要离开了。<br><img src="/2018/07/17/谈谈加入WePay的感受/jrbb.jpeg" alt="jrbb.jpeg" title=""><br>
+          <p>一眨眼两个月的时间就过去了，两个月来一直忙于接手业务、熟悉业务、熟悉代码，也没有时间进行总结与回顾，没有想到真正要回顾的时候就已经要离开了。</p>
+<img src="/2018/07/17/%E8%B0%88%E8%B0%88%E5%8A%A0%E5%85%A5WePay%E7%9A%84%E6%84%9F%E5%8F%97/jrbb.jpeg" class="">
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/07/17/谈谈加入WePay的感受/#more" rel="contents">
+            <a class="btn" href="/2018/07/17/%E8%B0%88%E8%B0%88%E5%8A%A0%E5%85%A5WePay%E7%9A%84%E6%84%9F%E5%8F%97/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -750,10 +841,10 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://idonkeyliu.github.io/2018/06/06/日本旅行计划/">
+    <link itemprop="mainEntityOfPage" href="http://idonkeyliu.github.io/2018/06/06/%E6%97%A5%E6%9C%AC%E6%97%85%E8%A1%8C%E8%AE%A1%E5%88%92/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="idonkeyliu">
+      <meta itemprop="name" content="">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="http://thirdwx.qlogo.cn/mmopen/vi_32/nqv8Jdn4oa4vIBamP2ZLQcGdg87gicx6PGlOkFGhs8QP6VlWYicj14hJsISSQO44rytt4fujXj4uNicEJUxRBlWzQ/0">
     </span>
@@ -769,7 +860,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/06/06/日本旅行计划/" itemprop="url">日本旅行计划</a></h1>
+                <a class="post-title-link" href="/2018/06/06/%E6%97%A5%E6%9C%AC%E6%97%85%E8%A1%8C%E8%AE%A1%E5%88%92/" itemprop="url">日本旅行计划</a></h1>
         
 
         <div class="post-meta">
@@ -870,10 +961,10 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://idonkeyliu.github.io/2018/05/09/服务器优化的若干方法/">
+    <link itemprop="mainEntityOfPage" href="http://idonkeyliu.github.io/2018/05/09/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BC%98%E5%8C%96%E7%9A%84%E8%8B%A5%E5%B9%B2%E6%96%B9%E6%B3%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="idonkeyliu">
+      <meta itemprop="name" content="">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="http://thirdwx.qlogo.cn/mmopen/vi_32/nqv8Jdn4oa4vIBamP2ZLQcGdg87gicx6PGlOkFGhs8QP6VlWYicj14hJsISSQO44rytt4fujXj4uNicEJUxRBlWzQ/0">
     </span>
@@ -889,7 +980,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/05/09/服务器优化的若干方法/" itemprop="url">服务器优化的若干方法</a></h1>
+                <a class="post-title-link" href="/2018/05/09/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BC%98%E5%8C%96%E7%9A%84%E8%8B%A5%E5%B9%B2%E6%96%B9%E6%B3%95/" itemprop="url">服务器优化的若干方法</a></h1>
         
 
         <div class="post-meta">
@@ -941,7 +1032,7 @@
       
         
           
-            <a id="more"></a>
+            <span id="more"></span>
 
 
 	<div class="row">
@@ -998,10 +1089,10 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://idonkeyliu.github.io/2018/04/26/架构师技能图谱/">
+    <link itemprop="mainEntityOfPage" href="http://idonkeyliu.github.io/2018/04/26/%E6%9E%B6%E6%9E%84%E5%B8%88%E6%8A%80%E8%83%BD%E5%9B%BE%E8%B0%B1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="idonkeyliu">
+      <meta itemprop="name" content="">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="http://thirdwx.qlogo.cn/mmopen/vi_32/nqv8Jdn4oa4vIBamP2ZLQcGdg87gicx6PGlOkFGhs8QP6VlWYicj14hJsISSQO44rytt4fujXj4uNicEJUxRBlWzQ/0">
     </span>
@@ -1017,7 +1108,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/04/26/架构师技能图谱/" itemprop="url">架构师技能图谱</a></h1>
+                <a class="post-title-link" href="/2018/04/26/%E6%9E%B6%E6%9E%84%E5%B8%88%E6%8A%80%E8%83%BD%E5%9B%BE%E8%B0%B1/" itemprop="url">架构师技能图谱</a></h1>
         
 
         <div class="post-meta">
@@ -1069,7 +1160,8 @@
       
         
           
-            <img src="/2018/04/26/架构师技能图谱/jgtp.jpg" alt="jgtp.jpg" title="">
+            <img src="/2018/04/26/%E6%9E%B6%E6%9E%84%E5%B8%88%E6%8A%80%E8%83%BD%E5%9B%BE%E8%B0%B1/jgtp.jpg" class="">
+
 <h1 id="系统架构能力"><a href="#系统架构能力" class="headerlink" title="系统架构能力"></a>系统架构能力</h1><h2 id="1-基本理论"><a href="#1-基本理论" class="headerlink" title="1.基本理论"></a>1.基本理论</h2><h3 id="扩展性设计"><a href="#扩展性设计" class="headerlink" title="扩展性设计"></a>扩展性设计</h3><p>架构易于扩展是其非常重要的一个特性，好的架构需要有非常强的扩展能力，架构中的每个角色都需要有standby，好的架构可以满足业务飞速发展的需要，传说中QQ的架构好多年都没有大变，满足了用户从百万、千万、亿级的发展需要。我自己写的AcMid和reviewTask工程就是具备多机多进程的消费模型，通过队列进行生产者与消费者的解耦，也是可以无限添加机器与进程的架构。</p>
 <h3 id="可用性设计"><a href="#可用性设计" class="headerlink" title="可用性设计"></a>可用性设计</h3><p>好的架构都是非常注重可用性的，好的架构可以极大的提高系统的可用性。好的架构是一整套方案，所以可用性是非常高的。</p>
 <h3 id="可靠性设计"><a href="#可靠性设计" class="headerlink" title="可靠性设计"></a>可靠性设计</h3><p>用于定义组件或系统可靠性的一个度量标准是平均故障间隔时间 (MTBF)。MTBF 是平均间隔时间。好的架构需要易监控、会有全套的业务日志打出，这样整个系统会比较定位问题，而且容灾完全可以让架构更可靠。</p>
@@ -1130,10 +1222,10 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://idonkeyliu.github.io/2018/04/25/QCon-北京站-2018年4月与会记录/">
+    <link itemprop="mainEntityOfPage" href="http://idonkeyliu.github.io/2018/04/25/QCon-%E5%8C%97%E4%BA%AC%E7%AB%99-2018%E5%B9%B44%E6%9C%88%E4%B8%8E%E4%BC%9A%E8%AE%B0%E5%BD%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="idonkeyliu">
+      <meta itemprop="name" content="">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="http://thirdwx.qlogo.cn/mmopen/vi_32/nqv8Jdn4oa4vIBamP2ZLQcGdg87gicx6PGlOkFGhs8QP6VlWYicj14hJsISSQO44rytt4fujXj4uNicEJUxRBlWzQ/0">
     </span>
@@ -1149,7 +1241,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/04/25/QCon-北京站-2018年4月与会记录/" itemprop="url">QCon(北京站)2018年4月与会记录</a></h1>
+                <a class="post-title-link" href="/2018/04/25/QCon-%E5%8C%97%E4%BA%AC%E7%AB%99-2018%E5%B9%B44%E6%9C%88%E4%B8%8E%E4%BC%9A%E8%AE%B0%E5%BD%95/" itemprop="url">QCon(北京站)2018年4月与会记录</a></h1>
         
 
         <div class="post-meta">
@@ -1200,10 +1292,10 @@
 
       
         
-          <p>一直都有看InfoQ上面的各种技术文章，感觉InfoQ算是国内组织技术会议与传播技术做的比较好的了，所以其组织的各种大会一直以来都想去参加，但是限于门票比较贵与路费就没有动买票参会的念头。正好组织要在北京开UP大会，所以组内有几个名额可以去参加下QCon2018在北京站点的全球软件开发者大会，我运气好，获得了一张票。<br>
+          <p>一直都有看InfoQ上面的各种技术文章，感觉InfoQ算是国内组织技术会议与传播技术做的比较好的了，所以其组织的各种大会一直以来都想去参加，但是限于门票比较贵与路费就没有动买票参会的念头。正好组织要在北京开UP大会，所以组内有几个名额可以去参加下QCon2018在北京站点的全球软件开发者大会，我运气好，获得了一张票。</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/04/25/QCon-北京站-2018年4月与会记录/#more" rel="contents">
+            <a class="btn" href="/2018/04/25/QCon-%E5%8C%97%E4%BA%AC%E7%AB%99-2018%E5%B9%B44%E6%9C%88%E4%B8%8E%E4%BC%9A%E8%AE%B0%E5%BD%95/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1254,10 +1346,10 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://idonkeyliu.github.io/2018/04/17/服务器优化指南全集/">
+    <link itemprop="mainEntityOfPage" href="http://idonkeyliu.github.io/2018/04/17/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BC%98%E5%8C%96%E6%8C%87%E5%8D%97%E5%85%A8%E9%9B%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="idonkeyliu">
+      <meta itemprop="name" content="">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="http://thirdwx.qlogo.cn/mmopen/vi_32/nqv8Jdn4oa4vIBamP2ZLQcGdg87gicx6PGlOkFGhs8QP6VlWYicj14hJsISSQO44rytt4fujXj4uNicEJUxRBlWzQ/0">
     </span>
@@ -1273,7 +1365,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/04/17/服务器优化指南全集/" itemprop="url">服务器优化指南全集</a></h1>
+                <a class="post-title-link" href="/2018/04/17/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BC%98%E5%8C%96%E6%8C%87%E5%8D%97%E5%85%A8%E9%9B%86/" itemprop="url">服务器优化指南全集</a></h1>
         
 
         <div class="post-meta">
@@ -1325,10 +1417,10 @@
       
         
           <p>在我们的日常开发过程中，少不了需要提供服务给比人使用，可能是一个接口，也可能是一个服务。我们当然希望我们提供的服务具备低延迟、高并发的特点，那么从哪些地方可以优化我们的程序或者说是服务呢？<br>该部分分14个部分加以说明.</p>
-<img src="/2018/04/17/服务器优化指南全集/server_opt.png" alt="server_opt.png" title="">
+<img src="/2018/04/17/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BC%98%E5%8C%96%E6%8C%87%E5%8D%97%E5%85%A8%E9%9B%86/server_opt.png" class="">
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/04/17/服务器优化指南全集/#more" rel="contents">
+            <a class="btn" href="/2018/04/17/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BC%98%E5%8C%96%E6%8C%87%E5%8D%97%E5%85%A8%E9%9B%86/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1379,10 +1471,10 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://idonkeyliu.github.io/2018/04/16/谈谈A-B测试/">
+    <link itemprop="mainEntityOfPage" href="http://idonkeyliu.github.io/2018/04/16/%E8%B0%88%E8%B0%88A-B%E6%B5%8B%E8%AF%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="idonkeyliu">
+      <meta itemprop="name" content="">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="http://thirdwx.qlogo.cn/mmopen/vi_32/nqv8Jdn4oa4vIBamP2ZLQcGdg87gicx6PGlOkFGhs8QP6VlWYicj14hJsISSQO44rytt4fujXj4uNicEJUxRBlWzQ/0">
     </span>
@@ -1398,7 +1490,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/04/16/谈谈A-B测试/" itemprop="url">谈谈A/B测试</a></h1>
+                <a class="post-title-link" href="/2018/04/16/%E8%B0%88%E8%B0%88A-B%E6%B5%8B%E8%AF%95/" itemprop="url">谈谈A/B测试</a></h1>
         
 
         <div class="post-meta">
@@ -1500,139 +1592,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://idonkeyliu.github.io/2018/04/12/全链路压测系统/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="idonkeyliu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://thirdwx.qlogo.cn/mmopen/vi_32/nqv8Jdn4oa4vIBamP2ZLQcGdg87gicx6PGlOkFGhs8QP6VlWYicj14hJsISSQO44rytt4fujXj4uNicEJUxRBlWzQ/0">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="idonkeyliu's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/12/全链路压测系统/" itemprop="url">全链路压测系统</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-12T20:45:06+08:00">
-                2018-04-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p>背景：在日常开发的过程中，开发更多的关注在功能开发上，对于接口性能与服务能力关注较少，但是无论是对内还是对外提供接口与服务，都应该明白的给出服务能力界限的说明，而且需要对方给出调用量的评估，这样才能在一定程度上做到心中有数，从而维护系统的安全。压测系统不是一蹴而就的，据了解业内大公司的压测系统基本经过了几轮迭代，而且耗时基本需要3年。</p>
-</blockquote>
-<h3 id="1-思路"><a href="#1-思路" class="headerlink" title="1. 思路"></a>1. 思路</h3><p>压测系统的设计最后会走上类似阿里双十一、微信等全链路压测的道路，但是这两个系统都是花费了至少3年的时间打磨完成，所以我们也分四大步走：<br>1.提供压测的url、ip+port+协议栈 +参数，来进行简单的分布式压测，（<font color="red">预期完成时间2018年上半年</font>)<br>2.改造目前项目的上下游路由机制（目前使用的是L５，但是L５不具备准备的流量分配机制），使得能方便快速的切换流量到单台机器上，从而得出单台机器的负载上限。（<font color="red">预期完成时间2018年下半年</font>)<br>3.复制目前项目单日所有用户的流量，清洗后进行重放，来大规模的压测整个系统，目的是在大流量的压力下发现系统瓶颈与隐藏故障点。（<font color="red">预期完成时间2019年全年</font>)<br>4.压测常规化，定时的来进行流量压测，完成自动化压测系统的进化。（<font color="red">预期完成时间2020年上半年</font>)</p>
-<h3 id="2-同类型产品分析"><a href="#2-同类型产品分析" class="headerlink" title="2. 同类型产品分析"></a>2. 同类型产品分析</h3><h4 id="2-1-压测大师"><a href="#2-1-压测大师" class="headerlink" title="2.1 压测大师"></a>2.1 压测大师</h4><p>压测大师可以很方便的实现第一步，但是具备如下缺点：<br>1.被压测机器的负载不能很方便的展示出来，最关键的是需要在被压测机器上装个软件，路径较长<br>2.压测大师对每个Url的并发上限为200，虽然可以通过开启白名单的方式来提升，但是感觉还是不太方便。<br>3.最主要的一点是，压测大师是一个独立的系统，虽然能大概cover住我们的第一步，但是对于我们的长期目标来说并不能很好的满足。</p>
-<h3 id="3-压测架构图"><a href="#3-压测架构图" class="headerlink" title="3. 压测架构图"></a>3. 压测架构图</h3><img src="/2018/04/12/全链路压测系统/pressure.jpg" alt="pressure.jpg" title="">
-<p>模块介绍：<br>web controler: 显示与控制模块，显示压测的结果数据与agent的负载数据、agent的状态数据、dispatch模块的分发状态。<br>Manager：任务管理模块，通过从web controler获取任务配置，然后进行任务分配与启动停止。<br>Register: agent节点注册模块，可以获取agent的空闲繁忙状态，一般是分布式节点，推荐使用zk<br>dispatch: 文件分发模块，将提交的任务文件通过dispatch模块分发到各agent机器中。<br>agent: 真实的压测发起模块，从dispatch模块获取压测文件，从manager获取启停命令。<br>monitor: 监控统计模块，agent的负载信息上报至monitor模块。<br>MQ: agent获取压测结果，将其写入MQ<br>Collector: 收集器模块，将压测结果与agent的负载信息汇聚处理。<br>DB/DR：信息储存模块，存储web controler需要显示的各项数据。</p>
-<h3 id="4-设计要点"><a href="#4-设计要点" class="headerlink" title="4. 设计要点"></a>4. 设计要点</h3><p>1.能模拟线上流量（真实请求回放、自己模拟请求）<br>2.能区分模拟流量与真实流量<br>3.在线压测<br>4.物理隔离存储 正常存储+影子存储<br>5.能快速的进行流量路由，将单个模块的请求打满，直到错误率上升为止，因为具备重试的逻辑，所以问题不是很大。</p>
-<h3 id="4-参考文档"><a href="#4-参考文档" class="headerlink" title="4.参考文档"></a>4.参考文档</h3><p>有赞<br><a href="http://www.infoq.com/cn/articles/youzan-11-11-stress-testing" target="_blank" rel="external">http://www.infoq.com/cn/articles/youzan-11-11-stress-testing</a><br>云集<br><a href="https://github.com/yunjiweidian/TITAN" target="_blank" rel="external">https://github.com/yunjiweidian/TITAN</a><br>滴滴<br><a href="http://gitbook.cn/books/58edf24902c60a2473618fac/index.html" target="_blank" rel="external">http://gitbook.cn/books/58edf24902c60a2473618fac/index.html</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/6/">&lt;i class&#x3D;&quot;fa fa-angle-left&quot;&gt;&lt;&#x2F;i&gt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/8/">&lt;i class&#x3D;&quot;fa fa-angle-right&quot;&gt;&lt;&#x2F;i&gt;</a>
   </nav>
 
 
@@ -1667,10 +1631,10 @@
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://thirdwx.qlogo.cn/mmopen/vi_32/nqv8Jdn4oa4vIBamP2ZLQcGdg87gicx6PGlOkFGhs8QP6VlWYicj14hJsISSQO44rytt4fujXj4uNicEJUxRBlWzQ/0"
-               alt="idonkeyliu" />
-          <p class="site-author-name" itemprop="name">idonkeyliu</p>
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
            
-              <p class="site-description motion-element" itemprop="description">今天越安逸，明天越危险</p>
+              <p class="site-description motion-element" itemprop="description"></p>
           
         </div>
         <nav class="site-state motion-element">
@@ -1678,7 +1642,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">90</span>
+                <span class="site-state-item-count">91</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

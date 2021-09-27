@@ -99,23 +99,23 @@
 <meta name="description" content="背景：在日常开发的过程中，开发更多的关注在功能开发上，对于接口性能与服务能力关注较少，但是无论是对内还是对外提供接口与服务，都应该明白的给出服务能力界限的说明，而且需要对方给出调用量的评估，这样才能在一定程度上做到心中有数，从而维护系统的安全。压测系统不是一蹴而就的，据了解业内大公司的压测系统基本经过了几轮迭代，而且耗时基本需要3年。  1. 思路压测系统的设计最后会走上类似阿里双十一、微信等全">
 <meta property="og:type" content="article">
 <meta property="og:title" content="全链路压测系统">
-<meta property="og:url" content="http://idonkeyliu.github.io/2018/04/12/全链路压测系统/index.html">
+<meta property="og:url" content="http://idonkeyliu.github.io/2018/04/12/%E5%85%A8%E9%93%BE%E8%B7%AF%E5%8E%8B%E6%B5%8B%E7%B3%BB%E7%BB%9F/index.html">
 <meta property="og:site_name" content="idonkeyliu&#39;s Blog">
 <meta property="og:description" content="背景：在日常开发的过程中，开发更多的关注在功能开发上，对于接口性能与服务能力关注较少，但是无论是对内还是对外提供接口与服务，都应该明白的给出服务能力界限的说明，而且需要对方给出调用量的评估，这样才能在一定程度上做到心中有数，从而维护系统的安全。压测系统不是一蹴而就的，据了解业内大公司的压测系统基本经过了几轮迭代，而且耗时基本需要3年。  1. 思路压测系统的设计最后会走上类似阿里双十一、微信等全">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://idonkeyliu.github.io/2018/04/12/全链路压测系统/pressure.jpg">
-<meta property="og:updated_time" content="2018-04-12T13:46:41.801Z">
+<meta property="og:locale">
+<meta property="og:image" content="http://idonkeyliu.github.io/2018/04/12/%E5%85%A8%E9%93%BE%E8%B7%AF%E5%8E%8B%E6%B5%8B%E7%B3%BB%E7%BB%9F/pressure.jpg">
+<meta property="article:published_time" content="2018-04-12T12:45:06.000Z">
+<meta property="article:modified_time" content="2018-04-12T13:46:40.000Z">
+<meta property="article:author" content="idonkeyliu">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="全链路压测系统">
-<meta name="twitter:description" content="背景：在日常开发的过程中，开发更多的关注在功能开发上，对于接口性能与服务能力关注较少，但是无论是对内还是对外提供接口与服务，都应该明白的给出服务能力界限的说明，而且需要对方给出调用量的评估，这样才能在一定程度上做到心中有数，从而维护系统的安全。压测系统不是一蹴而就的，据了解业内大公司的压测系统基本经过了几轮迭代，而且耗时基本需要3年。  1. 思路压测系统的设计最后会走上类似阿里双十一、微信等全">
-<meta name="twitter:image" content="http://idonkeyliu.github.io/2018/04/12/全链路压测系统/pressure.jpg">
+<meta name="twitter:image" content="http://idonkeyliu.github.io/2018/04/12/%E5%85%A8%E9%93%BE%E8%B7%AF%E5%8E%8B%E6%B5%8B%E7%B3%BB%E7%BB%9F/pressure.jpg">
 
 
 
 <script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    root: '/',
+    root: '',
     scheme: 'Muse',
     sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
@@ -126,9 +126,9 @@
       author: '博主'
     },
     algolia: {
-      applicationID: '6F2WMLW1H9',
-      apiKey: '425ab9d811f8cec07d6103e168490a30',
-      indexName: 'prod_tang_tang',
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
@@ -184,7 +184,7 @@
 
 
 
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -339,10 +339,10 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://idonkeyliu.github.io/2018/04/12/全链路压测系统/">
+    <link itemprop="mainEntityOfPage" href="http://idonkeyliu.github.io/2018/04/12/%E5%85%A8%E9%93%BE%E8%B7%AF%E5%8E%8B%E6%B5%8B%E7%B3%BB%E7%BB%9F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="idonkeyliu">
+      <meta itemprop="name" content="">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="http://thirdwx.qlogo.cn/mmopen/vi_32/nqv8Jdn4oa4vIBamP2ZLQcGdg87gicx6PGlOkFGhs8QP6VlWYicj14hJsISSQO44rytt4fujXj4uNicEJUxRBlWzQ/0">
     </span>
@@ -414,12 +414,12 @@
         <blockquote>
 <p>背景：在日常开发的过程中，开发更多的关注在功能开发上，对于接口性能与服务能力关注较少，但是无论是对内还是对外提供接口与服务，都应该明白的给出服务能力界限的说明，而且需要对方给出调用量的评估，这样才能在一定程度上做到心中有数，从而维护系统的安全。压测系统不是一蹴而就的，据了解业内大公司的压测系统基本经过了几轮迭代，而且耗时基本需要3年。</p>
 </blockquote>
-<h3 id="1-思路"><a href="#1-思路" class="headerlink" title="1. 思路"></a>1. 思路</h3><p>压测系统的设计最后会走上类似阿里双十一、微信等全链路压测的道路，但是这两个系统都是花费了至少3年的时间打磨完成，所以我们也分四大步走：<br>1.提供压测的url、ip+port+协议栈 +参数，来进行简单的分布式压测，（<font color="red">预期完成时间2018年上半年</font>)<br>2.改造目前项目的上下游路由机制（目前使用的是L５，但是L５不具备准备的流量分配机制），使得能方便快速的切换流量到单台机器上，从而得出单台机器的负载上限。（<font color="red">预期完成时间2018年下半年</font>)<br>3.复制目前项目单日所有用户的流量，清洗后进行重放，来大规模的压测整个系统，目的是在大流量的压力下发现系统瓶颈与隐藏故障点。（<font color="red">预期完成时间2019年全年</font>)<br>4.压测常规化，定时的来进行流量压测，完成自动化压测系统的进化。（<font color="red">预期完成时间2020年上半年</font>)</p>
+<h3 id="1-思路"><a href="#1-思路" class="headerlink" title="1. 思路"></a>1. 思路</h3><p>压测系统的设计最后会走上类似阿里双十一、微信等全链路压测的道路，但是这两个系统都是花费了至少3年的时间打磨完成，所以我们也分四大步走：<br>1.提供压测的url、ip+port+协议栈 +参数，来进行简单的分布式压测，（<font color=red>预期完成时间2018年上半年</font>)<br>2.改造目前项目的上下游路由机制（目前使用的是L５，但是L５不具备准备的流量分配机制），使得能方便快速的切换流量到单台机器上，从而得出单台机器的负载上限。（<font color=red>预期完成时间2018年下半年</font>)<br>3.复制目前项目单日所有用户的流量，清洗后进行重放，来大规模的压测整个系统，目的是在大流量的压力下发现系统瓶颈与隐藏故障点。（<font color=red>预期完成时间2019年全年</font>)<br>4.压测常规化，定时的来进行流量压测，完成自动化压测系统的进化。（<font color=red>预期完成时间2020年上半年</font>)</p>
 <h3 id="2-同类型产品分析"><a href="#2-同类型产品分析" class="headerlink" title="2. 同类型产品分析"></a>2. 同类型产品分析</h3><h4 id="2-1-压测大师"><a href="#2-1-压测大师" class="headerlink" title="2.1 压测大师"></a>2.1 压测大师</h4><p>压测大师可以很方便的实现第一步，但是具备如下缺点：<br>1.被压测机器的负载不能很方便的展示出来，最关键的是需要在被压测机器上装个软件，路径较长<br>2.压测大师对每个Url的并发上限为200，虽然可以通过开启白名单的方式来提升，但是感觉还是不太方便。<br>3.最主要的一点是，压测大师是一个独立的系统，虽然能大概cover住我们的第一步，但是对于我们的长期目标来说并不能很好的满足。</p>
-<h3 id="3-压测架构图"><a href="#3-压测架构图" class="headerlink" title="3. 压测架构图"></a>3. 压测架构图</h3><img src="/2018/04/12/全链路压测系统/pressure.jpg" alt="pressure.jpg" title="">
+<h3 id="3-压测架构图"><a href="#3-压测架构图" class="headerlink" title="3. 压测架构图"></a>3. 压测架构图</h3><img src="/2018/04/12/%E5%85%A8%E9%93%BE%E8%B7%AF%E5%8E%8B%E6%B5%8B%E7%B3%BB%E7%BB%9F/pressure.jpg" class="">
 <p>模块介绍：<br>web controler: 显示与控制模块，显示压测的结果数据与agent的负载数据、agent的状态数据、dispatch模块的分发状态。<br>Manager：任务管理模块，通过从web controler获取任务配置，然后进行任务分配与启动停止。<br>Register: agent节点注册模块，可以获取agent的空闲繁忙状态，一般是分布式节点，推荐使用zk<br>dispatch: 文件分发模块，将提交的任务文件通过dispatch模块分发到各agent机器中。<br>agent: 真实的压测发起模块，从dispatch模块获取压测文件，从manager获取启停命令。<br>monitor: 监控统计模块，agent的负载信息上报至monitor模块。<br>MQ: agent获取压测结果，将其写入MQ<br>Collector: 收集器模块，将压测结果与agent的负载信息汇聚处理。<br>DB/DR：信息储存模块，存储web controler需要显示的各项数据。</p>
 <h3 id="4-设计要点"><a href="#4-设计要点" class="headerlink" title="4. 设计要点"></a>4. 设计要点</h3><p>1.能模拟线上流量（真实请求回放、自己模拟请求）<br>2.能区分模拟流量与真实流量<br>3.在线压测<br>4.物理隔离存储 正常存储+影子存储<br>5.能快速的进行流量路由，将单个模块的请求打满，直到错误率上升为止，因为具备重试的逻辑，所以问题不是很大。</p>
-<h3 id="4-参考文档"><a href="#4-参考文档" class="headerlink" title="4.参考文档"></a>4.参考文档</h3><p>有赞<br><a href="http://www.infoq.com/cn/articles/youzan-11-11-stress-testing" target="_blank" rel="external">http://www.infoq.com/cn/articles/youzan-11-11-stress-testing</a><br>云集<br><a href="https://github.com/yunjiweidian/TITAN" target="_blank" rel="external">https://github.com/yunjiweidian/TITAN</a><br>滴滴<br><a href="http://gitbook.cn/books/58edf24902c60a2473618fac/index.html" target="_blank" rel="external">http://gitbook.cn/books/58edf24902c60a2473618fac/index.html</a></p>
+<h3 id="4-参考文档"><a href="#4-参考文档" class="headerlink" title="4.参考文档"></a>4.参考文档</h3><p>有赞<br><a target="_blank" rel="noopener" href="http://www.infoq.com/cn/articles/youzan-11-11-stress-testing">http://www.infoq.com/cn/articles/youzan-11-11-stress-testing</a><br>云集<br><a target="_blank" rel="noopener" href="https://github.com/yunjiweidian/TITAN">https://github.com/yunjiweidian/TITAN</a><br>滴滴<br><a target="_blank" rel="noopener" href="http://gitbook.cn/books/58edf24902c60a2473618fac/index.html">http://gitbook.cn/books/58edf24902c60a2473618fac/index.html</a></p>
 
       
     </div>
@@ -440,14 +440,14 @@
 
     
       <div id="wechat" style="display: inline-block">
-        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="idonkeyliu WeChat Pay"/>
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt=" WeChat Pay"/>
         <p>WeChat Pay</p>
       </div>
     
 
     
       <div id="alipay" style="display: inline-block">
-        <img id="alipay_qr" src="/images/alipay.jpg" alt="idonkeyliu Alipay"/>
+        <img id="alipay_qr" src="/images/alipay.jpg" alt=" Alipay"/>
         <p>Alipay</p>
       </div>
     
@@ -473,7 +473,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/02/26/2018规划/" rel="next" title="2018规划">
+              <a href="/2018/02/26/2018%E8%A7%84%E5%88%92/" rel="next" title="2018规划">
                 <i class="fa fa-chevron-left"></i> 2018规划
               </a>
             
@@ -483,7 +483,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/04/16/谈谈A-B测试/" rel="prev" title="谈谈A/B测试">
+              <a href="/2018/04/16/%E8%B0%88%E8%B0%88A-B%E6%B5%8B%E8%AF%95/" rel="prev" title="谈谈A/B测试">
                 谈谈A/B测试 <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -553,10 +553,10 @@
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://thirdwx.qlogo.cn/mmopen/vi_32/nqv8Jdn4oa4vIBamP2ZLQcGdg87gicx6PGlOkFGhs8QP6VlWYicj14hJsISSQO44rytt4fujXj4uNicEJUxRBlWzQ/0"
-               alt="idonkeyliu" />
-          <p class="site-author-name" itemprop="name">idonkeyliu</p>
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
            
-              <p class="site-description motion-element" itemprop="description">今天越安逸，明天越危险</p>
+              <p class="site-description motion-element" itemprop="description"></p>
           
         </div>
         <nav class="site-state motion-element">
@@ -564,7 +564,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">90</span>
+                <span class="site-state-item-count">91</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -652,7 +652,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-思路"><span class="nav-number">1.</span> <span class="nav-text">1. 思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-同类型产品分析"><span class="nav-number">2.</span> <span class="nav-text">2. 同类型产品分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-压测大师"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 压测大师</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-压测架构图"><span class="nav-number">3.</span> <span class="nav-text">3. 压测架构图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-设计要点"><span class="nav-number">4.</span> <span class="nav-text">4. 设计要点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-参考文档"><span class="nav-number">5.</span> <span class="nav-text">4.参考文档</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%80%9D%E8%B7%AF"><span class="nav-number">1.</span> <span class="nav-text">1. 思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%90%8C%E7%B1%BB%E5%9E%8B%E4%BA%A7%E5%93%81%E5%88%86%E6%9E%90"><span class="nav-number">2.</span> <span class="nav-text">2. 同类型产品分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-%E5%8E%8B%E6%B5%8B%E5%A4%A7%E5%B8%88"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 压测大师</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%8E%8B%E6%B5%8B%E6%9E%B6%E6%9E%84%E5%9B%BE"><span class="nav-number">3.</span> <span class="nav-text">3. 压测架构图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E8%AE%BE%E8%AE%A1%E8%A6%81%E7%82%B9"><span class="nav-number">4.</span> <span class="nav-text">4. 设计要点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3"><span class="nav-number">5.</span> <span class="nav-text">4.参考文档</span></a></li></ol></div>
             
 
           </div>

@@ -96,27 +96,27 @@
 
 
 
-<meta name="description" content="HTTP/2HTTP/2是HTTP/1.1之后的HTTP传输标准，是下一代的HTTP协议。其优势有：  采用二进制格式传输数据，而HTTP/1.1是采用文本协议传输数据，所以在解析上更有优势 对消息头采用HPACK进行压缩传输，能够节省协议头所占的网络流量 多路复用，同一域名下的请求可以通过一个TCP连接并发完成，效率极大提高 Server Push,服务器能够将资源传输给客户端">
-<meta name="keywords" content="每日一概念">
+<meta name="description" content="HTTP&#x2F;2HTTP&#x2F;2是HTTP&#x2F;1.1之后的HTTP传输标准，是下一代的HTTP协议。其优势有：  采用二进制格式传输数据，而HTTP&#x2F;1.1是采用文本协议传输数据，所以在解析上更有优势 对消息头采用HPACK进行压缩传输，能够节省协议头所占的网络流量 多路复用，同一域名下的请求可以通过一个TCP连接并发完成，效率极大提高 Server Push,服务器能够将资源传输给客户端">
 <meta property="og:type" content="article">
 <meta property="og:title" content="每日一概念-HTTP&#x2F;2&#x2F;2019-06-27">
-<meta property="og:url" content="http://idonkeyliu.github.io/2019/06/27/每日一概念-HTTP-2-2019-06-27/index.html">
+<meta property="og:url" content="http://idonkeyliu.github.io/2019/06/27/%E6%AF%8F%E6%97%A5%E4%B8%80%E6%A6%82%E5%BF%B5-HTTP-2-2019-06-27/index.html">
 <meta property="og:site_name" content="idonkeyliu&#39;s Blog">
-<meta property="og:description" content="HTTP/2HTTP/2是HTTP/1.1之后的HTTP传输标准，是下一代的HTTP协议。其优势有：  采用二进制格式传输数据，而HTTP/1.1是采用文本协议传输数据，所以在解析上更有优势 对消息头采用HPACK进行压缩传输，能够节省协议头所占的网络流量 多路复用，同一域名下的请求可以通过一个TCP连接并发完成，效率极大提高 Server Push,服务器能够将资源传输给客户端">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://idonkeyliu.github.io/2019/06/27/每日一概念-HTTP-2-2019-06-27/http2.gif">
-<meta property="og:updated_time" content="2019-06-27T15:19:38.386Z">
+<meta property="og:description" content="HTTP&#x2F;2HTTP&#x2F;2是HTTP&#x2F;1.1之后的HTTP传输标准，是下一代的HTTP协议。其优势有：  采用二进制格式传输数据，而HTTP&#x2F;1.1是采用文本协议传输数据，所以在解析上更有优势 对消息头采用HPACK进行压缩传输，能够节省协议头所占的网络流量 多路复用，同一域名下的请求可以通过一个TCP连接并发完成，效率极大提高 Server Push,服务器能够将资源传输给客户端">
+<meta property="og:locale">
+<meta property="og:image" content="http://idonkeyliu.github.io/2019/06/27/%E6%AF%8F%E6%97%A5%E4%B8%80%E6%A6%82%E5%BF%B5-HTTP-2-2019-06-27/http2.gif">
+<meta property="article:published_time" content="2019-06-27T15:10:35.000Z">
+<meta property="article:modified_time" content="2019-06-27T15:19:38.000Z">
+<meta property="article:author" content="idonkeyliu">
+<meta property="article:tag" content="每日一概念">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="每日一概念-HTTP&#x2F;2&#x2F;2019-06-27">
-<meta name="twitter:description" content="HTTP/2HTTP/2是HTTP/1.1之后的HTTP传输标准，是下一代的HTTP协议。其优势有：  采用二进制格式传输数据，而HTTP/1.1是采用文本协议传输数据，所以在解析上更有优势 对消息头采用HPACK进行压缩传输，能够节省协议头所占的网络流量 多路复用，同一域名下的请求可以通过一个TCP连接并发完成，效率极大提高 Server Push,服务器能够将资源传输给客户端">
-<meta name="twitter:image" content="http://idonkeyliu.github.io/2019/06/27/每日一概念-HTTP-2-2019-06-27/http2.gif">
+<meta name="twitter:image" content="http://idonkeyliu.github.io/2019/06/27/%E6%AF%8F%E6%97%A5%E4%B8%80%E6%A6%82%E5%BF%B5-HTTP-2-2019-06-27/http2.gif">
 
 
 
 <script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    root: '/',
+    root: '',
     scheme: 'Muse',
     sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
@@ -127,9 +127,9 @@
       author: '博主'
     },
     algolia: {
-      applicationID: '6F2WMLW1H9',
-      apiKey: '425ab9d811f8cec07d6103e168490a30',
-      indexName: 'prod_tang_tang',
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
@@ -185,7 +185,7 @@
 
 
 
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -340,10 +340,10 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://idonkeyliu.github.io/2019/06/27/每日一概念-HTTP-2-2019-06-27/">
+    <link itemprop="mainEntityOfPage" href="http://idonkeyliu.github.io/2019/06/27/%E6%AF%8F%E6%97%A5%E4%B8%80%E6%A6%82%E5%BF%B5-HTTP-2-2019-06-27/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="idonkeyliu">
+      <meta itemprop="name" content="">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="http://thirdwx.qlogo.cn/mmopen/vi_32/nqv8Jdn4oa4vIBamP2ZLQcGdg87gicx6PGlOkFGhs8QP6VlWYicj14hJsISSQO44rytt4fujXj4uNicEJUxRBlWzQ/0">
     </span>
@@ -419,7 +419,7 @@
 <li>多路复用，同一域名下的请求可以通过一个TCP连接并发完成，效率极大提高</li>
 <li>Server Push,服务器能够将资源传输给客户端</li>
 </ol>
-<img src="/2019/06/27/每日一概念-HTTP-2-2019-06-27/http2.gif" alt="http2.gif" title="">
+<img src="/2019/06/27/%E6%AF%8F%E6%97%A5%E4%B8%80%E6%A6%82%E5%BF%B5-HTTP-2-2019-06-27/http2.gif" class="">
 
       
     </div>
@@ -440,14 +440,14 @@
 
     
       <div id="wechat" style="display: inline-block">
-        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="idonkeyliu WeChat Pay"/>
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt=" WeChat Pay"/>
         <p>WeChat Pay</p>
       </div>
     
 
     
       <div id="alipay" style="display: inline-block">
-        <img id="alipay_qr" src="/images/alipay.jpg" alt="idonkeyliu Alipay"/>
+        <img id="alipay_qr" src="/images/alipay.jpg" alt=" Alipay"/>
         <p>Alipay</p>
       </div>
     
@@ -466,7 +466,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/每日一概念/" rel="tag"><i class="fa fa-tag"></i> 每日一概念</a>
+            <a href="/tags/%E6%AF%8F%E6%97%A5%E4%B8%80%E6%A6%82%E5%BF%B5/" rel="tag"><i class="fa fa-tag"></i> 每日一概念</a>
           
         </div>
       
@@ -479,7 +479,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/06/26/每日一概念-熵与反熵-2019-06-26/" rel="next" title="每日一概念-熵与反熵/2019-06-26">
+              <a href="/2019/06/26/%E6%AF%8F%E6%97%A5%E4%B8%80%E6%A6%82%E5%BF%B5-%E7%86%B5%E4%B8%8E%E5%8F%8D%E7%86%B5-2019-06-26/" rel="next" title="每日一概念-熵与反熵/2019-06-26">
                 <i class="fa fa-chevron-left"></i> 每日一概念-熵与反熵/2019-06-26
               </a>
             
@@ -489,7 +489,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/07/02/每日一概念-WebAuthn-2019-06-28/" rel="prev" title="每日一概念-WebAuthn/2019-06-28">
+              <a href="/2019/07/02/%E6%AF%8F%E6%97%A5%E4%B8%80%E6%A6%82%E5%BF%B5-WebAuthn-2019-06-28/" rel="prev" title="每日一概念-WebAuthn/2019-06-28">
                 每日一概念-WebAuthn/2019-06-28 <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -559,10 +559,10 @@
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://thirdwx.qlogo.cn/mmopen/vi_32/nqv8Jdn4oa4vIBamP2ZLQcGdg87gicx6PGlOkFGhs8QP6VlWYicj14hJsISSQO44rytt4fujXj4uNicEJUxRBlWzQ/0"
-               alt="idonkeyliu" />
-          <p class="site-author-name" itemprop="name">idonkeyliu</p>
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
            
-              <p class="site-description motion-element" itemprop="description">今天越安逸，明天越危险</p>
+              <p class="site-description motion-element" itemprop="description"></p>
           
         </div>
         <nav class="site-state motion-element">
@@ -570,7 +570,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">90</span>
+                <span class="site-state-item-count">91</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -658,7 +658,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP-2"><span class="nav-number">1.</span> <span class="nav-text">HTTP/2</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP-2"><span class="nav-number">1.</span> <span class="nav-text">HTTP&#x2F;2</span></a></li></ol></div>
             
 
           </div>

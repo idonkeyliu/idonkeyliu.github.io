@@ -97,24 +97,24 @@
 
 
 <meta name="description" content="1. 思虑周全，版本迭代从V0.1，V0.5到V1.0，每个版本都会进一步优化，挨个扫清风险点。所以一个好的系统不是一蹴而就的，而是不断的迭代打磨而来，虽然摇一摇系统的生命周期可能只有春节的短短几天。但是一般大型系统会提前几个月进行，这期间一般会不断的测试、压测，所以会让使用场景提前出现。就像阿里中间件博客里面提到的，应对流量风险的最好方法就是让其提前出现，然后找到应对办法，这样才能做到流量来时成">
-<meta name="keywords" content="架构设计">
 <meta property="og:type" content="article">
 <meta property="og:title" content="读微信摇一摇有感">
-<meta property="og:url" content="http://idonkeyliu.github.io/2017/10/09/读微信摇一摇有感/index.html">
+<meta property="og:url" content="http://idonkeyliu.github.io/2017/10/09/%E8%AF%BB%E5%BE%AE%E4%BF%A1%E6%91%87%E4%B8%80%E6%91%87%E6%9C%89%E6%84%9F/index.html">
 <meta property="og:site_name" content="idonkeyliu&#39;s Blog">
 <meta property="og:description" content="1. 思虑周全，版本迭代从V0.1，V0.5到V1.0，每个版本都会进一步优化，挨个扫清风险点。所以一个好的系统不是一蹴而就的，而是不断的迭代打磨而来，虽然摇一摇系统的生命周期可能只有春节的短短几天。但是一般大型系统会提前几个月进行，这期间一般会不断的测试、压测，所以会让使用场景提前出现。就像阿里中间件博客里面提到的，应对流量风险的最好方法就是让其提前出现，然后找到应对办法，这样才能做到流量来时成">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-10-09T14:06:32.000Z">
+<meta property="og:locale">
+<meta property="article:published_time" content="2017-10-09T12:09:28.000Z">
+<meta property="article:modified_time" content="2017-10-09T14:06:32.000Z">
+<meta property="article:author" content="idonkeyliu">
+<meta property="article:tag" content="架构设计">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="读微信摇一摇有感">
-<meta name="twitter:description" content="1. 思虑周全，版本迭代从V0.1，V0.5到V1.0，每个版本都会进一步优化，挨个扫清风险点。所以一个好的系统不是一蹴而就的，而是不断的迭代打磨而来，虽然摇一摇系统的生命周期可能只有春节的短短几天。但是一般大型系统会提前几个月进行，这期间一般会不断的测试、压测，所以会让使用场景提前出现。就像阿里中间件博客里面提到的，应对流量风险的最好方法就是让其提前出现，然后找到应对办法，这样才能做到流量来时成">
 
 
 
 <script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    root: '/',
+    root: '',
     scheme: 'Muse',
     sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
@@ -125,9 +125,9 @@
       author: '博主'
     },
     algolia: {
-      applicationID: '6F2WMLW1H9',
-      apiKey: '425ab9d811f8cec07d6103e168490a30',
-      indexName: 'prod_tang_tang',
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
@@ -183,7 +183,7 @@
 
 
 
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -338,10 +338,10 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://idonkeyliu.github.io/2017/10/09/读微信摇一摇有感/">
+    <link itemprop="mainEntityOfPage" href="http://idonkeyliu.github.io/2017/10/09/%E8%AF%BB%E5%BE%AE%E4%BF%A1%E6%91%87%E4%B8%80%E6%91%87%E6%9C%89%E6%84%9F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="idonkeyliu">
+      <meta itemprop="name" content="">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="http://thirdwx.qlogo.cn/mmopen/vi_32/nqv8Jdn4oa4vIBamP2ZLQcGdg87gicx6PGlOkFGhs8QP6VlWYicj14hJsISSQO44rytt4fujXj4uNicEJUxRBlWzQ/0">
     </span>
@@ -390,7 +390,7 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/架构/" itemprop="url" rel="index">
+                  <a href="/categories/%E6%9E%B6%E6%9E%84/" itemprop="url" rel="index">
                     <span itemprop="name">架构</span>
                   </a>
                 </span>
@@ -432,7 +432,8 @@
       
 
       
-        <h3 id="1-思虑周全，版本迭代"><a href="#1-思虑周全，版本迭代" class="headerlink" title="1. 思虑周全，版本迭代"></a>1. 思虑周全，版本迭代</h3><p>从V0.1，V0.5到V1.0，每个版本都会进一步优化，挨个扫清风险点。所以一个好的系统不是一蹴而就的，而是不断的迭代打磨而来，虽然摇一摇系统的生命周期可能只有春节的短短几天。但是一般大型系统会提前几个月进行，这期间一般会不断的测试、压测，所以会让使用场景提前出现。就像阿里中间件博客里面提到的，应对流量风险的最好方法就是让其提前出现，然后找到应对办法，这样才能做到流量来时成竹于胸。<br><a id="more"></a></p>
+        <h3 id="1-思虑周全，版本迭代"><a href="#1-思虑周全，版本迭代" class="headerlink" title="1. 思虑周全，版本迭代"></a>1. 思虑周全，版本迭代</h3><p>从V0.1，V0.5到V1.0，每个版本都会进一步优化，挨个扫清风险点。所以一个好的系统不是一蹴而就的，而是不断的迭代打磨而来，虽然摇一摇系统的生命周期可能只有春节的短短几天。但是一般大型系统会提前几个月进行，这期间一般会不断的测试、压测，所以会让使用场景提前出现。就像阿里中间件博客里面提到的，应对流量风险的最好方法就是让其提前出现，然后找到应对办法，这样才能做到流量来时成竹于胸。</p>
+<span id="more"></span>
 <h3 id="2-多点结合"><a href="#2-多点结合" class="headerlink" title="2. 多点结合"></a>2. 多点结合</h3><p>一个大型系统不仅仅考验的是服务器端的架构设计能力，有时候一些逻辑可以放在其余的点。比如终端与cdn节点。终端会进行资格的判定、资源的预加载，CDN会进行资源的存取。另外出现并发与流量压力的时候，客户端可以给出安民告示来提醒用户稍后再试。放下手机多和朋友聊聊天，多陪陪家人都是绝佳的文案。</p>
 <h3 id="3-压测"><a href="#3-压测" class="headerlink" title="3. 压测"></a>3. 压测</h3><p>这一点是所有的大型系统都绕不过去的点。无论是阿里的双十一还是微信的春节红包项目。只有不断的进行压测才能明白系统的极限在哪里，从而可以比较从容的应对巨大的流量。压测并不是小打小闹地搞几个测试脚本就能行，而是另外一个比较大型的系统，光这个系统就需要一个团队专注的做个一到两年，而测试使用的机器可能需要几百台。</p>
 <h3 id="4-异步"><a href="#4-异步" class="headerlink" title="4. 异步"></a>4. 异步</h3><p>异步是所有大型系统必须使用的利器，其天然的解耦特性符合计算机的大道。</p>
@@ -462,14 +463,14 @@
 
     
       <div id="wechat" style="display: inline-block">
-        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="idonkeyliu WeChat Pay"/>
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt=" WeChat Pay"/>
         <p>WeChat Pay</p>
       </div>
     
 
     
       <div id="alipay" style="display: inline-block">
-        <img id="alipay_qr" src="/images/alipay.jpg" alt="idonkeyliu Alipay"/>
+        <img id="alipay_qr" src="/images/alipay.jpg" alt=" Alipay"/>
         <p>Alipay</p>
       </div>
     
@@ -488,7 +489,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/架构设计/" rel="tag"><i class="fa fa-tag"></i> 架构设计</a>
+            <a href="/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" rel="tag"><i class="fa fa-tag"></i> 架构设计</a>
           
         </div>
       
@@ -501,7 +502,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/10/02/服务器优化指南之二（软件升级）/" rel="next" title="服务器优化指南之二（软件升级）">
+              <a href="/2017/10/02/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BC%98%E5%8C%96%E6%8C%87%E5%8D%97%E4%B9%8B%E4%BA%8C%EF%BC%88%E8%BD%AF%E4%BB%B6%E5%8D%87%E7%BA%A7%EF%BC%89/" rel="next" title="服务器优化指南之二（软件升级）">
                 <i class="fa fa-chevron-left"></i> 服务器优化指南之二（软件升级）
               </a>
             
@@ -511,7 +512,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/10/10/浅谈架构/" rel="prev" title="浅谈架构">
+              <a href="/2017/10/10/%E6%B5%85%E8%B0%88%E6%9E%B6%E6%9E%84/" rel="prev" title="浅谈架构">
                 浅谈架构 <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -581,10 +582,10 @@
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://thirdwx.qlogo.cn/mmopen/vi_32/nqv8Jdn4oa4vIBamP2ZLQcGdg87gicx6PGlOkFGhs8QP6VlWYicj14hJsISSQO44rytt4fujXj4uNicEJUxRBlWzQ/0"
-               alt="idonkeyliu" />
-          <p class="site-author-name" itemprop="name">idonkeyliu</p>
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
            
-              <p class="site-description motion-element" itemprop="description">今天越安逸，明天越危险</p>
+              <p class="site-description motion-element" itemprop="description"></p>
           
         </div>
         <nav class="site-state motion-element">
@@ -592,7 +593,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">90</span>
+                <span class="site-state-item-count">91</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -680,7 +681,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-思虑周全，版本迭代"><span class="nav-number">1.</span> <span class="nav-text">1. 思虑周全，版本迭代</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-多点结合"><span class="nav-number">2.</span> <span class="nav-text">2. 多点结合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-压测"><span class="nav-number">3.</span> <span class="nav-text">3. 压测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-异步"><span class="nav-number">4.</span> <span class="nav-text">4. 异步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-逻辑前置"><span class="nav-number">5.</span> <span class="nav-text">5. 逻辑前置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-外网接入"><span class="nav-number">6.</span> <span class="nav-text">6. 外网接入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-全面的监控"><span class="nav-number">7.</span> <span class="nav-text">7. 全面的监控</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-防刷"><span class="nav-number">8.</span> <span class="nav-text">8. 防刷</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-不断的复盘，不断的CR"><span class="nav-number">9.</span> <span class="nav-text">9.不断的复盘，不断的CR</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-争取预热机会"><span class="nav-number">10.</span> <span class="nav-text">10. 争取预热机会</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%80%9D%E8%99%91%E5%91%A8%E5%85%A8%EF%BC%8C%E7%89%88%E6%9C%AC%E8%BF%AD%E4%BB%A3"><span class="nav-number">1.</span> <span class="nav-text">1. 思虑周全，版本迭代</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%A4%9A%E7%82%B9%E7%BB%93%E5%90%88"><span class="nav-number">2.</span> <span class="nav-text">2. 多点结合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%8E%8B%E6%B5%8B"><span class="nav-number">3.</span> <span class="nav-text">3. 压测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%BC%82%E6%AD%A5"><span class="nav-number">4.</span> <span class="nav-text">4. 异步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E9%80%BB%E8%BE%91%E5%89%8D%E7%BD%AE"><span class="nav-number">5.</span> <span class="nav-text">5. 逻辑前置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E5%A4%96%E7%BD%91%E6%8E%A5%E5%85%A5"><span class="nav-number">6.</span> <span class="nav-text">6. 外网接入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-%E5%85%A8%E9%9D%A2%E7%9A%84%E7%9B%91%E6%8E%A7"><span class="nav-number">7.</span> <span class="nav-text">7. 全面的监控</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-%E9%98%B2%E5%88%B7"><span class="nav-number">8.</span> <span class="nav-text">8. 防刷</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-%E4%B8%8D%E6%96%AD%E7%9A%84%E5%A4%8D%E7%9B%98%EF%BC%8C%E4%B8%8D%E6%96%AD%E7%9A%84CR"><span class="nav-number">9.</span> <span class="nav-text">9.不断的复盘，不断的CR</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-%E4%BA%89%E5%8F%96%E9%A2%84%E7%83%AD%E6%9C%BA%E4%BC%9A"><span class="nav-number">10.</span> <span class="nav-text">10. 争取预热机会</span></a></li></ol></div>
             
 
           </div>
