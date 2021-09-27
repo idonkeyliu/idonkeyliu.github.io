@@ -96,12 +96,12 @@
 
 
 
-<meta name="description" content="当后端的服务并发满足不了需要的时候，进行软件升级也是一个性价比很高的方法。  下面写一个简单的测试程序bench.php12345678910for($i &#x3D;0; $i &lt; 10000000; $i++)&amp;#123;    $info &#x3D; array(        &#39;name&#39; &#x3D;&gt;&#39;Tom&#39;,        &#39;rank&#39; &#x3D;&gt; 1    );    $infoEncode">
+<meta name="description" content="当后端的服务并发满足不了需要的时候，进行软件升级也是一个性价比很高的方法。  下面写一个简单的测试程序bench.php 12345678910for($i &#x3D;0; $i &lt; 10000000; $i++)&amp;#123;    $info &#x3D; array(        &amp;#x27;name&amp;#x27; &#x3D;&gt;&amp;#x27;Tom&amp;#x27;,        &amp;#x27;rank&amp;#x27">
 <meta property="og:type" content="article">
 <meta property="og:title" content="服务器优化指南之二（软件升级）">
 <meta property="og:url" content="http://idonkeyliu.github.io/2017/10/02/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BC%98%E5%8C%96%E6%8C%87%E5%8D%97%E4%B9%8B%E4%BA%8C%EF%BC%88%E8%BD%AF%E4%BB%B6%E5%8D%87%E7%BA%A7%EF%BC%89/index.html">
 <meta property="og:site_name" content="idonkeyliu&#39;s Blog">
-<meta property="og:description" content="当后端的服务并发满足不了需要的时候，进行软件升级也是一个性价比很高的方法。  下面写一个简单的测试程序bench.php12345678910for($i &#x3D;0; $i &lt; 10000000; $i++)&amp;#123;    $info &#x3D; array(        &#39;name&#39; &#x3D;&gt;&#39;Tom&#39;,        &#39;rank&#39; &#x3D;&gt; 1    );    $infoEncode">
+<meta property="og:description" content="当后端的服务并发满足不了需要的时候，进行软件升级也是一个性价比很高的方法。  下面写一个简单的测试程序bench.php 12345678910for($i &#x3D;0; $i &lt; 10000000; $i++)&amp;#123;    $info &#x3D; array(        &amp;#x27;name&amp;#x27; &#x3D;&gt;&amp;#x27;Tom&amp;#x27;,        &amp;#x27;rank&amp;#x27">
 <meta property="og:locale">
 <meta property="article:published_time" content="2017-10-02T03:43:22.000Z">
 <meta property="article:modified_time" content="2017-10-10T04:01:22.000Z">
@@ -435,8 +435,11 @@
         <blockquote>
 <p>当后端的服务并发满足不了需要的时候，进行软件升级也是一个性价比很高的方法。</p>
 </blockquote>
-<p>下面写一个简单的测试程序bench.php<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span>($i =<span class="number">0</span>; $i &lt; <span class="number">10000000</span>; $i++)</div><div class="line">&#123;</div><div class="line">    $info = <span class="keyword">array</span>(</div><div class="line">        <span class="string">'name'</span> =&gt;<span class="string">'Tom'</span>,</div><div class="line">        <span class="string">'rank'</span> =&gt; <span class="number">1</span></div><div class="line">    );</div><div class="line"></div><div class="line">    $infoEncode = json_encode($info);</div><div class="line">    $infoDecode = json_decode($infoEncode, <span class="keyword">true</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>在机器A上面看php的版本号码<br><a id="more"></a><br>PHP 5.6.21 (cli) (built: Aug 18 2016 16:16:25)<br>Copyright (c) 1997-2016 The PHP Group<br>Zend Engine v2.6.0, Copyright (c) 1998-2016 Zend Technologies<br>    with Zend OPcache v7.0.6-dev, Copyright (c) 1999-2016, by Zend Technologies<br>在机器A上面运行bench.php，并且用time工具查看耗时</p>
+<p>下面写一个简单的测试程序bench.php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="variable">$i</span> =<span class="number">0</span>; <span class="variable">$i</span> &lt; <span class="number">10000000</span>; <span class="variable">$i</span>++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="variable">$info</span> = <span class="keyword">array</span>(</span><br><span class="line">        <span class="string">&#x27;name&#x27;</span> =&gt;<span class="string">&#x27;Tom&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;rank&#x27;</span> =&gt; <span class="number">1</span></span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    <span class="variable">$infoEncode</span> = json_encode(<span class="variable">$info</span>);</span><br><span class="line">    <span class="variable">$infoDecode</span> = json_decode(<span class="variable">$infoEncode</span>, <span class="literal">true</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在机器A上面看php的版本号码</p>
+<span id="more"></span>
+<p>PHP 5.6.21 (cli) (built: Aug 18 2016 16:16:25)<br>Copyright (c) 1997-2016 The PHP Group<br>Zend Engine v2.6.0, Copyright (c) 1998-2016 Zend Technologies<br>    with Zend OPcache v7.0.6-dev, Copyright (c) 1999-2016, by Zend Technologies<br>在机器A上面运行bench.php，并且用time工具查看耗时</p>
 <p>[<strong>@</strong> /<strong>/</strong>]# time php bench.php</p>
 <p>real    0m32.086s<br>user    0m32.084s<br>sys     0m0.004s<br>然后将机器A的php版本升级到php7</p>
 <p>PHP 7.0.7 (cli) (built: Aug 18 2016 20:08:32) ( NTS )<br>Copyright (c) 1997-2016 The PHP Group<br>Zend Engine v3.0.0, Copyright (c) 1998-2016 Zend Technologies<br>    with Zend OPcache v7.0.6-dev, Copyright (c) 1999-2016, by Zend Technologies<br>再次执行bench.php，并且用time工具查看耗时</p>

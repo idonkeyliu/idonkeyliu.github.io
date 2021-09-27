@@ -435,7 +435,8 @@
         <h3 id="1-禁止嵌套循环"><a href="#1-禁止嵌套循环" class="headerlink" title="1. 禁止嵌套循环"></a>1. 禁止嵌套循环</h3><p>将嵌套循环改为二次循环 （新手常犯该错误）</p>
 <h3 id="2-单次循环读写"><a href="#2-单次循环读写" class="headerlink" title="2. 单次循环读写"></a>2. 单次循环读写</h3><p>单次循环读写改为批量读写，单次循环会占用非常多的开销 （新手常犯错误）</p>
 <h3 id="3-超时时间设置"><a href="#3-超时时间设置" class="headerlink" title="3. 超时时间设置"></a>3. 超时时间设置</h3><p>不设置超时会引起雪崩，连接超时与执行超时都需要设置，udp有回包也需要设置超时时间</p>
-<a id="more"></a>
+<span id="more"></span>
+
 <h3 id="4-请求分页"><a href="#4-请求分页" class="headerlink" title="4. 请求分页"></a>4. 请求分页</h3><p>不要在一个请求里面返回太多的数据内容，如果返回的内容不会都用到，可以用多个请求来获取，也即是分页。当请求条数变大的时候服务器性能会变差</p>
 <h3 id="5-DB相关"><a href="#5-DB相关" class="headerlink" title="5. DB相关"></a>5. DB相关</h3><h4 id="5-1-索引的威力"><a href="#5-1-索引的威力" class="headerlink" title="5.1 索引的威力"></a>5.1 索引的威力</h4><h4 id="5-2-提取必要数据，避免select"><a href="#5-2-提取必要数据，避免select" class="headerlink" title="5.2 提取必要数据，避免select *"></a>5.2 提取必要数据，避免select *</h4><h4 id="5-3-避免使用函数"><a href="#5-3-避免使用函数" class="headerlink" title="5.3 避免使用函数"></a>5.3 避免使用函数</h4><h3 id="6-算法"><a href="#6-算法" class="headerlink" title="6. 算法"></a>6. 算法</h3><p>O(1) O(n) O(logn) O(n2)</p>
 <h3 id="7-IO多路复用"><a href="#7-IO多路复用" class="headerlink" title="7. IO多路复用"></a>7. IO多路复用</h3><h3 id="8-yield生成器"><a href="#8-yield生成器" class="headerlink" title="8. yield生成器"></a>8. yield生成器</h3><h3 id="9-有锁编程"><a href="#9-有锁编程" class="headerlink" title="9. 有锁编程"></a>9. 有锁编程</h3><p>有锁编程变为无锁编程</p>

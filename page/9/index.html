@@ -691,8 +691,11 @@
         
           
             
-<a id="more"></a>
-<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><p><a href="http://www.docin.com/p-1280872046.html" target="_blank" rel="external">海量服务之道</a><br><a href="http://www.docin.com/p-834669651.html" target="_blank" rel="external">海量服务之道2.0</a></p>
+
+
+<span id="more"></span>
+
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><p><a target="_blank" rel="noopener" href="http://www.docin.com/p-1280872046.html">海量服务之道</a><br><a target="_blank" rel="noopener" href="http://www.docin.com/p-834669651.html">海量服务之道2.0</a></p>
 
           
         
@@ -987,7 +990,7 @@
 
       
         
-          <h3 id="1-思虑周全，版本迭代"><a href="#1-思虑周全，版本迭代" class="headerlink" title="1. 思虑周全，版本迭代"></a>1. 思虑周全，版本迭代</h3><p>从V0.1，V0.5到V1.0，每个版本都会进一步优化，挨个扫清风险点。所以一个好的系统不是一蹴而就的，而是不断的迭代打磨而来，虽然摇一摇系统的生命周期可能只有春节的短短几天。但是一般大型系统会提前几个月进行，这期间一般会不断的测试、压测，所以会让使用场景提前出现。就像阿里中间件博客里面提到的，应对流量风险的最好方法就是让其提前出现，然后找到应对办法，这样才能做到流量来时成竹于胸。<br>
+          <h3 id="1-思虑周全，版本迭代"><a href="#1-思虑周全，版本迭代" class="headerlink" title="1. 思虑周全，版本迭代"></a>1. 思虑周全，版本迭代</h3><p>从V0.1，V0.5到V1.0，每个版本都会进一步优化，挨个扫清风险点。所以一个好的系统不是一蹴而就的，而是不断的迭代打磨而来，虽然摇一摇系统的生命周期可能只有春节的短短几天。但是一般大型系统会提前几个月进行，这期间一般会不断的测试、压测，所以会让使用场景提前出现。就像阿里中间件博客里面提到的，应对流量风险的最好方法就是让其提前出现，然后找到应对办法，这样才能做到流量来时成竹于胸。</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/10/09/%E8%AF%BB%E5%BE%AE%E4%BF%A1%E6%91%87%E4%B8%80%E6%91%87%E6%9C%89%E6%84%9F/#more" rel="contents">
@@ -1136,8 +1139,9 @@
           <blockquote>
 <p>当后端的服务并发满足不了需要的时候，进行软件升级也是一个性价比很高的方法。</p>
 </blockquote>
-<p>下面写一个简单的测试程序bench.php<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span>($i =<span class="number">0</span>; $i &lt; <span class="number">10000000</span>; $i++)</div><div class="line">&#123;</div><div class="line">    $info = <span class="keyword">array</span>(</div><div class="line">        <span class="string">'name'</span> =&gt;<span class="string">'Tom'</span>,</div><div class="line">        <span class="string">'rank'</span> =&gt; <span class="number">1</span></div><div class="line">    );</div><div class="line"></div><div class="line">    $infoEncode = json_encode($info);</div><div class="line">    $infoDecode = json_decode($infoEncode, <span class="keyword">true</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>在机器A上面看php的版本号码<br>
+<p>下面写一个简单的测试程序bench.php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="variable">$i</span> =<span class="number">0</span>; <span class="variable">$i</span> &lt; <span class="number">10000000</span>; <span class="variable">$i</span>++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="variable">$info</span> = <span class="keyword">array</span>(</span><br><span class="line">        <span class="string">&#x27;name&#x27;</span> =&gt;<span class="string">&#x27;Tom&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;rank&#x27;</span> =&gt; <span class="number">1</span></span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    <span class="variable">$infoEncode</span> = json_encode(<span class="variable">$info</span>);</span><br><span class="line">    <span class="variable">$infoDecode</span> = json_decode(<span class="variable">$infoEncode</span>, <span class="literal">true</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在机器A上面看php的版本号码</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/10/02/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BC%98%E5%8C%96%E6%8C%87%E5%8D%97%E4%B9%8B%E4%BA%8C%EF%BC%88%E8%BD%AF%E4%BB%B6%E5%8D%87%E7%BA%A7%EF%BC%89/#more" rel="contents">
@@ -1284,7 +1288,7 @@
       
         
           <p>今天下午早点下班（国庆前一天），去腾大吃晚饭，估计晚上会堵车。班车是准时6点半出发的，果然很堵，广深沿江公路真是挤爆了，半天动不了。到国庆第一天早上8点钟才到家。</p>
-<h3 id="Day-1"><a href="#Day-1" class="headerlink" title="Day 1"></a>Day 1</h3><p>回来就看到了两个半月大的儿子，真的是非常开心，今天哪也没有去，就是陪着儿子好好玩了一天，儿子真是可爱极了。<br>
+<h3 id="Day-1"><a href="#Day-1" class="headerlink" title="Day 1"></a>Day 1</h3><p>回来就看到了两个半月大的儿子，真的是非常开心，今天哪也没有去，就是陪着儿子好好玩了一天，儿子真是可爱极了。</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/10/02/2017%E5%9B%BD%E5%BA%86/#more" rel="contents">
@@ -1716,28 +1720,7 @@
 <p>当后端的服务并发满足不了需要的时候，升级硬件往往是一个不错的选择。</p>
 </blockquote>
 <p>下面做一组测试，有A、B两台服务器，配置分别见下图</p>
-<table>
-<thead>
-<tr>
-<th>机型</th>
-<th>CPU核数</th>
-<th>内存</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>A</td>
-<td>4</td>
-<td>8G</td>
-</tr>
-<tr>
-<td>B</td>
-<td>24</td>
-<td>64G</td>
-</tr>
-</tbody>
-</table>
-<p>A、B两台机器的php环境都是<br>
+<p>|机型|    CPU核数|    内存|<br>| - | - |<br>|A    |4    |8G|<br>|B    |24    |64G|<br>A、B两台机器的php环境都是</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/09/29/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BC%98%E5%8C%96%E6%8C%87%E5%8D%97%E4%B9%8B%E4%B8%80%EF%BC%88%E7%A1%AC%E4%BB%B6%E5%8D%87%E7%BA%A7%EF%BC%89/#more" rel="contents">

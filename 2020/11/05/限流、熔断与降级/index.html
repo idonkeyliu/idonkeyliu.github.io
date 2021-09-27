@@ -103,15 +103,15 @@
 <meta property="og:site_name" content="idonkeyliu&#39;s Blog">
 <meta property="og:description" content="限流、熔断与降级 限流、熔断与降级，此三者都是流量过大时，通过一定的方式去保护系统的手段，是应对海量服务的三大“神器”   如上图所述中ServiceA是主调，有两个实例A1和A2。ServiceB是被调，也有两个实例B1和B2。限流：一般是在被调生效，即图中的绿色框框所处的位置熔断：一般是在主调生效，也有一部分熔断设计是在被调生效的，如图中红色块所处的位置。降级：一般的视角是从用户侧观察，所享有">
 <meta property="og:locale">
-<meta property="og:image" content="http://idonkeyliu.github.io/2020/11/05/限流、熔断与降级/rt1.png">
-<meta property="og:image" content="http://idonkeyliu.github.io/2020/11/05/限流、熔断与降级/rt2.png">
-<meta property="og:image" content="http://idonkeyliu.github.io/2020/11/05/限流、熔断与降级/rt3.png">
-<meta property="og:image" content="http://idonkeyliu.github.io/2020/11/05/限流、熔断与降级/rt4.png">
+<meta property="og:image" content="http://idonkeyliu.github.io/2020/11/05/%E9%99%90%E6%B5%81%E3%80%81%E7%86%94%E6%96%AD%E4%B8%8E%E9%99%8D%E7%BA%A7/rt1.png">
+<meta property="og:image" content="http://idonkeyliu.github.io/2020/11/05/%E9%99%90%E6%B5%81%E3%80%81%E7%86%94%E6%96%AD%E4%B8%8E%E9%99%8D%E7%BA%A7/rt2.png">
+<meta property="og:image" content="http://idonkeyliu.github.io/2020/11/05/%E9%99%90%E6%B5%81%E3%80%81%E7%86%94%E6%96%AD%E4%B8%8E%E9%99%8D%E7%BA%A7/rt3.png">
+<meta property="og:image" content="http://idonkeyliu.github.io/2020/11/05/%E9%99%90%E6%B5%81%E3%80%81%E7%86%94%E6%96%AD%E4%B8%8E%E9%99%8D%E7%BA%A7/rt4.png">
 <meta property="article:published_time" content="2020-11-05T11:55:36.000Z">
 <meta property="article:modified_time" content="2020-11-05T12:13:52.000Z">
 <meta property="article:author" content="idonkeyliu">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://idonkeyliu.github.io/2020/11/05/限流、熔断与降级/rt1.png">
+<meta name="twitter:image" content="http://idonkeyliu.github.io/2020/11/05/%E9%99%90%E6%B5%81%E3%80%81%E7%86%94%E6%96%AD%E4%B8%8E%E9%99%8D%E7%BA%A7/rt1.png">
 
 
 
@@ -417,22 +417,23 @@
         <h2 id="限流、熔断与降级"><a href="#限流、熔断与降级" class="headerlink" title="限流、熔断与降级"></a>限流、熔断与降级</h2><blockquote>
 <p>限流、熔断与降级，此三者都是流量过大时，通过一定的方式去保护系统的手段，是应对海量服务的三大“神器”</p>
 </blockquote>
-<img src="/2020/11/05/限流、熔断与降级/rt1.png" alt="rt1.png" title="">
-<p>如上图所述中ServiceA是主调，有两个实例A1和A2。ServiceB是被调，也有两个实例B1和B2。<br>限流：一般是在被调生效，即图中的绿色框框所处的位置<br>熔断：一般是在主调生效，也有一部分熔断设计是在被调生效的，如图中红色块所处的位置。<br>降级：一般的视角是从用户侧观察，所享有的服务变差了。限流和熔断都会带来降级。<br><a id="more"></a></p>
+<img src="/2020/11/05/%E9%99%90%E6%B5%81%E3%80%81%E7%86%94%E6%96%AD%E4%B8%8E%E9%99%8D%E7%BA%A7/rt1.png" class="">
+<p>如上图所述中ServiceA是主调，有两个实例A1和A2。ServiceB是被调，也有两个实例B1和B2。<br>限流：一般是在被调生效，即图中的绿色框框所处的位置<br>熔断：一般是在主调生效，也有一部分熔断设计是在被调生效的，如图中红色块所处的位置。<br>降级：一般的视角是从用户侧观察，所享有的服务变差了。限流和熔断都会带来降级。</p>
+<span id="more"></span>
 <h3 id="1-限流"><a href="#1-限流" class="headerlink" title="1. 限流"></a>1. 限流</h3><p>限流是从系统的流量入口考虑，从进入的流量上进行限制，达到保护系统的作用<br>是指需要限制并发/请求量的场景（如秒杀等），通过限流保护服务免受雪崩之灾。<br>主流的限流算法有:</p>
 <h4 id="1-1-计数器"><a href="#1-1-计数器" class="headerlink" title="1.1 计数器"></a>1.1 计数器</h4><p>多少次每秒/每分/每天，根据作用范围的不同，计算器可以分为单机计数器即Local Counter（每个机器都有自己的计数器）和全局计数器也就是分布式计数器即Global Counter（所有机器公有一个计数器阈值）</p>
 <ul>
 <li>单机计数器一般会用自研计数服务（一般是本地有agent）或者memcache来做</li>
 <li>分布式计数器一般会用自研计数服务或者redis等组件来做<br>大公司一般都有自己的限流组件（已经包括了单机和分布式计数器功能）</li>
 </ul>
-<h4 id="1-2-令牌桶"><a href="#1-2-令牌桶" class="headerlink" title="1.2 令牌桶"></a>1.2 令牌桶</h4><img src="/2020/11/05/限流、熔断与降级/rt2.png" alt="rt2.png" title="">
+<h4 id="1-2-令牌桶"><a href="#1-2-令牌桶" class="headerlink" title="1.2 令牌桶"></a>1.2 令牌桶</h4><img src="/2020/11/05/%E9%99%90%E6%B5%81%E3%80%81%E7%86%94%E6%96%AD%E4%B8%8E%E9%99%8D%E7%BA%A7/rt2.png" class="">
 <p>令牌桶算法是网络流量整形（Traffic Shaping）和速率限制（Rate Limiting）中最常使用的一种算法。典型情况下，令牌桶算法用来控制发送到网络上的数据的数目，并允许突发数据的发送。</p>
 <p>令牌桶算法的原理是系统会以一个恒定的速度往桶里放入令牌，而如果请求需要被处理，则需要先从桶里获取一个令牌，当桶里没有令牌可取时，则拒绝服务。</p>
-<h4 id="1-3-漏桶"><a href="#1-3-漏桶" class="headerlink" title="1.3 漏桶"></a>1.3 漏桶</h4><img src="/2020/11/05/限流、熔断与降级/rt3.png" alt="rt3.png" title="">
+<h4 id="1-3-漏桶"><a href="#1-3-漏桶" class="headerlink" title="1.3 漏桶"></a>1.3 漏桶</h4><img src="/2020/11/05/%E9%99%90%E6%B5%81%E3%80%81%E7%86%94%E6%96%AD%E4%B8%8E%E9%99%8D%E7%BA%A7/rt3.png" class="">
 <p>漏桶算法思路很简单，水（请求）先进入到漏桶里，漏桶以一定的速度出水，当水流入速度过大会直接溢出，可以看出漏桶算法能强行限制数据的传输速率。</p>
 <p>一般限流需要配合<code>压测</code>来做，不然也不知道系统的负载极限在哪里。初期的做法是通过单一服务的压测或者全链路压测得到一个阈值（静态），该处做法就是简单，缺点是随着业务复杂度的上升静态阈值不能代表服务的真实服务能力，所以一般在活动或者大促前会组织一批压测。更好的做法是全链路压测日常化，然后随时来调整这个阈值。实现阈值从静态到动态的转变。</p>
 <p>下面比较下限流的三种方法的区别<br>|方法|优点|缺点|<br>|-|-|-|-|-|<br>|计数器|简单方便|存在一下子被刷完计数器的情况|<br>|令牌桶|可以处理瞬间突发的流量|~|<br>|漏桶|限制请求的平均速率|不能处理瞬间流量的情况，当流量把漏桶装满后，大部分的请求都会被丢弃掉|</p>
-<h3 id="2-熔断"><a href="#2-熔断" class="headerlink" title="2. 熔断"></a>2. 熔断</h3><img src="/2020/11/05/限流、熔断与降级/rt4.png" alt="rt4.png" title="">
+<h3 id="2-熔断"><a href="#2-熔断" class="headerlink" title="2. 熔断"></a>2. 熔断</h3><img src="/2020/11/05/%E9%99%90%E6%B5%81%E3%80%81%E7%86%94%E6%96%AD%E4%B8%8E%E9%99%8D%E7%BA%A7/rt4.png" class="">
 <p>如上图所示，熔断器首先是关闭的，当主调失败到达了一定阈值后，此时熔断器打开（主调的请求不会再到被调了，压根就不会发出请求），过了一个”冷却时间”后，熔断器此时会处于一个半开的状态，会有请求到被调，如果请求成功就关闭熔断器（后端服务恢复），否则就继续打开熔断器。熔断强调的是服务之间的调用能实现自我恢复的状态。<br>例如你的A服务里面的一个功能依赖B服务，这时候B服务出问题了，返回的很慢。这种情况可能会因为这么一个功能而拖慢了A服务里面的所有功能，因此我们这时候就需要熔断！即当发现A要调用这B时就直接返回错误(或者返回其他默认值)，就<code>不去请求B</code>了</p>
 <h4 id="2-1-主调熔断"><a href="#2-1-主调熔断" class="headerlink" title="2.1 主调熔断"></a>2.1 主调熔断</h4><p>主调熔断是熔断的主要场景，在微服务中是结合服务注册和发现组件来使用的。主调通过服务发现组件来获取被调的实例，如果主调的失败达到了一个阈值，服务发现组件会熔断被调的实例。</p>
 <h4 id="2-2-被调熔断"><a href="#2-2-被调熔断" class="headerlink" title="2.2 被调熔断"></a>2.2 被调熔断</h4><p>被调熔断，被调实例获取当前的实例负载情况，如果cpu/内存/io等超过了一定的阈值，那么就会触发熔断，将抛弃进来的请求。此时熔断和限流比较像，一个是基于负载情况，一个是根据配置的阈值情况。</p>
@@ -449,7 +450,7 @@
 <li>熔断是非持续性的服务，逻辑一般在客户端。此时客户端的请求并没有到服务端。当客户端调用北极星获取后端的服务出现比较多的错误的时候（错误数或者错误率超过一定的阈值），北极星会将该节点熔断。一段时间客户端的服务请求都不会到达服务端，所以服务端的服务看起来是不连续的。</li>
 <li>降级是从整体资源使用的角度来考虑的，实质是解决资源不足和访问增加的情况。当整体资源不够的时候，可以牺牲低优先级服务的体验来保证高优先级服务的使用体验。<br><code>熔断和限流都可以认为是降级的一种方式</code></li>
 </ul>
-<h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><p><a href="SpringBoot+Sentinel实现限流和降级">SpringBoot+Sentinel实现限流和降级</a></p>
+<h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><p><a href="SpringBoot+Sentinel%E5%AE%9E%E7%8E%B0%E9%99%90%E6%B5%81%E5%92%8C%E9%99%8D%E7%BA%A7">SpringBoot+Sentinel实现限流和降级</a></p>
 
       
     </div>

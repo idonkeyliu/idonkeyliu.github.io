@@ -408,7 +408,7 @@
       
         
           <p>我们在操作数据库的时候，可能会由于并发问题而引起的数据的不一致性（数据冲突）</p>
-<p>乐观锁<br>乐观锁不是数据库自带的，需要我们自己去实现。乐观锁是指操作数据库时(更新操作)，想法很乐观，认为这次的操作不会导致冲突，在操作数据时，并不进行任何其他的特殊处理（也就是不加锁），而在进行更新后，再去判断是否有冲突了。<br>
+<p>乐观锁<br>乐观锁不是数据库自带的，需要我们自己去实现。乐观锁是指操作数据库时(更新操作)，想法很乐观，认为这次的操作不会导致冲突，在操作数据时，并不进行任何其他的特殊处理（也就是不加锁），而在进行更新后，再去判断是否有冲突了。</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/07/19/Mysql%E4%B9%90%E8%A7%82%E9%94%81%E4%B8%8E%E6%82%B2%E8%A7%82%E9%94%81/#more" rel="contents">
@@ -535,42 +535,7 @@
           <p>一、数据库事务隔离级别</p>
 <p>数据库事务的隔离级别有4个，由低到高依次为Read uncommitted 、Read committed 、Repeatable read 、Serializable ，这四个级别可以逐个解决脏读 、不可重复读 、幻读 这几类问题。</p>
 <p>√: 可能出现    ×: 不会出现</p>
-<table>
-<thead>
-<tr>
-<th>隔离级别</th>
-<th>脏读</th>
-<th>不可重复读</th>
-<th>幻读</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Read uncommitted</td>
-<td>√</td>
-<td>√</td>
-<td>√</td>
-</tr>
-<tr>
-<td>Read committed</td>
-<td>×</td>
-<td>√</td>
-<td>√</td>
-</tr>
-<tr>
-<td>Repeatable read</td>
-<td>×</td>
-<td>×</td>
-<td>√</td>
-</tr>
-<tr>
-<td>Serializable</td>
-<td>×</td>
-<td>×</td>
-<td>×</td>
-</tr>
-</tbody>
-</table>
+<p>|隔离级别|脏读|    不可重复读|    幻读|<br>|-|-|-|<br>|Read uncommitted    |√|    √    |√|<br>|Read committed    |×|    √    |√|<br>|Repeatable read|    ×    |×|√|<br>|Serializable|    ×    |×    |×|</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/07/19/mysql%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E5%AD%A6%E4%B9%A0/#more" rel="contents">
@@ -694,9 +659,10 @@
 
       
         
-          <img src="/2018/07/18/读QuestMobile中国移动互联网2018半年大报告有感/timg.jpeg" alt="timg.jpeg" title="">
+          <img src="/2018/07/18/%E8%AF%BBQuestMobile%E4%B8%AD%E5%9B%BD%E7%A7%BB%E5%8A%A8%E4%BA%92%E8%81%94%E7%BD%912018%E5%8D%8A%E5%B9%B4%E5%A4%A7%E6%8A%A5%E5%91%8A%E6%9C%89%E6%84%9F/timg.jpeg" class="">
+
 <ol>
-<li>强者愈强，弱者愈弱，马太效应明显，腾讯系、阿里系、百度系、头条系、新浪系占据了中国网民的绝大部分时间，后进者要么从垂直领域切入、要么改变自己的信息架构与技术架构才有一些机会。当然科技发展的同时也会产生一些蓝海区域，快速的把握时代发展就更加重要了。
+<li><p>强者愈强，弱者愈弱，马太效应明显，腾讯系、阿里系、百度系、头条系、新浪系占据了中国网民的绝大部分时间，后进者要么从垂直领域切入、要么改变自己的信息架构与技术架构才有一些机会。当然科技发展的同时也会产生一些蓝海区域，快速的把握时代发展就更加重要了。</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/07/18/%E8%AF%BBQuestMobile%E4%B8%AD%E5%9B%BD%E7%A7%BB%E5%8A%A8%E4%BA%92%E8%81%94%E7%BD%912018%E5%8D%8A%E5%B9%B4%E5%A4%A7%E6%8A%A5%E5%91%8A%E6%9C%89%E6%84%9F/#more" rel="contents">
@@ -820,7 +786,8 @@
 
       
         
-          <p>一眨眼两个月的时间就过去了，两个月来一直忙于接手业务、熟悉业务、熟悉代码，也没有时间进行总结与回顾，没有想到真正要回顾的时候就已经要离开了。<br><img src="/2018/07/17/谈谈加入WePay的感受/jrbb.jpeg" alt="jrbb.jpeg" title=""><br>
+          <p>一眨眼两个月的时间就过去了，两个月来一直忙于接手业务、熟悉业务、熟悉代码，也没有时间进行总结与回顾，没有想到真正要回顾的时候就已经要离开了。</p>
+<img src="/2018/07/17/%E8%B0%88%E8%B0%88%E5%8A%A0%E5%85%A5WePay%E7%9A%84%E6%84%9F%E5%8F%97/jrbb.jpeg" class="">
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/07/17/%E8%B0%88%E8%B0%88%E5%8A%A0%E5%85%A5WePay%E7%9A%84%E6%84%9F%E5%8F%97/#more" rel="contents">
@@ -1065,7 +1032,7 @@
       
         
           
-            <a id="more"></a>
+            <span id="more"></span>
 
 
 	<div class="row">
@@ -1193,7 +1160,8 @@
       
         
           
-            <img src="/2018/04/26/架构师技能图谱/jgtp.jpg" alt="jgtp.jpg" title="">
+            <img src="/2018/04/26/%E6%9E%B6%E6%9E%84%E5%B8%88%E6%8A%80%E8%83%BD%E5%9B%BE%E8%B0%B1/jgtp.jpg" class="">
+
 <h1 id="系统架构能力"><a href="#系统架构能力" class="headerlink" title="系统架构能力"></a>系统架构能力</h1><h2 id="1-基本理论"><a href="#1-基本理论" class="headerlink" title="1.基本理论"></a>1.基本理论</h2><h3 id="扩展性设计"><a href="#扩展性设计" class="headerlink" title="扩展性设计"></a>扩展性设计</h3><p>架构易于扩展是其非常重要的一个特性，好的架构需要有非常强的扩展能力，架构中的每个角色都需要有standby，好的架构可以满足业务飞速发展的需要，传说中QQ的架构好多年都没有大变，满足了用户从百万、千万、亿级的发展需要。我自己写的AcMid和reviewTask工程就是具备多机多进程的消费模型，通过队列进行生产者与消费者的解耦，也是可以无限添加机器与进程的架构。</p>
 <h3 id="可用性设计"><a href="#可用性设计" class="headerlink" title="可用性设计"></a>可用性设计</h3><p>好的架构都是非常注重可用性的，好的架构可以极大的提高系统的可用性。好的架构是一整套方案，所以可用性是非常高的。</p>
 <h3 id="可靠性设计"><a href="#可靠性设计" class="headerlink" title="可靠性设计"></a>可靠性设计</h3><p>用于定义组件或系统可靠性的一个度量标准是平均故障间隔时间 (MTBF)。MTBF 是平均间隔时间。好的架构需要易监控、会有全套的业务日志打出，这样整个系统会比较定位问题，而且容灾完全可以让架构更可靠。</p>
@@ -1324,7 +1292,7 @@
 
       
         
-          <p>一直都有看InfoQ上面的各种技术文章，感觉InfoQ算是国内组织技术会议与传播技术做的比较好的了，所以其组织的各种大会一直以来都想去参加，但是限于门票比较贵与路费就没有动买票参会的念头。正好组织要在北京开UP大会，所以组内有几个名额可以去参加下QCon2018在北京站点的全球软件开发者大会，我运气好，获得了一张票。<br>
+          <p>一直都有看InfoQ上面的各种技术文章，感觉InfoQ算是国内组织技术会议与传播技术做的比较好的了，所以其组织的各种大会一直以来都想去参加，但是限于门票比较贵与路费就没有动买票参会的念头。正好组织要在北京开UP大会，所以组内有几个名额可以去参加下QCon2018在北京站点的全球软件开发者大会，我运气好，获得了一张票。</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/04/25/QCon-%E5%8C%97%E4%BA%AC%E7%AB%99-2018%E5%B9%B44%E6%9C%88%E4%B8%8E%E4%BC%9A%E8%AE%B0%E5%BD%95/#more" rel="contents">
@@ -1449,7 +1417,7 @@
       
         
           <p>在我们的日常开发过程中，少不了需要提供服务给比人使用，可能是一个接口，也可能是一个服务。我们当然希望我们提供的服务具备低延迟、高并发的特点，那么从哪些地方可以优化我们的程序或者说是服务呢？<br>该部分分14个部分加以说明.</p>
-<img src="/2018/04/17/服务器优化指南全集/server_opt.png" alt="server_opt.png" title="">
+<img src="/2018/04/17/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BC%98%E5%8C%96%E6%8C%87%E5%8D%97%E5%85%A8%E9%9B%86/server_opt.png" class="">
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/04/17/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BC%98%E5%8C%96%E6%8C%87%E5%8D%97%E5%85%A8%E9%9B%86/#more" rel="contents">

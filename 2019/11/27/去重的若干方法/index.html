@@ -103,12 +103,12 @@
 <meta property="og:site_name" content="idonkeyliu&#39;s Blog">
 <meta property="og:description" content="我们活动存储都用的是redis，落地用mysql，这样就会面对一个问题：如何清理过期活动用过的key。同事搞个一个脚本：每天去扫码有无过期的活动，如果有就去slave redis实例中用scan扫描出活动所有的相关key，然后挨个清理。有一天redis发生了主备切换，这个脚本就去主redis上扫描去了，引起了告警。这种scan方式不是很好，我们在想是不是搞成一个日志服务，将这些key都记录下来，等">
 <meta property="og:locale">
-<meta property="og:image" content="http://idonkeyliu.github.io/2019/11/27/去重的若干方法/mr.jpeg">
+<meta property="og:image" content="http://idonkeyliu.github.io/2019/11/27/%E5%8E%BB%E9%87%8D%E7%9A%84%E8%8B%A5%E5%B9%B2%E6%96%B9%E6%B3%95/mr.jpeg">
 <meta property="article:published_time" content="2019-11-27T13:43:01.000Z">
 <meta property="article:modified_time" content="2019-11-27T14:17:14.000Z">
 <meta property="article:author" content="idonkeyliu">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://idonkeyliu.github.io/2019/11/27/去重的若干方法/mr.jpeg">
+<meta name="twitter:image" content="http://idonkeyliu.github.io/2019/11/27/%E5%8E%BB%E9%87%8D%E7%9A%84%E8%8B%A5%E5%B9%B2%E6%96%B9%E6%B3%95/mr.jpeg">
 
 
 
@@ -412,8 +412,9 @@
 
       
         <p>我们活动存储都用的是redis，落地用mysql，这样就会面对一个问题：如何清理过期活动用过的key。同事搞个一个脚本：每天去扫码有无过期的活动，如果有就去slave redis实例中用scan扫描出活动所有的相关key，然后挨个清理。有一天redis发生了主备切换，这个脚本就去主redis上扫描去了，引起了告警。这种scan方式不是很好，我们在想是不是搞成一个日志服务，将这些key都记录下来，等到活动结束后直接看这些日志文件，对照着日志文件清理就行了，但是不去重的记录每个redis key的话，每天的数据量会很多，所以就有了如何去重的思考。</p>
-<img src="/2019/11/27/去重的若干方法/mr.jpeg" alt="mr.jpeg" title="">
-<a id="more"></a>
+<img src="/2019/11/27/%E5%8E%BB%E9%87%8D%E7%9A%84%E8%8B%A5%E5%B9%B2%E6%96%B9%E6%B3%95/mr.jpeg" class="">
+<span id="more"></span>
+
 <h3 id="1-先记录，定期汇总"><a href="#1-先记录，定期汇总" class="headerlink" title="1.先记录，定期汇总"></a>1.先记录，定期汇总</h3><p>这种方式是记录下每条key的访问日志，暂时不做去重处理，第二天或者活动结束后进行一次整体的去重处理，这样异步的去重在不是很重要的场景还是可以使用一下的。</p>
 <h3 id="2-本地存储"><a href="#2-本地存储" class="headerlink" title="2.本地存储"></a>2.本地存储</h3><p>比如使用本机memcache进行判重，如果在memcache中存在的就不写入日志文件中了，该方法的缺点是：日志系统肯定不是单机的，如果用单机memcache的话后续还是存在多机汇总的问题。使用本机sqlite也是一样的情况。</p>
 <h3 id="3-使用redis"><a href="#3-使用redis" class="headerlink" title="3.使用redis"></a>3.使用redis</h3><p>redis目前有主从模式和集群模式，能够解决单机的问题，redis在去重这个问题上是个不错的方案，不过就是比较浪费内存，不过每个Key设置过期时间的话还好。</p>
