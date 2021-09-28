@@ -96,17 +96,19 @@
 
 
 
-<meta name="description" content="今天越安逸，明天越危险">
+<meta name="description" content="新版小程序已经于上周五0910日独立上线，且进行了部分灰度，目前项目算是告一段落了。准备总结下过去一段时间的工作。   1. 项目预期按时接住业务，然后新版本小程序能独立上线 2. 项目现状接住了业务，新版本小程序也独立上线了，不过比之前预定的晚了几天 3. 对比分析 项目进度严格上说还是有延期 需求产出（1.口喷 2.延期 3.需求理解不清晰 4.问题没有及时暴露） 设计与前端开发（1. 没">
 <meta property="og:type" content="article">
 <meta property="og:title" content="小程序改造复盘">
 <meta property="og:url" content="http://idonkeyliu.github.io/2021/09/15/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%94%B9%E9%80%A0%E5%A4%8D%E7%9B%98/index.html">
 <meta property="og:site_name" content="idonkeyliu&#39;s Blog">
-<meta property="og:description" content="今天越安逸，明天越危险">
+<meta property="og:description" content="新版小程序已经于上周五0910日独立上线，且进行了部分灰度，目前项目算是告一段落了。准备总结下过去一段时间的工作。   1. 项目预期按时接住业务，然后新版本小程序能独立上线 2. 项目现状接住了业务，新版本小程序也独立上线了，不过比之前预定的晚了几天 3. 对比分析 项目进度严格上说还是有延期 需求产出（1.口喷 2.延期 3.需求理解不清晰 4.问题没有及时暴露） 设计与前端开发（1. 没">
 <meta property="og:locale">
+<meta property="og:image" content="http://idonkeyliu.github.io/2021/09/15/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%94%B9%E9%80%A0%E5%A4%8D%E7%9B%98/teamwork.jpeg">
 <meta property="article:published_time" content="2021-09-15T13:44:39.000Z">
-<meta property="article:modified_time" content="2021-09-15T13:44:39.563Z">
+<meta property="article:modified_time" content="2021-09-28T02:46:03.733Z">
 <meta property="article:author" content="idonkeyliu">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://idonkeyliu.github.io/2021/09/15/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%94%B9%E9%80%A0%E5%A4%8D%E7%9B%98/teamwork.jpeg">
 
 
 
@@ -409,7 +411,41 @@
       
 
       
-        
+        <p>  新版小程序已经于上周五<code>0910日</code>独立上线，且进行了部分灰度，目前项目算是告一段落了。准备总结下过去一段时间的工作。</p>
+<img src="/2021/09/15/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%94%B9%E9%80%A0%E5%A4%8D%E7%9B%98/teamwork.jpeg" class="">
+
+<h3 id="1-项目预期"><a href="#1-项目预期" class="headerlink" title="1. 项目预期"></a>1. 项目预期</h3><p>按时接住业务，然后新版本小程序能独立上线</p>
+<h3 id="2-项目现状"><a href="#2-项目现状" class="headerlink" title="2. 项目现状"></a>2. 项目现状</h3><p>接住了业务，新版本小程序也独立上线了，不过比之前预定的晚了几天</p>
+<h3 id="3-对比分析"><a href="#3-对比分析" class="headerlink" title="3. 对比分析"></a>3. 对比分析</h3><ol>
+<li>项目进度严格上说还是有延期</li>
+<li>需求产出（1.口喷 2.延期 3.需求理解不清晰 4.问题没有及时暴露）</li>
+<li>设计与前端开发（1. 没有产出标准 2. 沟通不够）</li>
+<li>后端开发（存在沟通问题）1. 任务划分不清晰 2.沟通不充分 3.不上升暴露问题</li>
+<li>数据侧（不好测试、流程缺失（需求流程、开发流程、测试流程））</li>
+<li>测试侧（bug单查询问题，会漏，而且没有及时处理）</li>
+<li>管理侧（没有好的工具，需求管理工具、进度管理工具、bug管理工具）文案需要提高</li>
+</ol>
+<h3 id="4-改进计划"><a href="#4-改进计划" class="headerlink" title="4. 改进计划"></a>4. 改进计划</h3><ol>
+<li>依赖人力驱动而非流程驱动，需要人推动</li>
+<li>不能及时暴露反馈问题，把时间窗口往后期压。制定追责制</li>
+<li>开发质量不高，造成反复，需要有更充裕的时间保住和激励闭环</li>
+<li>需求滞后。尽量走标准流程</li>
+<li>增强单兵能力。核心模块的单兵一定要能顶上压力</li>
+</ol>
+<h3 id="5-项目难点"><a href="#5-项目难点" class="headerlink" title="5. 项目难点"></a>5. 项目难点</h3><ol>
+<li>涉及到跨部门合作，沟通挑战大，而且需要对方开发排期支持（比如用户资产迁移）</li>
+<li>子项目较多，虽然是1个大项目，但是实际有3个子项目</li>
+<li>待明确的技术点较多，需要花时间调研&amp;确定方案</li>
+<li>涉及到的业务模块较多（并不是简单的技术方案调研与确认），比如合同与结算</li>
+<li>开发模式与APP版本迭代不一样。边对需求边开发，开发有时候会先于需求</li>
+<li>依赖小程序生态，但是小程序生态目前还不够完善</li>
+</ol>
+<h3 id="6-项目制度"><a href="#6-项目制度" class="headerlink" title="6. 项目制度"></a>6. 项目制度</h3><h4 id="6-1-晨会"><a href="#6-1-晨会" class="headerlink" title="6.1. 晨会"></a>6.1. 晨会</h4><p>作用：信息对齐、抛出问题、优先级调整</p>
+<h4 id="6-2-日报"><a href="#6-2-日报" class="headerlink" title="6.2. 日报"></a>6.2. 日报</h4><p>作用：信息同步</p>
+<h4 id="6-3-周进度会"><a href="#6-3-周进度会" class="headerlink" title="6.3. 周进度会"></a>6.3. 周进度会</h4><p>作用：进度汇报与阶段性决策</p>
+<h4 id="6-4-小程序Daily-Build"><a href="#6-4-小程序Daily-Build" class="headerlink" title="6.4. 小程序Daily Build"></a>6.4. 小程序Daily Build</h4><p>作用：每日进展体现</p>
+<p>从项目启动到新版独立上线，差不多3个月的时间，协同工作40余人，项目管理能力和带项目能力得到了很大的锻炼。目前优点是能够知道安排什么人在什么时候做什么，而且能及时的响应解决问题，能做好阶段性汇报，也能严格把控项目进度，决策迅速。缺点是管理工具不够好，感觉管理起来还是比较吃力。</p>
+
       
     </div>
     
@@ -524,8 +560,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://thirdwx.qlogo.cn/mmopen/vi_32/nqv8Jdn4oa4vIBamP2ZLQcGdg87gicx6PGlOkFGhs8QP6VlWYicj14hJsISSQO44rytt4fujXj4uNicEJUxRBlWzQ/0"
@@ -618,6 +663,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E9%A1%B9%E7%9B%AE%E9%A2%84%E6%9C%9F"><span class="nav-number">1.</span> <span class="nav-text">1. 项目预期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E9%A1%B9%E7%9B%AE%E7%8E%B0%E7%8A%B6"><span class="nav-number">2.</span> <span class="nav-text">2. 项目现状</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%AF%B9%E6%AF%94%E5%88%86%E6%9E%90"><span class="nav-number">3.</span> <span class="nav-text">3. 对比分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E6%94%B9%E8%BF%9B%E8%AE%A1%E5%88%92"><span class="nav-number">4.</span> <span class="nav-text">4. 改进计划</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E9%A1%B9%E7%9B%AE%E9%9A%BE%E7%82%B9"><span class="nav-number">5.</span> <span class="nav-text">5. 项目难点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E9%A1%B9%E7%9B%AE%E5%88%B6%E5%BA%A6"><span class="nav-number">6.</span> <span class="nav-text">6. 项目制度</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#6-1-%E6%99%A8%E4%BC%9A"><span class="nav-number">6.1.</span> <span class="nav-text">6.1. 晨会</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-2-%E6%97%A5%E6%8A%A5"><span class="nav-number">6.2.</span> <span class="nav-text">6.2. 日报</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-3-%E5%91%A8%E8%BF%9B%E5%BA%A6%E4%BC%9A"><span class="nav-number">6.3.</span> <span class="nav-text">6.3. 周进度会</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-4-%E5%B0%8F%E7%A8%8B%E5%BA%8FDaily-Build"><span class="nav-number">6.4.</span> <span class="nav-text">6.4. 小程序Daily Build</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
