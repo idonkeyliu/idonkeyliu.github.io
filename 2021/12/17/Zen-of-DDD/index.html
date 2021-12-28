@@ -96,17 +96,17 @@
 
 
 
-<meta name="description" content="今天越安逸，明天越危险">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Zen of DDD">
 <meta property="og:url" content="http://idonkeyliu.github.io/2021/12/17/Zen-of-DDD/index.html">
 <meta property="og:site_name" content="idonkeyliu&#39;s Blog">
-<meta property="og:description" content="今天越安逸，明天越危险">
 <meta property="og:locale">
+<meta property="og:image" content="http://idonkeyliu.github.io/2021/12/17/Zen-of-DDD/DDD.jpeg">
 <meta property="article:published_time" content="2021-12-17T03:37:38.000Z">
-<meta property="article:modified_time" content="2021-12-17T03:37:38.176Z">
+<meta property="article:modified_time" content="2021-12-28T12:56:44.484Z">
 <meta property="article:author" content="idonkeyliu">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://idonkeyliu.github.io/2021/12/17/Zen-of-DDD/DDD.jpeg">
 
 
 
@@ -409,7 +409,24 @@
       
 
       
-        
+        <img src="/2021/12/17/Zen-of-DDD/DDD.jpeg" class="">
+<span id="more"></span>
+<ol>
+<li>领域划分最好是从场景开始，而不是业务概念</li>
+<li>愿景=》人=》目标=》场景=》小场景，思考顺序大体是这样的，首先要有愿景，然后找出利益相关者，结合目标找出场景。划分好了场景，子域就自然得出。</li>
+<li>场景也就是业务流程如何？可能用到的有用例图和流程图</li>
+<li>要区别问题空间和解空间，不能混为一谈。问题空间里面有业务上下文、域和业务模块、建模等。解空间有限界上下文、实体、聚合等。</li>
+<li>建模会有UML 分析类图或者概念序列图</li>
+<li>划分子域的时候可以先找出单一的抽象层次。然后再进行业务模块划分（业务模块需要自治），子域包括一个或者多个业务模块</li>
+<li>微服务是部署层面的东西，微服务可以包括1个或者多个业务模块，但是不要超过1个子域。</li>
+<li>聚合讲的是不变量，强一致要么是聚合实现要么是领域事件实现，强一致指的是中间结果不会被暴露到外部</li>
+<li>单一职责也是分层级的，有大的单一职责，也有小的单一职责，领域消息不是单一职责</li>
+<li>业务的编排应该在领域层实现而非应用层实现，应用层是很薄的一层。</li>
+<li>我们面对的边界是待开发系统的愿景而不是组织的愿景</li>
+<li>目前实现的DDD大部分缺少业务团队的参与，称之为自嗨型的DDD，较好的实践是“双修”DDD</li>
+<li>DDD实操 1. 做好是和业务团队（尤其是产品团队） 一起讨论 2. 目前技术团队可以先做好OO，为后续DDD打下基础。</li>
+</ol>
+
       
     </div>
     
