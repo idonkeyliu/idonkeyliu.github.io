@@ -105,7 +105,7 @@
 <meta property="og:locale">
 <meta property="og:image" content="http://idonkeyliu.github.io/2021/12/27/%E6%AF%94%E7%89%B9%E5%B8%81%E4%B8%8E%E5%8C%BA%E5%9D%97%E9%93%BE/BLOCKCHAIN.jpeg">
 <meta property="article:published_time" content="2021-12-27T13:17:48.000Z">
-<meta property="article:modified_time" content="2021-12-28T12:58:26.055Z">
+<meta property="article:modified_time" content="2021-12-31T07:15:23.369Z">
 <meta property="article:author" content="idonkeyliu">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://idonkeyliu.github.io/2021/12/27/%E6%AF%94%E7%89%B9%E5%B8%81%E4%B8%8E%E5%8C%BA%E5%9D%97%E9%93%BE/BLOCKCHAIN.jpeg">
@@ -416,7 +416,15 @@
 <span id="more"></span>
 
 <h3 id="比特币与区块链"><a href="#比特币与区块链" class="headerlink" title="比特币与区块链"></a>比特币与区块链</h3><p>比特币是一种发行总数固定的虚拟货币，其底层依赖的技术就是区块链。通过比特币可以发行不同的虚拟货币，但是这些虚拟货币的底层技术都是区块链</p>
-<h3 id="前导知识"><a href="#前导知识" class="headerlink" title="前导知识"></a>前导知识</h3><h4 id="1-加密"><a href="#1-加密" class="headerlink" title="1. 加密"></a>1. 加密</h4><h4 id="2-公钥与私钥"><a href="#2-公钥与私钥" class="headerlink" title="2. 公钥与私钥"></a>2. 公钥与私钥</h4><h4 id="3-哈希"><a href="#3-哈希" class="headerlink" title="3. 哈希"></a>3. 哈希</h4><h4 id="4-Merkle-Tree"><a href="#4-Merkle-Tree" class="headerlink" title="4. Merkle Tree"></a>4. Merkle Tree</h4><h4 id="5-Gossip-算法"><a href="#5-Gossip-算法" class="headerlink" title="5. Gossip 算法"></a>5. Gossip 算法</h4>
+<h3 id="前导知识"><a href="#前导知识" class="headerlink" title="前导知识"></a>前导知识</h3><h4 id="1-加密"><a href="#1-加密" class="headerlink" title="1. 加密"></a>1. 加密</h4><h4 id="2-公钥与私钥"><a href="#2-公钥与私钥" class="headerlink" title="2. 公钥与私钥"></a>2. 公钥与私钥</h4><h4 id="3-哈希"><a href="#3-哈希" class="headerlink" title="3. 哈希"></a>3. 哈希</h4><h4 id="4-Merkle-Tree"><a href="#4-Merkle-Tree" class="headerlink" title="4. Merkle Tree"></a>4. Merkle Tree</h4><h4 id="5-Gossip-算法"><a href="#5-Gossip-算法" class="headerlink" title="5. Gossip 算法"></a>5. Gossip 算法</h4><h3 id="区块链流程"><a href="#区块链流程" class="headerlink" title="区块链流程"></a>区块链流程</h3><ol>
+<li>节点加入与启动</li>
+<li>节点产生交易并广播</li>
+<li>其余节点收到广播并验证交易，合法交易记录到本地</li>
+<li>节点执行Mining过程，获取记账权的节点可以打包交易形成区块</li>
+<li>拥有记账权的节点打包好区块后广播</li>
+<li>其余节点收到广播将区块验证后写入到本地</li>
+</ol>
+
       
     </div>
     
@@ -644,7 +652,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AF%94%E7%89%B9%E5%B8%81%E4%B8%8E%E5%8C%BA%E5%9D%97%E9%93%BE"><span class="nav-number">1.</span> <span class="nav-text">比特币与区块链</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E5%AF%BC%E7%9F%A5%E8%AF%86"><span class="nav-number">2.</span> <span class="nav-text">前导知识</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%8A%A0%E5%AF%86"><span class="nav-number">2.1.</span> <span class="nav-text">1. 加密</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%85%AC%E9%92%A5%E4%B8%8E%E7%A7%81%E9%92%A5"><span class="nav-number">2.2.</span> <span class="nav-text">2. 公钥与私钥</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E5%93%88%E5%B8%8C"><span class="nav-number">2.3.</span> <span class="nav-text">3. 哈希</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-Merkle-Tree"><span class="nav-number">2.4.</span> <span class="nav-text">4. Merkle Tree</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-Gossip-%E7%AE%97%E6%B3%95"><span class="nav-number">2.5.</span> <span class="nav-text">5. Gossip 算法</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AF%94%E7%89%B9%E5%B8%81%E4%B8%8E%E5%8C%BA%E5%9D%97%E9%93%BE"><span class="nav-number">1.</span> <span class="nav-text">比特币与区块链</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E5%AF%BC%E7%9F%A5%E8%AF%86"><span class="nav-number">2.</span> <span class="nav-text">前导知识</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%8A%A0%E5%AF%86"><span class="nav-number">2.1.</span> <span class="nav-text">1. 加密</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%85%AC%E9%92%A5%E4%B8%8E%E7%A7%81%E9%92%A5"><span class="nav-number">2.2.</span> <span class="nav-text">2. 公钥与私钥</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E5%93%88%E5%B8%8C"><span class="nav-number">2.3.</span> <span class="nav-text">3. 哈希</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-Merkle-Tree"><span class="nav-number">2.4.</span> <span class="nav-text">4. Merkle Tree</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-Gossip-%E7%AE%97%E6%B3%95"><span class="nav-number">2.5.</span> <span class="nav-text">5. Gossip 算法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8C%BA%E5%9D%97%E9%93%BE%E6%B5%81%E7%A8%8B"><span class="nav-number">3.</span> <span class="nav-text">区块链流程</span></a></li></ol></div>
             
 
           </div>
