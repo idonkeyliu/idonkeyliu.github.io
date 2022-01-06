@@ -104,8 +104,9 @@
 <meta property="og:description" content="一直以来就很喜欢区块链技术，趁着年前的这段时间又重新学习了下，记录下里面的要点。">
 <meta property="og:locale">
 <meta property="og:image" content="http://idonkeyliu.github.io/2021/12/27/%E6%AF%94%E7%89%B9%E5%B8%81%E4%B8%8E%E5%8C%BA%E5%9D%97%E9%93%BE/BLOCKCHAIN.jpeg">
+<meta property="og:image" content="http://idonkeyliu.github.io/2021/12/27/%E6%AF%94%E7%89%B9%E5%B8%81%E4%B8%8E%E5%8C%BA%E5%9D%97%E9%93%BE/merkle.jpeg">
 <meta property="article:published_time" content="2021-12-27T13:17:48.000Z">
-<meta property="article:modified_time" content="2022-01-04T11:22:27.987Z">
+<meta property="article:modified_time" content="2022-01-06T13:37:15.544Z">
 <meta property="article:author" content="idonkeyliu">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://idonkeyliu.github.io/2021/12/27/%E6%AF%94%E7%89%B9%E5%B8%81%E4%B8%8E%E5%8C%BA%E5%9D%97%E9%93%BE/BLOCKCHAIN.jpeg">
@@ -416,8 +417,12 @@
 <span id="more"></span>
 
 <h3 id="比特币与区块链"><a href="#比特币与区块链" class="headerlink" title="比特币与区块链"></a>比特币与区块链</h3><p>比特币是一种发行总数固定的虚拟货币，其底层依赖的技术就是区块链。通过比特币可以发行不同的虚拟货币，但是这些虚拟货币的底层技术都是区块链</p>
-<h3 id="前导知识"><a href="#前导知识" class="headerlink" title="前导知识"></a>前导知识</h3><h4 id="1-加密"><a href="#1-加密" class="headerlink" title="1. 加密"></a>1. 加密</h4><h4 id="2-公钥与私钥"><a href="#2-公钥与私钥" class="headerlink" title="2. 公钥与私钥"></a>2. 公钥与私钥</h4><h4 id="3-哈希"><a href="#3-哈希" class="headerlink" title="3. 哈希"></a>3. 哈希</h4><p>Hash，一般翻译做散列、杂凑，或音译为哈希，是把任意长度的输入（又叫做预映射pre-image）通过散列算法变换成固定长度的输出，该输出就是散列值。 这种转换是一种压缩映射，也就是，散列值的空间通常远小于输入的空间，不同的输入可能会散列成相同的输出，所以不可能从散列值来确定唯一的输入值。一般常用的哈希算法有两个算法族，md5和sha,具体见<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/37165658">哈希算法与MD5、SHA</a></p>
-<h4 id="4-Merkle-Tree"><a href="#4-Merkle-Tree" class="headerlink" title="4. Merkle Tree"></a>4. Merkle Tree</h4><h4 id="5-Gossip-算法"><a href="#5-Gossip-算法" class="headerlink" title="5. Gossip 算法"></a>5. Gossip 算法</h4><p>消息同步算法，又叫流言算法。</p>
+<h3 id="前导知识"><a href="#前导知识" class="headerlink" title="前导知识"></a>前导知识</h3><h4 id="1-加密"><a href="#1-加密" class="headerlink" title="1. 加密"></a>1. 加密</h4><p>在密码学中，加密（英语：Encryption）是将明文信息改变为难以读取的密文内容，使之不可读的过程。只有拥有解密方法的对象，经由解密过程，才能将密文还原为正常可读的内容</p>
+<h4 id="2-公钥与私钥"><a href="#2-公钥与私钥" class="headerlink" title="2. 公钥与私钥"></a>2. 公钥与私钥</h4><p>在密码学中，密钥（key，又常称金钥）是指某个用来完成加密、解密、完整性验证等密码学应用的秘密信息。在对称密码学（或称密钥密码学）中，加密和解密用的是同一个钥匙，因此钥匙需要保密。而在公钥密码学（或称非对称密码学）中，加密和解密用的钥匙不同：通常一个是公开的，称为公钥；另一个保密，称为私钥。</p>
+<h4 id="3-哈希"><a href="#3-哈希" class="headerlink" title="3. 哈希"></a>3. 哈希</h4><p>Hash，一般翻译做散列、杂凑，或音译为哈希，是把任意长度的输入（又叫做预映射pre-image）通过散列算法变换成固定长度的输出，该输出就是散列值。 这种转换是一种压缩映射，也就是，散列值的空间通常远小于输入的空间，不同的输入可能会散列成相同的输出，所以不可能从散列值来确定唯一的输入值。一般常用的哈希算法有两个算法族，md5和sha,具体见<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/37165658">哈希算法与MD5、SHA</a></p>
+<h4 id="4-Merkle-Tree"><a href="#4-Merkle-Tree" class="headerlink" title="4. Merkle Tree"></a>4. Merkle Tree</h4><img src="/2021/12/27/%E6%AF%94%E7%89%B9%E5%B8%81%E4%B8%8E%E5%8C%BA%E5%9D%97%E9%93%BE/merkle.jpeg" class="">
+<p>1，首先是它的树的结构，Merkle树常见的结构是二叉树，但它也可以是多叉树，它具有树结构的全部特点。<br>2，Merkle树的基础数据不是固定的，想存什么数据由你说了算，因为它只要数据经过哈希运算得到的Ｈash值。<br>3，Merkle树是从下往上逐层计算的，就是说每个中间节点，都是根据相邻的两个叶子节点组合计算得出的，而根节点是根据两个中间节点组合计算得出的，所以叶子节点是基础。</p>
+<h4 id="5-Gossip-算法"><a href="#5-Gossip-算法" class="headerlink" title="5. Gossip 算法"></a>5. Gossip 算法</h4><p>消息同步算法，又叫流言算法。Gossip 过程是由种子节点发起，当一个种子节点有状态需要更新到网络中的其他节点时，它会随机的选择周围几个节点散播消息，收到消息的节点也会重复该过程，直至最终网络中所有的节点都收到了消息。这个过程可能需要一定的时间，由于不能保证某个时刻所有节点都收到消息，但是理论上最终所有节点都会收到消息，因此它是一个最终一致性协议。</p>
 <h3 id="区块链流程"><a href="#区块链流程" class="headerlink" title="区块链流程"></a>区块链流程</h3><ol>
 <li>节点加入与启动</li>
 <li>节点产生交易，交易包括转账费用与记账权节点（矿工）的手续费，并广播。其中手续费不是必须的</li>
@@ -432,7 +437,7 @@
 <li>后续比特币来于交易和手续费，交易手续费收入：手续费收入来自转账的用户，用户每转账一次，需支付一定的比特币作为手续费。传统金融领域，手续费支付给银行，比特币系统中，手续费支付给矿工；比特币网络手续费可以自行设置，拥堵时可上调手续费，矿工会优先打包手续费高的交易。</li>
 <li>最后区块完全挖完后只能来自交易于手续费。</li>
 </ol>
-<h3 id="比特币双花"><a href="#比特币双花" class="headerlink" title="比特币双花"></a>比特币双花</h3><h3 id="比特币分叉"><a href="#比特币分叉" class="headerlink" title="比特币分叉"></a>比特币分叉</h3><h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/26762707">什么是哈希？</a></p>
+<h3 id="比特币双花"><a href="#比特币双花" class="headerlink" title="比特币双花"></a>比特币双花</h3><h3 id="比特币分叉"><a href="#比特币分叉" class="headerlink" title="比特币分叉"></a>比特币分叉</h3><h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/26762707">什么是哈希？</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/fengzhiwu/p/5524324.html">Merkle Tree 学习</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/41228196">P2P 网络核心技术：Gossip 协议</a></p>
 
       
     </div>
