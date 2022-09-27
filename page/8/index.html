@@ -337,6 +337,132 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://idonkeyliu.github.io/2018/10/26/%E5%87%A0%E7%A7%8D%E7%94%9F%E6%88%90ID%E7%9A%84%E6%96%B9%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://thirdwx.qlogo.cn/mmopen/vi_32/nqv8Jdn4oa4vIBamP2ZLQcGdg87gicx6PGlOkFGhs8QP6VlWYicj14hJsISSQO44rytt4fujXj4uNicEJUxRBlWzQ/0">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="idonkeyliu's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/26/%E5%87%A0%E7%A7%8D%E7%94%9F%E6%88%90ID%E7%9A%84%E6%96%B9%E6%B3%95/" itemprop="url">几种生成ID的方法</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-26T17:37:55+08:00">
+                2018-10-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>在我们的工作中，经常会遇到需要生成ID的场景，比如全链路日志中标识唯一请求或者说唯一链路的ID，用户注册过程中给用户分配的唯一账号ID，交易过程中的幂等值等。下面就说说几种常见的ID生成方法，也就是Id Maker的实现方案。</p>
+<h3 id="1-数据库auto-increment"><a href="#1-数据库auto-increment" class="headerlink" title="1. 数据库auto increment"></a>1. 数据库auto increment</h3><p>我们很容易的想到，数据库中auto increment就是为了生成唯一主键ID的，而且数据库的ACID特性，保证该过程肯定是原子的，原子的意思就是不会有ID冲突即有两个ID生成的一模一样。该方法对于生成ID不是很频繁的场景还是比较适用的，一般是生成请求在几千次/s的情况下。</p>
+<h3 id="2-使用redis自增命令"><a href="#2-使用redis自增命令" class="headerlink" title="2. 使用redis自增命令"></a>2. 使用redis自增命令</h3><p>redis有个incrby的命令，通用点的叫法就是计数器，其实这种思路与mysql的自增并没有什么分别，不过因为存储方式的原因，使用redis做id maker可以在单位时间内生成更多的ID，redis的性能都是10W/s的。不过使用redis没有使用mysql那么简单，它需要在业务层面做一些保护。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/10/26/%E5%87%A0%E7%A7%8D%E7%94%9F%E6%88%90ID%E7%9A%84%E6%96%B9%E6%B3%95/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://idonkeyliu.github.io/2018/10/12/%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1473,130 +1599,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://idonkeyliu.github.io/2018/04/25/QCon-%E5%8C%97%E4%BA%AC%E7%AB%99-2018%E5%B9%B44%E6%9C%88%E4%B8%8E%E4%BC%9A%E8%AE%B0%E5%BD%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://thirdwx.qlogo.cn/mmopen/vi_32/nqv8Jdn4oa4vIBamP2ZLQcGdg87gicx6PGlOkFGhs8QP6VlWYicj14hJsISSQO44rytt4fujXj4uNicEJUxRBlWzQ/0">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="idonkeyliu's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/25/QCon-%E5%8C%97%E4%BA%AC%E7%AB%99-2018%E5%B9%B44%E6%9C%88%E4%B8%8E%E4%BC%9A%E8%AE%B0%E5%BD%95/" itemprop="url">QCon(北京站)2018年4月与会记录</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-25T16:20:39+08:00">
-                2018-04-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>一直都有看InfoQ上面的各种技术文章，感觉InfoQ算是国内组织技术会议与传播技术做的比较好的了，所以其组织的各种大会一直以来都想去参加，但是限于门票比较贵与路费就没有动买票参会的念头。正好组织要在北京开UP大会，所以组内有几个名额可以去参加下QCon2018在北京站点的全球软件开发者大会，我运气好，获得了一张票。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/25/QCon-%E5%8C%97%E4%BA%AC%E7%AB%99-2018%E5%B9%B44%E6%9C%88%E4%B8%8E%E4%BC%9A%E8%AE%B0%E5%BD%95/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1647,7 +1649,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">103</span>
+                <span class="site-state-item-count">104</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
