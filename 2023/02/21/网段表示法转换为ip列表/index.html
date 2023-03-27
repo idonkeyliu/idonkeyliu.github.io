@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="今天越安逸，明天越危险" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="idonkeyliu's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="网段表示法转换为ip列表">
+<meta property="og:url" content="http://idonkeyliu.github.io/2023/02/21/%E7%BD%91%E6%AE%B5%E8%A1%A8%E7%A4%BA%E6%B3%95%E8%BD%AC%E6%8D%A2%E4%B8%BAip%E5%88%97%E8%A1%A8/index.html">
+<meta property="og:site_name" content="idonkeyliu&#39;s Blog">
+<meta property="og:locale">
+<meta property="og:image" content="http://idonkeyliu.github.io/2023/02/21/%E7%BD%91%E6%AE%B5%E8%A1%A8%E7%A4%BA%E6%B3%95%E8%BD%AC%E6%8D%A2%E4%B8%BAip%E5%88%97%E8%A1%A8/ip.png">
+<meta property="article:published_time" content="2023-02-21T08:45:18.000Z">
+<meta property="article:modified_time" content="2023-02-21T09:12:53.225Z">
+<meta property="article:author" content="idonkeyliu">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://idonkeyliu.github.io/2023/02/21/%E7%BD%91%E6%AE%B5%E8%A1%A8%E7%A4%BA%E6%B3%95%E8%BD%AC%E6%8D%A2%E4%B8%BAip%E5%88%97%E8%A1%A8/ip.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://idonkeyliu.github.io/2023/02/21/网段表示法转换为ip列表/"/>
+
+
+
+
+
+  <title>网段表示法转换为ip列表 | idonkeyliu's Blog</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-107117252-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?d3c2fc214cb28804722819af3b12894e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1264537514&web_id=1264537514" language="JavaScript"></script>
+  </div>
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">idonkeyliu's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://idonkeyliu.github.io/2023/02/21/%E7%BD%91%E6%AE%B5%E8%A1%A8%E7%A4%BA%E6%B3%95%E8%BD%AC%E6%8D%A2%E4%B8%BAip%E5%88%97%E8%A1%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://thirdwx.qlogo.cn/mmopen/vi_32/nqv8Jdn4oa4vIBamP2ZLQcGdg87gicx6PGlOkFGhs8QP6VlWYicj14hJsISSQO44rytt4fujXj4uNicEJUxRBlWzQ/0">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="idonkeyliu's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">网段表示法转换为ip列表</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-02-21T16:45:18+08:00">
+                2023-02-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <img src="/2023/02/21/%E7%BD%91%E6%AE%B5%E8%A1%A8%E7%A4%BA%E6%B3%95%E8%BD%AC%E6%8D%A2%E4%B8%BAip%E5%88%97%E8%A1%A8/ip.png" class="">
+
+<span id="more"></span>
+<blockquote>
+<p>106.52.1.0/26 这个表示法代表的是什么意思呢？</p>
+</blockquote>
+<h2 id="IP-地址：网络和主机"><a href="#IP-地址：网络和主机" class="headerlink" title="IP 地址：网络和主机"></a>IP 地址：网络和主机</h2><p>IP 地址是一个 32 位的数字。 它以唯一的数字标识出 TCP/IP 网络上的主机（计算机或其他设备，如打印机或路由器）。<br>IP 地址有两个部分。 IP 地址的第一部分用作网络地址，后一部分则用作主机地址。 以 192.168.123.132 为例，将其划分为这两部分，则会得到 192.168.123.0（网络地址）和 0.0.0.132（主机地址）</p>
+<h2 id="CIDR：无类域间路由"><a href="#CIDR：无类域间路由" class="headerlink" title="CIDR：无类域间路由"></a>CIDR：无类域间路由</h2><p>由于早期的IP地址的划分会浪费太多的IP地址（5种类型，A类地址、B类地址、C类地址、D类地址和E类地址），所以，现在都是用CIDR表示法，为此引入了子网掩码的概念，即网络位的个数可以任意指定。该方法兼容早期的IP划分方法。<br>CIDR表示方法：IP地址/网络ID的位数（网段的划分更加灵活）</p>
+<h2 id="子网掩码"><a href="#子网掩码" class="headerlink" title="子网掩码"></a>子网掩码</h2><p>在 TCP/IP 中，IP 地址中用作网络和主机地址的部分并不固定。 除非获取额外的信息，否则无法确定上述的网络和主机地址。 此信息以另一个 32 位数字（称为子网掩码）提供。 在这个例子中，子网掩码为 255.255.255.0。 这个数字的含义并不明显，除非你知道 255 在二进制计数法中等于 11111111。 因此，子网掩码为 11111111.11111111.11111111.00000000。</p>
+<p>将 IP 地址和子网掩码排在一起，即可分开地址中的网络和主机部分：</p>
+<p>11000000.10101000.01111011.10000100 - IP 地址 (192.168.123.132)<br>11111111.11111111.11111111.00000000 - 子网掩码 (255.255.255.0)</p>
+<p>前 24 位（子网掩码中的 1）被标识为网络地址。 最后 8 位（子网掩码中剩余的零）被标识为主机地址。 它为你提供以下地址：</p>
+<p>11000000.10101000.01111011.00000000 - 网络地址 (192.168.123.0)<br>00000000.00000000.00000000.10000100 - 主机地址 (000.000.000.132)</p>
+<h2 id="106-52-1-0-26"><a href="#106-52-1-0-26" class="headerlink" title="106.52.1.0/26"></a>106.52.1.0/26</h2><p>这个表示是网络地址位数有26位，其包含的ip列表有<br>最小IP：主机ID不能全为0，全为0表示网络ID<br>最大IP：主机ID不能全为1，全为1表示本地广播</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// processSegment 处理网段表示的 ip</span></span><br><span class="line"><span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">processSegment</span>(<span class="params"><span class="variable">$segment</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="variable">$info</span> = <span class="keyword">$this</span>-&gt;getIpInfo(<span class="variable">$segment</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="variable">$i</span> = <span class="variable">$info</span>[<span class="string">&#x27;long&#x27;</span>][<span class="string">&#x27;begin&#x27;</span>]; <span class="variable">$i</span> &lt;= <span class="variable">$info</span>[<span class="string">&#x27;long&#x27;</span>][<span class="string">&#x27;end&#x27;</span>]; <span class="variable">$i</span>++) &#123;</span><br><span class="line">       <span class="variable">$ip</span> = long2ip(<span class="variable">$i</span>);</span><br><span class="line">       <span class="keyword">echo</span> &#123;<span class="variable">$ip</span>&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getIpInfo</span>(<span class="params"><span class="variable">$ipStr</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="variable">$ipArr</span> = explode(<span class="string">&#x27;/&#x27;</span>, <span class="variable">$ipStr</span>);</span><br><span class="line">    <span class="variable">$info</span>[<span class="string">&#x27;ipStr&#x27;</span>] = <span class="variable">$ipStr</span>;</span><br><span class="line">    <span class="variable">$info</span>[<span class="string">&#x27;bin&#x27;</span>][<span class="string">&#x27;mask&#x27;</span>] = <span class="keyword">$this</span>-&gt;getSubnetMask(<span class="variable">$ipArr</span>[<span class="number">1</span>]); <span class="comment">// 获取掩码的二进制字符串</span></span><br><span class="line">    <span class="variable">$info</span>[<span class="string">&#x27;ip&#x27;</span>][<span class="string">&#x27;mask&#x27;</span>] = <span class="keyword">$this</span>-&gt;bin2ip(<span class="variable">$info</span>[<span class="string">&#x27;bin&#x27;</span>][<span class="string">&#x27;mask&#x27;</span>]);</span><br><span class="line">    <span class="variable">$info</span>[<span class="string">&#x27;long&#x27;</span>][<span class="string">&#x27;mask&#x27;</span>] = ip2long(<span class="variable">$info</span>[<span class="string">&#x27;ip&#x27;</span>][<span class="string">&#x27;mask&#x27;</span>]);</span><br><span class="line">    <span class="variable">$info</span>[<span class="string">&#x27;bin&#x27;</span>][<span class="string">&#x27;net_and&#x27;</span>] = <span class="keyword">$this</span>-&gt;ip2bin(<span class="variable">$ipArr</span>[<span class="number">0</span>]) &amp; <span class="variable">$info</span>[<span class="string">&#x27;bin&#x27;</span>][<span class="string">&#x27;mask&#x27;</span>]; <span class="comment">// 求与</span></span><br><span class="line">    <span class="variable">$info</span>[<span class="string">&#x27;ip&#x27;</span>][<span class="string">&#x27;net_and&#x27;</span>] = <span class="keyword">$this</span>-&gt;bin2ip(<span class="variable">$info</span>[<span class="string">&#x27;bin&#x27;</span>][<span class="string">&#x27;net_and&#x27;</span>]); <span class="comment">//</span></span><br><span class="line">    <span class="variable">$info</span>[<span class="string">&#x27;bin&#x27;</span>][<span class="string">&#x27;broadcast_address&#x27;</span>] = <span class="variable">$info</span>[<span class="string">&#x27;bin&#x27;</span>][<span class="string">&#x27;net_and&#x27;</span>] | <span class="keyword">$this</span>-&gt;getSubnetMaskFan(<span class="variable">$ipArr</span>[<span class="number">1</span>]); <span class="comment">// 求或，获取广播地址</span></span><br><span class="line">    <span class="variable">$info</span>[<span class="string">&#x27;ip&#x27;</span>][<span class="string">&#x27;broadcast_address&#x27;</span>] = <span class="keyword">$this</span>-&gt;bin2ip(<span class="variable">$info</span>[<span class="string">&#x27;bin&#x27;</span>][<span class="string">&#x27;broadcast_address&#x27;</span>]);</span><br><span class="line">    <span class="variable">$info</span>[<span class="string">&#x27;ip&#x27;</span>][<span class="string">&#x27;begin&#x27;</span>] = long2ip(ip2long(<span class="keyword">$this</span>-&gt;bin2ip(<span class="variable">$info</span>[<span class="string">&#x27;bin&#x27;</span>][<span class="string">&#x27;net_and&#x27;</span>])) + <span class="number">1</span>); <span class="comment">// 全为0的不能用</span></span><br><span class="line">    <span class="variable">$info</span>[<span class="string">&#x27;bin&#x27;</span>][<span class="string">&#x27;begin&#x27;</span>] = <span class="keyword">$this</span>-&gt;ip2bin(<span class="variable">$info</span>[<span class="string">&#x27;ip&#x27;</span>][<span class="string">&#x27;begin&#x27;</span>]);</span><br><span class="line">    <span class="variable">$info</span>[<span class="string">&#x27;long&#x27;</span>][<span class="string">&#x27;begin&#x27;</span>] = ip2long(<span class="variable">$info</span>[<span class="string">&#x27;ip&#x27;</span>][<span class="string">&#x27;begin&#x27;</span>]);</span><br><span class="line">    <span class="variable">$info</span>[<span class="string">&#x27;ip&#x27;</span>][<span class="string">&#x27;end&#x27;</span>] = long2ip(ip2long(<span class="variable">$info</span>[<span class="string">&#x27;ip&#x27;</span>][<span class="string">&#x27;broadcast_address&#x27;</span>]) - <span class="number">1</span>); <span class="comment">// 全为1的不能用</span></span><br><span class="line">    <span class="variable">$info</span>[<span class="string">&#x27;bin&#x27;</span>][<span class="string">&#x27;end&#x27;</span>] = <span class="keyword">$this</span>-&gt;ip2bin(<span class="variable">$info</span>[<span class="string">&#x27;ip&#x27;</span>][<span class="string">&#x27;end&#x27;</span>]);</span><br><span class="line">    <span class="variable">$info</span>[<span class="string">&#x27;long&#x27;</span>][<span class="string">&#x27;end&#x27;</span>] = ip2long(<span class="variable">$info</span>[<span class="string">&#x27;ip&#x27;</span>][<span class="string">&#x27;end&#x27;</span>]);</span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$info</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//获取二进制</span></span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">get_bin</span>(<span class="params"><span class="variable">$number</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> str_pad(decbin(<span class="variable">$number</span>), <span class="number">8</span>, <span class="string">&#x27;0&#x27;</span>, STR_PAD_LEFT);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//IP地址转二进制</span></span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">ip2bin</span>(<span class="params"><span class="variable">$ip</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="variable">$ip_octets</span> = explode(<span class="string">&quot;.&quot;</span>, <span class="variable">$ip</span>);</span><br><span class="line">    <span class="keyword">unset</span>(<span class="variable">$bin_sn</span>);</span><br><span class="line">    <span class="keyword">foreach</span> (<span class="variable">$ip_octets</span> <span class="keyword">as</span> <span class="variable">$val</span>) &#123;</span><br><span class="line">        <span class="variable">$bin_sn</span>[] = <span class="keyword">$this</span>-&gt;get_bin(<span class="variable">$val</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> join(<span class="string">&quot;.&quot;</span>, <span class="variable">$bin_sn</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//二进制转IP地址</span></span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">bin2ip</span>(<span class="params"><span class="variable">$ip</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="variable">$ip_octets</span> = explode(<span class="string">&quot;.&quot;</span>, <span class="variable">$ip</span>);</span><br><span class="line">    <span class="keyword">unset</span>(<span class="variable">$bin_sn</span>);</span><br><span class="line">    <span class="keyword">foreach</span> (<span class="variable">$ip_octets</span> <span class="keyword">as</span> <span class="variable">$val</span>) &#123;</span><br><span class="line">        <span class="variable">$bin_sn</span>[] = bindec(<span class="variable">$val</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> join(<span class="string">&quot;.&quot;</span>, <span class="variable">$bin_sn</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//获取子网掩码</span></span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">getSubnetMask</span>(<span class="params"><span class="variable">$mask</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="variable">$maskStr</span> = <span class="string">&quot;&quot;</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="variable">$i</span> = <span class="number">1</span>; <span class="variable">$i</span> &lt;= <span class="number">32</span>; <span class="variable">$i</span>++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="variable">$i</span> &lt;= <span class="variable">$mask</span>) &#123;</span><br><span class="line">            <span class="variable">$maskStr</span> .= <span class="string">&#x27;1&#x27;</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="variable">$maskStr</span> .= <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (<span class="variable">$i</span> % <span class="number">8</span> == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="variable">$maskStr</span> .= <span class="string">&#x27;.&#x27;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> substr(<span class="variable">$maskStr</span>, <span class="number">0</span>, -<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">getSubnetMaskFan</span>(<span class="params"><span class="variable">$mask</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="variable">$maskStr</span> = <span class="string">&quot;&quot;</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="variable">$i</span> = <span class="number">1</span>; <span class="variable">$i</span> &lt;= <span class="number">32</span>; <span class="variable">$i</span>++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="variable">$i</span> &lt;= <span class="variable">$mask</span>) &#123;</span><br><span class="line">            <span class="variable">$maskStr</span> .= <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="variable">$maskStr</span> .= <span class="string">&#x27;1&#x27;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (<span class="variable">$i</span> % <span class="number">8</span> == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="variable">$maskStr</span> .= <span class="string">&#x27;.&#x27;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> substr(<span class="variable">$maskStr</span>, <span class="number">0</span>, -<span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt=" WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt=" Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2023/01/12/2022%E5%B9%B4%E6%80%BB%E7%BB%93%E4%B8%8E2023%E5%B9%B4%E5%B1%95%E6%9C%9B/" rel="next" title="2022年总结与2023年展望">
+                <i class="fa fa-chevron-left"></i> 2022年总结与2023年展望
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2023/03/27/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%80%E4%BB%8B/" rel="prev" title="机器学习简介">
+                机器学习简介 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMTEwOC83NjU3"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://thirdwx.qlogo.cn/mmopen/vi_32/nqv8Jdn4oa4vIBamP2ZLQcGdg87gicx6PGlOkFGhs8QP6VlWYicj14hJsISSQO44rytt4fujXj4uNicEJUxRBlWzQ/0"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">108</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/idonkeyliu" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      github
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/idonkeyliu" target="_blank" title="twitter">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      twitter
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#IP-%E5%9C%B0%E5%9D%80%EF%BC%9A%E7%BD%91%E7%BB%9C%E5%92%8C%E4%B8%BB%E6%9C%BA"><span class="nav-number">1.</span> <span class="nav-text">IP 地址：网络和主机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CIDR%EF%BC%9A%E6%97%A0%E7%B1%BB%E5%9F%9F%E9%97%B4%E8%B7%AF%E7%94%B1"><span class="nav-number">2.</span> <span class="nav-text">CIDR：无类域间路由</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%90%E7%BD%91%E6%8E%A9%E7%A0%81"><span class="nav-number">3.</span> <span class="nav-text">子网掩码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#106-52-1-0-26"><span class="nav-number">4.</span> <span class="nav-text">106.52.1.0&#x2F;26</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">idonkeyliu</span>
+</div>
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.2"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>

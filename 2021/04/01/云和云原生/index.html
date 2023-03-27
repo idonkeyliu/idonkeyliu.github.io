@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="今天越安逸，明天越危险" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="idonkeyliu's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="云原生十二法则https:&#x2F;&#x2F;12factor.net&#x2F;zh_cn&#x2F;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="云和云原生">
+<meta property="og:url" content="http://idonkeyliu.github.io/2021/04/01/%E4%BA%91%E5%92%8C%E4%BA%91%E5%8E%9F%E7%94%9F/index.html">
+<meta property="og:site_name" content="idonkeyliu&#39;s Blog">
+<meta property="og:description" content="云原生十二法则https:&#x2F;&#x2F;12factor.net&#x2F;zh_cn&#x2F;">
+<meta property="og:locale">
+<meta property="og:image" content="http://idonkeyliu.github.io/2021/04/01/%E4%BA%91%E5%92%8C%E4%BA%91%E5%8E%9F%E7%94%9F/0.png">
+<meta property="og:image" content="http://idonkeyliu.github.io/2021/04/01/%E4%BA%91%E5%92%8C%E4%BA%91%E5%8E%9F%E7%94%9F/1.png">
+<meta property="og:image" content="http://idonkeyliu.github.io/2021/04/01/%E4%BA%91%E5%92%8C%E4%BA%91%E5%8E%9F%E7%94%9F/2.png">
+<meta property="og:image" content="http://idonkeyliu.github.io/2021/04/01/%E4%BA%91%E5%92%8C%E4%BA%91%E5%8E%9F%E7%94%9F/3.png">
+<meta property="og:image" content="http://idonkeyliu.github.io/2021/04/01/%E4%BA%91%E5%92%8C%E4%BA%91%E5%8E%9F%E7%94%9F/4.png">
+<meta property="og:image" content="http://idonkeyliu.github.io/2021/04/01/%E4%BA%91%E5%92%8C%E4%BA%91%E5%8E%9F%E7%94%9F/5.png">
+<meta property="og:image" content="http://idonkeyliu.github.io/2021/04/01/%E4%BA%91%E5%92%8C%E4%BA%91%E5%8E%9F%E7%94%9F/6.png">
+<meta property="og:image" content="http://idonkeyliu.github.io/2021/04/01/%E4%BA%91%E5%92%8C%E4%BA%91%E5%8E%9F%E7%94%9F/7.png">
+<meta property="og:image" content="http://idonkeyliu.github.io/2021/04/01/%E4%BA%91%E5%92%8C%E4%BA%91%E5%8E%9F%E7%94%9F/8.png">
+<meta property="article:published_time" content="2021-04-01T01:22:18.000Z">
+<meta property="article:modified_time" content="2021-09-28T03:18:16.264Z">
+<meta property="article:author" content="idonkeyliu">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://idonkeyliu.github.io/2021/04/01/%E4%BA%91%E5%92%8C%E4%BA%91%E5%8E%9F%E7%94%9F/0.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://idonkeyliu.github.io/2021/04/01/云和云原生/"/>
+
+
+
+
+
+  <title>云和云原生 | idonkeyliu's Blog</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-107117252-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?d3c2fc214cb28804722819af3b12894e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1264537514&web_id=1264537514" language="JavaScript"></script>
+  </div>
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">idonkeyliu's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://idonkeyliu.github.io/2021/04/01/%E4%BA%91%E5%92%8C%E4%BA%91%E5%8E%9F%E7%94%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://thirdwx.qlogo.cn/mmopen/vi_32/nqv8Jdn4oa4vIBamP2ZLQcGdg87gicx6PGlOkFGhs8QP6VlWYicj14hJsISSQO44rytt4fujXj4uNicEJUxRBlWzQ/0">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="idonkeyliu's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">云和云原生</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-01T09:22:18+08:00">
+                2021-04-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <img src="/2021/04/01/%E4%BA%91%E5%92%8C%E4%BA%91%E5%8E%9F%E7%94%9F/0.png" class="">
+<h3 id="云原生十二法则"><a href="#云原生十二法则" class="headerlink" title="云原生十二法则"></a>云原生十二法则</h3><p><a target="_blank" rel="noopener" href="https://12factor.net/zh_cn/">https://12factor.net/zh_cn/</a></p>
+<span id="more"></span>
+<h3 id="十二法则讲解"><a href="#十二法则讲解" class="headerlink" title="十二法则讲解"></a>十二法则讲解</h3><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/243404169">https://zhuanlan.zhihu.com/p/243404169</a></p>
+<h3 id="1-国内外的五朵云"><a href="#1-国内外的五朵云" class="headerlink" title="1. 国内外的五朵云"></a>1. 国内外的五朵云</h3><h4 id="1-1-海外五朵云（2018年数据）"><a href="#1-1-海外五朵云（2018年数据）" class="headerlink" title="1.1 海外五朵云（2018年数据）"></a>1.1 海外五朵云（2018年数据）</h4><img src="/2021/04/01/%E4%BA%91%E5%92%8C%E4%BA%91%E5%8E%9F%E7%94%9F/1.png" class="">
+
+<h4 id="1-2-国内五朵云（2018年数据）"><a href="#1-2-国内五朵云（2018年数据）" class="headerlink" title="1.2 国内五朵云（2018年数据）"></a>1.2 国内五朵云（2018年数据）</h4><img src="/2021/04/01/%E4%BA%91%E5%92%8C%E4%BA%91%E5%8E%9F%E7%94%9F/2.png" class="">
+
+<h3 id="2-什么叫做云原生"><a href="#2-什么叫做云原生" class="headerlink" title="2. 什么叫做云原生"></a>2. 什么叫做云原生</h3><p>云原生技术有利于各组织在公有云、私有云和混合云等新型动态环境中，构建和运行可弹性扩展的应用。云原生的代表技术包括容器、服务网格、微服务、不可变基础设施和声明式API。</p>
+<p>这些技术能够构建容错性好、易于管理和便于观察的松耦合系统。结合可靠的自动化手段，云原生技术使工程师能够轻松地对系统作出频繁和可预测的重大变更。</p>
+<p>云原生应用程序开发通常包括DevOps，敏捷方法，微服务，云平台，Kubernetes和Docker等，以及持续交付，简而言之，每种新的和现代的应用程序部署方法。其目的就是利用云的便利，更高效稳定的开发应用。</p>
+<p>云原生根本目的就是<code>利用云上的便利，以及各种容器技术，更高效稳定的开发应用</code>。</p>
+<h3 id="3-什么是IAAS、PAAS、SAAS"><a href="#3-什么是IAAS、PAAS、SAAS" class="headerlink" title="3. 什么是IAAS、PAAS、SAAS"></a>3. 什么是IAAS、PAAS、SAAS</h3><p>云计算的三个分层</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SaaS: Software-as-a-Service（软件即服务）</span><br><span class="line"></span><br><span class="line">PaaS: Platform-as-a-Service（平台即服务）</span><br><span class="line"></span><br><span class="line">IaaS: Infrastructure-as-a-Service（基础设施即服务）</span><br></pre></td></tr></table></figure>
+<img src="/2021/04/01/%E4%BA%91%E5%92%8C%E4%BA%91%E5%8E%9F%E7%94%9F/3.png" class="">
+
+<img src="/2021/04/01/%E4%BA%91%E5%92%8C%E4%BA%91%E5%8E%9F%E7%94%9F/4.png" class="">
+
+<p>现在还有其它的分法<br>FaaS、BaaS</p>
+<h3 id="4-什么叫docker"><a href="#4-什么叫docker" class="headerlink" title="4. 什么叫docker"></a>4. 什么叫docker</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">官方定义：Docker是一个能够把开发的应用程序自动部署到容器的开源引擎。由 Docker Inc. 公司 前 dotC1oud公司, PaaS市场中的老牌提供商)的团队编写,基于 Apache 2.0开源授权协议发行。</span><br><span class="line">程序员能理解的定义：Docker是Docker Inc. 公司开源的一个基于Linux技术构建容器的容器引擎，其源代码在GitHub上，基于Go语言开发并遵从Apache 2.0协议；</span><br><span class="line">普通人能理解的定义：“没有集装箱，就不会有全球化。”而Docker就是IT领域里改变世界的“集装箱”；</span><br><span class="line">圈里人总结：Docker是一套以容器技术为核心的IT标准化构建体系。它不仅仅是一项技术，更不仅仅是一家公司，Docker必将改变整个IT世界，让“Build Ship Run”来的更猛烈些吧！</span><br></pre></td></tr></table></figure>
+<p>总结一下：<code>可以将docker理解为一个集装箱，是IT标准化的体系</code>。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">以公司的服务为例，存在着不同的linux版本，不同服务依赖不同的应用版本，.so等，有些业务可能还需要设置环境变量。</span><br><span class="line"></span><br><span class="line">同时，公司内的制品库复杂，交付件各种各样，各种安装包，rpm，织云PKG，CC配置文件，ARS包等，很多程序在安装时，还要执行响应的前置脚本或者后置脚本执行各种配置。</span><br><span class="line"></span><br><span class="line">当使用Docker时，用户可以很轻松的通过编写Dockerfile构建出一个可以直接提供服务交付件(应用+依赖环境)，只要启动容器镜像，即可提供对外服务。</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-1-好处"><a href="#4-1-好处" class="headerlink" title="4.1 好处"></a>4.1 好处</h4><p>更高效的利用系统资源<br>资源隔离<br>一致的运行环境<br>持续交付和部署<br>更轻松的迁移<br>更轻松的维护和扩展</p>
+<h4 id="4-2-相关概念"><a href="#4-2-相关概念" class="headerlink" title="4.2 相关概念"></a>4.2 相关概念</h4><p>docker是<code>静态的叫镜像，动态的叫容器，存储镜像的地方叫仓库或者镜像仓库</code>，其中生成镜像最普遍的方式是编写Dockerfile。</p>
+<h3 id="5-什么是Kubernetes"><a href="#5-什么是Kubernetes" class="headerlink" title="5. 什么是Kubernetes"></a>5. 什么是Kubernetes</h3><p><code>Kubernetes 这个单词来自于希腊语，含义是 舵手 或 领航员 。其词根是 governor 和 cybernetic。 K8s 是它的缩写，用 8 字替代了“ubernete”。是Google 公司于 2014 年启动的项目</code><br>Kubernetes 可以在物理或虚拟机集群上调度和运行应用程序容器。然而，Kubernetes 还允许开发人员从物理和虚拟机’脱离’，从以主机为中心的基础架构转移到以容器为中心的基础架构，这样可以提供容器固有的全部优点和益处。Kubernetes 提供了基础设施来构建一个真正以容器为中心的开发环境。<br>总结：<code>k8s是一个编排容器的工具，其实也是管理应用的全生命周期的一个工具</code></p>
+<h4 id="5-1-相关概念"><a href="#5-1-相关概念" class="headerlink" title="5.1 相关概念"></a>5.1 相关概念</h4><img src="/2021/04/01/%E4%BA%91%E5%92%8C%E4%BA%91%E5%8E%9F%E7%94%9F/5.png" class="">
+
+<p>Node</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">节点（上图橘色方框）是物理或者虚拟机器，作为Kubernetes worker，通常称为Minion。每个节点都运行如下Kubernetes关键组件：</span><br><span class="line">Kubelet：是主节点代理。</span><br><span class="line">Kube-proxy：Service使用其将链接路由到Pod</span><br><span class="line">Docker或Rocket：Kubernetes使用的容器技术来创建容器。</span><br></pre></td></tr></table></figure>
+
+<p><code>Pod</code>(k8s调度的单元，扩缩容以这个为单位)</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Pod（上图绿色方框）安排在节点上，包含一组容器和卷。同一个Pod里的容器共享同一个网络命名空间，可以使用localhost互相通信。Pod是短暂的，不是持续性实体。你可能会有这些问题：</span><br><span class="line">如果Pod是短暂的，那么我怎么才能持久化容器数据使其能够跨重启而存在呢？ 是的，Kubernetes支持卷的概念，因此可以使用持久化的卷类型。</span><br><span class="line">是否手动创建Pod，如果想要创建同一个容器的多份拷贝，需要一个个分别创建出来么？可以手动创建单个Pod，但是也可以使用Replication Controller使用Pod模板创建出多份拷贝，下文会详细介绍。</span><br><span class="line">如果Pod是短暂的，那么重启时IP地址可能会改变，那么怎么才能从前端容器正确可靠地指向后台容器呢？这时可以使用Service，下文会详细介绍。</span><br></pre></td></tr></table></figure>
+
+<p>ReplicaSet(Replication-拷贝复制的意思)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">是 Pod 副本的抽象，用于解决 Pod 的扩容和伸缩，`主要作用是确保Pod以你指定的副本数运行`</span><br></pre></td></tr></table></figure>
+<p>Deployment</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Deployment 表示部署，在内部使用ReplicaSet 来实现。可以通过 Deployment 来生成相应的 ReplicaSet 完成 Pod 副本的创建。在公有云的容器服务里面有很多细分：</span><br></pre></td></tr></table></figure>
+
+<p>Container（容器）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">刚才说了运行的镜像叫容器，所以我们打的镜像跑起来就是这个东西。</span><br></pre></td></tr></table></figure>
+
+<p>Service与Ingress(路由与服务发现)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">一组pod对外提供的服务叫Service,Service 是后端真实服务的抽象，一个 Service 可以代表多个相同的后端服务</span><br><span class="line">Ingress 是反向代理规则，用来规定 HTTP/S 请求应该被转发到哪个 Service 上，比如根据请求中不同的 Host 和 url 路径让请求落到不同的 Service 上</span><br></pre></td></tr></table></figure>
+<img src="/2021/04/01/%E4%BA%91%E5%92%8C%E4%BA%91%E5%8E%9F%E7%94%9F/6.png" class="">
+
+<h3 id="6-上面一堆改变了什么？"><a href="#6-上面一堆改变了什么？" class="headerlink" title="6. 上面一堆改变了什么？"></a>6. 上面一堆改变了什么？</h3><img src="/2021/04/01/%E4%BA%91%E5%92%8C%E4%BA%91%E5%8E%9F%E7%94%9F/7.png" class="">
+
+<p>DevOps：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DevOps 一词的来自于 Development 和 Operations 的组合，突出重视软件开发人员和运维人员的沟通合作，通过自动化流程来使得软件构建、测试、发布更加快捷、频繁和可靠。DevOps 其实包含了三个部分：开发、测试和运维。换句话 DevOps 希望做到的是软件产品交付过程中IT工具链的打通，使得各个团队减少时间损耗，更加高效地协同工作。</span><br></pre></td></tr></table></figure>
+<p>CI:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CI的全称是Continuous Integration，表示持续集成。持续集成（CI）是在源代码变更后自动检测、拉取、构建和（在大多数情况下）进行单元测试的过程。持续集成是启动管道的环节（尽管某些预验证 —— 通常称为上线前检查pre-flight checks —— 有时会被归在持续集成之前）。持续集成的目标是快速确保开发人员新提交的变更是好的，并且适合在代码库中进一步使用。</span><br></pre></td></tr></table></figure>
+<p>CD:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">持续交付（CONTINUOUS DELIVERY），软件发布到目标环境。</span><br></pre></td></tr></table></figure>
+<p>CD:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">持续部署（CONTINUOUS DEPLOYMENT）</span><br><span class="line">有时候，持续交付也与持续部署混淆。持续部署意味着所有的变更都会被自动部署到生产环境中。持续交付意味着所有的变更都可以被部署到生产环境中，但是出于业务考虑，可以选择不部署。如果要实施持续部署，必须先实施持续交付。</span><br></pre></td></tr></table></figure>
+<p>CO:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">持续运营（CONTINUOUS OPERATION）</span><br></pre></td></tr></table></figure>
+
+<img src="/2021/04/01/%E4%BA%91%E5%92%8C%E4%BA%91%E5%8E%9F%E7%94%9F/8.png" class="">
+
+<p><code>结论：使用上述的1-6可以使得整个增长流程流转的更加有效率，虽然在CI+CD部分作了优化，但是对于全局来说，已经是个不小的改进。</code></p>
+<hr>
+<h3 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h3><p><a target="_blank" rel="noopener" href="https://kubernetes.io/">k8s官方文档</a><br><a target="_blank" rel="noopener" href="http://dockone.io/article/932">十分钟带你理解Kubernetes核心概念</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt=" WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt=" Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/03/30/2021%E5%B9%B411%E7%BA%A7%E7%AD%94%E8%BE%A9%E6%80%BB%E7%BB%93/" rel="next" title="2021年11级答辩总结">
+                <i class="fa fa-chevron-left"></i> 2021年11级答辩总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/06/17/AB%E5%AE%9E%E9%AA%8C%E5%9F%BA%E7%A1%80%E4%BB%8B%E7%BB%8D/" rel="prev" title="AB实验基础介绍">
+                AB实验基础介绍 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMTEwOC83NjU3"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://thirdwx.qlogo.cn/mmopen/vi_32/nqv8Jdn4oa4vIBamP2ZLQcGdg87gicx6PGlOkFGhs8QP6VlWYicj14hJsISSQO44rytt4fujXj4uNicEJUxRBlWzQ/0"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">108</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/idonkeyliu" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      github
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/idonkeyliu" target="_blank" title="twitter">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      twitter
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%91%E5%8E%9F%E7%94%9F%E5%8D%81%E4%BA%8C%E6%B3%95%E5%88%99"><span class="nav-number">1.</span> <span class="nav-text">云原生十二法则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%81%E4%BA%8C%E6%B3%95%E5%88%99%E8%AE%B2%E8%A7%A3"><span class="nav-number">2.</span> <span class="nav-text">十二法则讲解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%9B%BD%E5%86%85%E5%A4%96%E7%9A%84%E4%BA%94%E6%9C%B5%E4%BA%91"><span class="nav-number">3.</span> <span class="nav-text">1. 国内外的五朵云</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-%E6%B5%B7%E5%A4%96%E4%BA%94%E6%9C%B5%E4%BA%91%EF%BC%882018%E5%B9%B4%E6%95%B0%E6%8D%AE%EF%BC%89"><span class="nav-number">3.1.</span> <span class="nav-text">1.1 海外五朵云（2018年数据）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-%E5%9B%BD%E5%86%85%E4%BA%94%E6%9C%B5%E4%BA%91%EF%BC%882018%E5%B9%B4%E6%95%B0%E6%8D%AE%EF%BC%89"><span class="nav-number">3.2.</span> <span class="nav-text">1.2 国内五朵云（2018年数据）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E4%BB%80%E4%B9%88%E5%8F%AB%E5%81%9A%E4%BA%91%E5%8E%9F%E7%94%9F"><span class="nav-number">4.</span> <span class="nav-text">2. 什么叫做云原生</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E4%BB%80%E4%B9%88%E6%98%AFIAAS%E3%80%81PAAS%E3%80%81SAAS"><span class="nav-number">5.</span> <span class="nav-text">3. 什么是IAAS、PAAS、SAAS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E4%BB%80%E4%B9%88%E5%8F%ABdocker"><span class="nav-number">6.</span> <span class="nav-text">4. 什么叫docker</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1-%E5%A5%BD%E5%A4%84"><span class="nav-number">6.1.</span> <span class="nav-text">4.1 好处</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5"><span class="nav-number">6.2.</span> <span class="nav-text">4.2 相关概念</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E4%BB%80%E4%B9%88%E6%98%AFKubernetes"><span class="nav-number">7.</span> <span class="nav-text">5. 什么是Kubernetes</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-1-%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5"><span class="nav-number">7.1.</span> <span class="nav-text">5.1 相关概念</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E4%B8%8A%E9%9D%A2%E4%B8%80%E5%A0%86%E6%94%B9%E5%8F%98%E4%BA%86%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">8.</span> <span class="nav-text">6. 上面一堆改变了什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%99%84%E5%BD%95"><span class="nav-number">9.</span> <span class="nav-text">附录</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">idonkeyliu</span>
+</div>
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.2"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
