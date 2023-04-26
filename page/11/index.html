@@ -180,7 +180,7 @@
 
 
 
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -733,7 +733,7 @@
 <p>当后端的服务并发满足不了需要的时候，进行软件升级也是一个性价比很高的方法。</p>
 </blockquote>
 <p>下面写一个简单的测试程序bench.php</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="variable">$i</span> =<span class="number">0</span>; <span class="variable">$i</span> &lt; <span class="number">10000000</span>; <span class="variable">$i</span>++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="variable">$info</span> = <span class="keyword">array</span>(</span><br><span class="line">        <span class="string">&#x27;name&#x27;</span> =&gt;<span class="string">&#x27;Tom&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;rank&#x27;</span> =&gt; <span class="number">1</span></span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    <span class="variable">$infoEncode</span> = json_encode(<span class="variable">$info</span>);</span><br><span class="line">    <span class="variable">$infoDecode</span> = json_decode(<span class="variable">$infoEncode</span>, <span class="literal">true</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="variable">$i</span> =<span class="number">0</span>; <span class="variable">$i</span> &lt; <span class="number">10000000</span>; <span class="variable">$i</span>++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="variable">$info</span> = <span class="keyword">array</span>(</span><br><span class="line">        <span class="string">&#x27;name&#x27;</span> =&gt;<span class="string">&#x27;Tom&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;rank&#x27;</span> =&gt; <span class="number">1</span></span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    <span class="variable">$infoEncode</span> = <span class="title function_ invoke__">json_encode</span>(<span class="variable">$info</span>);</span><br><span class="line">    <span class="variable">$infoDecode</span> = <span class="title function_ invoke__">json_decode</span>(<span class="variable">$infoEncode</span>, <span class="literal">true</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>在机器A上面看php的版本号码</p>
           <!--noindex-->
           <div class="post-button text-center">
@@ -1313,7 +1313,7 @@
 <p>当后端的服务并发满足不了需要的时候，升级硬件往往是一个不错的选择。</p>
 </blockquote>
 <p>下面做一组测试，有A、B两台服务器，配置分别见下图</p>
-<p>|机型|    CPU核数|    内存|<br>| - | - |<br>|A    |4    |8G|<br>|B    |24    |64G|<br>A、B两台机器的php环境都是</p>
+<p>|机型|	CPU核数|	内存|<br>| - | - |<br>|A	|4	|8G|<br>|B	|24	|64G|<br>A、B两台机器的php环境都是</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/09/29/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BC%98%E5%8C%96%E6%8C%87%E5%8D%97%E4%B9%8B%E4%B8%80%EF%BC%88%E7%A1%AC%E4%BB%B6%E5%8D%87%E7%BA%A7%EF%BC%89/#more" rel="contents">

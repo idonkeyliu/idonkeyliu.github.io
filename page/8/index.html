@@ -180,7 +180,7 @@
 
 
 
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -928,8 +928,8 @@
       
         
           <p>在我们的工作中，经常会遇到需要生成ID的场景，比如全链路日志中标识唯一请求或者说唯一链路的ID，用户注册过程中给用户分配的唯一账号ID，交易过程中的幂等值等。下面就说说几种常见的ID生成方法，也就是Id Maker的实现方案。</p>
-<h3 id="1-数据库auto-increment"><a href="#1-数据库auto-increment" class="headerlink" title="1. 数据库auto increment"></a>1. 数据库auto increment</h3><p>我们很容易的想到，数据库中auto increment就是为了生成唯一主键ID的，而且数据库的ACID特性，保证该过程肯定是原子的，原子的意思就是不会有ID冲突即有两个ID生成的一模一样。该方法对于生成ID不是很频繁的场景还是比较适用的，一般是生成请求在几千次/s的情况下。</p>
-<h3 id="2-使用redis自增命令"><a href="#2-使用redis自增命令" class="headerlink" title="2. 使用redis自增命令"></a>2. 使用redis自增命令</h3><p>redis有个incrby的命令，通用点的叫法就是计数器，其实这种思路与mysql的自增并没有什么分别，不过因为存储方式的原因，使用redis做id maker可以在单位时间内生成更多的ID，redis的性能都是10W/s的。不过使用redis没有使用mysql那么简单，它需要在业务层面做一些保护。</p>
+<h3 id="1-数据库auto-increment"><a href="#1-数据库auto-increment" class="headerlink" title="1. 数据库auto increment"></a>1. 数据库auto increment</h3><p>我们很容易的想到，数据库中auto increment就是为了生成唯一主键ID的，而且数据库的ACID特性，保证该过程肯定是原子的，原子的意思就是不会有ID冲突即有两个ID生成的一模一样。该方法对于生成ID不是很频繁的场景还是比较适用的，一般是生成请求在几千次&#x2F;s的情况下。</p>
+<h3 id="2-使用redis自增命令"><a href="#2-使用redis自增命令" class="headerlink" title="2. 使用redis自增命令"></a>2. 使用redis自增命令</h3><p>redis有个incrby的命令，通用点的叫法就是计数器，其实这种思路与mysql的自增并没有什么分别，不过因为存储方式的原因，使用redis做id maker可以在单位时间内生成更多的ID，redis的性能都是10W&#x2F;s的。不过使用redis没有使用mysql那么简单，它需要在业务层面做一些保护。</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/10/26/%E5%87%A0%E7%A7%8D%E7%94%9F%E6%88%90ID%E7%9A%84%E6%96%B9%E6%B3%95/#more" rel="contents">
@@ -1445,7 +1445,7 @@
           <p>一、数据库事务隔离级别</p>
 <p>数据库事务的隔离级别有4个，由低到高依次为Read uncommitted 、Read committed 、Repeatable read 、Serializable ，这四个级别可以逐个解决脏读 、不可重复读 、幻读 这几类问题。</p>
 <p>√: 可能出现    ×: 不会出现</p>
-<p>|隔离级别|脏读|    不可重复读|    幻读|<br>|-|-|-|<br>|Read uncommitted    |√|    √    |√|<br>|Read committed    |×|    √    |√|<br>|Repeatable read|    ×    |×|√|<br>|Serializable|    ×    |×    |×|</p>
+<p>|隔离级别|脏读|	不可重复读|	幻读|<br>|-|-|-|<br>|Read uncommitted	|√|	√	|√|<br>|Read committed	|×|	√	|√|<br>|Repeatable read|	×	|×|√|<br>|Serializable|	×	|×	|×|</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/07/19/mysql%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E5%AD%A6%E4%B9%A0/#more" rel="contents">

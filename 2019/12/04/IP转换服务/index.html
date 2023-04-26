@@ -184,7 +184,7 @@
 
 
 
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -425,7 +425,7 @@
 <h4 id="2-1-利用mysql"><a href="#2-1-利用mysql" class="headerlink" title="2.1 利用mysql"></a>2.1 利用mysql</h4><p>将begin和end都用ip2long存起来，然后查询的时候用 ip &gt; begin and ip &lt; end 来提起，当然需要将begin、end做个联合索引。</p>
 <h4 id="2-2-利用Redis这样的kv"><a href="#2-2-利用Redis这样的kv" class="headerlink" title="2.2 利用Redis这样的kv"></a>2.2 利用Redis这样的kv</h4><p>将begin作为KEY,然后存为KV，然后将ip2long(begin)存在有序集合中，这样通过两次查询依然可以找到。</p>
 <p>上面都是IPV4的情况，IPV6的情况类似。不过貌似这些方法都不是很好，因为更新IP库的时候涉及到的变动挺多的。</p>
-<h3 id="3-搭建服务"><a href="#3-搭建服务" class="headerlink" title="3. 搭建服务"></a>3. 搭建服务</h3><p>无论是http还是tcp/udp服务都可以，逻辑比较简单，就是简单的查询</p>
+<h3 id="3-搭建服务"><a href="#3-搭建服务" class="headerlink" title="3. 搭建服务"></a>3. 搭建服务</h3><p>无论是http还是tcp&#x2F;udp服务都可以，逻辑比较简单，就是简单的查询</p>
 <h3 id="4-更新IP数据"><a href="#4-更新IP数据" class="headerlink" title="4. 更新IP数据"></a>4. 更新IP数据</h3><p>这一步比较费，需要去调整2中的存储。</p>
 
       

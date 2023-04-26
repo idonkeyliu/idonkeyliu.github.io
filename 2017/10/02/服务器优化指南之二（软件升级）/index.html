@@ -183,7 +183,7 @@
 
 
 
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -436,14 +436,14 @@
 <p>当后端的服务并发满足不了需要的时候，进行软件升级也是一个性价比很高的方法。</p>
 </blockquote>
 <p>下面写一个简单的测试程序bench.php</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="variable">$i</span> =<span class="number">0</span>; <span class="variable">$i</span> &lt; <span class="number">10000000</span>; <span class="variable">$i</span>++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="variable">$info</span> = <span class="keyword">array</span>(</span><br><span class="line">        <span class="string">&#x27;name&#x27;</span> =&gt;<span class="string">&#x27;Tom&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;rank&#x27;</span> =&gt; <span class="number">1</span></span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    <span class="variable">$infoEncode</span> = json_encode(<span class="variable">$info</span>);</span><br><span class="line">    <span class="variable">$infoDecode</span> = json_decode(<span class="variable">$infoEncode</span>, <span class="literal">true</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="variable">$i</span> =<span class="number">0</span>; <span class="variable">$i</span> &lt; <span class="number">10000000</span>; <span class="variable">$i</span>++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="variable">$info</span> = <span class="keyword">array</span>(</span><br><span class="line">        <span class="string">&#x27;name&#x27;</span> =&gt;<span class="string">&#x27;Tom&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;rank&#x27;</span> =&gt; <span class="number">1</span></span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    <span class="variable">$infoEncode</span> = <span class="title function_ invoke__">json_encode</span>(<span class="variable">$info</span>);</span><br><span class="line">    <span class="variable">$infoDecode</span> = <span class="title function_ invoke__">json_decode</span>(<span class="variable">$infoEncode</span>, <span class="literal">true</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>在机器A上面看php的版本号码</p>
 <span id="more"></span>
 <p>PHP 5.6.21 (cli) (built: Aug 18 2016 16:16:25)<br>Copyright (c) 1997-2016 The PHP Group<br>Zend Engine v2.6.0, Copyright (c) 1998-2016 Zend Technologies<br>    with Zend OPcache v7.0.6-dev, Copyright (c) 1999-2016, by Zend Technologies<br>在机器A上面运行bench.php，并且用time工具查看耗时</p>
-<p>[<strong>@</strong> /<strong>/</strong>]# time php bench.php</p>
+<p>[<strong>@</strong> &#x2F;<strong>&#x2F;</strong>]# time php bench.php</p>
 <p>real    0m32.086s<br>user    0m32.084s<br>sys     0m0.004s<br>然后将机器A的php版本升级到php7</p>
 <p>PHP 7.0.7 (cli) (built: Aug 18 2016 20:08:32) ( NTS )<br>Copyright (c) 1997-2016 The PHP Group<br>Zend Engine v3.0.0, Copyright (c) 1998-2016 Zend Technologies<br>    with Zend OPcache v7.0.6-dev, Copyright (c) 1999-2016, by Zend Technologies<br>再次执行bench.php，并且用time工具查看耗时</p>
-<p>[<strong>@</strong> /<strong>/</strong>]# time php bench.php</p>
+<p>[<strong>@</strong> &#x2F;<strong>&#x2F;</strong>]# time php bench.php</p>
 <p>real    0m14.106s<br>user    0m14.096s<br>sys     0m0.008s<br>可以看到在不改变程序只升级软件的情况下，php7的性能比php5.6高出很多。不止是php，还有许多其余的软件，都可以关注其最新的版本，然后可以尝试升级到最新的稳定版本，会有意想不到的好效果的~</p>
 
       

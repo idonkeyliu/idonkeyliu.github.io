@@ -180,7 +180,7 @@
 
 
 
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -1163,14 +1163,14 @@
       
         
           
-            <p>我知道A/B Test还是从几年前的一位女产品经理那里听到的，然后专门去搜索了一下这到底是个什么东西，才对它有个大概的认识。前些时间看了一些文章说今日头条与国外的一些游戏公司搭建了一套系统，能够非常方便的使用A/B测试来推出新的功能，看到这个的时候我自己挺震惊的，没有想到A/B测试还可以这么玩啊。</p>
-<h2 id="A-B测试是什么"><a href="#A-B测试是什么" class="headerlink" title="A/B测试是什么"></a>A/B测试是什么</h2><p>就是说对于一个需求有存在大于一种方案的时候（一般会有两种方案），每种方案都有优缺点但是难以取舍，即方案A与方案B，从整体用户中挑选样本量相同的两组样本，一组应用方案A，另外一种应用方案B。然后在一定的观察周期后（基本是1到2周吧），观察两组方案的数据指标，数据优的那个方案就可以合入到主干版本中去全量发行了。</p>
-<h2 id="A-B测试的优点"><a href="#A-B测试的优点" class="headerlink" title="A/B测试的优点"></a>A/B测试的优点</h2><ol>
+            <p>我知道A&#x2F;B Test还是从几年前的一位女产品经理那里听到的，然后专门去搜索了一下这到底是个什么东西，才对它有个大概的认识。前些时间看了一些文章说今日头条与国外的一些游戏公司搭建了一套系统，能够非常方便的使用A&#x2F;B测试来推出新的功能，看到这个的时候我自己挺震惊的，没有想到A&#x2F;B测试还可以这么玩啊。</p>
+<h2 id="A-x2F-B测试是什么"><a href="#A-x2F-B测试是什么" class="headerlink" title="A&#x2F;B测试是什么"></a>A&#x2F;B测试是什么</h2><p>就是说对于一个需求有存在大于一种方案的时候（一般会有两种方案），每种方案都有优缺点但是难以取舍，即方案A与方案B，从整体用户中挑选样本量相同的两组样本，一组应用方案A，另外一种应用方案B。然后在一定的观察周期后（基本是1到2周吧），观察两组方案的数据指标，数据优的那个方案就可以合入到主干版本中去全量发行了。</p>
+<h2 id="A-x2F-B测试的优点"><a href="#A-x2F-B测试的优点" class="headerlink" title="A&#x2F;B测试的优点"></a>A&#x2F;B测试的优点</h2><ol>
 <li>是一种科学的线上预测方法，基于样本可以代替总体的统计学原理，很容易看出哪种方案更优。</li>
 <li>数据化决策，以线上实际结果为导向，符合数字化世界的发展趋势。</li>
-<li>搭建测试框架，使得A/B测试这种方法可以很快的流水化进行，比传统的产品经理更能把握产品的走向。</li>
+<li>搭建测试框架，使得A&#x2F;B测试这种方法可以很快的流水化进行，比传统的产品经理更能把握产品的走向。</li>
 </ol>
-<h2 id="A-B测试的缺点"><a href="#A-B测试的缺点" class="headerlink" title="A/B测试的缺点"></a>A/B测试的缺点</h2><ol>
+<h2 id="A-x2F-B测试的缺点"><a href="#A-x2F-B测试的缺点" class="headerlink" title="A&#x2F;B测试的缺点"></a>A&#x2F;B测试的缺点</h2><ol>
 <li>实现成本较高，使用它的前提是会形成犹豫不决难以取舍的多套方案</li>
 <li>结论得出的周期较长，一般都需要一到两个自然周。</li>
 </ol>
@@ -1303,7 +1303,7 @@
 <h3 id="1-思路"><a href="#1-思路" class="headerlink" title="1. 思路"></a>1. 思路</h3><p>压测系统的设计最后会走上类似阿里双十一、微信等全链路压测的道路，但是这两个系统都是花费了至少3年的时间打磨完成，所以我们也分四大步走：<br>1.提供压测的url、ip+port+协议栈 +参数，来进行简单的分布式压测，（<font color=red>预期完成时间2018年上半年</font>)<br>2.改造目前项目的上下游路由机制（目前使用的是L５，但是L５不具备准备的流量分配机制），使得能方便快速的切换流量到单台机器上，从而得出单台机器的负载上限。（<font color=red>预期完成时间2018年下半年</font>)<br>3.复制目前项目单日所有用户的流量，清洗后进行重放，来大规模的压测整个系统，目的是在大流量的压力下发现系统瓶颈与隐藏故障点。（<font color=red>预期完成时间2019年全年</font>)<br>4.压测常规化，定时的来进行流量压测，完成自动化压测系统的进化。（<font color=red>预期完成时间2020年上半年</font>)</p>
 <h3 id="2-同类型产品分析"><a href="#2-同类型产品分析" class="headerlink" title="2. 同类型产品分析"></a>2. 同类型产品分析</h3><h4 id="2-1-压测大师"><a href="#2-1-压测大师" class="headerlink" title="2.1 压测大师"></a>2.1 压测大师</h4><p>压测大师可以很方便的实现第一步，但是具备如下缺点：<br>1.被压测机器的负载不能很方便的展示出来，最关键的是需要在被压测机器上装个软件，路径较长<br>2.压测大师对每个Url的并发上限为200，虽然可以通过开启白名单的方式来提升，但是感觉还是不太方便。<br>3.最主要的一点是，压测大师是一个独立的系统，虽然能大概cover住我们的第一步，但是对于我们的长期目标来说并不能很好的满足。</p>
 <h3 id="3-压测架构图"><a href="#3-压测架构图" class="headerlink" title="3. 压测架构图"></a>3. 压测架构图</h3><img src="/2018/04/12/%E5%85%A8%E9%93%BE%E8%B7%AF%E5%8E%8B%E6%B5%8B%E7%B3%BB%E7%BB%9F/pressure.jpg" class="">
-<p>模块介绍：<br>web controler: 显示与控制模块，显示压测的结果数据与agent的负载数据、agent的状态数据、dispatch模块的分发状态。<br>Manager：任务管理模块，通过从web controler获取任务配置，然后进行任务分配与启动停止。<br>Register: agent节点注册模块，可以获取agent的空闲繁忙状态，一般是分布式节点，推荐使用zk<br>dispatch: 文件分发模块，将提交的任务文件通过dispatch模块分发到各agent机器中。<br>agent: 真实的压测发起模块，从dispatch模块获取压测文件，从manager获取启停命令。<br>monitor: 监控统计模块，agent的负载信息上报至monitor模块。<br>MQ: agent获取压测结果，将其写入MQ<br>Collector: 收集器模块，将压测结果与agent的负载信息汇聚处理。<br>DB/DR：信息储存模块，存储web controler需要显示的各项数据。</p>
+<p>模块介绍：<br>web controler: 显示与控制模块，显示压测的结果数据与agent的负载数据、agent的状态数据、dispatch模块的分发状态。<br>Manager：任务管理模块，通过从web controler获取任务配置，然后进行任务分配与启动停止。<br>Register: agent节点注册模块，可以获取agent的空闲繁忙状态，一般是分布式节点，推荐使用zk<br>dispatch: 文件分发模块，将提交的任务文件通过dispatch模块分发到各agent机器中。<br>agent: 真实的压测发起模块，从dispatch模块获取压测文件，从manager获取启停命令。<br>monitor: 监控统计模块，agent的负载信息上报至monitor模块。<br>MQ: agent获取压测结果，将其写入MQ<br>Collector: 收集器模块，将压测结果与agent的负载信息汇聚处理。<br>DB&#x2F;DR：信息储存模块，存储web controler需要显示的各项数据。</p>
 <h3 id="4-设计要点"><a href="#4-设计要点" class="headerlink" title="4. 设计要点"></a>4. 设计要点</h3><p>1.能模拟线上流量（真实请求回放、自己模拟请求）<br>2.能区分模拟流量与真实流量<br>3.在线压测<br>4.物理隔离存储 正常存储+影子存储<br>5.能快速的进行流量路由，将单个模块的请求打满，直到错误率上升为止，因为具备重试的逻辑，所以问题不是很大。</p>
 <h3 id="4-参考文档"><a href="#4-参考文档" class="headerlink" title="4.参考文档"></a>4.参考文档</h3><p>有赞<br><a target="_blank" rel="noopener" href="http://www.infoq.com/cn/articles/youzan-11-11-stress-testing">http://www.infoq.com/cn/articles/youzan-11-11-stress-testing</a><br>云集<br><a target="_blank" rel="noopener" href="https://github.com/yunjiweidian/TITAN">https://github.com/yunjiweidian/TITAN</a><br>滴滴<br><a target="_blank" rel="noopener" href="http://gitbook.cn/books/58edf24902c60a2473618fac/index.html">http://gitbook.cn/books/58edf24902c60a2473618fac/index.html</a></p>
 
