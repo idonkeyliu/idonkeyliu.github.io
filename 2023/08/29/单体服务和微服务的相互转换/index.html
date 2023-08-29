@@ -105,7 +105,7 @@
 <meta property="og:locale">
 <meta property="og:image" content="http://idonkeyliu.github.io/2023/08/29/%E5%8D%95%E4%BD%93%E6%9C%8D%E5%8A%A1%E5%92%8C%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9A%84%E7%9B%B8%E4%BA%92%E8%BD%AC%E6%8D%A2/arch.png">
 <meta property="article:published_time" content="2023-08-29T08:48:05.000Z">
-<meta property="article:modified_time" content="2023-08-29T09:37:30.734Z">
+<meta property="article:modified_time" content="2023-08-29T09:41:47.823Z">
 <meta property="article:author" content="idonkeyliu">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://idonkeyliu.github.io/2023/08/29/%E5%8D%95%E4%BD%93%E6%9C%8D%E5%8A%A1%E5%92%8C%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9A%84%E7%9B%B8%E4%BA%92%E8%BD%AC%E6%8D%A2/arch.png">
@@ -414,14 +414,62 @@
         <img src="/2023/08/29/%E5%8D%95%E4%BD%93%E6%9C%8D%E5%8A%A1%E5%92%8C%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9A%84%E7%9B%B8%E4%BA%92%E8%BD%AC%E6%8D%A2/arch.png" class="">
 <h1 id="单体架构和微服务架构"><a href="#单体架构和微服务架构" class="headerlink" title="单体架构和微服务架构"></a>单体架构和微服务架构</h1><p>架构的发展过程是单体-&gt;soa-&gt;微服务。随着业务的复杂程度加剧，单体架构服务间耦合严重的情况愈加突出。<br>微服务化主要是解决业务间耦合的问题，拆分为粒度更小的服务可以控制业务复杂度和故障的爆炸半径。</p>
 <span id="more"></span>
-<p>|传统单体架构|	分布式微服务化架构|<br>|-|-|-|<br>|新功能开发|	需要时间|	容易开发和实现|<br>|部署	|不经常而且容易部署|	经常发布，部署复杂|<br>|隔离性|	故障影响范围大	|故障影响范围小|<br>|架构设计	|初期技术选型难度大|	设计逻辑难度大|<br>|系统性能	|相对时间快，吞吐量小	|相对时间慢，吞吐量大|<br>|系统运维	|运维难度简单	|运维难度复杂|<br>|新人上手	|学习曲线大（应用逻辑）|	学习曲线大（架构逻辑）|<br>|技术|	技术单一而且封闭|	技术多样而且容易开发|<br>|测试和差错|	简单	|复杂（每个服务都要进行单独测试，还需要集群测试）|<br>|系统扩展性	|扩展性差	|扩展性好|<br>|系统管理	|重点在于开发成本	|重点在于服务治理和调度|</p>
+<table>
+<thead>
+<tr>
+<th>传统单体架构</th>
+<th>分布式微服务化架构</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>新功能开发</td>
+<td>需要时间</td>
+</tr>
+<tr>
+<td>部署</td>
+<td>不经常而且容易部署</td>
+</tr>
+<tr>
+<td>隔离性</td>
+<td>故障影响范围大</td>
+</tr>
+<tr>
+<td>架构设计</td>
+<td>初期技术选型难度大</td>
+</tr>
+<tr>
+<td>系统性能</td>
+<td>相对时间快，吞吐量小</td>
+</tr>
+<tr>
+<td>系统运维</td>
+<td>运维难度简单</td>
+</tr>
+<tr>
+<td>新人上手</td>
+<td>学习曲线大（应用逻辑）</td>
+</tr>
+<tr>
+<td>技术</td>
+<td>技术单一而且封闭</td>
+</tr>
+<tr>
+<td>测试和差错</td>
+<td>简单</td>
+</tr>
+<tr>
+<td>系统扩展性</td>
+<td>扩展性差</td>
+</tr>
+<tr>
+<td>系统管理</td>
+<td>重点在于开发成本</td>
+</tr>
+</tbody></table>
 <h1 id="逆潮流"><a href="#逆潮流" class="headerlink" title="逆潮流?"></a>逆潮流?</h1><p>目前我们处于单体到微服务的运动过程中，逐渐发现拆分后细粒度的微服务比较多，从而带来管理和维护成本。那如何能进行优化呢？<br>对于成熟的业务来说，维护开销比开发开销占比更高，是否可以将若干微服务打包为一个新的微服务呢？<br>逻辑独立但是部署在一起，一起对外提供完整的功能。</p>
 <h1 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h1><p>可根据需求把所有微服务随时合并成少数几个单体服务，在保留微服务优势的前提下，消除其劣势。也可以随时在其中某个服务变得更复杂更大的时候从单体服务中拆分出来</p>
-<h1 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h1><ol>
-<li>所有的微服务都需要符合既定的目录规范<br>├── service # 服务入口,用户用例集合（实现pb定义的方法）<br>│   └── xxx.go 具体的入口文件<br>│<br>├── logic # 逻辑层，所有业务逻辑都在此层, 根据业务细分目录<br>│   ├── biz1 # 对应领域建模中的应用服务1<br>│       └── 实体1.go # 具体的业务逻辑, 实体结构体和port定义其中</li>
-</ol>
-<p>│       └── 实体2.go # 具体的业务逻辑, 实体结构体和port定义其中<br>│       └── service.go # 非实体逻辑（类似ddd中的domain service, 有些逻辑不属于任何实体，可以找个地方归属它）<br>│   ├── biz2 # 对应领域建模中的应用服务2，一般没有<br>│       └── 实体1.go 同上<br>│<br>├── infrastructure # 基础设施层<br>│   ├── biz1 # 对应logic中的biz1<br>│       ├── 实体1.go # 实体1的adapter在其中实现（默认包含mysql等基础设施）<br>│       └── 实体2.go # 实体2的adapter在其中实现（默认包含mysql等基础设施）<br>│   ├── biz2 # 同上<br>│       └── 实体X.go 同上<br>│   ├── commonbiz1 # 公共服务，比如biz1和biz2都需要rpc请求XXX服务，为了避免biz1和biz2中都写XXX请求服务的代码，将其找个目录收敛起来<br>│       └── commonbiz1.go 同上<br>│<br>├── common # 通用常量，工具函数（该目录非常薄，大部分服务用不到）<br>│   └── constant # 多层通用常量，如果一个常量只在logic层使用就不要定义在这里<br>│       └──biz1<br>│          └── biz1.go<br>│   ├── util # 工具函数目录（工程独有的，否则可以考虑将工具代码合到另外的git项目）<br>│       └──cast # 具体的工具函数，比如转换<br>│           └── cast.go<br>├── test # 接口测试目录<br>2. main.go通过脚手架生成,不允许修改。里面是依赖注入和服务注册<br>3. 拆分合并脚本来合并不同微服务的目录，集成main.go和yaml配置文件，yaml文件中配置可以去重</p>
-
+<h1 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h1><h2 id="1-所有的微服务都需要符合既定的目录规范"><a href="#1-所有的微服务都需要符合既定的目录规范" class="headerlink" title="1. 所有的微服务都需要符合既定的目录规范"></a>1. 所有的微服务都需要符合既定的目录规范</h2><p>├── service # 服务入口,用户用例集合（实现pb定义的方法）<br>│   └── xxx.go 具体的入口文件<br>│<br>├── logic # 逻辑层，所有业务逻辑都在此层, 根据业务细分目录<br>│   ├── biz1 # 对应领域建模中的应用服务1<br>│       └── 实体1.go # 具体的业务逻辑, 实体结构体和port定义其中<br>│       └── 实体2.go # 具体的业务逻辑, 实体结构体和port定义其中<br>│       └── service.go # 非实体逻辑（类似ddd中的domain service, 有些逻辑不属于任何实体，可以找个地方归属它）<br>│   ├── biz2 # 对应领域建模中的应用服务2，一般没有<br>│       └── 实体1.go 同上<br>│<br>├── infrastructure # 基础设施层<br>│   ├── biz1 # 对应logic中的biz1<br>│       ├── 实体1.go # 实体1的adapter在其中实现（默认包含mysql等基础设施）<br>│       └── 实体2.go # 实体2的adapter在其中实现（默认包含mysql等基础设施）<br>│   ├── biz2 # 同上<br>│       └── 实体X.go 同上<br>│   ├── commonbiz1 # 公共服务，比如biz1和biz2都需要rpc请求XXX服务，为了避免biz1和biz2中都写XXX请求服务的代码，将其找个目录收敛起来<br>│       └── commonbiz1.go 同上<br>│<br>├── common # 通用常量，工具函数（该目录非常薄，大部分服务用不到）<br>│   └── constant # 多层通用常量，如果一个常量只在logic层使用就不要定义在这里<br>│       └──biz1<br>│          └── biz1.go<br>│   ├── util # 工具函数目录（工程独有的，否则可以考虑将工具代码合到另外的git项目）<br>│       └──cast # 具体的工具函数，比如转换<br>│           └── cast.go<br>├── test # 接口测试目录</p>
+<h2 id="2-main-go通过脚手架生成-不允许修改。里面是依赖注入和服务注册"><a href="#2-main-go通过脚手架生成-不允许修改。里面是依赖注入和服务注册" class="headerlink" title="2. main.go通过脚手架生成,不允许修改。里面是依赖注入和服务注册"></a>2. main.go通过脚手架生成,不允许修改。里面是依赖注入和服务注册</h2><h2 id="3-拆分合并脚本来合并不同微服务的目录，集成main-go和yaml配置文件，yaml文件中配置可以去重"><a href="#3-拆分合并脚本来合并不同微服务的目录，集成main-go和yaml配置文件，yaml文件中配置可以去重" class="headerlink" title="3. 拆分合并脚本来合并不同微服务的目录，集成main.go和yaml配置文件，yaml文件中配置可以去重"></a>3. 拆分合并脚本来合并不同微服务的目录，集成main.go和yaml配置文件，yaml文件中配置可以去重</h2>
       
     </div>
     
@@ -649,7 +697,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84%E5%92%8C%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84"><span class="nav-number">1.</span> <span class="nav-text">单体架构和微服务架构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%80%86%E6%BD%AE%E6%B5%81"><span class="nav-number">2.</span> <span class="nav-text">逆潮流?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87"><span class="nav-number">3.</span> <span class="nav-text">目标</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%B9%E6%A1%88"><span class="nav-number">4.</span> <span class="nav-text">方案</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84%E5%92%8C%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84"><span class="nav-number">1.</span> <span class="nav-text">单体架构和微服务架构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%80%86%E6%BD%AE%E6%B5%81"><span class="nav-number">2.</span> <span class="nav-text">逆潮流?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87"><span class="nav-number">3.</span> <span class="nav-text">目标</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%B9%E6%A1%88"><span class="nav-number">4.</span> <span class="nav-text">方案</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%89%80%E6%9C%89%E7%9A%84%E5%BE%AE%E6%9C%8D%E5%8A%A1%E9%83%BD%E9%9C%80%E8%A6%81%E7%AC%A6%E5%90%88%E6%97%A2%E5%AE%9A%E7%9A%84%E7%9B%AE%E5%BD%95%E8%A7%84%E8%8C%83"><span class="nav-number">4.1.</span> <span class="nav-text">1. 所有的微服务都需要符合既定的目录规范</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-main-go%E9%80%9A%E8%BF%87%E8%84%9A%E6%89%8B%E6%9E%B6%E7%94%9F%E6%88%90-%E4%B8%8D%E5%85%81%E8%AE%B8%E4%BF%AE%E6%94%B9%E3%80%82%E9%87%8C%E9%9D%A2%E6%98%AF%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E5%92%8C%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C"><span class="nav-number">4.2.</span> <span class="nav-text">2. main.go通过脚手架生成,不允许修改。里面是依赖注入和服务注册</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%8B%86%E5%88%86%E5%90%88%E5%B9%B6%E8%84%9A%E6%9C%AC%E6%9D%A5%E5%90%88%E5%B9%B6%E4%B8%8D%E5%90%8C%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9A%84%E7%9B%AE%E5%BD%95%EF%BC%8C%E9%9B%86%E6%88%90main-go%E5%92%8Cyaml%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%EF%BC%8Cyaml%E6%96%87%E4%BB%B6%E4%B8%AD%E9%85%8D%E7%BD%AE%E5%8F%AF%E4%BB%A5%E5%8E%BB%E9%87%8D"><span class="nav-number">4.3.</span> <span class="nav-text">3. 拆分合并脚本来合并不同微服务的目录，集成main.go和yaml配置文件，yaml文件中配置可以去重</span></a></li></ol></li></ol></div>
             
 
           </div>
