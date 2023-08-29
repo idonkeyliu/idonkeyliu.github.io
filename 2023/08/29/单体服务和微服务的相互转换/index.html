@@ -105,7 +105,7 @@
 <meta property="og:locale">
 <meta property="og:image" content="http://idonkeyliu.github.io/2023/08/29/%E5%8D%95%E4%BD%93%E6%9C%8D%E5%8A%A1%E5%92%8C%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9A%84%E7%9B%B8%E4%BA%92%E8%BD%AC%E6%8D%A2/arch.png">
 <meta property="article:published_time" content="2023-08-29T08:48:05.000Z">
-<meta property="article:modified_time" content="2023-08-29T09:41:47.823Z">
+<meta property="article:modified_time" content="2023-08-29T09:43:32.061Z">
 <meta property="article:author" content="idonkeyliu">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://idonkeyliu.github.io/2023/08/29/%E5%8D%95%E4%BD%93%E6%9C%8D%E5%8A%A1%E5%92%8C%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9A%84%E7%9B%B8%E4%BA%92%E8%BD%AC%E6%8D%A2/arch.png">
@@ -417,6 +417,7 @@
 <table>
 <thead>
 <tr>
+<th>维度</th>
 <th>传统单体架构</th>
 <th>分布式微服务化架构</th>
 </tr>
@@ -424,46 +425,57 @@
 <tbody><tr>
 <td>新功能开发</td>
 <td>需要时间</td>
+<td>容易开发和实现</td>
 </tr>
 <tr>
 <td>部署</td>
 <td>不经常而且容易部署</td>
+<td>经常发布，部署复杂</td>
 </tr>
 <tr>
 <td>隔离性</td>
 <td>故障影响范围大</td>
+<td>故障影响范围小</td>
 </tr>
 <tr>
 <td>架构设计</td>
 <td>初期技术选型难度大</td>
+<td>设计逻辑难度大</td>
 </tr>
 <tr>
 <td>系统性能</td>
 <td>相对时间快，吞吐量小</td>
+<td>相对时间慢，吞吐量大</td>
 </tr>
 <tr>
 <td>系统运维</td>
 <td>运维难度简单</td>
+<td>运维难度复杂</td>
 </tr>
 <tr>
 <td>新人上手</td>
 <td>学习曲线大（应用逻辑）</td>
+<td>学习曲线大（架构逻辑）</td>
 </tr>
 <tr>
 <td>技术</td>
 <td>技术单一而且封闭</td>
+<td>技术多样而且容易开发</td>
 </tr>
 <tr>
 <td>测试和差错</td>
 <td>简单</td>
+<td>复杂（每个服务都要进行单独测试，还需要集群测试）</td>
 </tr>
 <tr>
 <td>系统扩展性</td>
 <td>扩展性差</td>
+<td>扩展性好</td>
 </tr>
 <tr>
 <td>系统管理</td>
 <td>重点在于开发成本</td>
+<td>重点在于服务治理和调度</td>
 </tr>
 </tbody></table>
 <h1 id="逆潮流"><a href="#逆潮流" class="headerlink" title="逆潮流?"></a>逆潮流?</h1><p>目前我们处于单体到微服务的运动过程中，逐渐发现拆分后细粒度的微服务比较多，从而带来管理和维护成本。那如何能进行优化呢？<br>对于成熟的业务来说，维护开销比开发开销占比更高，是否可以将若干微服务打包为一个新的微服务呢？<br>逻辑独立但是部署在一起，一起对外提供完整的功能。</p>
