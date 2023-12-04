@@ -111,7 +111,7 @@
 <meta property="og:image" content="http://idonkeyliu.github.io/2023/11/28/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E4%B8%80%E8%87%B4%E6%80%A7/raft0.gif">
 <meta property="og:image" content="http://idonkeyliu.github.io/2023/11/28/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E4%B8%80%E8%87%B4%E6%80%A7/gossip.gif">
 <meta property="article:published_time" content="2023-11-28T02:06:41.000Z">
-<meta property="article:modified_time" content="2023-12-04T08:25:06.756Z">
+<meta property="article:modified_time" content="2023-12-04T08:53:16.386Z">
 <meta property="article:author" content="idonkeyliu">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://idonkeyliu.github.io/2023/11/28/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E4%B8%80%E8%87%B4%E6%80%A7/fen.png">
@@ -475,12 +475,14 @@
 <h5 id="leader选举"><a href="#leader选举" class="headerlink" title="leader选举"></a>leader选举</h5><img src="/2023/11/28/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E4%B8%80%E8%87%B4%E6%80%A7/raft1.png" class="">
 <h5 id="日志复制"><a href="#日志复制" class="headerlink" title="日志复制"></a>日志复制</h5><img src="/2023/11/28/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E4%B8%80%E8%87%B4%E6%80%A7/raft0.gif" class="">
 
-<h4 id="zab"><a href="#zab" class="headerlink" title="zab"></a>zab</h4><h4 id="gossip"><a href="#gossip" class="headerlink" title="gossip"></a>gossip</h4><p>相比 Paxos、Raft 等算法，Gossip 的过程十分简单，它可以看作是以下两个步骤的简单循环：</p>
-<p>如果有某一项信息需要在整个网络中所有节点中传播，那从信息源开始，选择一个固定的传播周期（譬如 1 秒），随机选择它相连接的 k 个节点（称为 Fan-Out）来传播消息。</p>
-<p>每一个节点收到消息后，如果这个消息是它之前没有收到过的，将在下一个周期内，选择除了发送消息给它的那个节点外的其他相邻 k 个节点发送相同的消息，直到最终网络中所有节点都收到了消息，尽管这个过程需要一定时间，但是理论上最终网络的所有节点都会拥有相同的消息。</p>
+<h4 id="zab"><a href="#zab" class="headerlink" title="zab"></a>zab</h4><blockquote>
+<p>Zab协议 的全称是 Zookeeper Atomic Broadcast （Zookeeper原子广播）。 Zookeeper 是通过 Zab 协议来保证分布式事务的最终一致性。</p>
+</blockquote>
+<h4 id="gossip"><a href="#gossip" class="headerlink" title="gossip"></a>gossip</h4><p>相比 Paxos、Raft 等算法，Gossip 的过程十分简单，它可以看作是以下两个步骤的简单循环：<br>如果有某一项信息需要在整个网络中所有节点中传播，那从信息源开始，选择一个固定的传播周期（譬如 1 秒），随机选择它相连接的 k 个节点（称为 Fan-Out）来传播消息。<br>每一个节点收到消息后，如果这个消息是它之前没有收到过的，将在下一个周期内，选择除了发送消息给它的那个节点外的其他相邻 k 个节点发送相同的消息，直到最终网络中所有节点都收到了消息，尽管这个过程需要一定时间，但是理论上最终网络的所有节点都会拥有相同的消息。</p>
 <img src="/2023/11/28/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E4%B8%80%E8%87%B4%E6%80%A7/gossip.gif" class="">
 
-<h3 id="最终一致性"><a href="#最终一致性" class="headerlink" title="最终一致性"></a>最终一致性</h3><h3 id="一致性迷思"><a href="#一致性迷思" class="headerlink" title="一致性迷思"></a>一致性迷思</h3><ol>
+<h3 id="最终一致性"><a href="#最终一致性" class="headerlink" title="最终一致性"></a>最终一致性</h3><p>DNS<br>gossip</p>
+<h3 id="一致性迷思"><a href="#一致性迷思" class="headerlink" title="一致性迷思"></a>一致性迷思</h3><ol>
 <li>多副本的一致性<br>指的的多副本之间数据是否是一致的</li>
 <li>一致性hash<br>是一种解决数据分配的算法，提升的是系统的可用性和性能，并没有解决分布式系统中的一致性问题</li>
 <li>CAP理论的一致性<br>从客户端看来，分布式系统任意一个节点都可以提供相同的数据返回</li>
@@ -493,7 +495,7 @@
 <h3 id="分布式系统常见知识点"><a href="#分布式系统常见知识点" class="headerlink" title="分布式系统常见知识点"></a>分布式系统常见知识点</h3><ul>
 <li>说说一致性哈希算法</li>
 </ul>
-<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a target="_blank" rel="noopener" href="https://wanghenshui.github.io/2021/01/12/consistency.html">分布式系统中的一致性模型，以及事务</a><br><a target="_blank" rel="noopener" href="https://learn.lianglianglee.com/%e4%b8%93%e6%a0%8f/%e5%88%86%e5%b8%83%e5%bc%8f%e6%8a%80%e6%9c%af%e5%8e%9f%e7%90%86%e4%b8%8e%e5%ae%9e%e6%88%9845%e8%ae%b2-%e5%ae%8c/01%20%e5%a6%82%e4%bd%95%e8%af%81%e6%98%8e%e5%88%86%e5%b8%83%e5%bc%8f%e7%b3%bb%e7%bb%9f%e7%9a%84%20CAP%20%e7%90%86%e8%ae%ba%ef%bc%9f.md">技术文章摘抄</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39795049/article/details/128983551">分布式理论笔记</a><br><a target="_blank" rel="noopener" href="https://pdai.tech/md/arch/arch-z-id.html">Java全栈知识体系</a><br><a target="_blank" rel="noopener" href="https://icyfenix.cn/distribution/consensus/gossip.html">凤凰架构</a><br><a target="_blank" rel="noopener" href="https://mikechen.cc/20234.html">raft算法实现原理详解</a><br><a target="_blank" rel="noopener" href="https://xie.infoq.cn/article/967bcf5fa69f442e8e5f84330">谈谈分布式一致性机制</a><br><a target="_blank" rel="noopener" href="https://github.com/loveincode/notes/blob/master/15%20-%20Distributed%20%E5%88%86%E5%B8%83%E5%BC%8F/%E5%88%86%E5%B8%83%E5%BC%8F%E7%90%86%E8%AE%BA/%E5%88%86%E5%B8%83%E5%BC%8F%E7%90%86%E8%AE%BA%206%20-%20%E4%B8%80%E8%87%B4%E6%80%A7%E5%8D%8F%E8%AE%AERaft.md">一致性协议</a></p>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a target="_blank" rel="noopener" href="https://wanghenshui.github.io/2021/01/12/consistency.html">分布式系统中的一致性模型，以及事务</a><br><a target="_blank" rel="noopener" href="https://learn.lianglianglee.com/%e4%b8%93%e6%a0%8f/%e5%88%86%e5%b8%83%e5%bc%8f%e6%8a%80%e6%9c%af%e5%8e%9f%e7%90%86%e4%b8%8e%e5%ae%9e%e6%88%9845%e8%ae%b2-%e5%ae%8c/01%20%e5%a6%82%e4%bd%95%e8%af%81%e6%98%8e%e5%88%86%e5%b8%83%e5%bc%8f%e7%b3%bb%e7%bb%9f%e7%9a%84%20CAP%20%e7%90%86%e8%ae%ba%ef%bc%9f.md">技术文章摘抄</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39795049/article/details/128983551">分布式理论笔记</a><br><a target="_blank" rel="noopener" href="https://pdai.tech/md/arch/arch-z-id.html">Java全栈知识体系</a><br><a target="_blank" rel="noopener" href="https://icyfenix.cn/distribution/consensus/gossip.html">凤凰架构</a><br><a target="_blank" rel="noopener" href="https://mikechen.cc/20234.html">raft算法实现原理详解</a><br><a target="_blank" rel="noopener" href="https://xie.infoq.cn/article/967bcf5fa69f442e8e5f84330">谈谈分布式一致性机制</a><br><a target="_blank" rel="noopener" href="https://github.com/loveincode/notes/blob/master/15%20-%20Distributed%20%E5%88%86%E5%B8%83%E5%BC%8F/%E5%88%86%E5%B8%83%E5%BC%8F%E7%90%86%E8%AE%BA/%E5%88%86%E5%B8%83%E5%BC%8F%E7%90%86%E8%AE%BA%206%20-%20%E4%B8%80%E8%87%B4%E6%80%A7%E5%8D%8F%E8%AE%AERaft.md">一致性协议</a><br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/av21667358/?from=search&seid=3617346752757602421&vd_source=836f107b7fdaa84c6433cc04951e4882">一致性算法视频</a><br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Bj411u7An/?spm_id_from=333.788.recommend_more_video.0&vd_source=836f107b7fdaa84c6433cc04951e4882">Raft算法和ZAB算法</a></p>
 
       
     </div>
