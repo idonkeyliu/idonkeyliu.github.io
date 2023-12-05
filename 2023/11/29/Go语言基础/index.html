@@ -83,6 +83,8 @@
 
 
 
+  
+
 
   <link rel="alternate" href="/atom.xml" title="idonkeyliu's Blog" type="application/atom+xml" />
 
@@ -97,16 +99,16 @@
 
 
 <meta property="og:type" content="article">
-<meta property="og:title" content="go面试题目">
-<meta property="og:url" content="http://idonkeyliu.github.io/2023/11/29/go%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/index.html">
+<meta property="og:title" content="go语言基础">
+<meta property="og:url" content="http://idonkeyliu.github.io/2023/11/29/Go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="idonkeyliu&#39;s Blog">
 <meta property="og:locale">
-<meta property="og:image" content="http://idonkeyliu.github.io/2023/11/29/go%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/go.png">
+<meta property="og:image" content="http://idonkeyliu.github.io/2023/11/29/Go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/go.png">
 <meta property="article:published_time" content="2023-11-29T09:12:36.000Z">
-<meta property="article:modified_time" content="2023-12-02T00:37:47.682Z">
+<meta property="article:modified_time" content="2023-12-05T03:22:27.007Z">
 <meta property="article:author" content="idonkeyliu">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://idonkeyliu.github.io/2023/11/29/go%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/go.png">
+<meta name="twitter:image" content="http://idonkeyliu.github.io/2023/11/29/Go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/go.png">
 
 
 
@@ -135,13 +137,13 @@
 
 
 
-  <link rel="canonical" href="http://idonkeyliu.github.io/2023/11/29/go面试题目/"/>
+  <link rel="canonical" href="http://idonkeyliu.github.io/2023/11/29/Go语言基础/"/>
 
 
 
 
 
-  <title>go面试题目 | idonkeyliu's Blog</title>
+  <title>go语言基础 | idonkeyliu's Blog</title>
   
 
 
@@ -337,7 +339,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://idonkeyliu.github.io/2023/11/29/go%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/">
+    <link itemprop="mainEntityOfPage" href="http://idonkeyliu.github.io/2023/11/29/Go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -354,7 +356,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">go面试题目</h1>
+          <h1 class="post-title" itemprop="name headline">go语言基础</h1>
         
 
         <div class="post-meta">
@@ -409,7 +411,7 @@
       
 
       
-        <img src="/2023/11/29/go%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/go.png" class="">
+        <img src="/2023/11/29/Go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/go.png" class="">
 <span id="more"></span>
 <p>1、写出下面代码的输出结果，并给出原因和修正。</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	values := []<span class="type">string</span>&#123;<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>, <span class="string">&quot;c&quot;</span>&#125;</span><br><span class="line">	<span class="keyword">for</span> _, v := <span class="keyword">range</span> values &#123;</span><br><span class="line">		<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">			fmt.Println(v)</span><br><span class="line">		&#125;()</span><br><span class="line">	&#125;</span><br><span class="line">	time.Sleep(<span class="number">2</span> * time.Second)</span><br><span class="line">	fmt.Println(<span class="string">&quot;end&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
