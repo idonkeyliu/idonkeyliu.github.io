@@ -96,20 +96,20 @@
 
 
 
-<meta name="description" content="最近在考虑一个有趣的问题。如果有一个用户信息表，信息表的主要字段有三个，一个是用户id，一个是token，一个是具体信息info |id|	token|	info|| - | - ||10023	|G_KHFDFFDFDFADSF	|||10024	|K_TEREETETETTTET	|||****	|****	|*****|还有一个获取用户信息的接口 123req：https:&#x2F;&#x2F;xxx.co">
+<meta name="description" content="最近在考虑一个有趣的问题。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何极致的反复获取多个用户的信息">
 <meta property="og:url" content="http://idonkeyliu.github.io/2024/05/20/%E5%A6%82%E4%BD%95%E6%9E%81%E8%87%B4%E7%9A%84%E5%8F%8D%E5%A4%8D%E8%8E%B7%E5%8F%96%E5%A4%9A%E4%B8%AA%E7%94%A8%E6%88%B7%E7%9A%84%E4%BF%A1%E6%81%AF/index.html">
 <meta property="og:site_name" content="idonkeyliu&#39;s Blog">
-<meta property="og:description" content="最近在考虑一个有趣的问题。如果有一个用户信息表，信息表的主要字段有三个，一个是用户id，一个是token，一个是具体信息info |id|	token|	info|| - | - ||10023	|G_KHFDFFDFDFADSF	|||10024	|K_TEREETETETTTET	|||****	|****	|*****|还有一个获取用户信息的接口 123req：https:&#x2F;&#x2F;xxx.co">
+<meta property="og:description" content="最近在考虑一个有趣的问题。">
 <meta property="og:locale">
-<meta property="og:image" content="http://idonkeyliu.github.io/2024/05/20/%E5%A6%82%E4%BD%95%E6%9E%81%E8%87%B4%E7%9A%84%E5%8F%8D%E5%A4%8D%E8%8E%B7%E5%8F%96%E5%A4%9A%E4%B8%AA%E7%94%A8%E6%88%B7%E7%9A%84%E4%BF%A1%E6%81%AF/model.png">
+<meta property="og:image" content="http://idonkeyliu.github.io/2024/05/20/%E5%A6%82%E4%BD%95%E6%9E%81%E8%87%B4%E7%9A%84%E5%8F%8D%E5%A4%8D%E8%8E%B7%E5%8F%96%E5%A4%9A%E4%B8%AA%E7%94%A8%E6%88%B7%E7%9A%84%E4%BF%A1%E6%81%AF/list.png">
 <meta property="og:image" content="http://idonkeyliu.github.io/2024/05/20/%E5%A6%82%E4%BD%95%E6%9E%81%E8%87%B4%E7%9A%84%E5%8F%8D%E5%A4%8D%E8%8E%B7%E5%8F%96%E5%A4%9A%E4%B8%AA%E7%94%A8%E6%88%B7%E7%9A%84%E4%BF%A1%E6%81%AF/model.png">
 <meta property="article:published_time" content="2024-05-20T09:52:59.000Z">
-<meta property="article:modified_time" content="2024-05-21T03:02:11.453Z">
+<meta property="article:modified_time" content="2024-05-21T03:08:41.608Z">
 <meta property="article:author" content="idonkeyliu">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://idonkeyliu.github.io/2024/05/20/%E5%A6%82%E4%BD%95%E6%9E%81%E8%87%B4%E7%9A%84%E5%8F%8D%E5%A4%8D%E8%8E%B7%E5%8F%96%E5%A4%9A%E4%B8%AA%E7%94%A8%E6%88%B7%E7%9A%84%E4%BF%A1%E6%81%AF/model.png">
+<meta name="twitter:image" content="http://idonkeyliu.github.io/2024/05/20/%E5%A6%82%E4%BD%95%E6%9E%81%E8%87%B4%E7%9A%84%E5%8F%8D%E5%A4%8D%E8%8E%B7%E5%8F%96%E5%A4%9A%E4%B8%AA%E7%94%A8%E6%88%B7%E7%9A%84%E4%BF%A1%E6%81%AF/list.png">
 
 
 
@@ -412,9 +412,39 @@
       
 
       
-        <img src="/2024/05/20/%E5%A6%82%E4%BD%95%E6%9E%81%E8%87%B4%E7%9A%84%E5%8F%8D%E5%A4%8D%E8%8E%B7%E5%8F%96%E5%A4%9A%E4%B8%AA%E7%94%A8%E6%88%B7%E7%9A%84%E4%BF%A1%E6%81%AF/model.png" class="">
-<h2 id="最近在考虑一个有趣的问题。"><a href="#最近在考虑一个有趣的问题。" class="headerlink" title="最近在考虑一个有趣的问题。"></a>最近在考虑一个有趣的问题。</h2><p>如果有一个用户信息表，信息表的主要字段有三个，一个是用户id，一个是token，一个是具体信息info</p>
-<p>|id|	token|	info|<br>| - | - |<br>|10023	|G_KHFDFFDFDFADSF	|<em><strong><strong>|<br>|10024	|K_TEREETETETTTET	|</strong></strong></em>|<br>|****	|****	|*****|<br>还有一个获取用户信息的接口</p>
+        <img src="/2024/05/20/%E5%A6%82%E4%BD%95%E6%9E%81%E8%87%B4%E7%9A%84%E5%8F%8D%E5%A4%8D%E8%8E%B7%E5%8F%96%E5%A4%9A%E4%B8%AA%E7%94%A8%E6%88%B7%E7%9A%84%E4%BF%A1%E6%81%AF/list.png" class="">
+<p>最近在考虑一个有趣的问题。</p>
+<span id="more"></span>
+<p>如果有一个用户信息表，信息表的主要字段有三个，一个是用户id，一个是token，一个是具体信息info</p>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>token</th>
+<th>info</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>10023</td>
+<td>G_KHFDFFDFDFADSF</td>
+<td>*****</td>
+</tr>
+<tr>
+<td>10024</td>
+<td>K_TEREETETETTTET</td>
+<td>*****</td>
+</tr>
+<tr>
+<td>****</td>
+<td>****</td>
+<td>*****</td>
+</tr>
+<tr>
+<td>还有一个获取用户信息的接口</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">req：https://xxx.com?id=xxx&amp;token=xxx</span><br><span class="line">rsp: &#123;&quot;code&quot;:0, &quot;info&quot;:&quot;xxxxx&quot;&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>问题：如何尽快地维护这个表中info信息的更新？</p>
 <p>方案1：串行同步模型</p>
@@ -539,17 +569,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://thirdwx.qlogo.cn/mmopen/vi_32/nqv8Jdn4oa4vIBamP2ZLQcGdg87gicx6PGlOkFGhs8QP6VlWYicj14hJsISSQO44rytt4fujXj4uNicEJUxRBlWzQ/0"
@@ -642,22 +663,6 @@
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E8%BF%91%E5%9C%A8%E8%80%83%E8%99%91%E4%B8%80%E4%B8%AA%E6%9C%89%E8%B6%A3%E7%9A%84%E9%97%AE%E9%A2%98%E3%80%82"><span class="nav-number">1.</span> <span class="nav-text">最近在考虑一个有趣的问题。</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
