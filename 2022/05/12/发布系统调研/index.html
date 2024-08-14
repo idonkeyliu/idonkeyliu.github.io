@@ -98,17 +98,15 @@
 
 
 
-<meta name="description" content="背景：在使用acdeployment系统之前，我们20+个前后台项目均使用ars系统进行发布，但ars系统因底层安全漏洞需要下线，经过调研后发现虽然有蓝盾，橘子等CI平台可实现git项目文件传输至IDC的功能，但发布页面的信息展示，灰度ip发布，灰度文件发布，文件回滚等操作均支持得不够友好，需要自研一套小型发布系统进行替代。 发布系统需要在功能上贴近ARS系统，操作流程也需要尽量与ARS类似，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="发布系统调研">
 <meta property="og:url" content="http://idonkeyliu.github.io/2022/05/12/%E5%8F%91%E5%B8%83%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%A0%94/index.html">
 <meta property="og:site_name" content="idonkeyliu&#39;s Blog">
-<meta property="og:description" content="背景：在使用acdeployment系统之前，我们20+个前后台项目均使用ars系统进行发布，但ars系统因底层安全漏洞需要下线，经过调研后发现虽然有蓝盾，橘子等CI平台可实现git项目文件传输至IDC的功能，但发布页面的信息展示，灰度ip发布，灰度文件发布，文件回滚等操作均支持得不够友好，需要自研一套小型发布系统进行替代。 发布系统需要在功能上贴近ARS系统，操作流程也需要尽量与ARS类似，">
 <meta property="og:locale">
 <meta property="og:image" content="http://idonkeyliu.github.io/2022/05/12/%E5%8F%91%E5%B8%83%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%A0%94/de.png">
 <meta property="og:image" content="http://idonkeyliu.github.io/2022/05/12/%E5%8F%91%E5%B8%83%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%A0%94/acde.png">
 <meta property="article:published_time" content="2022-05-12T02:19:16.000Z">
-<meta property="article:modified_time" content="2024-08-14T12:17:33.680Z">
+<meta property="article:modified_time" content="2024-08-14T12:23:56.663Z">
 <meta property="article:author" content="idonkeyliu">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://idonkeyliu.github.io/2022/05/12/%E5%8F%91%E5%B8%83%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%A0%94/de.png">
@@ -415,11 +413,13 @@
 
       
         <img src="/2022/05/12/%E5%8F%91%E5%B8%83%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%A0%94/de.png" class="">
+
+
+<span id="more"></span>
+
 <blockquote>
 <p>背景：在使用acdeployment系统之前，我们20+个前后台项目均使用ars系统进行发布，但ars系统因底层安全漏洞需要下线，经过调研后发现虽然有蓝盾，橘子等CI平台可实现git项目文件传输至IDC的功能，但发布页面的信息展示，灰度ip发布，灰度文件发布，文件回滚等操作均支持得不够友好，需要自研一套小型发布系统进行替代。 发布系统需要在功能上贴近ARS系统，操作流程也需要尽量与ARS类似，使大家使用起来可以无门槛，另外，发布系统最好仍通过OCI接入，这样切换成本会比较低，只修改OCI插件配置为新发布系统的配置即可切换完成。</p>
 </blockquote>
-<span id="more"></span>
-
 <h2 id="发布模式介绍"><a href="#发布模式介绍" class="headerlink" title="发布模式介绍"></a>发布模式介绍</h2><h3 id="1-文件发布"><a href="#1-文件发布" class="headerlink" title="1. 文件发布"></a>1. 文件发布</h3><p>纯文件发布在前容器时代一直是主流，到了容器时代该发布方式就日渐式微了。不过在解释型语言发布的场景下依然有一席之地。</p>
 <h3 id="2-镜像发布"><a href="#2-镜像发布" class="headerlink" title="2. 镜像发布"></a>2. 镜像发布</h3><p>容器时代的主流发布模式，对于编译型语言来说该发布方式是绝对的主流。</p>
 <h2 id="流程解构"><a href="#流程解构" class="headerlink" title="流程解构"></a>流程解构</h2><p>发布系统属于发布阶段的范畴，隶属于DevOps中的CD环节。</p>
@@ -454,37 +454,37 @@
 <td>合法性</td>
 <td>语法检查</td>
 <td>存在语法错误的文件不能上线，不过这个功能应该是属于CI环节</td>
-<td></td>
+<td>acdeployment</td>
 </tr>
 <tr>
 <td>合法性</td>
 <td>单元测试&amp;接口测试</td>
 <td>没有通过测试的文件不能上线，不过这个功能应该是属于CI环节</td>
-<td></td>
+<td>acdeployment</td>
 </tr>
 <tr>
 <td>发布</td>
 <td>冲突检查</td>
 <td>保证发布过程安全</td>
-<td></td>
+<td>acdeployment</td>
 </tr>
 <tr>
 <td>发布</td>
 <td>灰度发布</td>
 <td>灰度发布保证系统安全</td>
-<td></td>
+<td>acdeployment</td>
 </tr>
 <tr>
 <td>发布</td>
 <td>回滚</td>
 <td>异常情况下的快速恢复</td>
-<td></td>
+<td>acdeployment</td>
 </tr>
 <tr>
 <td>发布</td>
 <td>手动和自动</td>
 <td>同时支持手动和自动发布</td>
-<td></td>
+<td>acdeployment</td>
 </tr>
 </tbody></table>
 <h2 id="发布系统流程图"><a href="#发布系统流程图" class="headerlink" title="发布系统流程图"></a>发布系统流程图</h2><img src="/2022/05/12/%E5%8F%91%E5%B8%83%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%A0%94/acde.png" class="">
