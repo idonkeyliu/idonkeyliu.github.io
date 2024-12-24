@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5326378969485700"
+     crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="今天越安逸，明天越危险" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="idonkeyliu's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="什么叫事务事务是无法被分割的操作.事务是应用程序中一系列严密的操作，所有操作必须成功完成，否则在每个操作中所作的所有更改都会被撤消。也就是事务具有原子性，一个事务中的一系列的操作要么全部成功，要么一个都不做。事务应该具有 4 个属性：原子性、一致性、隔离性、持久性。这四个属性通常称为 ACID 特性。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="分布式事务">
+<meta property="og:url" content="http://idonkeyliu.github.io/2024/11/25/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/index.html">
+<meta property="og:site_name" content="idonkeyliu&#39;s Blog">
+<meta property="og:description" content="什么叫事务事务是无法被分割的操作.事务是应用程序中一系列严密的操作，所有操作必须成功完成，否则在每个操作中所作的所有更改都会被撤消。也就是事务具有原子性，一个事务中的一系列的操作要么全部成功，要么一个都不做。事务应该具有 4 个属性：原子性、一致性、隔离性、持久性。这四个属性通常称为 ACID 特性。">
+<meta property="og:locale">
+<meta property="og:image" content="http://idonkeyliu.github.io/2024/11/25/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/ds.jpg">
+<meta property="og:image" content="http://idonkeyliu.github.io/2024/11/25/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/xa.png">
+<meta property="og:image" content="http://idonkeyliu.github.io/2024/11/25/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/2pc.png">
+<meta property="og:image" content="http://idonkeyliu.github.io/2024/11/25/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/3pc.png">
+<meta property="og:image" content="http://idonkeyliu.github.io/2024/11/25/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/tcc.jpg">
+<meta property="og:image" content="http://idonkeyliu.github.io/2024/11/25/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/saga.jpg">
+<meta property="og:image" content="http://idonkeyliu.github.io/2024/11/25/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/at.png">
+<meta property="og:image" content="http://idonkeyliu.github.io/2024/11/25/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/bf.png">
+<meta property="og:image" content="http://idonkeyliu.github.io/2024/11/25/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/bdsw.png">
+<meta property="og:image" content="http://idonkeyliu.github.io/2024/11/25/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/xxdl.png">
+<meta property="og:image" content="http://idonkeyliu.github.io/2024/11/25/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/ms.png">
+<meta property="article:published_time" content="2024-11-25T09:09:28.000Z">
+<meta property="article:modified_time" content="2024-12-24T10:03:54.329Z">
+<meta property="article:author" content="idonkeyliu">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://idonkeyliu.github.io/2024/11/25/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/ds.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://idonkeyliu.github.io/2024/11/25/分布式事务/"/>
+
+
+
+
+
+  <title>分布式事务 | idonkeyliu's Blog</title>
+  
+
+
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-96CQ5TQ1TG"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-96CQ5TQ1TG');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?d3c2fc214cb28804722819af3b12894e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1264537514&web_id=1264537514" language="JavaScript"></script>
+  </div>
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">idonkeyliu's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://idonkeyliu.github.io/2024/11/25/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://q1.qlogo.cn/g?b=qq&s=100&nk=232836108">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="idonkeyliu's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">分布式事务</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2024-11-25T17:09:28+08:00">
+                2024-11-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <img src="/2024/11/25/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/ds.jpg" class="">
+
+<h1 id="什么叫事务"><a href="#什么叫事务" class="headerlink" title="什么叫事务"></a>什么叫事务</h1><p>事务是无法被分割的操作.事务是应用程序中一系列严密的操作，所有操作必须成功完成，否则在每个操作中所作的所有更改都会被撤消。也就是事务具有原子性，一个事务中的一系列的操作要么全部成功，要么一个都不做。事务应该具有 4 个属性：原子性、一致性、隔离性、持久性。这四个属性通常称为 ACID 特性。</p>
+<span id="more"></span>
+
+<h2 id="本地事务"><a href="#本地事务" class="headerlink" title="本地事务"></a>本地事务</h2><p>举例：修改一个数据库中的多个表字段</p>
+<p>ACID，是指数据库管理系统（DBMS）在写入或更新资料的过程中，为保证事务（transaction）是正确可靠的，所必须具备的四个特性：原子性（atomicity，或称不可分割性）、一致性（consistency）、隔离性（isolation，又称独立性）、持久性（durability）。</p>
+<p>php使用pdo本地事务可以用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">$client-&gt;beginTransaction();</span><br><span class="line"></span><br><span class="line">$sql = &quot;update `xxxxx&quot;;</span><br><span class="line">$updateRet = $client-&gt;execute($sql);</span><br><span class="line">if (!$updateRet || $client-&gt;rowCount() == 0) &#123;</span><br><span class="line">    $client-&gt;rollBack();</span><br><span class="line">    $this-&gt;outputJson(E_DB, &#x27;失败~&#x27;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$sql = &quot;insert into xxxx&quot;;</span><br><span class="line">$insertRet = $client-&gt;execute($sql);</span><br><span class="line">if (!$insertRet || $client-&gt;rowCount() == 0) &#123;</span><br><span class="line">    $client-&gt;rollBack();</span><br><span class="line">    $this-&gt;outputJson(E_DB, &#x27;兑换失败!&#x27;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$client-&gt;commit();</span><br></pre></td></tr></table></figure>
+
+<h2 id="分布式事务"><a href="#分布式事务" class="headerlink" title="分布式事务"></a>分布式事务</h2><p>随着业务的发展，一个业务需求并不仅仅是在一个数据库中进行事务操作，很有可能是跨数据库、跨存储介质的事务操作，这种就是分布式事务。分布式的解决方案很多，我们先来看看XA 协议</p>
+<h3 id="XA协议"><a href="#XA协议" class="headerlink" title="XA协议"></a>XA协议</h3><blockquote>
+<p>XA协议，全称为eXtended Architecture，是由X&#x2F;Open组织定义的分布式事务处理（DTP，Distributed Transaction Processing）标准<br>。它主要用于协调跨多个数据库或资源管理器的事务，以确保事务的一致性和可靠性</p>
+</blockquote>
+<img src="/2024/11/25/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/xa.png" class="">
+
+<p>图中有三个角色。<br>AP：应用程序，也就是大家写的业务代码<br>TM：事务管理器，协调事务的“中间层”<br>RM：资源管理器，实际业务需要操作的资源，比如Mysql&#x2F;MQ等。</p>
+<p>其中TM和RM之间的交互规范为XA协议。</p>
+<p>XA协议通过两阶段提交（2PC）或三阶段提交（3PC）机制来实现分布式事务的处理，并确保事务操作的原子性、一致性、隔离性和持久性（ACID特性）。</p>
+<blockquote>
+<p>为什么需要有多阶段提交呢？假定我们是一阶段提交，即是直接进行操作。如果多个资源管理器能直接提交成功这当然没有问题。假定有A&#x2F;B&#x2F;C三个RM。AB直接扣成功了，C扣失败了。那么AB是不是要执行回退操作，同时因为是一阶段提交并没有rollback这个操作。所以A和B必须执行反向sql（删除的要插入、更新的要恢复，插入的要删除）整体的复杂度和容错上升了很多。</p>
+</blockquote>
+<p>具体的2pc和3pc就不描述了。总结下2pc和3pc。</p>
+<h3 id="2pc"><a href="#2pc" class="headerlink" title="2pc"></a>2pc</h3><img src="/2024/11/25/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/2pc.png" class="">
+
+<h4 id="包含的过程"><a href="#包含的过程" class="headerlink" title="包含的过程"></a>包含的过程</h4><p>prePare - 锁资源<br>commit<br>rollBack</p>
+<h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><ul>
+<li>2PC的原理直观易懂，实现起来相对简单，这使得它在许多关系型数据库中得到广泛应用。</li>
+<li>2PC通过协调所有分布式事务参与者来确保事务的一致性，使得事务要么全部提交，要么全部回滚，从而保证了数据的强一致性。（如果发生网络异常会有问题）</li>
+<li>在2PC中，提交和回滚操作可以利用数据库自身的功能来完成，不需要额外实现，这样可以减少对业务逻辑的侵入。</li>
+</ul>
+<h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><ul>
+<li>在2PC的执行过程中，所有参与节点都是事务阻塞型的。当参与者占有公共资源时，其他第三方节点访问公共资源不得不处于阻塞状态，这会影响系统的吞吐量和性能。</li>
+<li>协调者在整个两阶段提交协议中起到了非常重要的作用，一旦协调者发生故障，那么整个第二阶段提交流程将无法运转，更为严重的是，协调者在阶段二中出现问题的话，那么其他的参与者将会处于锁定事务资源的状态中，而无法继续完成事务操作。</li>
+<li>在二阶段提交的阶段二中，当协调者向参与者发送commit请求之后，发生了局部网络异常或者在发送commit请求过程中协调者发生了故障，这会导致只有一部分参与者接受到了commit请求。而在这部分参与者接到commit请求之后会执行commit操作，但是其他部分未接到commit请求的机器则无法执行事务提交，于是整个分布式系统便出现了数据不一致的现象。</li>
+<li>2PC方案需要进行多次网络通信和等待响应，这会增加系统的开销和延迟。特别是在大规模分布式系统中，2PC的性能开销可能会显著影响系统的吞吐量和响应时间。</li>
+<li>如果在协调者指示参与者进行事务提交询问的过程中，参与者出现故障而导致协调者始终无法获取到所有参与者的响应的消息的话，这时协调者只能依靠其自身的超时机制来判断是否中断事务，这样的策略比较保守，换句话说，二阶段提交协议没有设计相应的容错机制，当任意一个参与者节点宕机，那么协调者超时没收到响应，就会导致整个事务回滚失败。</li>
+</ul>
+<h4 id="2pc和xa的关系"><a href="#2pc和xa的关系" class="headerlink" title="2pc和xa的关系"></a>2pc和xa的关系</h4><p>X&#x2F;Open XA协议提供了一套标准接口，使得事务管理器能够与资源管理器进行通信，以实现两阶段提交协议，确保分布式系统中事务的原子性和一致性。因此，可以说X&#x2F;Open XA协议是实现二阶段提交协议的一种规范，而二阶段提交协议是X&#x2F;Open XA协议中用于保持事务一致性的核心机制。简单来说两阶段提交是思想，xa规范是基于思想的实现。</p>
+<h3 id="3pc"><a href="#3pc" class="headerlink" title="3pc"></a>3pc</h3><img src="/2024/11/25/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/3pc.png" class="">
+
+<h4 id="包含的过程-1"><a href="#包含的过程-1" class="headerlink" title="包含的过程"></a>包含的过程</h4><p>canCommit - 不锁资源<br>preCommit - 锁资源<br>doCommit<br>rollBack</p>
+<h4 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h4><ul>
+<li>3PC通过引入参与者超时机制，在参与者超时后会自动进行本地commit&#x2F;abort，从而释放资源，避免了参与者长时间无法与协调者通讯时无法释放资源的问题，减少了同步阻塞时间。</li>
+<li>3PC允许在第三阶段即使协调者出现故障，参与者也可以根据超时时间自行决定提交或回滚事务，降低了单点故障对系统的影响。</li>
+<li>3PC增加了CanCommit阶段，不像2PC一样从一开始就锁定所有事务资源，而是在通过CanCommit阶段排除掉个别不具备处理事务能力的参与者后，再进入锁定事务资源的第二阶段。</li>
+<li>3PC通过引入“询问阶段”，解决了2PC协议的阻塞问题和单点故障问题，提高了系统的可用性和性能。</li>
+<li>在CanCommit阶段，并没有进行真正的事务执行，即使失败也不会影响数据，减少了数据不一致的发生概率。</li>
+<li>3PC相较于2PC，最大的优点是降低了参与者的阻塞范围，并且能在单点故障后继续达成一致。</li>
+</ul>
+<h4 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h4><ul>
+<li>3PC 的流程比 2PC 更为复杂，需要更多的状态转换和超时处理逻辑，这增加了实现的难度和出错的可能性。</li>
+<li>3PC 引入了额外的阶段和网络通信，可能会导致更大的性能开销。</li>
+<li>虽然 3PC 在一定程度上降低了数据不一致的风险，但在某些极端情况下，例如网络分区等，仍然可能出现数据不一致的情况。（没有根本解决问题）</li>
+<li>在参与者收到 PreCommit 消息后，如果网络出现分区，协调者和参与者无法进行后续的通信，这种情况下，参与者在等待超时后，依旧会执行事务提交，这样会导致数据的不一致。</li>
+<li>尽管 3PC 缓解了对协调者的依赖，但没有完全解决。在某些情况下，如果协调者出现问题，事务的提交或回滚可能会受到影响。</li>
+</ul>
+<h3 id="TCC"><a href="#TCC" class="headerlink" title="TCC"></a>TCC</h3><img src="/2024/11/25/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/tcc.jpg" class="">
+
+<h4 id="TCC描述"><a href="#TCC描述" class="headerlink" title="TCC描述"></a>TCC描述</h4><p>TCC分为try&#x2F;confirm&#x2F;cancel三个部分。很明显是借鉴了两阶段提交的思想。</p>
+<blockquote>
+<p>Try：对应二阶段提交协议的 Prepare，业务在收到 Try 指令后，做资源的预留，而非直接执行实际的操作，返回“是”，假如资源预留不成功，返回“否”<br>Confirm：协调器在收到了所有分布式事务参与方的“是”后，决定全局提交，向分布式事务的各个参与方发送 Confirm，参与方执行 Confirm，将之前预留的资源进行扣除。<br>Cancel：协调器在收到参与方的任意一个“否”的话，会决定全局回滚，向各参与方发送 Cancel，参与方执行 Cancel，将之前预留的资源进行释放。</p>
+</blockquote>
+<p>Try&#x2F;Confirm&#x2F;Cancel 接口满足以下三个特性：<br>幂等：接口要能够正确的识别重复请求以避免重复处理，一种可行的思路是在业务上引入唯一 id，比如 uuid 库。<br>防悬挂：防止 Try 在 Cancel 之后到达导致的资源悬挂问题，在一般情况下，先执行 Try，后执行 Cancel，假如先执行 Cancel，后执行 Try，那么后执行的 Try 将没有对应的 Cancel 以取消资源的预留，导致资源悬挂。<br>空回滚：防止 Cancel 在 Try 之前到达导致的空回滚，这个和放悬挂说的是一件事的两个方面，放悬挂侧重的是要正确处理 Try，空回滚侧重的是要正确处理 Cancel。这两点可能的解决方案是引入类似于子事务屏障的机制，其基本实现原理类似于后面要讲的事务状态表，即在执行的时候记录所有分支事务的状态信息，以感知 Try&#x2F;Cancel 是否按序执行。</p>
+<h4 id="TCC优点"><a href="#TCC优点" class="headerlink" title="TCC优点"></a>TCC优点</h4><ul>
+<li>解决跨服务的业务操作原子性问题：TCC适用于需要保证跨多个服务操作原子性的业务场景。摆脱了2pc和3pc局限于数据库（或者符合xa规范的sql）的樊篱。自由度更高</li>
+<li>基于Confirm和Cancel的幂等性，TCC能够保证事务最终完成确认或者取消，保证数据的一致性</li>
+<li>由于Confirm和Cancel两个阶段的操作都是原子的，因此即使某个节点发生故障，也不会影响整个分布式事务的执行</li>
+</ul>
+<h4 id="TCC缺点"><a href="#TCC缺点" class="headerlink" title="TCC缺点"></a>TCC缺点</h4><ul>
+<li>实现复杂度高：相比于传统的两阶段提交和三阶段提交协议，TCC的实现复杂度更高。需要实现Try、Confirm和Cancel三个阶段的操作，并设计相应的监控和协调机制</li>
+<li>对微服务的侵入性强：微服务的每个事务都必须实现Try、Confirm、Cancel等3个方法，开发成本高，今后维护改造的成本也高</li>
+<li>性能开销大：由于需要在Try阶段进行资源锁定和业务检查，因此可能存在一定的性能开销。特别是对于一些高并发的场景，可能会对系统的性能产生影响</li>
+<li>系统依赖增加：要求所有参与的系统都必须实现TCC协议，增加了系统间的耦合</li>
+</ul>
+<h3 id="SAGA"><a href="#SAGA" class="headerlink" title="SAGA"></a>SAGA</h3><img src="/2024/11/25/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/saga.jpg" class="">
+
+<h4 id="SAGA描述"><a href="#SAGA描述" class="headerlink" title="SAGA描述"></a>SAGA描述</h4><p>SAGA最初出现在1987年Hector Garcaa-Molrna &amp; Kenneth Salem发表的论文SAGAS里。其核心思想是将长事务拆分为多个短事务，由Saga事务协调器协调，如果每个短事务都成功提交完成，那么全局事务就正常完成，如果某个步骤失败，则根据相反顺序一次调用补偿操作<br>长事务拆分为多个短事务T1,T2,T3…Tn,然后对应的回滚操作为C1,C2,C3…Cn。按照顺序执行T1-&gt;Tn.如果其中某个短事务执行失败比如T3。那么就反向执行C3-&gt;C2-&gt;C1。</p>
+<blockquote>
+<p>Saga的执行顺序有两种：<br>正向执行顺序：T1, T2, T3, …, Tn（理想情况下的执行顺序）。<br>反向补偿顺序：T1, T2, …, Tj, Cj, …, C2, C1，其中0 &lt; j &lt; n，表示在执行到第j个子事务时出错，然后从第j个子事务开始逆向执行补偿事务来撤销之前的操作<br>Saga模式有两种恢复策略：<br>向后恢复（Backward Recovery）：补偿所有已完成的事务，如果任一子事务失败。<br>向前恢复（Forward Recovery）：重试失败的事务，假设每个子事务最终都会成功</p>
+</blockquote>
+<h4 id="SAGA优点"><a href="#SAGA优点" class="headerlink" title="SAGA优点"></a>SAGA优点</h4><ul>
+<li>灵活性：Saga模式允许每个子事务独立执行，并且可以根据业务需求自定义补偿操作，这为处理复杂的业务流程提供了灵活性。</li>
+<li>可扩展性：Saga模式适用于微服务架构，可以轻松地扩展到多个服务和组件，而不需要集中式事务管理器</li>
+<li>容错性：通过补偿事务，Saga模式能够在子事务失败时撤销之前的操作，从而保持数据的一致性</li>
+<li>最终一致性：Saga模式支持最终一致性，允许系统在出现故障时通过补偿操作达到一致状态，而不是立即保证强一致性</li>
+<li>去中心化：Saga模式不需要一个中心化的事务协调器，每个服务可以独立管理自己的事务和补偿逻辑</li>
+</ul>
+<h4 id="SAGA缺点"><a href="#SAGA缺点" class="headerlink" title="SAGA缺点"></a>SAGA缺点</h4><ul>
+<li>复杂性：Saga模式需要为每个子事务定义补偿操作，这增加了系统的复杂性，特别是在事务链很长时。</li>
+<li>实时性问题：Saga模式可能无法保证实时一致性，因为补偿操作可能需要时间来执行，特别是在网络延迟或服务故障的情况下。</li>
+<li>业务逻辑侵入：Saga模式要求业务逻辑必须能够被拆分成可补偿的事务，这可能对业务逻辑的设计和实现造成侵入。</li>
+<li>数据不一致的风险：在某些情况下，如果补偿操作不成功或者不完整，可能会导致数据不一致。</li>
+<li>状态管理：Saga模式需要维护事务的状态，包括执行和补偿状态，这增加了状态管理的复杂性。</li>
+<li>幂等性问题：Saga中的操作需要保证幂等性，以确保多次执行或补偿不会导致不一致的结果，这在实际应用中可能难以保证。</li>
+</ul>
+<h3 id="AT"><a href="#AT" class="headerlink" title="AT"></a>AT</h3><img src="/2024/11/25/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/at.png" class="">
+
+<h4 id="AT描述"><a href="#AT描述" class="headerlink" title="AT描述"></a>AT描述</h4><p>AT依赖数据库的支持，自由度有限</p>
+<h4 id="AT优点"><a href="#AT优点" class="headerlink" title="AT优点"></a>AT优点</h4><ul>
+<li>无侵入性：应用程序无需修改代码就可以使用AT模式，对现有系统的集成较为简单</li>
+</ul>
+<h4 id="AT缺点"><a href="#AT缺点" class="headerlink" title="AT缺点"></a>AT缺点</h4><ul>
+<li>缺点是支持的 SQL 有限，并且锁全局资源有一定的性能问题</li>
+</ul>
+<h3 id="Try-Best"><a href="#Try-Best" class="headerlink" title="Try-Best"></a>Try-Best</h3><img src="/2024/11/25/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/bf.png" class="">
+
+<h4 id="Try-Best描述"><a href="#Try-Best描述" class="headerlink" title="Try-Best描述"></a>Try-Best描述</h4><p>学术名称为最大努力通知（Best-effort Delivery）。如上图所示，发起通知方需要将消息尽可能的投递到接收通知方。但是因为各种各样的原因这个消息不一定会被处理到。所以发起通知方还需要提供一个状态查询接口给接收通知方。</p>
+<h4 id="Try-Best优点"><a href="#Try-Best优点" class="headerlink" title="Try-Best优点"></a>Try-Best优点</h4><ul>
+<li>实现简单：相对于传统的两阶段提交，最大努力通知方案实现相对简单，易于维护</li>
+<li>性能高：由于采用异步通知的方式，事务发起方不需要等待通知结果，可以提高系统的整体性能</li>
+<li>灵活性强：最大努力通知方案可以根据具体业务需求，灵活设置重试策略和人工干预机制</li>
+</ul>
+<h4 id="Try-Best缺点"><a href="#Try-Best缺点" class="headerlink" title="Try-Best缺点"></a>Try-Best缺点</h4><ul>
+<li>一致性保证不足：由于采用异步通知的方式，无法完全保证数据的一致性，可能会存在短暂的不一致情况</li>
+<li>重试和人工干预成本高：在通知失败的情况下，需要设置重试策略和人工干预机制，增加了系统的复杂度和运维成本</li>
+<li>接收方主动查询：为了保证通知的可靠性，接收方需要主动查询通知结果，这可能增加系统的负担和复杂性</li>
+</ul>
+<h3 id="本地事务状态表"><a href="#本地事务状态表" class="headerlink" title="本地事务状态表"></a>本地事务状态表</h3><img src="/2024/11/25/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/bdsw.png" class="">
+
+<h4 id="本地事务状态表优点"><a href="#本地事务状态表优点" class="headerlink" title="本地事务状态表优点"></a>本地事务状态表优点</h4><p>逻辑简单，失败后插入表后就可以了。具体的补偿交给定时脚本</p>
+<h4 id="本地事务状态表缺点"><a href="#本地事务状态表缺点" class="headerlink" title="本地事务状态表缺点"></a>本地事务状态表缺点</h4><ul>
+<li>异步化，补偿可能有延迟</li>
+</ul>
+<h3 id="可靠消息队列-基于本地消息"><a href="#可靠消息队列-基于本地消息" class="headerlink" title="可靠消息队列-基于本地消息"></a>可靠消息队列-基于本地消息</h3><img src="/2024/11/25/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/xxdl.png" class="">
+
+<h4 id="可靠消息队列-基于本地消息优点"><a href="#可靠消息队列-基于本地消息优点" class="headerlink" title="可靠消息队列-基于本地消息优点"></a>可靠消息队列-基于本地消息优点</h4><ul>
+<li>业务不用直接对接外部系统</li>
+</ul>
+<h4 id="可靠消息队列-基于本地消息缺点"><a href="#可靠消息队列-基于本地消息缺点" class="headerlink" title="可靠消息队列-基于本地消息缺点"></a>可靠消息队列-基于本地消息缺点</h4><ul>
+<li>异步化，补偿可能有延迟</li>
+<li>消费侧会比较复杂，比如消费了消息后调用的若干外部系统有失败的怎么弄？状态在哪里存储</li>
+</ul>
+<h3 id="可靠消息队列-基于事务消息"><a href="#可靠消息队列-基于事务消息" class="headerlink" title="可靠消息队列-基于事务消息"></a>可靠消息队列-基于事务消息</h3>
+
+<h4 id="可靠消息队列-基于事务消息优点"><a href="#可靠消息队列-基于事务消息优点" class="headerlink" title="可靠消息队列-基于事务消息优点"></a>可靠消息队列-基于事务消息优点</h4><ul>
+<li>不用扫描脚本了，直接依赖mq</li>
+</ul>
+<h4 id="可靠消息队列-基于事务消息缺点"><a href="#可靠消息队列-基于事务消息缺点" class="headerlink" title="可靠消息队列-基于事务消息缺点"></a>可靠消息队列-基于事务消息缺点</h4><ul>
+<li>对mq有要求</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><img src="/2024/11/25/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/ms.png" class="">
+
+<h2 id="相关实践"><a href="#相关实践" class="headerlink" title="相关实践"></a>相关实践</h2><h3 id="腾讯"><a href="#腾讯" class="headerlink" title="腾讯"></a>腾讯</h3><p>TDXA</p>
+<h3 id="阿里"><a href="#阿里" class="headerlink" title="阿里"></a>阿里</h3><p>Seata</p>
+<h3 id="字节跳动"><a href="#字节跳动" class="headerlink" title="字节跳动"></a>字节跳动</h3><p>有个 bytetx、bytestate，前者是做强一致性的，后者是最终一致性</p>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a target="_blank" rel="noopener" href="https://icyfenix.cn/architect-perspective/general-architecture/transaction/distributed.html">分布式事务</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/chengxy-nds/p/14046856.html">看了5种分布式事务方案</a><br><a target="_blank" rel="noopener" href="https://www.51cto.com/article/790383.html">从零到一搭建 TCC 分布式事务框架</a><br><a target="_blank" rel="noopener" href="https://dtm.pub/practice/saga.html">DTM开源项目文档</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt=" WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt=" Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2024/11/12/%E5%A0%A1%E5%9E%92%E6%9C%BA%E5%92%8C%E8%B7%B3%E6%9D%BF%E6%9C%BA%E7%9A%84%E5%8C%BA%E5%88%AB/" rel="next" title="堡垒机和跳板机的区别">
+                <i class="fa fa-chevron-left"></i> 堡垒机和跳板机的区别
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://q1.qlogo.cn/g?b=qq&s=100&nk=232836108"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">126</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/idonkeyliu" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      github
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/idonkeyliu" target="_blank" title="twitter">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      twitter
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E5%8F%AB%E4%BA%8B%E5%8A%A1"><span class="nav-number">1.</span> <span class="nav-text">什么叫事务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E4%BA%8B%E5%8A%A1"><span class="nav-number">1.1.</span> <span class="nav-text">本地事务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1"><span class="nav-number">1.2.</span> <span class="nav-text">分布式事务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#XA%E5%8D%8F%E8%AE%AE"><span class="nav-number">1.2.1.</span> <span class="nav-text">XA协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2pc"><span class="nav-number">1.2.2.</span> <span class="nav-text">2pc</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8C%85%E5%90%AB%E7%9A%84%E8%BF%87%E7%A8%8B"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">包含的过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%98%E7%82%B9"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BC%BA%E7%82%B9"><span class="nav-number">1.2.2.3.</span> <span class="nav-text">缺点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2pc%E5%92%8Cxa%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">1.2.2.4.</span> <span class="nav-text">2pc和xa的关系</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3pc"><span class="nav-number">1.2.3.</span> <span class="nav-text">3pc</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8C%85%E5%90%AB%E7%9A%84%E8%BF%87%E7%A8%8B-1"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">包含的过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%98%E7%82%B9-1"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BC%BA%E7%82%B9-1"><span class="nav-number">1.2.3.3.</span> <span class="nav-text">缺点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCC"><span class="nav-number">1.2.4.</span> <span class="nav-text">TCC</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#TCC%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.2.4.1.</span> <span class="nav-text">TCC描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TCC%E4%BC%98%E7%82%B9"><span class="nav-number">1.2.4.2.</span> <span class="nav-text">TCC优点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TCC%E7%BC%BA%E7%82%B9"><span class="nav-number">1.2.4.3.</span> <span class="nav-text">TCC缺点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SAGA"><span class="nav-number">1.2.5.</span> <span class="nav-text">SAGA</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SAGA%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.2.5.1.</span> <span class="nav-text">SAGA描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SAGA%E4%BC%98%E7%82%B9"><span class="nav-number">1.2.5.2.</span> <span class="nav-text">SAGA优点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SAGA%E7%BC%BA%E7%82%B9"><span class="nav-number">1.2.5.3.</span> <span class="nav-text">SAGA缺点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AT"><span class="nav-number">1.2.6.</span> <span class="nav-text">AT</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#AT%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.2.6.1.</span> <span class="nav-text">AT描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AT%E4%BC%98%E7%82%B9"><span class="nav-number">1.2.6.2.</span> <span class="nav-text">AT优点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AT%E7%BC%BA%E7%82%B9"><span class="nav-number">1.2.6.3.</span> <span class="nav-text">AT缺点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Try-Best"><span class="nav-number">1.2.7.</span> <span class="nav-text">Try-Best</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Try-Best%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.2.7.1.</span> <span class="nav-text">Try-Best描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Try-Best%E4%BC%98%E7%82%B9"><span class="nav-number">1.2.7.2.</span> <span class="nav-text">Try-Best优点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Try-Best%E7%BC%BA%E7%82%B9"><span class="nav-number">1.2.7.3.</span> <span class="nav-text">Try-Best缺点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E4%BA%8B%E5%8A%A1%E7%8A%B6%E6%80%81%E8%A1%A8"><span class="nav-number">1.2.8.</span> <span class="nav-text">本地事务状态表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E4%BA%8B%E5%8A%A1%E7%8A%B6%E6%80%81%E8%A1%A8%E4%BC%98%E7%82%B9"><span class="nav-number">1.2.8.1.</span> <span class="nav-text">本地事务状态表优点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E4%BA%8B%E5%8A%A1%E7%8A%B6%E6%80%81%E8%A1%A8%E7%BC%BA%E7%82%B9"><span class="nav-number">1.2.8.2.</span> <span class="nav-text">本地事务状态表缺点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E9%9D%A0%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-%E5%9F%BA%E4%BA%8E%E6%9C%AC%E5%9C%B0%E6%B6%88%E6%81%AF"><span class="nav-number">1.2.9.</span> <span class="nav-text">可靠消息队列-基于本地消息</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%AF%E9%9D%A0%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-%E5%9F%BA%E4%BA%8E%E6%9C%AC%E5%9C%B0%E6%B6%88%E6%81%AF%E4%BC%98%E7%82%B9"><span class="nav-number">1.2.9.1.</span> <span class="nav-text">可靠消息队列-基于本地消息优点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%AF%E9%9D%A0%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-%E5%9F%BA%E4%BA%8E%E6%9C%AC%E5%9C%B0%E6%B6%88%E6%81%AF%E7%BC%BA%E7%82%B9"><span class="nav-number">1.2.9.2.</span> <span class="nav-text">可靠消息队列-基于本地消息缺点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E9%9D%A0%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-%E5%9F%BA%E4%BA%8E%E4%BA%8B%E5%8A%A1%E6%B6%88%E6%81%AF"><span class="nav-number">1.2.10.</span> <span class="nav-text">可靠消息队列-基于事务消息</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%AF%E9%9D%A0%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-%E5%9F%BA%E4%BA%8E%E4%BA%8B%E5%8A%A1%E6%B6%88%E6%81%AF%E4%BC%98%E7%82%B9"><span class="nav-number">1.2.10.1.</span> <span class="nav-text">可靠消息队列-基于事务消息优点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%AF%E9%9D%A0%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-%E5%9F%BA%E4%BA%8E%E4%BA%8B%E5%8A%A1%E6%B6%88%E6%81%AF%E7%BC%BA%E7%82%B9"><span class="nav-number">1.2.10.2.</span> <span class="nav-text">可靠消息队列-基于事务消息缺点</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">1.3.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E5%AE%9E%E8%B7%B5"><span class="nav-number">1.4.</span> <span class="nav-text">相关实践</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%85%BE%E8%AE%AF"><span class="nav-number">1.4.1.</span> <span class="nav-text">腾讯</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%98%BF%E9%87%8C"><span class="nav-number">1.4.2.</span> <span class="nav-text">阿里</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E8%8A%82%E8%B7%B3%E5%8A%A8"><span class="nav-number">1.4.3.</span> <span class="nav-text">字节跳动</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3"><span class="nav-number">1.5.</span> <span class="nav-text">参考文档</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">idonkeyliu</span>
+</div>
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.2"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
