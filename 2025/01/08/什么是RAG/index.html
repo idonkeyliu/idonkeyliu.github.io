@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5326378969485700"
+     crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="今天越安逸，明天越危险" />
+
+
+
+
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="idonkeyliu's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="最近会时不时看到或者听到过RAG，那到底什么是RAG呢？搞懂RAG之前可以看看人工智能的发展历史，我总是认为只有回顾历史才能真正找准当前的定位。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="什么是RAG?">
+<meta property="og:url" content="http://idonkeyliu.github.io/2025/01/08/%E4%BB%80%E4%B9%88%E6%98%AFRAG/index.html">
+<meta property="og:site_name" content="idonkeyliu&#39;s Blog">
+<meta property="og:description" content="最近会时不时看到或者听到过RAG，那到底什么是RAG呢？搞懂RAG之前可以看看人工智能的发展历史，我总是认为只有回顾历史才能真正找准当前的定位。">
+<meta property="og:locale">
+<meta property="og:image" content="http://idonkeyliu.github.io/2025/01/08/%E4%BB%80%E4%B9%88%E6%98%AFRAG/ragb.webp">
+<meta property="og:image" content="http://idonkeyliu.github.io/2025/01/08/%E4%BB%80%E4%B9%88%E6%98%AFRAG/ragd.avif">
+<meta property="article:published_time" content="2025-01-08T03:21:23.000Z">
+<meta property="article:modified_time" content="2025-01-09T06:15:11.040Z">
+<meta property="article:author" content="idonkeyliu">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://idonkeyliu.github.io/2025/01/08/%E4%BB%80%E4%B9%88%E6%98%AFRAG/ragb.webp">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://idonkeyliu.github.io/2025/01/08/什么是RAG/"/>
+
+
+
+
+
+  <title>什么是RAG? | idonkeyliu's Blog</title>
+  
+
+
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-96CQ5TQ1TG"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-96CQ5TQ1TG');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?d3c2fc214cb28804722819af3b12894e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1264537514&web_id=1264537514" language="JavaScript"></script>
+  </div>
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">idonkeyliu's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://idonkeyliu.github.io/2025/01/08/%E4%BB%80%E4%B9%88%E6%98%AFRAG/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://q1.qlogo.cn/g?b=qq&s=100&nk=232836108">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="idonkeyliu's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">什么是RAG?</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2025-01-08T11:21:23+08:00">
+                2025-01-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <img src="/2025/01/08/%E4%BB%80%E4%B9%88%E6%98%AFRAG/ragb.webp" class="">
+<p>最近会时不时看到或者听到过RAG，那到底什么是RAG呢？搞懂RAG之前可以看看人工智能的发展历史，我总是认为只有回顾历史才能真正找准当前的定位。</p>
+<span id="more"></span>
+
+<p>人工智能、神经网络、Transformer、GPT等LLM、微调、RAG。</p>
+<h2 id="AI-发展历史"><a href="#AI-发展历史" class="headerlink" title="AI 发展历史"></a>AI 发展历史</h2><p>人工智能（AI）的发展可以追溯到20世纪中叶，其历史大致可分为以下几个阶段：</p>
+<h3 id="1-起源与早期探索（20世纪40-50年代）"><a href="#1-起源与早期探索（20世纪40-50年代）" class="headerlink" title="1. 起源与早期探索（20世纪40-50年代）"></a>1. 起源与早期探索（20世纪40-50年代）</h3><ul>
+<li><strong>1943年</strong>：沃伦·麦卡洛克和约翰·皮茨提出神经网络的数学模型，奠定了神经网络研究的基础。</li>
+<li><strong>1950年</strong>：阿兰·图灵发表《计算机器与智能》，提出著名的“图灵测试”，用以判断机器是否具有智能。</li>
+<li><strong>1956年</strong>：约翰·麦卡锡等人在达特茅斯会议上首次提出“人工智能”这个术语，标志着AI研究的正式开始。</li>
+</ul>
+<h3 id="2-专家系统与知识工程（20世纪60-80年代）"><a href="#2-专家系统与知识工程（20世纪60-80年代）" class="headerlink" title="2. 专家系统与知识工程（20世纪60-80年代）"></a>2. 专家系统与知识工程（20世纪60-80年代）</h3><ul>
+<li><strong>1960年代</strong>：出现了早期的专家系统，如DENDRAL（用于化学分析）和MYCIN（用于医学诊断），这些系统通过“如果-那么”规则来模拟专家的决策过程。</li>
+<li><strong>1970年代</strong>：专家系统得到进一步发展，成为当时AI研究的热点，广泛应用于医疗、金融等领域。</li>
+<li><strong>1980年代</strong>：随着计算机硬件性能的提升和知识获取技术的进步，专家系统在商业领域得到广泛应用，但其局限性也逐渐显现。</li>
+</ul>
+<h3 id="3-机器学习与统计方法的兴起（20世纪90年代-21世纪初）"><a href="#3-机器学习与统计方法的兴起（20世纪90年代-21世纪初）" class="headerlink" title="3. 机器学习与统计方法的兴起（20世纪90年代-21世纪初）"></a>3. 机器学习与统计方法的兴起（20世纪90年代-21世纪初）</h3><ul>
+<li><strong>1989年</strong>：Yann LeCun等人成功将反向传播算法应用于多层神经网络，实现了手写数字识别，这是深度学习在实际应用中的早期突破。</li>
+<li><strong>2000年代初</strong>：随着数据量的激增和计算能力的提升，机器学习方法逐渐取代传统规则方法，成为AI研究的主流。支持向量机（SVM）、随机森林等算法在图像识别、语音识别等领域取得显著进展。</li>
+</ul>
+<h3 id="4-深度学习与大数据时代（21世纪10年代至今）"><a href="#4-深度学习与大数据时代（21世纪10年代至今）" class="headerlink" title="4. 深度学习与大数据时代（21世纪10年代至今）"></a>4. 深度学习与大数据时代（21世纪10年代至今）</h3><ul>
+<li><strong>2012年</strong>：Alex Krizhevsky等人开发的AlexNet在ImageNet竞赛中取得突破性成绩，标志着深度学习的崛起。</li>
+<li><strong>2010年代</strong>：深度学习在计算机视觉、自然语言处理、语音识别等多个领域取得重大突破，推动了AI技术的广泛应用。</li>
+<li><strong>2020年代</strong>：生成式AI、强化学习等新兴技术不断涌现，AI在医疗、金融、自动驾驶等领域的应用愈发深入。</li>
+</ul>
+<h3 id="专家模式与统计方法"><a href="#专家模式与统计方法" class="headerlink" title="专家模式与统计方法"></a>专家模式与统计方法</h3><h4 id="专家模式"><a href="#专家模式" class="headerlink" title="专家模式"></a>专家模式</h4><ul>
+<li><strong>定义与特点</strong>：专家模式主要指专家系统，它通过将专家的知识和经验编码成一系列规则（如“如果-那么”规则），来模拟专家的决策过程。专家系统具有可解释性强、推理过程清晰的优点，但也存在灵活性差、依赖于预定义知识的局限。</li>
+<li><strong>应用场景</strong>：在医疗诊断、故障检测、金融风险评估等领域有广泛应用。例如，在医疗领域，专家系统可以根据病人的症状和检查结果，推断出可能的疾病。</li>
+</ul>
+<h4 id="统计方法"><a href="#统计方法" class="headerlink" title="统计方法"></a>统计方法</h4><ul>
+<li><strong>定义与特点</strong>：统计方法通过分析大量数据，从中发现规律和模式，以支持决策和预测。它不依赖于显式的规则，而是通过学习数据的统计特性来实现目标。</li>
+<li><strong>应用场景</strong>：广泛应用于数据分析、机器学习、自然语言处理等领域。例如，在自然语言处理中，统计机器翻译方法通过分析大量双语文本数据，学习语言之间的转换规律。</li>
+</ul>
+<h4 id="专家模式与统计方法的融合"><a href="#专家模式与统计方法的融合" class="headerlink" title="专家模式与统计方法的融合"></a>专家模式与统计方法的融合</h4><ul>
+<li><strong>融合趋势</strong>：近年来，随着技术的发展，专家模式和统计方法开始相互融合，形成混合型AI系统。这种融合可以结合两者的优势，提高系统的性能和适应性。</li>
+<li><strong>优势</strong>：专家模式提供了清晰的规则和可解释性，而统计方法能够处理大量数据并发现潜在的复杂模式。例如，在金融领域，混合型AI系统可以结合专家的金融知识和统计分析结果，更准确地预测市场趋势。</li>
+</ul>
+<h2 id="传统神经网络的分类"><a href="#传统神经网络的分类" class="headerlink" title="传统神经网络的分类"></a>传统神经网络的分类</h2><table>
+<thead>
+<tr>
+<th>类别</th>
+<th>英文</th>
+<th>优点</th>
+<th>缺点</th>
+<th>使用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>前馈神经网络</td>
+<td>Feedforward Neural Networks, FNN</td>
+<td>结构简单，易于理解和实现，训练过程相对稳定，不容易出现梯度消失和梯度爆炸的问题</td>
+<td>对于复杂的时间序列数据处理能力有限</td>
+<td></td>
+</tr>
+<tr>
+<td>、计算效率较低，尤其是在处理高维数据时</td>
+<td>广泛用于分类、回归等任务，如手写数字识别、房价预测等</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>循环神经网络</td>
+<td>Recurrent Neural Networks, RNN</td>
+<td>擅长处理具有时间关系的序列数据，如文本、语音等</td>
+<td>难以捕捉到远距离的时间依赖关系，容易出现梯度消失或梯度爆炸问题</td>
+<td></td>
+</tr>
+<tr>
+<td>计算效率低，难以并行化计算，导致训练速度较慢</td>
+<td>适用于自然语言处理、语音识别、时间序列预测等任务，如文本生成、情感分析、股票价格预测等.</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>卷积神经网络</td>
+<td>Convolutional Neural Networks, CNN</td>
+<td>对空间特征的强大提取能力，适用于图像识别等任务，能够捕捉到图像中的局部特征</td>
+<td>无法很好地处理序列数据，对于时间依赖关系的建模能力较差</td>
+<td>广泛应用于图像处理任务，如图像分类、目标检测、图像分割等</td>
+</tr>
+<tr>
+<td>长短期记忆网络</td>
+<td>Long Short-Term Memory, LSTM</td>
+<td>能够有效地捕捉序列数据中的长期依赖关系，解决了传统RNN的梯度消失问题</td>
+<td>结构复杂，参数数量较多，导致训练速度较慢、计算成本较高，尤其是在处理大规模数据时</td>
+<td>适用于需要捕捉长期依赖关系的序列数据任务，如文本生成、机器翻译、语音识别等</td>
+</tr>
+<tr>
+<td>生成对抗网络</td>
+<td>Generative Adversarial Networks, GANs</td>
+<td>能生成逼真的新样本，广泛应用于图像生成等任务</td>
+<td>训练不稳定，收敛难度大，容易出现模式崩溃等问题</td>
+<td>主要用于生成任务，如图像生成、数据增强、风格迁移等</td>
+</tr>
+</tbody></table>
+<h2 id="传统神经网络和Transformer的关系"><a href="#传统神经网络和Transformer的关系" class="headerlink" title="传统神经网络和Transformer的关系"></a>传统神经网络和Transformer的关系</h2><p>Transformer模型的出现主要是为了解决传统神经网络在处理序列数据时存在的几个关键问题：</p>
+<h3 id="长距离依赖问题"><a href="#长距离依赖问题" class="headerlink" title="长距离依赖问题"></a>长距离依赖问题</h3><ul>
+<li><strong>传统RNN的局限</strong>：传统的循环神经网络（RNN）及其变体（如LSTM和GRU）在处理长序列数据时，容易遇到梯度消失或梯度爆炸的问题，这使得模型难以捕捉序列中的长距离依赖关系。</li>
+<li><strong>Transformer的解决方案</strong>：Transformer通过引入自注意力机制，能够同时考虑序列中所有位置的信息，从而有效地解决了长距离依赖问题。自注意力机制允许模型在处理输入序列时动态地计算每个位置与其他所有位置之间的依赖关系。</li>
+</ul>
+<h3 id="并行计算问题"><a href="#并行计算问题" class="headerlink" title="并行计算问题"></a>并行计算问题</h3><ul>
+<li><strong>传统RNN的局限</strong>：RNN需要按顺序处理序列中的每个元素，无法进行并行计算，这限制了其训练和推理的速度。</li>
+<li><strong>Transformer的解决方案</strong>：Transformer中的自注意力机制和多头注意力可以并行计算，大大提高了训练和推理的效率。由于Transformer没有序列依赖性，可以同时处理输入序列中的所有位置。</li>
+</ul>
+<h3 id="上下文信息融合问题"><a href="#上下文信息融合问题" class="headerlink" title="上下文信息融合问题"></a>上下文信息融合问题</h3><ul>
+<li><strong>传统RNN的局限</strong>：在自然语言处理任务中，上下文信息对于理解语义非常重要。传统的RNN通过隐状态来传递上下文信息，但隐状态的大小是固定的，难以适应不同长度的输入序列。</li>
+<li><strong>Transformer的解决方案</strong>：Transformer通过编码器将输入序列转换为一个固定长度的向量，并通过解码器进行上下文信息的融合，能够更好地捕捉序列中的全局信息。</li>
+</ul>
+<h3 id="诞生背景"><a href="#诞生背景" class="headerlink" title="诞生背景"></a>诞生背景</h3><ul>
+<li><strong>历史背景</strong>：在Transformer出现之前，RNN及其变体是处理序列任务的主流架构，但其序列化的处理方式限制了并行化能力。注意力机制最初被提出来用于改善序列到序列的任务，Transformer模型在2017年的论文《Attention Is All You Need》中首次被提出。Transformer模型的这些创新使其在自然语言处理领域迅速成为新的标杆，并逐渐扩展到其他领域，如图像处理等。</li>
+</ul>
+<h2 id="Transformer的发展"><a href="#Transformer的发展" class="headerlink" title="Transformer的发展"></a>Transformer的发展</h2><p>Transformer自2017年提出以来，经历了快速的发展和演变。</p>
+<h3 id="初始阶段（2017年）"><a href="#初始阶段（2017年）" class="headerlink" title="初始阶段（2017年）"></a>初始阶段（2017年）</h3><p>提出与基础架构：2017年，Vaswani等人在论文《Attention is All You Need》中首次提出了Transformer模型。该模型引入了自注意力机制、位置编码、多头注意力和编码器-解码器架构等创新概念，这些设计使得Transformer在处理序列数据时能够更高效地捕捉长距离依赖关系</p>
+<h3 id="发展与优化阶段（2018-2020年）"><a href="#发展与优化阶段（2018-2020年）" class="headerlink" title="发展与优化阶段（2018-2020年）"></a>发展与优化阶段（2018-2020年）</h3><p>模型效率提升：由于原始Transformer在处理长序列时存在计算复杂度和内存要求高的问题，研究者们提出了多种改进方法，如稀疏注意力机制、分而治之的方法等，以提高模型的效率<br>模型泛化增强：为了在小规模数据集上更好地训练Transformer，研究者们引入了结构偏差或正则化，并在大规模未标记数据上进行预训练，以增强模型的泛化能力<br>特定任务适配：针对不同的下游任务和应用，研究者们对Transformer进行了适配性改进，开发出多种变体和扩展模型</p>
+<h3 id="预训练模型的兴起（2018-2021年）"><a href="#预训练模型的兴起（2018-2021年）" class="headerlink" title="预训练模型的兴起（2018-2021年）"></a>预训练模型的兴起（2018-2021年）</h3><p>BERT与GPT的出现：2018年，谷歌提出了BERT（Bidirectional Encoder Representations from Transformers），它通过预训练大量文本数据，学习到丰富的语言表示，然后在各种下游任务上进行微调，取得了优异的性能。同年，OpenAI推出了GPT（Generative Pre-trained Transformer），它主要关注文本生成任务</p>
+<blockquote>
+<p>谷歌点错了科技树，让openai在后面横空出世了</p>
+</blockquote>
+<h2 id="LLM的诞生"><a href="#LLM的诞生" class="headerlink" title="LLM的诞生"></a>LLM的诞生</h2><p>以下是GPT系列模型的发展历史：</p>
+<h3 id="GPT-1（2018年）"><a href="#GPT-1（2018年）" class="headerlink" title="GPT-1（2018年）"></a>GPT-1（2018年）</h3><ul>
+<li><strong>特点</strong>：GPT-1是第一个使用Transformer架构进行预训练的模型，采用了仅有解码器的Transformer模型，专注于预测下一个词元。它包含12层Transformer结构和1.17亿参数。</li>
+<li><strong>贡献</strong>：GPT-1通过无监督预训练和有监督微调相结合的方法，增强了模型的通用任务求解能力，尽管其参数规模相对较小，但在自然语言处理任务上取得了一定的成果，为后续GPT模型的发展奠定了基础。</li>
+</ul>
+<h3 id="GPT-2（2019年）"><a href="#GPT-2（2019年）" class="headerlink" title="GPT-2（2019年）"></a>GPT-2（2019年）</h3><ul>
+<li><strong>特点</strong>：GPT-2在模型规模和性能上有了显著提升，参数规模达到15亿。它引入了更大和更多样化的数据集进行训练。</li>
+<li><strong>贡献</strong>：GPT-2在阅读理解、文本生成和翻译等多任务上取得显著进步，生成的高质量文本引发了广泛关注。然而，其强大的文本生成能力也带来了AI伦理和安全方面的讨论。</li>
+</ul>
+<h3 id="GPT-3（2020年）"><a href="#GPT-3（2020年）" class="headerlink" title="GPT-3（2020年）"></a>GPT-3（2020年）</h3><ul>
+<li><strong>特点</strong>：GPT-3的参数规模达到了1750亿，是当时最大的预训练语言模型之一。它通过“上下文学习”概念，在少量样本下就能完成多种任务，无需针对新任务微调。</li>
+<li><strong>贡献</strong>：GPT-3极大地拓展了其在写作、编程、艺术创作等诸多领域的应用，在文本生成、问答、翻译、摘要和对话等任务上都取得了非常好的表现。它的出现标志着AI在自然语言处理领域的巨大飞跃。</li>
+</ul>
+<h3 id="ChatGPT（2022年）"><a href="#ChatGPT（2022年）" class="headerlink" title="ChatGPT（2022年）"></a>ChatGPT（2022年）</h3><ul>
+<li><strong>特点</strong>：ChatGPT是基于GPT-3模型的升级版，主要针对对话任务进行了优化，增加了对话历史的输入和输出，以及对话策略的控制。</li>
+<li><strong>贡献</strong>：ChatGPT在对话任务上表现出色，可以与人类进行自然而流畅的对话，其发布标志着OpenAI声名鹊起的一个重要时刻。</li>
+</ul>
+<blockquote>
+<p>ChatGPT的诞生意味着LLM的兴起</p>
+</blockquote>
+<h3 id="GPT-4（2023年）"><a href="#GPT-4（2023年）" class="headerlink" title="GPT-4（2023年）"></a>GPT-4（2023年）</h3><ul>
+<li><strong>特点</strong>：GPT-4的具体细节未完全公开，但在理解复杂文本、逻辑推理和跨领域知识整合方面取得重大突破。它具有多模态能力，最大单次处理数据量为2.5万tokens。</li>
+<li><strong>贡献</strong>：GPT-4在医疗健康、法律咨询、教育辅导等多个领域展现出强大的应用潜力。</li>
+</ul>
+<h2 id="LLM的问题及其优化方向"><a href="#LLM的问题及其优化方向" class="headerlink" title="LLM的问题及其优化方向"></a>LLM的问题及其优化方向</h2><ul>
+<li>幻觉问题：LLM采用基于统计的概率方法逐词生成文本，内在地可能导致生成看似逻辑严谨实则缺乏事实依据的输出，即所谓的“郑重其事的虚构陈述”</li>
+<li>领域知识不足：对未接触过的内容，LLM的效果会很差</li>
+<li>信息过时：知识的更新只取决于训练集的截止时间，难以及时融入最新信息</li>
+<li>记忆力问题：对训练过程中接触的知识，LLM可能会忘记，对已经学会的知识也可能因为后续的训练而遗忘</li>
+<li>推理失败：对已有知识，LLM可能也会因为使用失败而让回答出现问题</li>
+</ul>
+<h3 id="优化方向"><a href="#优化方向" class="headerlink" title="优化方向"></a>优化方向</h3><h4 id="微调"><a href="#微调" class="headerlink" title="微调"></a>微调</h4><p>微调（Fine-Tuning）是深度学习中迁移学习的一种形式，指的是在预训练模型的基础上，通过对其参数进行小幅度的调整，使其能够更好地适应特定任务或数据集的过程。</p>
+<p>定义<br>基本概念：微调是在预训练模型（已经训练好的大模型）基础之上，使用少量数据对大模型的全部或部分参数进行调整，以达到在某个领域更好的效果</p>
+<p>技术过程：微调本质上是通过在特定任务的数据集上继续训练预训练模型，更新模型的权重，使其更好地适应新任务<br>适应特定领域：微调可以帮助LLM调整其对特定领域术语、语气或约定的反应，使其更好地适应特定的应用场景<br>提高任务性能：通过在特定任务的数据集上进行微调，LLM可以学习到该任务的特定特征和模式，从而提高在该任务上的性能<br>解决幻觉问题：微调可以使LLM在特定任务上生成更准确和可靠的内容，减少幻觉现象</p>
+<h4 id="RAG"><a href="#RAG" class="headerlink" title="RAG"></a>RAG</h4><p>待下文介绍</p>
+<h2 id="RAG-1"><a href="#RAG-1" class="headerlink" title="RAG"></a>RAG</h2><p>可以看到，rag是在llm出来后才有的，也就是最近2年才有的东西。它的存在是为了解决大模型的一些问题。</p>
+<img src="/2025/01/08/%E4%BB%80%E4%B9%88%E6%98%AFRAG/ragd.avif" class="">
+
+<p>检索增强生成 （Retrieval Augmented Generation），简称RAG，已经成为当前最火热的LLM应用方案。</p>
+<blockquote>
+<p>一句话总结：RAG（中文为检索增强生成） &#x3D; 检索技术 + LLM 提示。</p>
+</blockquote>
+<p>检索增强生成是一个多步式流程，始于检索，然后推进到生成。下面介绍了它的运作方式：</p>
+<h3 id="检索"><a href="#检索" class="headerlink" title="检索"></a>检索</h3><p>RAG 从输入查询开始。这可以是用户的问题，或者需要详细回复的任意一段文本。<br>检索模型会从知识库、数据库或外部来源（或者同时从多个来源）抓取相关信息。模型在何处搜索取决于输入查询所询问的内容。检索到的这一信息现在可以作为模型所需要的任何事实或背景信息的参考来源。检索到的信息会被转化为高维度空间中的矢量。这些知识矢量会被存储在矢量数据库中。<br>矢量模型会基于与输入查询的相关性，对检索到的信息进行排序。分数最高的文档或段落会被选中，以进行进一步的处理。</p>
+<h3 id="生成"><a href="#生成" class="headerlink" title="生成"></a>生成</h3><p>接下来，生成模型（例如 LLM）会使用检索到的信息来生成文本回复。</p>
+<p>在RAG（Retrieval-Augmented Generation）机制中，最终的回答是综合了LLM（大型语言模型）的回答和检索到的知识<br>。具体来说，RAG的工作流程通常包括以下几个步骤：</p>
+<p>检索阶段：当用户提出一个问题时，RAG首先使用检索模块从外部知识库中检索与问题相关的信息。这些信息作为上下文，为生成模型提供了丰富的背景知识<br>生成阶段：检索到的信息与用户的原始查询一起被输入到LLM中，LLM利用这些信息生成最终的回答，生成的回答不仅依赖于LLM的语言生成能力，还结合了检索到的外部知识<br>通过这种方式，RAG能够生成既符合语境又高度准确的回答。它利用LLM的生成能力和检索模块提供的最新、相关知识，从而提高了回答的质量和可靠性</p>
+<blockquote>
+<p>可以理解为给llm外挂一个知识丰富的“数据库”。</p>
+</blockquote>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a target="_blank" rel="noopener" href="https://www.elastic.co/cn/what-is/retrieval-augmented-generation">什么是 RAG（检索增强生成）？</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt=" WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt=" Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2025/01/01/%E4%B8%9A%E5%8A%A1%E8%BF%9E%E7%BB%AD%E6%80%A7%E8%AE%A1%E5%88%92/" rel="next" title="业务连续性计划">
+                <i class="fa fa-chevron-left"></i> 业务连续性计划
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://q1.qlogo.cn/g?b=qq&s=100&nk=232836108"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">128</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/idonkeyliu" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      github
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/idonkeyliu" target="_blank" title="twitter">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      twitter
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#AI-%E5%8F%91%E5%B1%95%E5%8E%86%E5%8F%B2"><span class="nav-number">1.</span> <span class="nav-text">AI 发展历史</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E8%B5%B7%E6%BA%90%E4%B8%8E%E6%97%A9%E6%9C%9F%E6%8E%A2%E7%B4%A2%EF%BC%8820%E4%B8%96%E7%BA%AA40-50%E5%B9%B4%E4%BB%A3%EF%BC%89"><span class="nav-number">1.1.</span> <span class="nav-text">1. 起源与早期探索（20世纪40-50年代）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E4%B8%93%E5%AE%B6%E7%B3%BB%E7%BB%9F%E4%B8%8E%E7%9F%A5%E8%AF%86%E5%B7%A5%E7%A8%8B%EF%BC%8820%E4%B8%96%E7%BA%AA60-80%E5%B9%B4%E4%BB%A3%EF%BC%89"><span class="nav-number">1.2.</span> <span class="nav-text">2. 专家系统与知识工程（20世纪60-80年代）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E7%BB%9F%E8%AE%A1%E6%96%B9%E6%B3%95%E7%9A%84%E5%85%B4%E8%B5%B7%EF%BC%8820%E4%B8%96%E7%BA%AA90%E5%B9%B4%E4%BB%A3-21%E4%B8%96%E7%BA%AA%E5%88%9D%EF%BC%89"><span class="nav-number">1.3.</span> <span class="nav-text">3. 机器学习与统计方法的兴起（20世纪90年代-21世纪初）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B8%8E%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%97%B6%E4%BB%A3%EF%BC%8821%E4%B8%96%E7%BA%AA10%E5%B9%B4%E4%BB%A3%E8%87%B3%E4%BB%8A%EF%BC%89"><span class="nav-number">1.4.</span> <span class="nav-text">4. 深度学习与大数据时代（21世纪10年代至今）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%93%E5%AE%B6%E6%A8%A1%E5%BC%8F%E4%B8%8E%E7%BB%9F%E8%AE%A1%E6%96%B9%E6%B3%95"><span class="nav-number">1.5.</span> <span class="nav-text">专家模式与统计方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%93%E5%AE%B6%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.5.1.</span> <span class="nav-text">专家模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%9F%E8%AE%A1%E6%96%B9%E6%B3%95"><span class="nav-number">1.5.2.</span> <span class="nav-text">统计方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%93%E5%AE%B6%E6%A8%A1%E5%BC%8F%E4%B8%8E%E7%BB%9F%E8%AE%A1%E6%96%B9%E6%B3%95%E7%9A%84%E8%9E%8D%E5%90%88"><span class="nav-number">1.5.3.</span> <span class="nav-text">专家模式与统计方法的融合</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%A0%E7%BB%9F%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9A%84%E5%88%86%E7%B1%BB"><span class="nav-number">2.</span> <span class="nav-text">传统神经网络的分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%A0%E7%BB%9F%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%92%8CTransformer%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">3.</span> <span class="nav-text">传统神经网络和Transformer的关系</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%95%BF%E8%B7%9D%E7%A6%BB%E4%BE%9D%E8%B5%96%E9%97%AE%E9%A2%98"><span class="nav-number">3.1.</span> <span class="nav-text">长距离依赖问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97%E9%97%AE%E9%A2%98"><span class="nav-number">3.2.</span> <span class="nav-text">并行计算问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8A%E4%B8%8B%E6%96%87%E4%BF%A1%E6%81%AF%E8%9E%8D%E5%90%88%E9%97%AE%E9%A2%98"><span class="nav-number">3.3.</span> <span class="nav-text">上下文信息融合问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%9E%E7%94%9F%E8%83%8C%E6%99%AF"><span class="nav-number">3.4.</span> <span class="nav-text">诞生背景</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Transformer%E7%9A%84%E5%8F%91%E5%B1%95"><span class="nav-number">4.</span> <span class="nav-text">Transformer的发展</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E9%98%B6%E6%AE%B5%EF%BC%882017%E5%B9%B4%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">初始阶段（2017年）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%91%E5%B1%95%E4%B8%8E%E4%BC%98%E5%8C%96%E9%98%B6%E6%AE%B5%EF%BC%882018-2020%E5%B9%B4%EF%BC%89"><span class="nav-number">4.2.</span> <span class="nav-text">发展与优化阶段（2018-2020年）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%85%B4%E8%B5%B7%EF%BC%882018-2021%E5%B9%B4%EF%BC%89"><span class="nav-number">4.3.</span> <span class="nav-text">预训练模型的兴起（2018-2021年）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LLM%E7%9A%84%E8%AF%9E%E7%94%9F"><span class="nav-number">5.</span> <span class="nav-text">LLM的诞生</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GPT-1%EF%BC%882018%E5%B9%B4%EF%BC%89"><span class="nav-number">5.1.</span> <span class="nav-text">GPT-1（2018年）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GPT-2%EF%BC%882019%E5%B9%B4%EF%BC%89"><span class="nav-number">5.2.</span> <span class="nav-text">GPT-2（2019年）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GPT-3%EF%BC%882020%E5%B9%B4%EF%BC%89"><span class="nav-number">5.3.</span> <span class="nav-text">GPT-3（2020年）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ChatGPT%EF%BC%882022%E5%B9%B4%EF%BC%89"><span class="nav-number">5.4.</span> <span class="nav-text">ChatGPT（2022年）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GPT-4%EF%BC%882023%E5%B9%B4%EF%BC%89"><span class="nav-number">5.5.</span> <span class="nav-text">GPT-4（2023年）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LLM%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E5%85%B6%E4%BC%98%E5%8C%96%E6%96%B9%E5%90%91"><span class="nav-number">6.</span> <span class="nav-text">LLM的问题及其优化方向</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E5%8C%96%E6%96%B9%E5%90%91"><span class="nav-number">6.1.</span> <span class="nav-text">优化方向</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BE%AE%E8%B0%83"><span class="nav-number">6.1.1.</span> <span class="nav-text">微调</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RAG"><span class="nav-number">6.1.2.</span> <span class="nav-text">RAG</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RAG-1"><span class="nav-number">7.</span> <span class="nav-text">RAG</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A3%80%E7%B4%A2"><span class="nav-number">7.1.</span> <span class="nav-text">检索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E6%88%90"><span class="nav-number">7.2.</span> <span class="nav-text">生成</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0"><span class="nav-number">8.</span> <span class="nav-text">参考文章</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">idonkeyliu</span>
+</div>
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.2"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
