@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5326378969485700"
+     crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="LLM,Agent,Jev,System One,TypeSafe," />
+
+
+
+
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="idonkeyliu's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="最近几天，Jev 把时间线刷穿了：TypeSafe AI 出圈、LangChain 当天接集成、Vercel &#x2F; Cloudflare 跟着上架。评论区两种声音最吵——「又一个便宜小模型」和「Agent 时代的 if」。 两种都没说准。Jev 故意不会聊天、不会写文、不会写代码。它干的事更土、也更狠：把程序里那些「语义上糊、规则写不死」的判断，变成带概率的结构化返回值。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="什么是Jev?">
+<meta property="og:url" content="http://idonkeyliu.github.io/2026/09/21/%E4%BB%80%E4%B9%88%E6%98%AFjev/index.html">
+<meta property="og:site_name" content="idonkeyliu&#39;s Blog">
+<meta property="og:description" content="最近几天，Jev 把时间线刷穿了：TypeSafe AI 出圈、LangChain 当天接集成、Vercel &#x2F; Cloudflare 跟着上架。评论区两种声音最吵——「又一个便宜小模型」和「Agent 时代的 if」。 两种都没说准。Jev 故意不会聊天、不会写文、不会写代码。它干的事更土、也更狠：把程序里那些「语义上糊、规则写不死」的判断，变成带概率的结构化返回值。">
+<meta property="og:locale">
+<meta property="og:image" content="http://idonkeyliu.github.io/2026/09/21/%E4%BB%80%E4%B9%88%E6%98%AFjev/jev_cover.png">
+<meta property="og:image" content="http://idonkeyliu.github.io/2026/09/21/%E4%BB%80%E4%B9%88%E6%98%AFjev/jev_flow.png">
+<meta property="og:image" content="http://idonkeyliu.github.io/2026/09/21/%E4%BB%80%E4%B9%88%E6%98%AFjev/llm_vs_jev.png">
+<meta property="og:image" content="http://idonkeyliu.github.io/2026/09/21/%E4%BB%80%E4%B9%88%E6%98%AFjev/jev_primitives.png">
+<meta property="og:image" content="http://idonkeyliu.github.io/2026/09/21/%E4%BB%80%E4%B9%88%E6%98%AFjev/jev_confidence.png">
+<meta property="og:image" content="http://idonkeyliu.github.io/2026/09/21/%E4%BB%80%E4%B9%88%E6%98%AFjev/jev_agent.png">
+<meta property="article:published_time" content="2026-09-21T04:07:55.000Z">
+<meta property="article:modified_time" content="2026-09-21T10:18:27.503Z">
+<meta property="article:author" content="idonkeyliu">
+<meta property="article:tag" content="LLM">
+<meta property="article:tag" content="Agent">
+<meta property="article:tag" content="Jev">
+<meta property="article:tag" content="System One">
+<meta property="article:tag" content="TypeSafe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://idonkeyliu.github.io/2026/09/21/%E4%BB%80%E4%B9%88%E6%98%AFjev/jev_cover.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://idonkeyliu.github.io/2026/09/21/什么是jev/"/>
+
+
+
+
+
+  <title>什么是Jev? | idonkeyliu's Blog</title>
+  
+
+
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-96CQ5TQ1TG"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-96CQ5TQ1TG');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?d3c2fc214cb28804722819af3b12894e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1264537514&web_id=1264537514" language="JavaScript"></script>
+  </div>
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">idonkeyliu's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://idonkeyliu.github.io/2026/09/21/%E4%BB%80%E4%B9%88%E6%98%AFjev/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://q1.qlogo.cn/g?b=qq&s=100&nk=232836108">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="idonkeyliu's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">什么是Jev?</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2026-09-21T12:07:55+08:00">
+                2026-09-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <img src="/2026/09/21/%E4%BB%80%E4%B9%88%E6%98%AFjev/jev_cover.png" class="">
+
+<p>最近几天，Jev 把时间线刷穿了：TypeSafe AI 出圈、LangChain 当天接集成、Vercel &#x2F; Cloudflare 跟着上架。评论区两种声音最吵——「又一个便宜小模型」和「Agent 时代的 if」。</p>
+<p>两种都没说准。Jev <strong>故意不会聊天、不会写文、不会写代码</strong>。它干的事更土、也更狠：把程序里那些「语义上糊、规则写不死」的判断，变成带概率的结构化返回值。</p>
+<span id="more"></span>
+
+<blockquote>
+<p>一句话：Jev &#x3D; <strong>给软件用的「智能 if」</strong>——喂 <code>state</code> + 闭集 <code>questions</code>，一次并行拿回概率答案；模型负责模糊判断，代码负责精确动作。</p>
+</blockquote>
+<h2 id="先看缺口：Agent-里真正贵的是什么"><a href="#先看缺口：Agent-里真正贵的是什么" class="headerlink" title="先看缺口：Agent 里真正贵的是什么"></a>先看缺口：Agent 里真正贵的是什么</h2><p>Agent 环路上，真正烧钱、拖尾延迟的，往往不是最后那句回复，而是中间那一堆<strong>小判断</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>决策点</th>
+<th>真实例子</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>路由</td>
+<td>工单去账单组、技术组，还是销售？</td>
+</tr>
+<tr>
+<td>分级</td>
+<td>P0 &#x2F; P1 &#x2F; P2？客户怒到什么程度？</td>
+</tr>
+<tr>
+<td>门禁</td>
+<td>这次 <code>bash</code> &#x2F; 转账要不要拦？</td>
+</tr>
+<tr>
+<td>选模</td>
+<td>Luna 够不够，还是必须上 Sol？</td>
+</tr>
+<tr>
+<td>校验</td>
+<td>这段引用是否真的支撑结论？</td>
+</tr>
+</tbody></table>
+<p>以前两条路：</p>
+<ol>
+<li><strong>手写规则 &#x2F; 传统分类器</strong>：快、便宜，语义一岔就碎。</li>
+<li><strong>聊天 LLM + structured output</strong>：聪明，但自回归吐 JSON，又慢又贵；schema 还可能歪，自报「95% 确信」常常虚高。</li>
+</ol>
+<p>Jev 卡在这个缝里：模糊语义交给模型，权限、分支、副作用留给你的确定性代码。</p>
+<img src="/2026/09/21/%E4%BB%80%E4%B9%88%E6%98%AFjev/jev_flow.png" class="">
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">state（当前上下文）</span><br><span class="line">  + questions（你预先钉死的答案空间）</span><br><span class="line">        ↓</span><br><span class="line">   Jev（并行闭集判断）</span><br><span class="line">        ↓</span><br><span class="line">answers（noul / choice / score + 概率）</span><br><span class="line">        ↓</span><br><span class="line">你的 if / 路由 / 队列 / 确认框</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="什么是-Jev"><a href="#什么是-Jev" class="headerlink" title="什么是 Jev"></a>什么是 Jev</h2><p>Jev 是 <strong>TypeSafe AI</strong> 于 <strong>2026-09-15</strong> 开放 Early Access 的首个 <strong>System One Model</strong>。</p>
+<table>
+<thead>
+<tr>
+<th>项</th>
+<th>现状</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>发布方</td>
+<td>TypeSafe AI（创始人 Diogo Almeida，InstructGPT &#x2F; ChatGPT 相关背景）</td>
+</tr>
+<tr>
+<td>版本</td>
+<td><code>jev-1.13.0</code>（<code>jev-latest</code> &#x2F; <code>jev-preview</code> 目前都指向它）</td>
+</tr>
+<tr>
+<td>形态</td>
+<td>托管 API，权重未开源</td>
+</tr>
+<tr>
+<td>端点</td>
+<td><code>POST https://api.typesafe.ai/v1/systemone</code></td>
+</tr>
+</tbody></table>
+<p>官方定位很硬：</p>
+<blockquote>
+<p>放弃字符串生成，换取类型安全的结构化输出、并行采样、以及可校准的概率。</p>
+</blockquote>
+<p>所以分工该这样记：</p>
+<table>
+<thead>
+<tr>
+<th>要做的事</th>
+<th>用谁</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>写回复、写代码、多步规划、解释推理</td>
+<td>生成式 LLM</td>
+</tr>
+<tr>
+<td>分类、路由、打分、是否、门禁、选模</td>
+<td><strong>Jev</strong></td>
+</tr>
+<tr>
+<td>生产系统</td>
+<td>LLM 负责「说 &#x2F; 想」，Jev 负责「判」</td>
+</tr>
+</tbody></table>
+<p>最小请求：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;model&quot;</span><span class="punctuation">:</span> <span class="string">&quot;jev-latest&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;state&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Stripe 接了三天一直失败，订单在掉，请尽快处理。&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;questions&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;is_urgent&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;noul&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;instructions&quot;</span><span class="punctuation">:</span> <span class="string">&quot;这条消息是否表达了紧迫性？&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>返回不是解释，是程序能直接吃的数：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;model&quot;</span><span class="punctuation">:</span> <span class="string">&quot;jev-1.13.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;answers&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;is_urgent&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;noul&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;noul&quot;</span><span class="punctuation">:</span> <span class="number">0.95</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>然后代码说了算：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> urgent &gt;= <span class="number">0.9</span>:</span><br><span class="line">    page_on_call()</span><br><span class="line"><span class="keyword">elif</span> urgent &gt;= <span class="number">0.6</span>:</span><br><span class="line">    queue_for_review()</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    normal_queue()</span><br></pre></td></tr></table></figure>
+
+<p>这就是 Jev 的产品哲学：<strong>模型给判断，代码握方向盘。</strong></p>
+<h2 id="名字从哪来（两个隐喻够用）"><a href="#名字从哪来（两个隐喻够用）" class="headerlink" title="名字从哪来（两个隐喻够用）"></a>名字从哪来（两个隐喻够用）</h2><ol>
+<li><strong>System One</strong> —— 借自卡尼曼《思考，快与慢》。System 1 是快、直觉式判断；System 2 是慢、刻意推理。Jev 被定位成软件里的「快判断层」；复杂推理仍留给推理模型。</li>
+<li><strong>Jev</strong> —— 取自经济学家 William Stanley <strong>Jevons</strong>。杰文斯悖论：蒸汽机更高效后，煤的总用量不降反升——更便宜会创造更多用途。TypeSafe 的赌注是：决策单价掉一个数量级，你会在以前绝不会调 LLM 的地方塞满判断。</li>
+</ol>
+<h2 id="和-LLM-structured-output：表面像，骨子不同"><a href="#和-LLM-structured-output：表面像，骨子不同" class="headerlink" title="和 LLM structured output：表面像，骨子不同"></a>和 LLM structured output：表面像，骨子不同</h2><img src="/2026/09/21/%E4%BB%80%E4%B9%88%E6%98%AFjev/llm_vs_jev.png" class="">
+
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>聊天 LLM + schema</th>
+<th>Jev</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>输出</td>
+<td>仍在生成字符串，再校验</td>
+<td>在你给定的答案空间上直接出分布</td>
+</tr>
+<tr>
+<td>采样</td>
+<td>自回归，逐 token</td>
+<td>多题对同一 <code>state</code> <strong>并行</strong>评估</td>
+</tr>
+<tr>
+<td>类型错误</td>
+<td>可能 schema 失败 &#x2F; 截断</td>
+<td>成功响应里不能出现 schema 外取值</td>
+</tr>
+<tr>
+<td>概率</td>
+<td>自报置信度常不可靠</td>
+<td>训练目标含 <strong>概率校准（RLCD）</strong></td>
+</tr>
+<tr>
+<td>延迟（官方）</td>
+<td>同形态问题可达数秒～数百秒</td>
+<td>约 <strong>70–500ms</strong> 端到端</td>
+</tr>
+<tr>
+<td>价格（官方）</td>
+<td>输入常见 $0.2–$10 &#x2F; MTok，输出更贵</td>
+<td>输入 <strong>$0.042 &#x2F; MTok</strong>，输出免费</td>
+</tr>
+<tr>
+<td>擅长</td>
+<td>生成、解释、开放规划</td>
+<td>闭集判断、路由、门禁</td>
+</tr>
+</tbody></table>
+<p>厂商 workflow eval 有「约 200× 更快、400× 更便宜」一类 headline——那是他们选的工作流上的 Pareto 上沿。<strong>当作上限，用你自己的 state 体量测一遍。</strong></p>
+<p>还有一句要拆开听：「不能幻觉」。</p>
+<ul>
+<li><strong>类型层面</strong>：不会吐出你没定义的选项——结构性保证。</li>
+<li><strong>语义层面</strong>：仍可能判错。合法但错误的类别，是业务错误，不是 schema 错误。</li>
+</ul>
+<blockquote>
+<p>幻觉没了类型形状，不代表判断永远正确。自动化系统里，这两件事必须分开处理。</p>
+</blockquote>
+<h2 id="RLCD：为「说-0-9-就得大约九成对」训的"><a href="#RLCD：为「说-0-9-就得大约九成对」训的" class="headerlink" title="RLCD：为「说 0.9 就得大约九成对」训的"></a>RLCD：为「说 0.9 就得大约九成对」训的</h2><p>TypeSafe 把后训练叫 <strong>RLCD（Reinforcement Learning for Calibrated Decisions）</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>主要优化什么</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>RLHF</td>
+<td>人类更喜欢的回答（聊天、文风）</td>
+</tr>
+<tr>
+<td>RLVR</td>
+<td>可程序验证的正确性（数学、代码等）</td>
+</tr>
+<tr>
+<td><strong>RLCD</strong></td>
+<td>闭集决策 + <strong>概率与真实频率对齐</strong></td>
+</tr>
+</tbody></table>
+<p>校准是<strong>群体统计</strong>：大量「说 0.9」的样本里，大约应有九成成立。它不保证某一个 0.9 一定对。</p>
+<p>公开材料没有完整损失公式、可靠性图、ECE 等第三方复现。生产上仍要：<strong>用你的标注集画 confidence–accuracy 曲线，自己定阈值。</strong></p>
+<h2 id="三种原语：Noul-x2F-Choice-x2F-Score"><a href="#三种原语：Noul-x2F-Choice-x2F-Score" class="headerlink" title="三种原语：Noul &#x2F; Choice &#x2F; Score"></a>三种原语：Noul &#x2F; Choice &#x2F; Score</h2><img src="/2026/09/21/%E4%BB%80%E4%B9%88%E6%98%AFjev/jev_primitives.png" class="">
+
+<p>一次请求可塞很多题；官方强调它们对同一 <code>state</code> <strong>独立并行</strong>——多加几题主要多付一点输入 token，延迟几乎不怎么涨。这才是「智能 if 可以铺满流水线」的物理基础。</p>
+<h3 id="Noul：是不是？"><a href="#Noul：是不是？" class="headerlink" title="Noul：是不是？"></a>Noul：是不是？</h3><p>返回 <code>noul ∈ [0, 1]</code>，表示「是」的概率。<strong>没有单独的 confidence 字段。</strong></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;refund_requested&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;noul&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;instructions&quot;</span><span class="punctuation">:</span> <span class="string">&quot;客户是否明确要求退款？&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;criteria&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;true&quot;</span><span class="punctuation">:</span> <span class="string">&quot;明确要求退钱或取消扣款&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;false&quot;</span><span class="punctuation">:</span> <span class="string">&quot;只是抱怨或询问政策，未要求退款&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>坑：</p>
+<ul>
+<li>靠近 <strong>0.5</strong> 往往是「分不清」，不是「中等程度」。要量程度，用 Score。</li>
+<li>问题写成「高分 &#x3D; 是」；别绕双重否定。</li>
+<li><code>noul=0.72</code> ≠「业务成功概率 72%」，只是「这句话像不像在要退款」。</li>
+</ul>
+<h3 id="Choice：在这些里选哪个？"><a href="#Choice：在这些里选哪个？" class="headerlink" title="Choice：在这些里选哪个？"></a>Choice：在这些里选哪个？</h3><p>无序分类。返回 <code>choice</code>、完整 <code>probabilities</code>、以及反映分布集中度的 <code>confidence</code>。最多 <strong>255</strong> 候选。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;department&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;choice&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;instructions&quot;</span><span class="punctuation">:</span> <span class="string">&quot;哪个团队应处理这条消息？&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;criteria&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;billing&quot;</span><span class="punctuation">:</span> <span class="string">&quot;扣款、发票、退款、订阅&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;technical&quot;</span><span class="punctuation">:</span> <span class="string">&quot;故障、宕机、集成问题&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;sales&quot;</span><span class="punctuation">:</span> <span class="string">&quot;询价、升级、新开户&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;other&quot;</span><span class="punctuation">:</span> <span class="string">&quot;以上都不适用&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>候选可能不全时，务必留 <code>other</code> &#x2F; <code>none</code>——否则模型只能硬选一个。<code>criteria</code> 写边界，不写形容词。</p>
+<h3 id="Score：落在哪一档？"><a href="#Score：落在哪一档？" class="headerlink" title="Score：落在哪一档？"></a>Score：落在哪一档？</h3><p>有序等级（2–10 档）。<code>score</code> 是等级编号的<strong>概率加权均值</strong>，可以落在两档之间。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;severity&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;score&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;instructions&quot;</span><span class="punctuation">:</span> <span class="string">&quot;问题有多严重？&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;criteria&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">      <span class="string">&quot;外观问题，不影响功能&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="string">&quot;功能受损，但有替代路径&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="string">&quot;阻断使用，没有 workaround&quot;</span></span><br><span class="line">    <span class="punctuation">]</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>写 Score 的关键：描述<strong>可匹配的情境</strong>，别写「中等 &#x2F; 较高」。每个等级尽量<strong>一个维度</strong>；「又准时又聪明又资深」应拆成多个 Score，在代码里合成。</p>
+<h2 id="Confidence：第二个决策轴"><a href="#Confidence：第二个决策轴" class="headerlink" title="Confidence：第二个决策轴"></a>Confidence：第二个决策轴</h2><img src="/2026/09/21/%E4%BB%80%E4%B9%88%E6%98%AFjev/jev_confidence.png" class="">
+
+<p>Choice &#x2F; Score 的 <code>confidence</code> 来自概率分布形状：</p>
+<ul>
+<li>集中在一个选项 → 高</li>
+<li>摊得很开 → 低</li>
+</ul>
+<p>它回答「模型有没有清晰偏好」，<strong>不是</strong>「这次一定正确」。生产里常见三档：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> answer.confidence &lt; <span class="number">0.5</span>:</span><br><span class="line">    route_to_human()</span><br><span class="line"><span class="keyword">elif</span> answer.choice == <span class="string">&quot;check_balance&quot;</span>:</span><br><span class="line">    show_balance()</span><br><span class="line"><span class="keyword">elif</span> answer.choice == <span class="string">&quot;approve_transfer&quot;</span>:</span><br><span class="line">    <span class="keyword">if</span> answer.confidence &gt; <span class="number">0.9</span>:</span><br><span class="line">        confirm_then_execute()</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        ask_user_to_confirm()</span><br></pre></td></tr></table></figure>
+
+<p>阈值跟<strong>错了的代价</strong>挂钩：查余额可以松，转账必须紧。先保守，用线上回流再调——别把官方 demo 里的 0.5 &#x2F; 0.9 当圣杯。</p>
+<h2 id="State-怎么喂才不废物"><a href="#State-怎么喂才不废物" class="headerlink" title="State 怎么喂才不废物"></a>State 怎么喂才不废物</h2><p><code>state</code> 可以是字符串、JSON 对象或文本数组。实践建议：</p>
+<ol>
+<li><strong>尽量用对象</strong>，问题里用反引号点路径：<code>`order.charges`</code>，减少指代歧义。</li>
+<li><strong>只塞本题需要的字段</strong>。无关历史、整本长文档会稀释信号（同样有 context rot）。</li>
+<li>预算（官方）：整请求约 <strong>64K</strong> token；<code>state + 最长单题</code> ≤ 约 <strong>32K</strong>。</li>
+<li>目前<strong>只吃文本</strong>，没有图 &#x2F; 音 &#x2F; 视频。</li>
+<li>英文效果官方最好；中文等 CJK 可用但不等同——关键路径单独评测。</li>
+<li><strong>问题 ID 不进模型</strong>。<code>refund_requested</code> 当 key 只方便你读代码；真正生效的是 <code>instructions</code>。</li>
+</ol>
+<h2 id="接到-Agent-x2F-Harness：这才是热度的理由"><a href="#接到-Agent-x2F-Harness：这才是热度的理由" class="headerlink" title="接到 Agent &#x2F; Harness：这才是热度的理由"></a>接到 Agent &#x2F; Harness：这才是热度的理由</h2><img src="/2026/09/21/%E4%BB%80%E4%B9%88%E6%98%AFjev/jev_agent.png" class="">
+
+<p>Jev 最有感的地方，不是「替代 LLM」，而是把 Agent 环上那些<strong>高频小判断</strong>拆出去。</p>
+<p>LangChain 已提供 <code>TypeSafeClassifier</code>（<code>langchain-typesafe</code>），以及实验性中间件：</p>
+<ul>
+<li><strong>Model routing</strong>：用 Jev 在 cheap &#x2F; powerful 模型间选型。</li>
+<li><strong>Auto Mode &#x2F; 工具门禁</strong>：执行 <code>bash</code> 等高风险工具前，先过一道风险判断。</li>
+</ul>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">┌─────────────────────────────────────┐</span><br><span class="line">│  LLM：规划、生成、工具参数、解释     │</span><br><span class="line">└──────────────┬──────────────────────┘</span><br><span class="line">               │ 每一步旁边的「判」</span><br><span class="line">               ▼</span><br><span class="line">┌─────────────────────────────────────┐</span><br><span class="line">│  Jev：路由 / 打分 / 是否 / 门禁      │</span><br><span class="line">└──────────────┬──────────────────────┘</span><br><span class="line">               │</span><br><span class="line">               ▼</span><br><span class="line">         你的确定性代码与工具</span><br></pre></td></tr></table></figure>
+
+<p>也适合：客服分拣、邮件 triage、简历初筛、引用是否支撑结论、贵模型调用前的便宜门禁。</p>
+<h2 id="接入示意（LangChain）"><a href="#接入示意（LangChain）" class="headerlink" title="接入示意（LangChain）"></a>接入示意（LangChain）</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> langchain_typesafe <span class="keyword">import</span> Noul, Choice, Score, TypeSafeClassifier</span><br><span class="line"></span><br><span class="line">classifier = TypeSafeClassifier()  <span class="comment"># 读 TYPESAFE_API_KEY</span></span><br><span class="line"></span><br><span class="line">resp = classifier.invoke(&#123;</span><br><span class="line">    <span class="string">&quot;state&quot;</span>: &#123;</span><br><span class="line">        <span class="string">&quot;ticket&quot;</span>: <span class="string">&quot;导出按钮在 Safari 设置页会崩，Chrome 正常。&quot;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">&quot;questions&quot;</span>: &#123;</span><br><span class="line">        <span class="string">&quot;urgent&quot;</span>: Noul(instructions=<span class="string">&quot;是否需要立刻处理？&quot;</span>),</span><br><span class="line">        <span class="string">&quot;category&quot;</span>: Choice(</span><br><span class="line">            instructions=<span class="string">&quot;这是什么类型的工单？&quot;</span>,</span><br><span class="line">            criteria=&#123;</span><br><span class="line">                <span class="string">&quot;bug&quot;</span>: <span class="string">&quot;功能异常或崩溃&quot;</span>,</span><br><span class="line">                <span class="string">&quot;feature&quot;</span>: <span class="string">&quot;新需求&quot;</span>,</span><br><span class="line">                <span class="string">&quot;billing&quot;</span>: <span class="string">&quot;账单相关&quot;</span>,</span><br><span class="line">                <span class="string">&quot;other&quot;</span>: <span class="string">&quot;其他&quot;</span>,</span><br><span class="line">            &#125;,</span><br><span class="line">        ),</span><br><span class="line">        <span class="string">&quot;severity&quot;</span>: Score(</span><br><span class="line">            instructions=<span class="string">&quot;严重程度？&quot;</span>,</span><br><span class="line">            criteria=[</span><br><span class="line">                <span class="string">&quot;外观问题&quot;</span>,</span><br><span class="line">                <span class="string">&quot;有 workaround 的功能受损&quot;</span>,</span><br><span class="line">                <span class="string">&quot;阻断使用&quot;</span>,</span><br><span class="line">            ],</span><br><span class="line">        ),</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(resp.nouls[<span class="string">&quot;urgent&quot;</span>].noul)</span><br><span class="line"><span class="built_in">print</span>(resp.choices[<span class="string">&quot;category&quot;</span>].choice, resp.choices[<span class="string">&quot;category&quot;</span>].confidence)</span><br><span class="line"><span class="built_in">print</span>(resp.scores[<span class="string">&quot;severity&quot;</span>].score)</span><br></pre></td></tr></table></figure>
+
+<p>原生 SDK &#x2F; curl 走同一 System One 端点；也可经 Vercel AI Gateway 的 <code>typesafe-ai/jev</code> 试用。</p>
+<p><strong>生产钉死版本号</strong>（如 <code>jev-1.13.0</code>），别只绑 <code>jev-latest</code>——置信度阈值会跟着别名一起飘。</p>
+<h2 id="规格速查（公开资料）"><a href="#规格速查（公开资料）" class="headerlink" title="规格速查（公开资料）"></a>规格速查（公开资料）</h2><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>版本</td>
+<td><code>jev-1.13.0</code></td>
+</tr>
+<tr>
+<td>输入价</td>
+<td>$0.042 &#x2F; 百万 token</td>
+</tr>
+<tr>
+<td>输出价</td>
+<td>免费</td>
+</tr>
+<tr>
+<td>上下文</td>
+<td>~64K &#x2F; 请求</td>
+</tr>
+<tr>
+<td>Choice 上限</td>
+<td>255</td>
+</tr>
+<tr>
+<td>Score 档位</td>
+<td>2–10</td>
+</tr>
+<tr>
+<td>默认限流（会动态调）</td>
+<td><del>250k 输入 token&#x2F;s，</del>1200 RPM</td>
+</tr>
+<tr>
+<td>访问</td>
+<td>Early Access &#x2F; 等待名单；权重未公开</td>
+</tr>
+</tbody></table>
+<p>参数量、网络结构、训练数据明细、论文：<strong>尚未公开</strong>。写进架构评审时，把「厂商声明」和「你自己测到的」分开写。</p>
+<h2 id="什么时候不要用-Jev"><a href="#什么时候不要用-Jev" class="headerlink" title="什么时候不要用 Jev"></a>什么时候不要用 Jev</h2><ul>
+<li>需要<strong>生成</strong>散文、代码、计划书、解释。</li>
+<li>需要开放式多步推理、复杂数学证明。</li>
+<li>答案空间事前定不下来，或候选经常爆炸式变化。</li>
+<li>专业窄域且还没在自己的分布上验证校准。</li>
+<li>把概率数字直接当「业务 KPI 成功率」。</li>
+</ul>
+<h2 id="工程上我会怎么用（个人判断）"><a href="#工程上我会怎么用（个人判断）" class="headerlink" title="工程上我会怎么用（个人判断）"></a>工程上我会怎么用（个人判断）</h2><p>如果明天要在现有 Agent &#x2F; 客服系统里落地，顺序大概是：</p>
+<ol>
+<li><strong>先拆决策点</strong>：把「该不该调大模型」「该不该执行工具」「工单去哪」从 prompt 里抠出来，改成闭集题。</li>
+<li><strong>先上 Noul &#x2F; Choice</strong>：边界清晰、收益立刻可见；Score 等标注稳定后再铺。</li>
+<li><strong>confidence 双轴</strong>：低置信走人，高置信自动，中间确认——阈值用你的错判代价定。</li>
+<li><strong>钉版本 + 回放集</strong>：10～50 条真实 case 做回归；别名升级当发版事件处理。</li>
+<li><strong>LLM 仍是大脑</strong>：Jev 替代的是环上的分类器，不是生成器。</li>
+</ol>
+<p>这波热度的底层叙事，不是又一个榜上分数，而是：</p>
+<blockquote>
+<p><strong>决策单元成本掉下来之后，软件里可以塞多少个「智能 if」。</strong></p>
+</blockquote>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>Jev 不是「下一个 GPT」，而是把 AI 从「会聊天的同事」推进到「能嵌进 if 的函数」：</p>
+<ol>
+<li><strong>闭集</strong>：答案空间你先定好。</li>
+<li><strong>并行</strong>：多题共享 state，一次拿回分布。</li>
+<li><strong>概率 + confidence</strong>：让不确定性能进业务代码。</li>
+<li><strong>和 LLM 互补</strong>：生成留给 LLM，判断留给 Jev。</li>
+</ol>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li>TypeSafe 官方：<a target="_blank" rel="noopener" href="https://typesafe.ai/blog/introducing-system-one-models-and-jev">Introducing System One Models and Jev</a></li>
+<li>LangChain：<a target="_blank" rel="noopener" href="https://www.langchain.com/blog/building-a-harness-with-jev">Building a Harness with Jev</a></li>
+<li>深度实践：<a target="_blank" rel="noopener" href="https://flaviocopes.com/jev/">A deep dive into Jev (Flavio Copes)</a></li>
+<li>中文综述：<a target="_blank" rel="noopener" href="https://jishuzhan.net/article/2101844026887163905">Jev 模型深度解读（技术栈）</a></li>
+</ul>
+<p>（资料整理截止约 2026-09-21；价格、限流、别名指向以官方控制台与文档为准。）</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt=" WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt=" Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/LLM/" rel="tag"><i class="fa fa-tag"></i> LLM</a>
+          
+            <a href="/tags/Agent/" rel="tag"><i class="fa fa-tag"></i> Agent</a>
+          
+            <a href="/tags/Jev/" rel="tag"><i class="fa fa-tag"></i> Jev</a>
+          
+            <a href="/tags/System-One/" rel="tag"><i class="fa fa-tag"></i> System One</a>
+          
+            <a href="/tags/TypeSafe/" rel="tag"><i class="fa fa-tag"></i> TypeSafe</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2026/09/20/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%8F%91%E5%B1%95%E8%B7%AF%E7%BA%BF/" rel="next" title="人工智能发展路线">
+                <i class="fa fa-chevron-left"></i> 人工智能发展路线
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://q1.qlogo.cn/g?b=qq&s=100&nk=232836108"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">138</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">28</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/idonkeyliu" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      github
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/idonkeyliu" target="_blank" title="twitter">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      twitter
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%88%E7%9C%8B%E7%BC%BA%E5%8F%A3%EF%BC%9AAgent-%E9%87%8C%E7%9C%9F%E6%AD%A3%E8%B4%B5%E7%9A%84%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">1.</span> <span class="nav-text">先看缺口：Agent 里真正贵的是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-Jev"><span class="nav-number">2.</span> <span class="nav-text">什么是 Jev</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8D%E5%AD%97%E4%BB%8E%E5%93%AA%E6%9D%A5%EF%BC%88%E4%B8%A4%E4%B8%AA%E9%9A%90%E5%96%BB%E5%A4%9F%E7%94%A8%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">名字从哪来（两个隐喻够用）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%92%8C-LLM-structured-output%EF%BC%9A%E8%A1%A8%E9%9D%A2%E5%83%8F%EF%BC%8C%E9%AA%A8%E5%AD%90%E4%B8%8D%E5%90%8C"><span class="nav-number">4.</span> <span class="nav-text">和 LLM structured output：表面像，骨子不同</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RLCD%EF%BC%9A%E4%B8%BA%E3%80%8C%E8%AF%B4-0-9-%E5%B0%B1%E5%BE%97%E5%A4%A7%E7%BA%A6%E4%B9%9D%E6%88%90%E5%AF%B9%E3%80%8D%E8%AE%AD%E7%9A%84"><span class="nav-number">5.</span> <span class="nav-text">RLCD：为「说 0.9 就得大约九成对」训的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E7%A7%8D%E5%8E%9F%E8%AF%AD%EF%BC%9ANoul-x2F-Choice-x2F-Score"><span class="nav-number">6.</span> <span class="nav-text">三种原语：Noul &#x2F; Choice &#x2F; Score</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Noul%EF%BC%9A%E6%98%AF%E4%B8%8D%E6%98%AF%EF%BC%9F"><span class="nav-number">6.1.</span> <span class="nav-text">Noul：是不是？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Choice%EF%BC%9A%E5%9C%A8%E8%BF%99%E4%BA%9B%E9%87%8C%E9%80%89%E5%93%AA%E4%B8%AA%EF%BC%9F"><span class="nav-number">6.2.</span> <span class="nav-text">Choice：在这些里选哪个？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Score%EF%BC%9A%E8%90%BD%E5%9C%A8%E5%93%AA%E4%B8%80%E6%A1%A3%EF%BC%9F"><span class="nav-number">6.3.</span> <span class="nav-text">Score：落在哪一档？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Confidence%EF%BC%9A%E7%AC%AC%E4%BA%8C%E4%B8%AA%E5%86%B3%E7%AD%96%E8%BD%B4"><span class="nav-number">7.</span> <span class="nav-text">Confidence：第二个决策轴</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#State-%E6%80%8E%E4%B9%88%E5%96%82%E6%89%8D%E4%B8%8D%E5%BA%9F%E7%89%A9"><span class="nav-number">8.</span> <span class="nav-text">State 怎么喂才不废物</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A5%E5%88%B0-Agent-x2F-Harness%EF%BC%9A%E8%BF%99%E6%89%8D%E6%98%AF%E7%83%AD%E5%BA%A6%E7%9A%84%E7%90%86%E7%94%B1"><span class="nav-number">9.</span> <span class="nav-text">接到 Agent &#x2F; Harness：这才是热度的理由</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A5%E5%85%A5%E7%A4%BA%E6%84%8F%EF%BC%88LangChain%EF%BC%89"><span class="nav-number">10.</span> <span class="nav-text">接入示意（LangChain）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%84%E6%A0%BC%E9%80%9F%E6%9F%A5%EF%BC%88%E5%85%AC%E5%BC%80%E8%B5%84%E6%96%99%EF%BC%89"><span class="nav-number">11.</span> <span class="nav-text">规格速查（公开资料）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E4%B8%8D%E8%A6%81%E7%94%A8-Jev"><span class="nav-number">12.</span> <span class="nav-text">什么时候不要用 Jev</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A5%E7%A8%8B%E4%B8%8A%E6%88%91%E4%BC%9A%E6%80%8E%E4%B9%88%E7%94%A8%EF%BC%88%E4%B8%AA%E4%BA%BA%E5%88%A4%E6%96%AD%EF%BC%89"><span class="nav-number">13.</span> <span class="nav-text">工程上我会怎么用（个人判断）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%8F%E7%BB%93"><span class="nav-number">14.</span> <span class="nav-text">小结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">15.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">idonkeyliu</span>
+</div>
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.2"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
