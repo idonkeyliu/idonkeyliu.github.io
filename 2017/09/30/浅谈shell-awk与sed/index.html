@@ -98,19 +98,21 @@
 
 
 
-<meta name="description" content="今天越安逸，明天越危险">
+<meta name="description" content="服务器上最高频的编程，往往不是写服务，而是把文本变成答案：日志、CSV、配置、进程列表。Shell、awk、sed 常被揉成「三种脚本语言」——更准的说法是三种职责。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="浅谈shell,awk与sed">
 <meta property="og:url" content="http://idonkeyliu.github.io/2017/09/30/%E6%B5%85%E8%B0%88shell-awk%E4%B8%8Esed/index.html">
 <meta property="og:site_name" content="idonkeyliu&#39;s Blog">
-<meta property="og:description" content="今天越安逸，明天越危险">
+<meta property="og:description" content="服务器上最高频的编程，往往不是写服务，而是把文本变成答案：日志、CSV、配置、进程列表。Shell、awk、sed 常被揉成「三种脚本语言」——更准的说法是三种职责。">
 <meta property="og:locale">
+<meta property="og:image" content="http://idonkeyliu.github.io/2017/09/30/%E6%B5%85%E8%B0%88shell-awk%E4%B8%8Esed/text_pipeline.png">
 <meta property="article:published_time" content="2017-09-30T03:40:25.000Z">
-<meta property="article:modified_time" content="2017-09-30T03:41:36.000Z">
+<meta property="article:modified_time" content="2026-09-29T02:39:04.068Z">
 <meta property="article:author" content="idonkeyliu">
 <meta property="article:tag" content="运维">
 <meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://idonkeyliu.github.io/2017/09/30/%E6%B5%85%E8%B0%88shell-awk%E4%B8%8Esed/text_pipeline.png">
 
 
 
@@ -435,7 +437,134 @@
       
 
       
-        
+        <img src="/2017/09/30/%E6%B5%85%E8%B0%88shell-awk%E4%B8%8Esed/text_pipeline.png" class="">
+<p>服务器上最高频的编程，往往不是写服务，而是<strong>把文本变成答案</strong>：日志、CSV、配置、进程列表。Shell、awk、sed 常被揉成「三种脚本语言」——更准的说法是三种职责。</p>
+<span id="more"></span>
+
+<blockquote>
+<p>一句话：Shell 管流程，sed 改行，awk 算列；角色分清，命令行才不会变成正则迷宫。</p>
+</blockquote>
+<h2 id="三者到底是什么"><a href="#三者到底是什么" class="headerlink" title="三者到底是什么"></a>三者到底是什么</h2><table>
+<thead>
+<tr>
+<th>工具</th>
+<th>核心角色</th>
+<th>最适合</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Shell（bash&#x2F;zsh）</td>
+<td>命令编排器</td>
+<td>变量、条件、循环、启动程序、重定向</td>
+</tr>
+<tr>
+<td>sed</td>
+<td>流式文本编辑器</td>
+<td>替换、删除、选取、简单逐行变换</td>
+</tr>
+<tr>
+<td>awk</td>
+<td>面向记录与字段的文本处理语言</td>
+<td>分列、聚合、统计、格式化报表</td>
+</tr>
+</tbody></table>
+<p>Shell 像导演，负责“先做什么、失败怎么办”；sed 像校对，逐行修改；awk 像表格分析师，把每行当记录、每列当字段。</p>
+<h2 id="管道：把程序接成流水线"><a href="#管道：把程序接成流水线" class="headerlink" title="管道：把程序接成流水线"></a>管道：把程序接成流水线</h2><p>Unix 工具通常只做好一件事，并通过三条通道组合：</p>
+<ul>
+<li>标准输入 stdin：程序读取的数据</li>
+<li>标准输出 stdout：正常结果</li>
+<li>标准错误 stderr：诊断信息</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep <span class="string">&#x27;ERROR&#x27;</span> app.log | sed <span class="string">&#x27;s/password=[^ ]*/password=***/g&#x27;</span> | <span class="built_in">head</span></span><br></pre></td></tr></table></figure>
+
+<p>数据从左向右流动：先筛错误行，再脱敏，最后只显示前十行。管道传递的是 stdout，默认不会传 stderr：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">command</span> 2&gt;error.log | another</span><br><span class="line"><span class="built_in">command</span> 2&gt;&amp;1 | <span class="built_in">tee</span> all.log</span><br></pre></td></tr></table></figure>
+
+<p>每一级都应有明确职责。若一条命令需要横向滚动三屏，最好拆成脚本、加中间变量和错误处理。</p>
+<h2 id="Shell：编排流程，而非硬算文本"><a href="#Shell：编排流程，而非硬算文本" class="headerlink" title="Shell：编排流程，而非硬算文本"></a>Shell：编排流程，而非硬算文本</h2><p>Shell 最重要的能力是调用命令、展开变量、判断返回码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/usr/bin/env bash</span></span><br><span class="line"><span class="built_in">set</span> -euo pipefail</span><br><span class="line"></span><br><span class="line">log_file=<span class="variable">$&#123;1:-app.log&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [[ ! -r <span class="string">&quot;<span class="variable">$log_file</span>&quot;</span> ]]; <span class="keyword">then</span></span><br><span class="line">  <span class="built_in">printf</span> <span class="string">&#x27;无法读取文件：%s\n&#x27;</span> <span class="string">&quot;<span class="variable">$log_file</span>&quot;</span> &gt;&amp;2</span><br><span class="line">  <span class="built_in">exit</span> 1</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">grep -c <span class="string">&#x27;ERROR&#x27;</span> <span class="string">&quot;<span class="variable">$log_file</span>&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>这里有几个生产脚本习惯：</p>
+<ul>
+<li><code>&quot;$log_file&quot;</code> 必须加引号，避免空格和通配符展开；</li>
+<li><code>$&#123;1:-app.log&#125;</code> 表示参数为空时使用默认值；</li>
+<li><code>set -u</code> 让未定义变量尽早报错；</li>
+<li><code>pipefail</code> 让管道中间命令失败时，整条管道也失败；</li>
+<li>错误信息写到 <code>&gt;&amp;2</code>。</li>
+</ul>
+<p>循环应当处理文件名，而不是解析 <code>ls</code> 输出：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">find logs -<span class="built_in">type</span> f -name <span class="string">&#x27;*.log&#x27;</span> -print0 |</span><br><span class="line"><span class="keyword">while</span> IFS= <span class="built_in">read</span> -r -d <span class="string">&#x27;&#x27;</span> file; <span class="keyword">do</span></span><br><span class="line">  gzip -- <span class="string">&quot;<span class="variable">$file</span>&quot;</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+
+<p><code>-print0</code> 与 <code>read -d &#39;&#39;</code> 用 NUL 分隔，因此文件名含空格、换行也不怕。</p>
+<h2 id="sed：逐行做编辑"><a href="#sed：逐行做编辑" class="headerlink" title="sed：逐行做编辑"></a>sed：逐行做编辑</h2><p>sed 的基本形式是：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed [选项] &#x27;地址 + 命令&#x27; 文件</span><br></pre></td></tr></table></figure>
+
+<p>最常见的是替换：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sed <span class="string">&#x27;s/http:/https:/&#x27;</span> config.txt       <span class="comment"># 每行只替换第一次</span></span><br><span class="line">sed <span class="string">&#x27;s/http:/https:/g&#x27;</span> config.txt      <span class="comment"># 替换每行全部匹配</span></span><br><span class="line">sed -E <span class="string">&#x27;s/[0-9]&#123;3&#125;-[0-9]&#123;4&#125;/****/g&#x27;</span> contacts.txt</span><br></pre></td></tr></table></figure>
+
+<p>地址用来限定处理范围：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sed -n <span class="string">&#x27;10,20p&#x27;</span> app.log               <span class="comment"># 只打印第 10～20 行</span></span><br><span class="line">sed <span class="string">&#x27;/DEBUG/d&#x27;</span> app.log                 <span class="comment"># 删除含 DEBUG 的行</span></span><br><span class="line">sed <span class="string">&#x27;/BEGIN/,/END/p&#x27;</span> app.log           <span class="comment"># 选取两个标记之间的区间</span></span><br><span class="line">sed <span class="string">&#x27;/server &#123;/a\    access_log off;&#x27;</span> nginx.conf</span><br></pre></td></tr></table></figure>
+
+<p>默认情况下，sed 只把结果打印到 stdout，不修改原文件。这一点很安全：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed <span class="string">&#x27;s/foo/bar/g&#x27;</span> file &gt;file.new</span><br></pre></td></tr></table></figure>
+
+<p>确认结果后再替换原文件。<code>sed -i</code> 会原地修改，但 GNU sed 与 macOS&#x2F;BSD sed 的参数略有差异：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i.bak <span class="string">&#x27;s/foo/bar/g&#x27;</span> file   <span class="comment"># 同时保留 file.bak，兼容性较好</span></span><br></pre></td></tr></table></figure>
+
+<p>sed 适合局部、线性的变换。需要跨多行状态、复杂分组或数值统计时，awk 通常更清晰。</p>
+<h2 id="awk：把文本当成表"><a href="#awk：把文本当成表" class="headerlink" title="awk：把文本当成表"></a>awk：把文本当成表</h2><p>awk 默认按空白切列：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk <span class="string">&#x27;&#123;print $1, $NF&#125;&#x27;</span> access.log</span><br></pre></td></tr></table></figure>
+
+<p><code>$1</code> 是第一列，<code>$NF</code> 是最后一列，<code>$0</code> 是整行，<code>NF</code> 是字段数，<code>NR</code> 是累计行号。指定分隔符后，它很像一台轻量表格引擎：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk -F, <span class="string">&#x27;NR &gt; 1 &#123;sum += $3&#125; END &#123;print &quot;总计:&quot;, sum&#125;&#x27;</span> sales.csv</span><br></pre></td></tr></table></figure>
+
+<p>awk 程序通常由三段组成：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">BEGIN</span> &#123; 初始化 &#125;</span><br><span class="line">条件   &#123; 对每条记录执行 &#125;</span><br><span class="line"><span class="keyword">END</span>   &#123; 汇总输出 &#125;</span><br></pre></td></tr></table></figure>
+
+<p>例如统计 nginx 访问日志里的状态码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">awk <span class="string">&#x27;&#123;count[$9]++&#125;</span></span><br><span class="line"><span class="string">END &#123;</span></span><br><span class="line"><span class="string">  for (code in count)</span></span><br><span class="line"><span class="string">    printf &quot;%s %d\n&quot;, code, count[code]</span></span><br><span class="line"><span class="string">&#125;&#x27;</span> access.log | <span class="built_in">sort</span> -k2 -nr</span><br></pre></td></tr></table></figure>
+
+<p>又比如计算耗时字段的平均值与最大值：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">awk <span class="string">&#x27;</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line"><span class="string">  sum += $NF</span></span><br><span class="line"><span class="string">  if ($NF &gt; max) max = $NF</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">END &#123;</span></span><br><span class="line"><span class="string">  if (NR &gt; 0)</span></span><br><span class="line"><span class="string">    printf &quot;count=%d avg=%.3f max=%.3f\n&quot;, NR, sum/NR, max</span></span><br><span class="line"><span class="string">&#125;&#x27;</span> request.log</span><br></pre></td></tr></table></figure>
+
+<p>条件模式也很直观：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">awk <span class="string">&#x27;$9 &gt;= 500 &#123;print $1, $7, $9&#125;&#x27;</span> access.log</span><br><span class="line">awk -F= <span class="string">&#x27;$1 == &quot;PORT&quot; &#123;print $2&#125;&#x27;</span> .<span class="built_in">env</span></span><br></pre></td></tr></table></figure>
+
+<p>注意：真正的 CSV 支持引号内逗号和换行，简单 <code>-F,</code> 无法正确解析所有 CSV。严肃数据处理应使用 Python <code>csv</code>、Miller 或专门工具。</p>
+<h2 id="经典单行命令"><a href="#经典单行命令" class="headerlink" title="经典单行命令"></a>经典单行命令</h2><h3 id="统计出现频率"><a href="#统计出现频率" class="headerlink" title="统计出现频率"></a>统计出现频率</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk <span class="string">&#x27;&#123;print $1&#125;&#x27;</span> access.log | <span class="built_in">sort</span> | <span class="built_in">uniq</span> -c | <span class="built_in">sort</span> -nr | <span class="built_in">head</span></span><br></pre></td></tr></table></figure>
+
+<p>为什么必须先 <code>sort</code>？因为 <code>uniq</code> 只合并相邻重复行。</p>
+<h3 id="替换配置但跳过注释"><a href="#替换配置但跳过注释" class="headerlink" title="替换配置但跳过注释"></a>替换配置但跳过注释</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed <span class="string">&#x27;/^[[:space:]]*#/! s/old.example.com/new.example.com/g&#x27;</span> app.conf</span><br></pre></td></tr></table></figure>
+
+<p><code>/模式/!</code> 表示“不匹配该模式的行”，因此注释保持原样。</p>
+<h3 id="找出-P99-之外的慢请求"><a href="#找出-P99-之外的慢请求" class="headerlink" title="找出 P99 之外的慢请求"></a>找出 P99 之外的慢请求</h3><p>若日志末列是毫秒耗时，可先做快速分位数观察：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">awk <span class="string">&#x27;&#123;print $NF&#125;&#x27;</span> access.log | <span class="built_in">sort</span> -n |</span><br><span class="line">awk <span class="string">&#x27;&#123;a[NR]=$1&#125; END &#123;if (NR) print a[int(NR*0.99+0.999)]&#125;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>这是离线近似写法；海量数据不宜全部排序，应使用监控系统的直方图或流式分位算法。</p>
+<h3 id="同时读取-Shell-变量"><a href="#同时读取-Shell-变量" class="headerlink" title="同时读取 Shell 变量"></a>同时读取 Shell 变量</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">threshold=1000</span><br><span class="line">awk -v <span class="built_in">limit</span>=<span class="string">&quot;<span class="variable">$threshold</span>&quot;</span> <span class="string">&#x27;$NF &gt; limit &#123;print $0&#125;&#x27;</span> request.log</span><br></pre></td></tr></table></figure>
+
+<p>不要把 Shell 变量生硬拼进 awk 源码，<code>-v</code> 更安全、可读。</p>
+<h2 id="什么时候用哪个"><a href="#什么时候用哪个" class="headerlink" title="什么时候用哪个"></a>什么时候用哪个</h2><p>先按问题形状选工具：</p>
+<ol>
+<li><strong>需要启动多个程序、判断成功失败</strong>：Shell。</li>
+<li><strong>每行做一次替换或删选</strong>：sed。</li>
+<li><strong>按列判断、累加、分组</strong>：awk。</li>
+<li><strong>JSON</strong>：<code>jq</code>；<strong>YAML</strong>：<code>yq</code>。</li>
+<li><strong>复杂数据结构、网络请求、长期维护</strong>：Python&#x2F;Go 等通用语言。</li>
+</ol>
+<p>一个实用边界是：命令用于一次性探索很合适；一旦要进定时任务、会修改数据、需要测试和重试，就把它升级成有参数校验、日志和测试的脚本。</p>
+<h2 id="常见陷阱"><a href="#常见陷阱" class="headerlink" title="常见陷阱"></a>常见陷阱</h2><h3 id="引号层级"><a href="#引号层级" class="headerlink" title="引号层级"></a>引号层级</h3><p>单引号阻止 Shell 展开，双引号允许 <code>$variable</code>、<code>$(command)</code> 展开：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">name=<span class="string">&#x27;world&#x27;</span></span><br><span class="line"><span class="built_in">printf</span> <span class="string">&#x27;%s\n&#x27;</span> <span class="string">&#x27;$name&#x27;</span>   <span class="comment"># 输出 $name</span></span><br><span class="line"><span class="built_in">printf</span> <span class="string">&#x27;%s\n&#x27;</span> <span class="string">&quot;<span class="variable">$name</span>&quot;</span>   <span class="comment"># 输出 world</span></span><br></pre></td></tr></table></figure>
+
+<p>awk 程序通常放单引号里，Shell 值通过 <code>-v</code> 传入。</p>
+<h3 id="正则不是通用解析器"><a href="#正则不是通用解析器" class="headerlink" title="正则不是通用解析器"></a>正则不是通用解析器</h3><p>HTML、JSON、CSV 都有结构与转义规则。sed&#x2F;awk 可以处理受控的简单格式，但不应冒充完整解析器。</p>
+<h3 id="管道吞掉失败"><a href="#管道吞掉失败" class="headerlink" title="管道吞掉失败"></a>管道吞掉失败</h3><p>未启用 <code>pipefail</code> 时，<code>producer | consumer</code> 的退出码通常只看最后一个命令。生产脚本建议：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> -o pipefail</span><br></pre></td></tr></table></figure>
+
+<h3 id="不要边看边破坏"><a href="#不要边看边破坏" class="headerlink" title="不要边看边破坏"></a>不要边看边破坏</h3><p>先输出预览，再写文件；先备份，再用 <code>-i</code>；处理批量文件时用 NUL 分隔；把破坏性动作设计成可重复、可回滚。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>Shell、sed、awk 的共同美感是组合，而不是炫技。Shell 管流程，sed 改行，awk 算列；选择合适的数据工具，保持每一级管道简单，再用 <code>set -euo pipefail</code>、正确引用和预览机制兜住边界。</p>
+<p>真正高质量的一行命令，不是字符最少，而是读者能快速回答：输入是什么、做了哪些变换、失败会怎样。</p>
+
       
     </div>
     
@@ -560,8 +689,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="https://q1.qlogo.cn/g?b=qq&s=100&nk=232836108"
@@ -598,7 +736,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-count">64</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -654,6 +792,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E8%80%85%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">1.</span> <span class="nav-text">三者到底是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%A1%E9%81%93%EF%BC%9A%E6%8A%8A%E7%A8%8B%E5%BA%8F%E6%8E%A5%E6%88%90%E6%B5%81%E6%B0%B4%E7%BA%BF"><span class="nav-number">2.</span> <span class="nav-text">管道：把程序接成流水线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shell%EF%BC%9A%E7%BC%96%E6%8E%92%E6%B5%81%E7%A8%8B%EF%BC%8C%E8%80%8C%E9%9D%9E%E7%A1%AC%E7%AE%97%E6%96%87%E6%9C%AC"><span class="nav-number">3.</span> <span class="nav-text">Shell：编排流程，而非硬算文本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sed%EF%BC%9A%E9%80%90%E8%A1%8C%E5%81%9A%E7%BC%96%E8%BE%91"><span class="nav-number">4.</span> <span class="nav-text">sed：逐行做编辑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#awk%EF%BC%9A%E6%8A%8A%E6%96%87%E6%9C%AC%E5%BD%93%E6%88%90%E8%A1%A8"><span class="nav-number">5.</span> <span class="nav-text">awk：把文本当成表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%8F%E5%85%B8%E5%8D%95%E8%A1%8C%E5%91%BD%E4%BB%A4"><span class="nav-number">6.</span> <span class="nav-text">经典单行命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%9F%E8%AE%A1%E5%87%BA%E7%8E%B0%E9%A2%91%E7%8E%87"><span class="nav-number">6.1.</span> <span class="nav-text">统计出现频率</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%BF%E6%8D%A2%E9%85%8D%E7%BD%AE%E4%BD%86%E8%B7%B3%E8%BF%87%E6%B3%A8%E9%87%8A"><span class="nav-number">6.2.</span> <span class="nav-text">替换配置但跳过注释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%BE%E5%87%BA-P99-%E4%B9%8B%E5%A4%96%E7%9A%84%E6%85%A2%E8%AF%B7%E6%B1%82"><span class="nav-number">6.3.</span> <span class="nav-text">找出 P99 之外的慢请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8C%E6%97%B6%E8%AF%BB%E5%8F%96-Shell-%E5%8F%98%E9%87%8F"><span class="nav-number">6.4.</span> <span class="nav-text">同时读取 Shell 变量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E7%94%A8%E5%93%AA%E4%B8%AA"><span class="nav-number">7.</span> <span class="nav-text">什么时候用哪个</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E9%99%B7%E9%98%B1"><span class="nav-number">8.</span> <span class="nav-text">常见陷阱</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%95%E5%8F%B7%E5%B1%82%E7%BA%A7"><span class="nav-number">8.1.</span> <span class="nav-text">引号层级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%A3%E5%88%99%E4%B8%8D%E6%98%AF%E9%80%9A%E7%94%A8%E8%A7%A3%E6%9E%90%E5%99%A8"><span class="nav-number">8.2.</span> <span class="nav-text">正则不是通用解析器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%A1%E9%81%93%E5%90%9E%E6%8E%89%E5%A4%B1%E8%B4%A5"><span class="nav-number">8.3.</span> <span class="nav-text">管道吞掉失败</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E8%A6%81%E8%BE%B9%E7%9C%8B%E8%BE%B9%E7%A0%B4%E5%9D%8F"><span class="nav-number">8.4.</span> <span class="nav-text">不要边看边破坏</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%8F%E7%BB%93"><span class="nav-number">9.</span> <span class="nav-text">小结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

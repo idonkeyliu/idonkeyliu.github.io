@@ -80,7 +80,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="今天越安逸，明天越危险" />
+  <meta name="keywords" content="每日一概念,安全," />
 
 
 
@@ -98,17 +98,21 @@
 
 
 
-<meta name="description" content="今天越安逸，明天越危险">
+<meta name="description" content="WebAuthn 密码泄露、短信被劫持、钓鱼站长得一模一样——传统登录像把一把会复制的钥匙，每次都交给对方检查。WebAuthn 换了一种玩法：网站只认「当场盖的章」，章不能带走，假门牌也盖不出来。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="每日一概念-WebAuthn&#x2F;2019-06-28">
 <meta property="og:url" content="http://idonkeyliu.github.io/2019/07/02/%E6%AF%8F%E6%97%A5%E4%B8%80%E6%A6%82%E5%BF%B5-WebAuthn-2019-06-28/index.html">
 <meta property="og:site_name" content="idonkeyliu&#39;s Blog">
-<meta property="og:description" content="今天越安逸，明天越危险">
+<meta property="og:description" content="WebAuthn 密码泄露、短信被劫持、钓鱼站长得一模一样——传统登录像把一把会复制的钥匙，每次都交给对方检查。WebAuthn 换了一种玩法：网站只认「当场盖的章」，章不能带走，假门牌也盖不出来。">
 <meta property="og:locale">
+<meta property="og:image" content="http://idonkeyliu.github.io/2019/07/02/%E6%AF%8F%E6%97%A5%E4%B8%80%E6%A6%82%E5%BF%B5-WebAuthn-2019-06-28/cover.png">
 <meta property="article:published_time" content="2019-07-02T14:09:50.000Z">
-<meta property="article:modified_time" content="2019-07-02T14:09:50.000Z">
+<meta property="article:modified_time" content="2026-09-29T02:38:46.716Z">
 <meta property="article:author" content="idonkeyliu">
+<meta property="article:tag" content="每日一概念">
+<meta property="article:tag" content="安全">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://idonkeyliu.github.io/2019/07/02/%E6%AF%8F%E6%97%A5%E4%B8%80%E6%A6%82%E5%BF%B5-WebAuthn-2019-06-28/cover.png">
 
 
 
@@ -411,7 +415,18 @@
       
 
       
-        
+        <h2 id="WebAuthn"><a href="#WebAuthn" class="headerlink" title="WebAuthn"></a>WebAuthn</h2><img src="/2019/07/02/%E6%AF%8F%E6%97%A5%E4%B8%80%E6%A6%82%E5%BF%B5-WebAuthn-2019-06-28/cover.png" class="">
+<p>密码泄露、短信被劫持、钓鱼站长得一模一样——传统登录像把一把会复制的钥匙，每次都交给对方检查。WebAuthn 换了一种玩法：网站只认「当场盖的章」，章不能带走，假门牌也盖不出来。</p>
+<span id="more"></span>
+
+<blockquote>
+<p>一句话：WebAuthn 用「设备持有私钥、网站保存公钥、凭据绑定域名」替代共享密码，天生更抗钓鱼和撞库。</p>
+</blockquote>
+<h3 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h3><p>它是浏览器侧的 Web 认证标准，也是 FIDO2 &#x2F; Passkey 的底座。注册时，认证器（手机安全芯片、本机生物识别模块、硬件 Key 等）为<strong>该网站域名</strong>生成密钥对：私钥不出设备，公钥交给服务器。登录时服务器发一次性挑战，用户本地确认（指纹&#x2F;面容&#x2F;PIN）后签名，服务器验签即可。</p>
+<h3 id="为什么重要"><a href="#为什么重要" class="headerlink" title="为什么重要"></a>为什么重要</h3><p>凭据绑定真实 origin，钓鱼页即使像素级模仿，也拿不到有效签名；服务器不存可复用的共享秘密，库被拖也难直接撞进账户。弱密码、复用、短信劫持的攻击面随之缩小。当然设备丢失与账户恢复流程仍要设计好——没有银弹，只有更短的脆弱路径。</p>
+<h3 id="怎么理解"><a href="#怎么理解" class="headerlink" title="怎么理解"></a>怎么理解</h3><p>密码是「可复制的钥匙」；WebAuthn 是「现场盖章」。单据每次不同，旧签名不能重放；假门牌对不上站点身份。Passkey 则是把这套体验产品化，有的绑单设备，有的经受保护的账户在设备间同步。</p>
+<h3 id="一句话记住"><a href="#一句话记住" class="headerlink" title="一句话记住"></a>一句话记住</h3><p><strong>别再把同一把钥匙交给全世界检查——让设备现场盖章，网站只验章。</strong></p>
+
       
     </div>
     
@@ -454,6 +469,14 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E6%AF%8F%E6%97%A5%E4%B8%80%E6%A6%82%E5%BF%B5/" rel="tag"><i class="fa fa-tag"></i> 每日一概念</a>
+          
+            <a href="/tags/%E5%AE%89%E5%85%A8/" rel="tag"><i class="fa fa-tag"></i> 安全</a>
+          
+        </div>
       
 
       
@@ -528,8 +551,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="https://q1.qlogo.cn/g?b=qq&s=100&nk=232836108"
@@ -566,7 +598,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-count">64</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -622,6 +654,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#WebAuthn"><span class="nav-number">1.</span> <span class="nav-text">WebAuthn</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">1.1.</span> <span class="nav-text">是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%87%8D%E8%A6%81"><span class="nav-number">1.2.</span> <span class="nav-text">为什么重要</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%8E%E4%B9%88%E7%90%86%E8%A7%A3"><span class="nav-number">1.3.</span> <span class="nav-text">怎么理解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E5%8F%A5%E8%AF%9D%E8%AE%B0%E4%BD%8F"><span class="nav-number">1.4.</span> <span class="nav-text">一句话记住</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

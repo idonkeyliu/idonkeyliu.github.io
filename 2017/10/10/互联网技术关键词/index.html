@@ -98,18 +98,20 @@
 
 
 
-<meta name="description" content="今天越安逸，明天越危险">
+<meta name="description" content="开会时有人甩出一个词——「我们上 Service Mesh」「这块用 CDC」「先做降级」——半桌人点头，半桌人其实在心里搜英文缩写。互联网技术不是缺文档，是缺一张不会让你慌的地图。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="互联网技术关键词">
 <meta property="og:url" content="http://idonkeyliu.github.io/2017/10/10/%E4%BA%92%E8%81%94%E7%BD%91%E6%8A%80%E6%9C%AF%E5%85%B3%E9%94%AE%E8%AF%8D/index.html">
 <meta property="og:site_name" content="idonkeyliu&#39;s Blog">
-<meta property="og:description" content="今天越安逸，明天越危险">
+<meta property="og:description" content="开会时有人甩出一个词——「我们上 Service Mesh」「这块用 CDC」「先做降级」——半桌人点头，半桌人其实在心里搜英文缩写。互联网技术不是缺文档，是缺一张不会让你慌的地图。">
 <meta property="og:locale">
+<meta property="og:image" content="http://idonkeyliu.github.io/2017/10/10/%E4%BA%92%E8%81%94%E7%BD%91%E6%8A%80%E6%9C%AF%E5%85%B3%E9%94%AE%E8%AF%8D/keywords_map.png">
 <meta property="article:published_time" content="2017-10-10T14:42:32.000Z">
-<meta property="article:modified_time" content="2017-10-17T12:45:14.000Z">
+<meta property="article:modified_time" content="2026-09-29T02:37:48.015Z">
 <meta property="article:author" content="idonkeyliu">
 <meta property="article:tag" content="技术">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://idonkeyliu.github.io/2017/10/10/%E4%BA%92%E8%81%94%E7%BD%91%E6%8A%80%E6%9C%AF%E5%85%B3%E9%94%AE%E8%AF%8D/keywords_map.png">
 
 
 
@@ -434,7 +436,146 @@
       
 
       
-        
+        <img src="/2017/10/10/%E4%BA%92%E8%81%94%E7%BD%91%E6%8A%80%E6%9C%AF%E5%85%B3%E9%94%AE%E8%AF%8D/keywords_map.png" class="">
+<p>开会时有人甩出一个词——「我们上 Service Mesh」「这块用 CDC」「先做降级」——半桌人点头，半桌人其实在心里搜英文缩写。互联网技术不是缺文档，是缺一张<strong>不会让你慌的地图</strong>。</p>
+<span id="more"></span>
+
+<blockquote>
+<p>一句话：先把生词丢进篮子，再问「它治什么病、会留下什么副作用」；归类对了，精读才有意义。</p>
+</blockquote>
+<p>这张图我按八个篮子收纳。每个词只给<strong>直觉</strong>，不替代专项深潜——但够你下次开会接得住话、问得出好问题。</p>
+<h2 id="怎么用"><a href="#怎么用" class="headerlink" title="怎么用"></a>怎么用</h2><p>听到新词，做三步：</p>
+<ol>
+<li><strong>归类</strong>：它更像架构、数据、稳定性，还是云原生？  </li>
+<li><strong>两句话</strong>：解决什么痛苦？引入什么成本？  </li>
+<li><strong>再决定</strong>：要不要开专题——大多数词，归好类就不慌。</li>
+</ol>
+<h2 id="架构：系统怎么切、怎么活"><a href="#架构：系统怎么切、怎么活" class="headerlink" title="架构：系统怎么切、怎么活"></a>架构：系统怎么切、怎么活</h2><table>
+<thead>
+<tr>
+<th>词</th>
+<th>一句话直觉</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>微服务</td>
+<td>按业务边界拆成可独立上线的小服务；换来的是分布式复杂度</td>
+</tr>
+<tr>
+<td>SOA</td>
+<td>更早一代的「面向服务」；微服务可看作它的细粒度亲戚</td>
+</tr>
+<tr>
+<td>中台</td>
+<td>把复用能力沉下去；成了是杠杆，不成是又一层单体</td>
+</tr>
+<tr>
+<td>高可用</td>
+<td>部分挂了还能用——靠冗余、切换、降级，不是靠祈祷</td>
+</tr>
+<tr>
+<td>CAP</td>
+<td>分区发生时，一致性与可用性很难同时满分</td>
+</tr>
+<tr>
+<td>BASE</td>
+<td>大规模业务的老实话：先基本可用，最终一致往往就够</td>
+</tr>
+</tbody></table>
+<p>选型时别问「先进不先进」，问「我们的失败模式是什么」。</p>
+<h2 id="数据：存得下、取得快、流得动"><a href="#数据：存得下、取得快、流得动" class="headerlink" title="数据：存得下、取得快、流得动"></a>数据：存得下、取得快、流得动</h2><table>
+<thead>
+<tr>
+<th>词</th>
+<th>一句话直觉</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>分库分表</td>
+<td>水平切开扛量；跨库查询和事务会变疼</td>
+</tr>
+<tr>
+<td>缓存</td>
+<td>用空间换时间；穿透&#x2F;击穿&#x2F;雪崩是三道必答题</td>
+</tr>
+<tr>
+<td>MQ</td>
+<td>异步解耦与削峰；重复与乱序是标配作业</td>
+</tr>
+<tr>
+<td>CDC</td>
+<td>盯住数据库变更，把它变成下游事件流</td>
+</tr>
+<tr>
+<td>OLAP &#x2F; 湖仓</td>
+<td>分析型查询的舞台；湖与仓在走向统一</td>
+</tr>
+</tbody></table>
+<p>数据域的坑，多半出在「一致性和时效」的夹缝里。</p>
+<h2 id="稳定性：流量打过来时你还站得住吗"><a href="#稳定性：流量打过来时你还站得住吗" class="headerlink" title="稳定性：流量打过来时你还站得住吗"></a>稳定性：流量打过来时你还站得住吗</h2><p>限流是挡超额；熔断是下游病了就快速失败；降级是保核心、舍次要；容灾是机房级后手；SLA&#x2F;SLO&#x2F;SLI 把「稳」写成可测的承诺；混沌工程则是主动打针，验证你的假设是不是自我安慰。</p>
+<blockquote>
+<p>稳定不是「从不失败」，是「失败时可预期、可恢复、可解释」。</p>
+</blockquote>
+<h2 id="云原生：交付与运行的现代默认项"><a href="#云原生：交付与运行的现代默认项" class="headerlink" title="云原生：交付与运行的现代默认项"></a>云原生：交付与运行的现代默认项</h2><p>容器把运行时打包；K8s 负责编排；Service Mesh 把重试、鉴权、可观测往边车沉；GitOps 让 Git 成为事实来源；可观测性离不开 Logs &#x2F; Metrics &#x2F; Traces；Serverless 让你少管机器——并接受冷启动与平台绑定。</p>
+<p>云原生不是「上了 K8s 就原生」，是声明式、可观测、可回滚成为习惯。</p>
+<h2 id="工程效能：让「提交→价值」变短"><a href="#工程效能：让「提交→价值」变短" class="headerlink" title="工程效能：让「提交→价值」变短"></a>工程效能：让「提交→价值」变短</h2><p>CI&#x2F;CD 缩短路径；代码评审传播质量与上下文；特性开关把「发布」和「放量」拆开；AB 实验用统计代替嗓门；技术债是今天的快捷换明天的利息——会借的人要会还。</p>
+<h2 id="安全：默认不信任，持续要证据"><a href="#安全：默认不信任，持续要证据" class="headerlink" title="安全：默认不信任，持续要证据"></a>安全：默认不信任，持续要证据</h2><p>零信任不是口号，是每次访问都核验。SSO 管「你是谁」，RBAC 管「你能干什么」，2FA 让密码泄露不等于失守。加密保护传输与落盘；审计回答「谁在何时动过什么」。</p>
+<h2 id="性能：先对齐口径，再谈优化"><a href="#性能：先对齐口径，再谈优化" class="headerlink" title="性能：先对齐口径，再谈优化"></a>性能：先对齐口径，再谈优化</h2><p>QPS 是速率，RT 是时延，吞吐是单位时间干完多少活——三个人用三个定义开会，优化必歪。然后再盯 GC、连接池、CDN、锁与热点。没有测量的优化，都是玄学。</p>
+<h2 id="前沿（2020s）：新词也按同一套方法拆"><a href="#前沿（2020s）：新词也按同一套方法拆" class="headerlink" title="前沿（2020s）：新词也按同一套方法拆"></a>前沿（2020s）：新词也按同一套方法拆</h2><table>
+<thead>
+<tr>
+<th>词</th>
+<th>一句话直觉</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>LLM</td>
+<td>超强的「下一个词」预测引擎，不是万能真理机</td>
+</tr>
+<tr>
+<td>RAG</td>
+<td>先检索再建，给模型外挂可更新的书架</td>
+</tr>
+<tr>
+<td>Agent</td>
+<td>模型 + 规划 + 工具调用的闭环</td>
+</tr>
+<tr>
+<td>MCP</td>
+<td>AI 外设的统一插口（工具&#x2F;资源&#x2F;提示）</td>
+</tr>
+<tr>
+<td>向量库</td>
+<td>存 Embedding，按「意思近不近」找邻居</td>
+</tr>
+<tr>
+<td>边缘计算</td>
+<td>把算力推到靠近用户和设备的地方</td>
+</tr>
+</tbody></table>
+<p>新词吓人，是因为它还没被你归类；归进篮子后，大多是老问题的新接口。</p>
+<h2 id="把关键词连成一条真实链路"><a href="#把关键词连成一条真实链路" class="headerlink" title="把关键词连成一条真实链路"></a>把关键词连成一条真实链路</h2><p>想象一个电商系统：用户请求先到 CDN 和网关，前者就近缓存静态资源，后者负责认证、限流与路由。核心业务最初可以是单体；团队和流量增长后，再按订单、库存、支付等领域边界拆成微服务。</p>
+<p>下单数据写入关系数据库，热点商品进入 Redis。订单创建后通过 MQ 发布事件，通知与画像异步处理；数据库变更由 CDC 同步到搜索和分析平台。这里每个词都不是孤岛：缓存提升读取速度，却引入一致性问题；MQ 解耦流程，却要求幂等、重试与堆积治理；分库分表突破容量上限，却让跨分片查询和事务更难。</p>
+<p>运行层面，应用打包进容器，由 Kubernetes 维持副本。CI&#x2F;CD 将提交变成制品，金丝雀发布只放少量流量，指标异常便回滚。日志解释细节，Metrics 展示趋势，Trace 串起一次请求：三者共同组成可观测性，而不是彼此替代。</p>
+<p>稳定性也会形成闭环：限流把压力挡在入口，熔断阻止故障扩散，降级保住下单主链路，异地容灾应对地域事故。团队用 SLI 测量成功率和延迟，以 SLO 设目标，再用错误预算决定继续发版还是优先还可靠性债。</p>
+<h2 id="容易混淆的几组词"><a href="#容易混淆的几组词" class="headerlink" title="容易混淆的几组词"></a>容易混淆的几组词</h2><h3 id="并发、并行、异步"><a href="#并发、并行、异步" class="headerlink" title="并发、并行、异步"></a>并发、并行、异步</h3><ul>
+<li><strong>并发</strong>：多个任务在同一时间段推进，单核切换也可以并发。</li>
+<li><strong>并行</strong>：多个任务在同一时刻真正执行，通常依赖多核或多机。</li>
+<li><strong>异步</strong>：发起方不原地等待，结果稍后通过事件、回调或 Future 返回。</li>
+</ul>
+<p>三者描述不同维度。异步 I&#x2F;O 可以提高并发，却不保证 CPU 计算并行。</p>
+<h3 id="认证、授权、审计"><a href="#认证、授权、审计" class="headerlink" title="认证、授权、审计"></a>认证、授权、审计</h3><p>认证回答“你是谁”，授权回答“你能做什么”，审计回答“你做过什么”。SSO 简化统一登录，RBAC 按角色授权，最小权限则要求只开放完成任务必需的能力。</p>
+<h3 id="备份、高可用、容灾"><a href="#备份、高可用、容灾" class="headerlink" title="备份、高可用、容灾"></a>备份、高可用、容灾</h3><p>备份让数据可以恢复；高可用减少组件故障造成的中断；容灾面向机房、地域级事故。主从复制不是备份——误删除也可能迅速复制到从库。任何方案都应明确 <strong>RPO</strong>（最多能丢多少数据）与 <strong>RTO</strong>（多久必须恢复）。</p>
+<h2 id="选型时问四个问题"><a href="#选型时问四个问题" class="headerlink" title="选型时问四个问题"></a>选型时问四个问题</h2><p>技术概念都在做交换：用空间换时间，用一致性换可用性，用基础设施复杂度换团队自治。遇到新词，可以追问：</p>
+<ol>
+<li>它解决哪个可量化问题：P99 延迟、发布频率，还是恢复时间？</li>
+<li>不用它会怎样：如果单体已经稳定，微服务也许暂时没有收益。</li>
+<li>复杂度转移到哪里：Serverless 少管机器，却仍要管冷启动与平台边界。</li>
+<li>谁来长期维护：能跑 Demo 不等于团队能值班三年。</li>
+</ol>
+<p>学习一个词时，试着用自己的话写一句定义，画出上下游，再列出至少两个失败模式。能解释它“不适合什么”，通常才算真正理解。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>技术关键词是行业的压缩包。顶流不是背完词条，而是<strong>听到任何词都能迅速定位坐标系</strong>。把这张图当目录，专项文章当章节——下次有人甩术语，你可以微笑着问：它治的是哪门病？</p>
+
       
     </div>
     
@@ -557,8 +698,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="https://q1.qlogo.cn/g?b=qq&s=100&nk=232836108"
@@ -595,7 +745,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-count">64</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -651,6 +801,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%8E%E4%B9%88%E7%94%A8"><span class="nav-number">1.</span> <span class="nav-text">怎么用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%B6%E6%9E%84%EF%BC%9A%E7%B3%BB%E7%BB%9F%E6%80%8E%E4%B9%88%E5%88%87%E3%80%81%E6%80%8E%E4%B9%88%E6%B4%BB"><span class="nav-number">2.</span> <span class="nav-text">架构：系统怎么切、怎么活</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%EF%BC%9A%E5%AD%98%E5%BE%97%E4%B8%8B%E3%80%81%E5%8F%96%E5%BE%97%E5%BF%AB%E3%80%81%E6%B5%81%E5%BE%97%E5%8A%A8"><span class="nav-number">3.</span> <span class="nav-text">数据：存得下、取得快、流得动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A8%B3%E5%AE%9A%E6%80%A7%EF%BC%9A%E6%B5%81%E9%87%8F%E6%89%93%E8%BF%87%E6%9D%A5%E6%97%B6%E4%BD%A0%E8%BF%98%E7%AB%99%E5%BE%97%E4%BD%8F%E5%90%97"><span class="nav-number">4.</span> <span class="nav-text">稳定性：流量打过来时你还站得住吗</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%91%E5%8E%9F%E7%94%9F%EF%BC%9A%E4%BA%A4%E4%BB%98%E4%B8%8E%E8%BF%90%E8%A1%8C%E7%9A%84%E7%8E%B0%E4%BB%A3%E9%BB%98%E8%AE%A4%E9%A1%B9"><span class="nav-number">5.</span> <span class="nav-text">云原生：交付与运行的现代默认项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A5%E7%A8%8B%E6%95%88%E8%83%BD%EF%BC%9A%E8%AE%A9%E3%80%8C%E6%8F%90%E4%BA%A4%E2%86%92%E4%BB%B7%E5%80%BC%E3%80%8D%E5%8F%98%E7%9F%AD"><span class="nav-number">6.</span> <span class="nav-text">工程效能：让「提交→价值」变短</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E5%85%A8%EF%BC%9A%E9%BB%98%E8%AE%A4%E4%B8%8D%E4%BF%A1%E4%BB%BB%EF%BC%8C%E6%8C%81%E7%BB%AD%E8%A6%81%E8%AF%81%E6%8D%AE"><span class="nav-number">7.</span> <span class="nav-text">安全：默认不信任，持续要证据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%A7%E8%83%BD%EF%BC%9A%E5%85%88%E5%AF%B9%E9%BD%90%E5%8F%A3%E5%BE%84%EF%BC%8C%E5%86%8D%E8%B0%88%E4%BC%98%E5%8C%96"><span class="nav-number">8.</span> <span class="nav-text">性能：先对齐口径，再谈优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E6%B2%BF%EF%BC%882020s%EF%BC%89%EF%BC%9A%E6%96%B0%E8%AF%8D%E4%B9%9F%E6%8C%89%E5%90%8C%E4%B8%80%E5%A5%97%E6%96%B9%E6%B3%95%E6%8B%86"><span class="nav-number">9.</span> <span class="nav-text">前沿（2020s）：新词也按同一套方法拆</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%8A%E5%85%B3%E9%94%AE%E8%AF%8D%E8%BF%9E%E6%88%90%E4%B8%80%E6%9D%A1%E7%9C%9F%E5%AE%9E%E9%93%BE%E8%B7%AF"><span class="nav-number">10.</span> <span class="nav-text">把关键词连成一条真实链路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%B9%E6%98%93%E6%B7%B7%E6%B7%86%E7%9A%84%E5%87%A0%E7%BB%84%E8%AF%8D"><span class="nav-number">11.</span> <span class="nav-text">容易混淆的几组词</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91%E3%80%81%E5%B9%B6%E8%A1%8C%E3%80%81%E5%BC%82%E6%AD%A5"><span class="nav-number">11.1.</span> <span class="nav-text">并发、并行、异步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A4%E8%AF%81%E3%80%81%E6%8E%88%E6%9D%83%E3%80%81%E5%AE%A1%E8%AE%A1"><span class="nav-number">11.2.</span> <span class="nav-text">认证、授权、审计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%87%E4%BB%BD%E3%80%81%E9%AB%98%E5%8F%AF%E7%94%A8%E3%80%81%E5%AE%B9%E7%81%BE"><span class="nav-number">11.3.</span> <span class="nav-text">备份、高可用、容灾</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%89%E5%9E%8B%E6%97%B6%E9%97%AE%E5%9B%9B%E4%B8%AA%E9%97%AE%E9%A2%98"><span class="nav-number">12.</span> <span class="nav-text">选型时问四个问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%8F%E7%BB%93"><span class="nav-number">13.</span> <span class="nav-text">小结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

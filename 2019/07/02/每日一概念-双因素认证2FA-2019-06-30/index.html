@@ -80,7 +80,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="今天越安逸，明天越危险" />
+  <meta name="keywords" content="每日一概念,安全," />
 
 
 
@@ -98,17 +98,21 @@
 
 
 
-<meta name="description" content="今天越安逸，明天越危险">
+<meta name="description" content="双因素认证 2FA 密码可以猜、可以买、可以钓鱼骗走。若登录只靠「你知道什么」，一次泄露就等于失守。2FA 的狠处在于：攻击者还得再偷一样不同类别的东西。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="每日一概念-双因素认证2FA&#x2F;2019-06-30">
 <meta property="og:url" content="http://idonkeyliu.github.io/2019/07/02/%E6%AF%8F%E6%97%A5%E4%B8%80%E6%A6%82%E5%BF%B5-%E5%8F%8C%E5%9B%A0%E7%B4%A0%E8%AE%A4%E8%AF%812FA-2019-06-30/index.html">
 <meta property="og:site_name" content="idonkeyliu&#39;s Blog">
-<meta property="og:description" content="今天越安逸，明天越危险">
+<meta property="og:description" content="双因素认证 2FA 密码可以猜、可以买、可以钓鱼骗走。若登录只靠「你知道什么」，一次泄露就等于失守。2FA 的狠处在于：攻击者还得再偷一样不同类别的东西。">
 <meta property="og:locale">
+<meta property="og:image" content="http://idonkeyliu.github.io/2019/07/02/%E6%AF%8F%E6%97%A5%E4%B8%80%E6%A6%82%E5%BF%B5-%E5%8F%8C%E5%9B%A0%E7%B4%A0%E8%AE%A4%E8%AF%812FA-2019-06-30/cover.png">
 <meta property="article:published_time" content="2019-07-02T14:53:07.000Z">
-<meta property="article:modified_time" content="2019-07-02T15:06:24.000Z">
+<meta property="article:modified_time" content="2026-09-29T02:38:46.717Z">
 <meta property="article:author" content="idonkeyliu">
+<meta property="article:tag" content="每日一概念">
+<meta property="article:tag" content="安全">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://idonkeyliu.github.io/2019/07/02/%E6%AF%8F%E6%97%A5%E4%B8%80%E6%A6%82%E5%BF%B5-%E5%8F%8C%E5%9B%A0%E7%B4%A0%E8%AE%A4%E8%AF%812FA-2019-06-30/cover.png">
 
 
 
@@ -411,7 +415,18 @@
       
 
       
-        
+        <h2 id="双因素认证-2FA"><a href="#双因素认证-2FA" class="headerlink" title="双因素认证 2FA"></a>双因素认证 2FA</h2><img src="/2019/07/02/%E6%AF%8F%E6%97%A5%E4%B8%80%E6%A6%82%E5%BF%B5-%E5%8F%8C%E5%9B%A0%E7%B4%A0%E8%AE%A4%E8%AF%812FA-2019-06-30/cover.png" class="">
+<p>密码可以猜、可以买、可以钓鱼骗走。若登录只靠「你知道什么」，一次泄露就等于失守。2FA 的狠处在于：攻击者还得再偷一样<strong>不同类别</strong>的东西。</p>
+<span id="more"></span>
+
+<blockquote>
+<p>一句话：2FA &#x3D; 至少两类独立证据（知道的 &#x2F; 拥有的 &#x2F; 你是谁），让「只有密码」不再足够。</p>
+</blockquote>
+<h3 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h3><p>认证因素通常分三类：知识（密码）、持有（手机、硬件 Key、OTP）、生物特征（指纹、面容）。双因素要求登录时组合其中两类。常见形态：密码 + TOTP App、密码 + 硬件安全密钥、密码 + 推送确认；短信验证码也算一种，但相对更脆弱。</p>
+<h3 id="为什么重要"><a href="#为什么重要" class="headerlink" title="为什么重要"></a>为什么重要</h3><p>拖库、撞库、钓鱼专打第一因素。第二因素把「远程批量攻击」变成「还得碰到你的设备或密钥」。对企业与高价值账户，这是性价比极高的安全升级。注意：备份码要妥善保存；薄弱的恢复流程可能绕开 2FA。</p>
+<h3 id="怎么理解"><a href="#怎么理解" class="headerlink" title="怎么理解"></a>怎么理解</h3><p>门禁要刷卡又要指纹——偷到卡不够，还得是你本人。优先级建议：硬件 Key &#x2F; Passkey &gt; TOTP App &gt; 短信。能上更强的，就别停在短信。</p>
+<h3 id="一句话记住"><a href="#一句话记住" class="headerlink" title="一句话记住"></a>一句话记住</h3><p><strong>密码像钥匙，2FA 像第二道完全不同的锁——偷一把不够开门。</strong></p>
+
       
     </div>
     
@@ -454,6 +469,14 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E6%AF%8F%E6%97%A5%E4%B8%80%E6%A6%82%E5%BF%B5/" rel="tag"><i class="fa fa-tag"></i> 每日一概念</a>
+          
+            <a href="/tags/%E5%AE%89%E5%85%A8/" rel="tag"><i class="fa fa-tag"></i> 安全</a>
+          
+        </div>
       
 
       
@@ -528,8 +551,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="https://q1.qlogo.cn/g?b=qq&s=100&nk=232836108"
@@ -566,7 +598,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-count">64</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -622,6 +654,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8C%E5%9B%A0%E7%B4%A0%E8%AE%A4%E8%AF%81-2FA"><span class="nav-number">1.</span> <span class="nav-text">双因素认证 2FA</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">1.1.</span> <span class="nav-text">是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%87%8D%E8%A6%81"><span class="nav-number">1.2.</span> <span class="nav-text">为什么重要</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%8E%E4%B9%88%E7%90%86%E8%A7%A3"><span class="nav-number">1.3.</span> <span class="nav-text">怎么理解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E5%8F%A5%E8%AF%9D%E8%AE%B0%E4%BD%8F"><span class="nav-number">1.4.</span> <span class="nav-text">一句话记住</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

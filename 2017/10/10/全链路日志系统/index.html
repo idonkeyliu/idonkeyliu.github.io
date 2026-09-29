@@ -80,7 +80,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="今天越安逸，明天越危险" />
+  <meta name="keywords" content="架构设计,日志," />
 
 
 
@@ -98,17 +98,22 @@
 
 
 
-<meta name="description" content="今天越安逸，明天越危险">
+<meta name="description" content="用户只看到「下单失败」。背后可能穿过网关、订单、库存、支付和消息队列。若每个系统各写各的日记本，工程师就只能拿时间戳人肉拼图——全链路日志，就是给这次请求发一张全球通行证。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="全链路日志系统">
 <meta property="og:url" content="http://idonkeyliu.github.io/2017/10/10/%E5%85%A8%E9%93%BE%E8%B7%AF%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F/index.html">
 <meta property="og:site_name" content="idonkeyliu&#39;s Blog">
-<meta property="og:description" content="今天越安逸，明天越危险">
+<meta property="og:description" content="用户只看到「下单失败」。背后可能穿过网关、订单、库存、支付和消息队列。若每个系统各写各的日记本，工程师就只能拿时间戳人肉拼图——全链路日志，就是给这次请求发一张全球通行证。">
 <meta property="og:locale">
+<meta property="og:image" content="http://idonkeyliu.github.io/2017/10/10/%E5%85%A8%E9%93%BE%E8%B7%AF%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F/trace_arch.png">
+<meta property="og:image" content="http://idonkeyliu.github.io/2017/10/10/%E5%85%A8%E9%93%BE%E8%B7%AF%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F/log_fields.png">
 <meta property="article:published_time" content="2017-10-10T14:41:19.000Z">
-<meta property="article:modified_time" content="2017-10-10T14:41:18.000Z">
+<meta property="article:modified_time" content="2026-09-29T02:39:04.068Z">
 <meta property="article:author" content="idonkeyliu">
+<meta property="article:tag" content="架构设计">
+<meta property="article:tag" content="日志">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://idonkeyliu.github.io/2017/10/10/%E5%85%A8%E9%93%BE%E8%B7%AF%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F/trace_arch.png">
 
 
 
@@ -411,7 +416,180 @@
       
 
       
-        
+        <img src="/2017/10/10/%E5%85%A8%E9%93%BE%E8%B7%AF%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F/trace_arch.png" class="">
+<p>用户只看到「下单失败」。背后可能穿过网关、订单、库存、支付和消息队列。若每个系统各写各的日记本，工程师就只能拿时间戳人肉拼图——全链路日志，就是给这次请求发一张全球通行证。</p>
+<span id="more"></span>
+
+<blockquote>
+<p>一句话：统一 TraceId、自动透传、结构化可检索；让故障从「搜日志」变成「还原一次请求」。</p>
+</blockquote>
+<h2 id="从“搜日志”到“还原一次请求”"><a href="#从“搜日志”到“还原一次请求”" class="headerlink" title="从“搜日志”到“还原一次请求”"></a>从“搜日志”到“还原一次请求”</h2><p>普通日志回答“这个服务发生了什么”；全链路日志还要回答：</p>
+<ul>
+<li>这条日志属于哪次用户请求？</li>
+<li>请求经过了哪些服务和步骤？</li>
+<li>时间耗在哪里，错误从哪里开始传播？</li>
+<li>异步消息、重试和批处理如何关联回来？</li>
+</ul>
+<p>三个概念最关键：</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>TraceId</td>
+<td>一条端到端链路的全局标识</td>
+</tr>
+<tr>
+<td>SpanId</td>
+<td>链路中一次操作的标识，如一次 RPC 或 SQL</td>
+</tr>
+<tr>
+<td>ParentSpanId</td>
+<td>当前 Span 的父操作，用于还原调用树</td>
+</tr>
+</tbody></table>
+<p>一次请求可看成一棵树：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Trace 7f3a...</span><br><span class="line">└─ gateway span=A</span><br><span class="line">   └─ order-service span=B parent=A</span><br><span class="line">      ├─ mysql span=C parent=B</span><br><span class="line">      └─ inventory-rpc span=D parent=B</span><br></pre></td></tr></table></figure>
+
+<p>所有节点共享 TraceId，但 SpanId 不同。只记录 TraceId 能把日志搜齐；加入 Span 父子关系，才能看清调用结构与耗时。</p>
+<h2 id="一套典型架构"><a href="#一套典型架构" class="headerlink" title="一套典型架构"></a>一套典型架构</h2><p>全链路可观测通常包含三类信号：</p>
+<ul>
+<li><strong>Logs</strong>：离散事件和上下文，适合解释“为什么”；</li>
+<li><strong>Metrics</strong>：聚合数字和趋势，适合发现“是否异常”；</li>
+<li><strong>Traces</strong>：请求路径与耗时，适合定位“慢在哪里”。</li>
+</ul>
+<p>典型数据流如下：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">应用 SDK / Agent</span><br><span class="line">  ├─ stdout 日志 ─→ Fluent Bit / Vector ─→ Kafka ─→ Elasticsearch/Loki</span><br><span class="line">  ├─ Trace Span  ─→ OpenTelemetry Collector ─→ Tempo/Jaeger/APM</span><br><span class="line">  └─ Metrics     ─→ Collector/Exporter ─→ Prometheus</span><br><span class="line">                                             │</span><br><span class="line">                                     Grafana / 告警平台</span><br></pre></td></tr></table></figure>
+
+<p>采集器应与应用解耦。应用只负责规范输出，Agent 或 Collector 负责批量、缓冲、重试和路由，后端负责索引、存储与查询。</p>
+<p>OpenTelemetry 提供厂商中立的 API、SDK 和传输规范。实践中可采用 W3C Trace Context，用 HTTP 头传播：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">traceparent: 00-4bf92f3577b34da6a3ce929d0e0e4736-00f067aa0ba902b7-01</span><br></pre></td></tr></table></figure>
+
+<p>字段依次包含版本、Trace ID、父 Span ID 和采样标志。不要自创十几套 <code>X-Request-Id</code> 协议；若历史系统已有 request ID，可以保留并映射，但链路传播尽量统一。</p>
+<h2 id="上下文如何跨边界传播"><a href="#上下文如何跨边界传播" class="headerlink" title="上下文如何跨边界传播"></a>上下文如何跨边界传播</h2><p>同步 RPC 最简单：调用方把 Trace Context 注入 HTTP&#x2F;gRPC 头，被调用方提取后创建子 Span，响应返回时结束 Span。</p>
+<p>异步场景更容易断链：</p>
+<ol>
+<li>生产者创建“发送消息”Span；</li>
+<li>把 trace 上下文写入消息 Header，而非业务正文；</li>
+<li>消费者提取上下文，创建“处理消息”Span；</li>
+<li>重试时保留原始关联，同时记录 retry count；</li>
+<li>批量消费可用 Span Link 关联多个上游，而不是硬造一个父节点。</li>
+</ol>
+<p>线程池、协程与定时任务也要注意上下文丢失。不要假设 ThreadLocal 能自动跨线程；应使用框架的 context propagation 能力，或显式传递不可变上下文。</p>
+<p>链路入口若没有上游 TraceId，就生成新的；收到格式非法或不可信的外部 TraceId 时，应校验并限制长度，避免日志注入与索引污染。</p>
+<h2 id="结构化日志：让机器能理解"><a href="#结构化日志：让机器能理解" class="headerlink" title="结构化日志：让机器能理解"></a>结构化日志：让机器能理解</h2><img src="/2017/10/10/%E5%85%A8%E9%93%BE%E8%B7%AF%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F/log_fields.png" class="">
+
+<p>下面两行对人都能看懂，但只有后一种适合稳定查询：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">下单失败，用户 42，商品 9001，库存不足</span><br><span class="line">&#123;&quot;level&quot;:&quot;WARN&quot;,&quot;event&quot;:&quot;order_create_failed&quot;,&quot;user_id&quot;:&quot;42&quot;,&quot;sku_id&quot;:&quot;9001&quot;,&quot;reason&quot;:&quot;out_of_stock&quot;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>推荐的基础字段：</p>
+<table>
+<thead>
+<tr>
+<th>类别</th>
+<th>字段示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>时间</td>
+<td><code>timestamp</code>，统一 UTC 或明确时区</td>
+</tr>
+<tr>
+<td>级别</td>
+<td><code>level</code>：DEBUG&#x2F;INFO&#x2F;WARN&#x2F;ERROR</td>
+</tr>
+<tr>
+<td>服务身份</td>
+<td><code>service.name</code>、<code>service.version</code>、<code>environment</code></td>
+</tr>
+<tr>
+<td>链路</td>
+<td><code>trace_id</code>、<code>span_id</code></td>
+</tr>
+<tr>
+<td>事件</td>
+<td><code>event</code>、<code>message</code>、<code>error.type</code>、<code>error.stack</code></td>
+</tr>
+<tr>
+<td>请求</td>
+<td><code>http.method</code>、<code>http.route</code>、<code>status_code</code>、<code>duration_ms</code></td>
+</tr>
+<tr>
+<td>业务</td>
+<td><code>order_id</code>、<code>tenant_id</code> 等稳定标识</td>
+</tr>
+</tbody></table>
+<p><code>message</code> 用于人读，字段用于机器查。不要把所有信息都塞进一句可变文本，更不要把动态订单号放进字段名。</p>
+<p>一个较完整的示例：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;timestamp&quot;</span><span class="punctuation">:</span> <span class="string">&quot;2026-09-29T02:30:18.234Z&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;level&quot;</span><span class="punctuation">:</span> <span class="string">&quot;ERROR&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;service.name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;order-service&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;service.version&quot;</span><span class="punctuation">:</span> <span class="string">&quot;v2.7.1&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;trace_id&quot;</span><span class="punctuation">:</span> <span class="string">&quot;4bf92f3577b34da6a3ce929d0e0e4736&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;span_id&quot;</span><span class="punctuation">:</span> <span class="string">&quot;00f067aa0ba902b7&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;event&quot;</span><span class="punctuation">:</span> <span class="string">&quot;payment_call_failed&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;order_id&quot;</span><span class="punctuation">:</span> <span class="string">&quot;o_83921&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;duration_ms&quot;</span><span class="punctuation">:</span> <span class="number">812</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;error.type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;UpstreamTimeout&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;message&quot;</span><span class="punctuation">:</span> <span class="string">&quot;payment gateway timed out&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>日志 Schema 应版本化并有负责人。字段命名可优先参考 OpenTelemetry Semantic Conventions，减少不同团队的 <code>cost</code>、<code>latency</code>、<code>elapsed</code> 三套同义词。</p>
+<h2 id="日志级别与错误记录"><a href="#日志级别与错误记录" class="headerlink" title="日志级别与错误记录"></a>日志级别与错误记录</h2><p>级别不是情绪，而是运维契约：</p>
+<ul>
+<li><code>DEBUG</code>：调试细节，生产通常按需开启；</li>
+<li><code>INFO</code>：关键业务状态变化与生命周期事件；</li>
+<li><code>WARN</code>：已降级或可恢复，但值得关注；</li>
+<li><code>ERROR</code>：本次操作失败，需要调查；</li>
+<li><code>FATAL</code>：进程无法继续。</li>
+</ul>
+<p>同一异常不要每层都打印完整堆栈。底层可以包装错误并返回，上层在真正处理或终止请求的边界记录一次，否则一个故障会制造几十条重复 ERROR，污染告警。</p>
+<p>日志还要避免两种极端：入口、出口、每个变量都打，成本失控；只在 catch 里写“失败了”，没有参数、耗时和错误类型，无法定位。</p>
+<h2 id="采样：省成本但别丢掉真相"><a href="#采样：省成本但别丢掉真相" class="headerlink" title="采样：省成本但别丢掉真相"></a>采样：省成本但别丢掉真相</h2><p>流量很大时，保存每个 Trace 和每条 DEBUG 日志并不现实。</p>
+<h3 id="头部采样"><a href="#头部采样" class="headerlink" title="头部采样"></a>头部采样</h3><p>请求刚进入系统就决定是否采样，例如保留 1%。优点是开销低、整条链路决策一致；缺点是无法提前知道这次请求最终会不会报错。</p>
+<h3 id="尾部采样"><a href="#尾部采样" class="headerlink" title="尾部采样"></a>尾部采样</h3><p>Collector 暂存完整 Trace，结束后再决定：</p>
+<ul>
+<li>错误请求 100% 保留；</li>
+<li>高延迟请求提高比例；</li>
+<li>普通成功请求只保留少量；</li>
+<li>特定租户或灰度版本按规则保留。</li>
+</ul>
+<p>尾部采样更聪明，但需要内存、等待窗口和集中式决策。无论哪种，都要传播采样标志，避免上游采了、下游没采。</p>
+<p>日志采样不能简单随机扔掉 ERROR。对重复错误可按指纹限速，同时记录被抑制数量；审计日志与计费记录更不能因采样消失。</p>
+<h2 id="隐私与安全"><a href="#隐私与安全" class="headerlink" title="隐私与安全"></a>隐私与安全</h2><p>日志系统往往比业务库更容易被广泛查询，因此也是数据泄露高风险区。默认禁止记录：</p>
+<ul>
+<li>密码、Token、Cookie、私钥；</li>
+<li>完整身份证、银行卡、手机号；</li>
+<li>请求或响应的完整敏感正文；</li>
+<li>未经批准的用户内容。</li>
+</ul>
+<p>推荐在源头做字段白名单和脱敏，而不是指望采集端用正则补救。哈希也不是万能匿名化：手机号空间有限，普通 SHA-256 很容易被字典反查；需要关联统计时应使用带密钥的 HMAC，并管理密钥轮换。</p>
+<p>日志查询要有最小权限、审计记录、保留周期和自动删除策略。开发环境与生产环境应分开索引，导出日志同样要审批和脱敏。</p>
+<h2 id="性能与可靠性"><a href="#性能与可靠性" class="headerlink" title="性能与可靠性"></a>性能与可靠性</h2><p>日志代码不能反过来拖垮业务：</p>
+<ul>
+<li>异步批量写，设置队列上限；</li>
+<li>后端不可用时限速或落盘缓冲；</li>
+<li>明确“队列满时丢低级日志还是阻塞业务”；</li>
+<li>限制单条大小与异常堆栈长度；</li>
+<li>避免对每个高基数字段建立索引。</li>
+</ul>
+<p><code>user_id</code>、<code>trace_id</code> 很有查询价值，但 URL 原文、SQL 原文、随机错误消息可能造成索引基数爆炸。可把 <code>http.route=/users/&#123;id&#125;</code> 作为聚合字段，把原始路径仅作为非索引字段或干脆不记。</p>
+<p>系统自身也要可观测：采集延迟、丢弃条数、队列长度、解析失败率、存储容量、查询 P95 都应有指标与告警。</p>
+<h2 id="实施清单"><a href="#实施清单" class="headerlink" title="实施清单"></a>实施清单</h2><h3 id="第一阶段：先做到“串得起来”"><a href="#第一阶段：先做到“串得起来”" class="headerlink" title="第一阶段：先做到“串得起来”"></a>第一阶段：先做到“串得起来”</h3><ol>
+<li>统一入口生成或接收 W3C Trace Context；</li>
+<li>HTTP、RPC、MQ 自动注入与提取；</li>
+<li>所有结构化日志自动带 <code>trace_id/span_id</code>；</li>
+<li>网关到核心服务跑通一条可查询链路。</li>
+</ol>
+<h3 id="第二阶段：让数据可用"><a href="#第二阶段：让数据可用" class="headerlink" title="第二阶段：让数据可用"></a>第二阶段：让数据可用</h3><ol>
+<li>定义日志 Schema、级别与脱敏规范；</li>
+<li>接入 OpenTelemetry Collector；</li>
+<li>建立按服务、版本、路由和错误类型的面板；</li>
+<li>告警可一键跳转到对应 Trace 和日志；</li>
+<li>用故障演练验证跨线程、MQ、重试不会断链。</li>
+</ol>
+<h3 id="第三阶段：治理成本"><a href="#第三阶段：治理成本" class="headerlink" title="第三阶段：治理成本"></a>第三阶段：治理成本</h3><ol>
+<li>按价值设置采样策略；</li>
+<li>管理索引与冷热保留周期；</li>
+<li>监控采集丢失和 Schema 解析失败；</li>
+<li>定期扫描敏感字段与无效日志；</li>
+<li>用每 GB 成本、检索命中率和故障定位时间衡量收益。</li>
+</ol>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>全链路日志不是“给每行加一个 TraceId”就结束了。它是一整套上下文传播、结构化 Schema、采集管道、采样策略和安全治理。</p>
+<p>成熟系统的体验应该是：从一个告警进入，先看指标确认范围，再打开 Trace 找到最慢或出错的 Span，最后跳到同一 TraceId 的结构化日志解释原因。三类信号互相跳转，才真正把“日志海洋”变成故障证据链。</p>
+
       
     </div>
     
@@ -454,6 +632,14 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" rel="tag"><i class="fa fa-tag"></i> 架构设计</a>
+          
+            <a href="/tags/%E6%97%A5%E5%BF%97/" rel="tag"><i class="fa fa-tag"></i> 日志</a>
+          
+        </div>
       
 
       
@@ -528,8 +714,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="https://q1.qlogo.cn/g?b=qq&s=100&nk=232836108"
@@ -566,7 +761,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-count">64</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -622,6 +817,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8E%E2%80%9C%E6%90%9C%E6%97%A5%E5%BF%97%E2%80%9D%E5%88%B0%E2%80%9C%E8%BF%98%E5%8E%9F%E4%B8%80%E6%AC%A1%E8%AF%B7%E6%B1%82%E2%80%9D"><span class="nav-number">1.</span> <span class="nav-text">从“搜日志”到“还原一次请求”</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E5%A5%97%E5%85%B8%E5%9E%8B%E6%9E%B6%E6%9E%84"><span class="nav-number">2.</span> <span class="nav-text">一套典型架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8A%E4%B8%8B%E6%96%87%E5%A6%82%E4%BD%95%E8%B7%A8%E8%BE%B9%E7%95%8C%E4%BC%A0%E6%92%AD"><span class="nav-number">3.</span> <span class="nav-text">上下文如何跨边界传播</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E6%9E%84%E5%8C%96%E6%97%A5%E5%BF%97%EF%BC%9A%E8%AE%A9%E6%9C%BA%E5%99%A8%E8%83%BD%E7%90%86%E8%A7%A3"><span class="nav-number">4.</span> <span class="nav-text">结构化日志：让机器能理解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%A5%E5%BF%97%E7%BA%A7%E5%88%AB%E4%B8%8E%E9%94%99%E8%AF%AF%E8%AE%B0%E5%BD%95"><span class="nav-number">5.</span> <span class="nav-text">日志级别与错误记录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%87%E6%A0%B7%EF%BC%9A%E7%9C%81%E6%88%90%E6%9C%AC%E4%BD%86%E5%88%AB%E4%B8%A2%E6%8E%89%E7%9C%9F%E7%9B%B8"><span class="nav-number">6.</span> <span class="nav-text">采样：省成本但别丢掉真相</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%B4%E9%83%A8%E9%87%87%E6%A0%B7"><span class="nav-number">6.1.</span> <span class="nav-text">头部采样</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%BE%E9%83%A8%E9%87%87%E6%A0%B7"><span class="nav-number">6.2.</span> <span class="nav-text">尾部采样</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9A%90%E7%A7%81%E4%B8%8E%E5%AE%89%E5%85%A8"><span class="nav-number">7.</span> <span class="nav-text">隐私与安全</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%A7%E8%83%BD%E4%B8%8E%E5%8F%AF%E9%9D%A0%E6%80%A7"><span class="nav-number">8.</span> <span class="nav-text">性能与可靠性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E6%96%BD%E6%B8%85%E5%8D%95"><span class="nav-number">9.</span> <span class="nav-text">实施清单</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5%EF%BC%9A%E5%85%88%E5%81%9A%E5%88%B0%E2%80%9C%E4%B8%B2%E5%BE%97%E8%B5%B7%E6%9D%A5%E2%80%9D"><span class="nav-number">9.1.</span> <span class="nav-text">第一阶段：先做到“串得起来”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5%EF%BC%9A%E8%AE%A9%E6%95%B0%E6%8D%AE%E5%8F%AF%E7%94%A8"><span class="nav-number">9.2.</span> <span class="nav-text">第二阶段：让数据可用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%EF%BC%9A%E6%B2%BB%E7%90%86%E6%88%90%E6%9C%AC"><span class="nav-number">9.3.</span> <span class="nav-text">第三阶段：治理成本</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%8F%E7%BB%93"><span class="nav-number">10.</span> <span class="nav-text">小结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

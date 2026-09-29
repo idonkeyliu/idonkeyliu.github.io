@@ -80,7 +80,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="今天越安逸，明天越危险" />
+  <meta name="keywords" content="每日一概念," />
 
 
 
@@ -98,17 +98,20 @@
 
 
 
-<meta name="description" content="今天越安逸，明天越危险">
+<meta name="description" content="希克定律 选项越多越贴心？交互上常常相反：菜单长到像论文目录，用户反而更慢、更易放弃。希克定律把这事说透了——决策时间随选项信息量上升。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="每日一概念-希克定律&#x2F;2019-07-08">
 <meta property="og:url" content="http://idonkeyliu.github.io/2019/07/08/%E6%AF%8F%E6%97%A5%E4%B8%80%E6%A6%82%E5%BF%B5-%E5%B8%8C%E5%85%8B%E5%AE%9A%E5%BE%8B-2019-07-08/index.html">
 <meta property="og:site_name" content="idonkeyliu&#39;s Blog">
-<meta property="og:description" content="今天越安逸，明天越危险">
+<meta property="og:description" content="希克定律 选项越多越贴心？交互上常常相反：菜单长到像论文目录，用户反而更慢、更易放弃。希克定律把这事说透了——决策时间随选项信息量上升。">
 <meta property="og:locale">
+<meta property="og:image" content="http://idonkeyliu.github.io/2019/07/08/%E6%AF%8F%E6%97%A5%E4%B8%80%E6%A6%82%E5%BF%B5-%E5%B8%8C%E5%85%8B%E5%AE%9A%E5%BE%8B-2019-07-08/cover.png">
 <meta property="article:published_time" content="2019-07-08T15:06:34.000Z">
-<meta property="article:modified_time" content="2019-07-08T15:06:34.000Z">
+<meta property="article:modified_time" content="2026-09-29T02:49:21.860Z">
 <meta property="article:author" content="idonkeyliu">
+<meta property="article:tag" content="每日一概念">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://idonkeyliu.github.io/2019/07/08/%E6%AF%8F%E6%97%A5%E4%B8%80%E6%A6%82%E5%BF%B5-%E5%B8%8C%E5%85%8B%E5%AE%9A%E5%BE%8B-2019-07-08/cover.png">
 
 
 
@@ -411,7 +414,47 @@
       
 
       
-        
+        <h2 id="希克定律"><a href="#希克定律" class="headerlink" title="希克定律"></a>希克定律</h2><img src="/2019/07/08/%E6%AF%8F%E6%97%A5%E4%B8%80%E6%A6%82%E5%BF%B5-%E5%B8%8C%E5%85%8B%E5%AE%9A%E5%BE%8B-2019-07-08/cover.png" class="">
+<p>选项越多越贴心？交互上常常相反：菜单长到像论文目录，用户反而更慢、更易放弃。希克定律把这事说透了——决策时间随选项信息量上升。</p>
+<span id="more"></span>
+
+<blockquote>
+<p>一句话：可选项变多，人做选择通常更慢；大致与 (\log_2(n)) 相关，不是「多就是好」。</p>
+</blockquote>
+<h3 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h3><p>Hick’s Law（Hick–Hyman）：在选项相对均等、需择一时，反应时间近似 (T&#x3D;a+b\log_2(n))。高发场景：导航、定价页、权限勾选、后台筛选器、遥控器按键密度。</p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>常见反模式</th>
+<th>更好的做法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>导航</td>
+<td>一级塞 20 个入口</td>
+<td>少而清 + 「更多」</td>
+</tr>
+<tr>
+<td>套餐</td>
+<td>7 档价格让人选到自闭</td>
+<td>3 档 + 推荐默认</td>
+</tr>
+<tr>
+<td>权限</td>
+<td>40 个勾选甩给新人</td>
+<td>角色模板 + 高级展开</td>
+</tr>
+</tbody></table>
+<h3 id="为什么重要"><a href="#为什么重要" class="headerlink" title="为什么重要"></a>为什么重要</h3><p>产品容易「功能诚实」：有就全摆出来。用户付出的是认知税。结果是转化下降、误触上升、新手被高级功能吓退。设计应减少无效选项，用分组、默认值、搜索与渐进披露承接复杂度。</p>
+<h3 id="怎么理解"><a href="#怎么理解" class="headerlink" title="怎么理解"></a>怎么理解</h3><p>专家模式可以多选项（肌肉记忆在），新手路径要短。默认简单，高级折叠——不是藏功能，是按需展开。希克定律不是让你删掉能力，是让你别把「第一次决策」变成期末考试。</p>
+<h3 id="常见误解"><a href="#常见误解" class="headerlink" title="常见误解"></a>常见误解</h3><ul>
+<li><strong>选项越少永远越好</strong>：过少会逼用户走弯路或找不到能力。  </li>
+<li><strong>对数增长&#x3D;可以无限堆</strong>：用户在放弃，不在耐心求导。  </li>
+<li><strong>只优化 UI，不优化信息架构</strong>：分类错误时，少选项也救不了。</li>
+</ul>
+<h3 id="一句话记住"><a href="#一句话记住" class="headerlink" title="一句话记住"></a>一句话记住</h3><p><strong>少即是快：砍掉无效选择，决策才轻，体验才顺。</strong></p>
+
       
     </div>
     
@@ -454,6 +497,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E6%AF%8F%E6%97%A5%E4%B8%80%E6%A6%82%E5%BF%B5/" rel="tag"><i class="fa fa-tag"></i> 每日一概念</a>
+          
+        </div>
       
 
       
@@ -528,8 +577,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="https://q1.qlogo.cn/g?b=qq&s=100&nk=232836108"
@@ -566,7 +624,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-count">64</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -622,6 +680,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%8C%E5%85%8B%E5%AE%9A%E5%BE%8B"><span class="nav-number">1.</span> <span class="nav-text">希克定律</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">1.1.</span> <span class="nav-text">是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%87%8D%E8%A6%81"><span class="nav-number">1.2.</span> <span class="nav-text">为什么重要</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%8E%E4%B9%88%E7%90%86%E8%A7%A3"><span class="nav-number">1.3.</span> <span class="nav-text">怎么理解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E8%AF%AF%E8%A7%A3"><span class="nav-number">1.4.</span> <span class="nav-text">常见误解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E5%8F%A5%E8%AF%9D%E8%AE%B0%E4%BD%8F"><span class="nav-number">1.5.</span> <span class="nav-text">一句话记住</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

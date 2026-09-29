@@ -80,7 +80,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="今天越安逸，明天越危险" />
+  <meta name="keywords" content="每日一概念," />
 
 
 
@@ -98,17 +98,20 @@
 
 
 
-<meta name="description" content="今天越安逸，明天越危险">
+<meta name="description" content="HPCC 有些计算单机要算一个月，多机并行可能一天做完——前提是你真的会把问题切开、把数据喂到足够快的网络上。HPCC 谈的就是这类「堆机器换时间」的集群。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="每日一概念-HPCC&#x2F;2019-07-04">
 <meta property="og:url" content="http://idonkeyliu.github.io/2019/07/04/%E6%AF%8F%E6%97%A5%E4%B8%80%E6%A6%82%E5%BF%B5-HPCC-2019-07-04/index.html">
 <meta property="og:site_name" content="idonkeyliu&#39;s Blog">
-<meta property="og:description" content="今天越安逸，明天越危险">
+<meta property="og:description" content="HPCC 有些计算单机要算一个月，多机并行可能一天做完——前提是你真的会把问题切开、把数据喂到足够快的网络上。HPCC 谈的就是这类「堆机器换时间」的集群。">
 <meta property="og:locale">
+<meta property="og:image" content="http://idonkeyliu.github.io/2019/07/04/%E6%AF%8F%E6%97%A5%E4%B8%80%E6%A6%82%E5%BF%B5-HPCC-2019-07-04/cover.png">
 <meta property="article:published_time" content="2019-07-04T15:07:30.000Z">
-<meta property="article:modified_time" content="2019-07-04T15:07:30.000Z">
+<meta property="article:modified_time" content="2026-09-29T02:38:46.718Z">
 <meta property="article:author" content="idonkeyliu">
+<meta property="article:tag" content="每日一概念">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://idonkeyliu.github.io/2019/07/04/%E6%AF%8F%E6%97%A5%E4%B8%80%E6%A6%82%E5%BF%B5-HPCC-2019-07-04/cover.png">
 
 
 
@@ -411,7 +414,18 @@
       
 
       
-        
+        <h2 id="HPCC"><a href="#HPCC" class="headerlink" title="HPCC"></a>HPCC</h2><img src="/2019/07/04/%E6%AF%8F%E6%97%A5%E4%B8%80%E6%A6%82%E5%BF%B5-HPCC-2019-07-04/cover.png" class="">
+<p>有些计算单机要算一个月，多机并行可能一天做完——前提是你真的会把问题切开、把数据喂到足够快的网络上。HPCC 谈的就是这类「堆机器换时间」的集群。</p>
+<span id="more"></span>
+
+<blockquote>
+<p>一句话：HPCC（High Performance Computing Cluster）&#x3D; 用高速互联的多节点，啃掉单机啃不动的大规模计算。</p>
+</blockquote>
+<h3 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h3><p>高性能计算集群：计算节点 + 存储 + 低延迟高带宽网络（常配并行文件系统、作业调度器）。典型负载包括科学仿真、气象、基因、部分大规模数值与分析任务。它与互联网常见的无状态微服务集群目标不同：更追求算力密度与互联效率。</p>
+<h3 id="为什么重要"><a href="#为什么重要" class="headerlink" title="为什么重要"></a>为什么重要</h3><p>它决定「能不能在截止日前算完」。对工程人，理解 HPCC 有助于对照：自己的大数据作业是 IO 瓶颈还是计算瓶颈、是否值得上加速器与更好的互联，而不是只会水平加 Web 机器。</p>
+<h3 id="怎么理解"><a href="#怎么理解" class="headerlink" title="怎么理解"></a>怎么理解</h3><p>把一把大火拆成许多灶眼同时烧，但燃料和烟气管道必须配得上——节点多、网络慢，照样浪费。Hadoop&#x2F;Spark 解决的是另一类「大数据」问题，可对照学，勿混为一谈。</p>
+<h3 id="一句话记住"><a href="#一句话记住" class="headerlink" title="一句话记住"></a>一句话记住</h3><p><strong>HPCC 是并行算力的正规军编制：多节点 + 快网络 + 调度，专治「算到天荒地老」。</strong></p>
+
       
     </div>
     
@@ -454,6 +468,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E6%AF%8F%E6%97%A5%E4%B8%80%E6%A6%82%E5%BF%B5/" rel="tag"><i class="fa fa-tag"></i> 每日一概念</a>
+          
+        </div>
       
 
       
@@ -528,8 +548,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="https://q1.qlogo.cn/g?b=qq&s=100&nk=232836108"
@@ -566,7 +595,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-count">64</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -622,6 +651,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#HPCC"><span class="nav-number">1.</span> <span class="nav-text">HPCC</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">1.1.</span> <span class="nav-text">是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%87%8D%E8%A6%81"><span class="nav-number">1.2.</span> <span class="nav-text">为什么重要</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%8E%E4%B9%88%E7%90%86%E8%A7%A3"><span class="nav-number">1.3.</span> <span class="nav-text">怎么理解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E5%8F%A5%E8%AF%9D%E8%AE%B0%E4%BD%8F"><span class="nav-number">1.4.</span> <span class="nav-text">一句话记住</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
